@@ -1,0 +1,26 @@
+{% comment %} {% extends 'dashboard.html' %} {% endcomment %}
+{% block panel %}
+  <div class="sub-header"></div>
+
+  <div class="panel-section notes-section">
+    <h3>Notes</h3>
+    <form action="" class="add-btn-form">
+        <input type="file" accept="image/*,.pdf" value="ADD" class="add-btn">
+        <input type="submit" value="ADD+">
+    </form>
+  </div>
+  <div class="panel-section assignment-section">
+    <h3>Assignment</h3>
+    <form action="" class="add-btn-form">
+        <input type="file" accept="image/*,.pdf" value="ADD" class="add-btn">
+        <input type="submit" value="ADD+">
+    </form>
+  </div>
+  <div class="panel-section assignment-section">
+    <h3>Others</h3>
+    <form action="" class="add-btn-form">
+        <input type="file" accept="image/*,.pdf" value="ADD" class="add-btn">
+        <input type="submit" value="ADD+">
+    </form>
+  </div>
+{% endblock %}

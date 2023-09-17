@@ -23,7 +23,7 @@ class Command(BaseCommand):
             Course.objects.create(
                 cid='MICRO5th',
                 name='Microprocessor',
-                semester='5th Semester',
+                semester='5th',
                 description='Course Description 3',
             )
             Course.objects.create(

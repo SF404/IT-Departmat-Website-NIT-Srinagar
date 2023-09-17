@@ -39,22 +39,7 @@ def signupUser(request):
     return render(request,"signup.html")
 
 
-def dashboard(request):
-    usern = request.session.get("username")
-    passw = request.session.get("password")
-    teacher = Teacher.objects.get(username=usern, password=passw)
-    subjects = Course.objects.filter(teacher=teacher).values_list('name', flat=True)
-    context={
-        "sid ":teacher.sid,
-        "name ":teacher.name,
-        "username":teacher.username,
-        "email ":teacher.email,
-        "temporary":teacher.temporary,
-        "subjects":subjects,
-        "target":"os.html"
-    }
-    
-    return render(request, "dashboard.html",context)
+
 def home(request):
     return render(request, "main.html")
 def os(request):
