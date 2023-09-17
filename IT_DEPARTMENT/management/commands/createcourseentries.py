@@ -32,5 +32,4 @@ class Command(BaseCommand):
                 semester='5th',
                 description='Course Description 3',
             )
-
             self.stdout.write(self.style.SUCCESS('ALL Course entries created.'))
