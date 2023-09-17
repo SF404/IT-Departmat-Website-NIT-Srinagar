@@ -254,9 +254,10 @@ form {
 .aside {
     background-color: rgb(201, 201, 201);
     background-color: rgb(213, 213, 213);
-    width: 260px;
+    min-width: 260px;
+    max-width: 260px;
     padding: 1em;
-    position: fixed;
+    position: sticky;
     top: 174px;
     bottom: 0;
 }
@@ -299,4 +300,9 @@ form {
     border: none;
     background-color: transparent;
 
+}
+
+.panel{
+    flex-grow: 1;
+    padding: 1em;
 }

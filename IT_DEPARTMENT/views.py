@@ -31,7 +31,8 @@ def signup(request):
     return render(request,"signup.html")
 def dashboard(request):
     context = {
-        'name':'Suhaib Ahmad'
+        'name':'Suhaib Ahmad',
+        'target':'os.html',
     }
     return render(request,"dashboard.html", context)
 def home(request):
