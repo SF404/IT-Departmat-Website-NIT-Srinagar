@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'IT_DEPARTMENT.apps.ItDepartmentConfig',
+    'IT_DEPARTMENT',
+    # 'IT_DEPARTMENT.apps.ItDepartmentConfig',
     'Admin_Panel',
 ]
 
