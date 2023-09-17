@@ -1,7 +1,8 @@
-
-from django.shortcuts import render,redirect
-from IT_DEPARTMENT.models import Teacher,Course
+from django.http import FileResponse
+from django.shortcuts import render,redirect,HttpResponse,get_object_or_404
+from IT_DEPARTMENT.models import Teacher,Course,Assignment
 from django.contrib.auth.decorators import login_required
+from .forms import AssiignmentForm
 
 # Create your views here.
 def index(request):
@@ -38,6 +39,29 @@ def signupUser(request):
     print("Data Saved")
     return render(request,"signup.html")
 
+def uploadfile(request):
+    if request.method == 'POST':
+        form = AssiignmentForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+           # return redirect('login')
+    else:
+        form = AssiignmentForm()
+        context = {
+            'form':form,
+        }
+        return render(request, 'upload.html',context)
+    return HttpResponse("done")
+
+def downloadfile(request):
+    # Replace 'MyModel' with the name of your model containing the uploaded file
+    file_id=32
+    my_model_instance = Assignment.objects.get(aid=file_id)
+    file_path = my_model_instance.pdf.path
+    with open(file_path, 'rb') as pdf_file:
+        response = HttpResponse(pdf_file.read(), content_type='application/pdf')
+        response['Content-Disposition'] = f'attachment; filename="{my_model_instance.pdf.name}"'
+        return response
 
 def dashboard(request):
     usern = request.session.get("username")
