@@ -21,7 +21,7 @@ def loginUser(request):
     return render(request,"login.html")
 def signupUser(request):
     if request.method=="POST":
-        k="password";
+        k="password"
         selected_options = request.POST.getlist('option')
         sid =request.POST.get("sid")
         name =request.POST.get("name")
@@ -50,7 +50,12 @@ def dashboard(request):
         "username":teacher.username,
         "email ":teacher.email,
         "temporary":teacher.temporary,
-        "subjects":subjects
+        "subjects":subjects,
+        "target":"os.html"
     }
     
     return render(request, "dashboard.html",context)
+def home(request):
+    return render(request, "main.html")
+def os(request):
+    return render(request, "os.html")

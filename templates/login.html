@@ -1,0 +1,19 @@
+{% extends "index.html" %}
+
+{% block content %}
+    <div class="login-container">
+        <form method="POST" action="" onsubmit.submit(function(e) {e.preventDefault()});>
+            {% csrf_token %}
+            <h2 style="text-align: center; color: white;">Faculty Login</h2>
+            {% comment %} <img src="{% static 'images/logo.png' %}" alt="profile"> {% endcomment %}
+            <input type="text" placeholder="username" name="username" required>
+            <input type="password" placeholder="password" name="password" required>
+            <div style="user-select: none;">
+                <input type="checkbox" id="rememberme" name="rememberme" style="width: 20px;"> <label for="rememberme">Remember me</label>
+            </div>
+            <button type="submit">Login</button>
+        </form>
+        <div class="login-right" ></div>
+    </div>
+    {% endblock %}
+

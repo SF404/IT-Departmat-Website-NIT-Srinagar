@@ -1,0 +1,112 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      {% block title %}
+      {% endblock %} | IT Department
+    </title>
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque&family=Inconsolata:wght@300&family=Montserrat:ital@0;1&family=Poppins:wght@300&family=Rubik&display=swap');
+    </style>
+    <script src="https://kit.fontawesome.com/8cc96fae0f.js" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <section class="header">
+      <div class="top-nav">
+        <img src="{% static 'images/logo.png' %}" alt="logo" id="master-logo" />
+      </div>
+      <div class="sub-nav" id="mySub-nav">
+        {% comment %} <form action="" method="POST">
+          {% csrf_token %}
+          <input type="submit" />
+        </form> {% endcomment %}
+
+        <a href="/home" class="active" id="home-btn">Home</a>
+        <a href="/contact">Contact</a>
+
+        <div class="dropdown">
+          <button class="dropbtn">
+            Acadamics
+            <i class="fa fa-caret-down"></i>
+          </button>
+          <div class="dropdown-content">
+            <a href="/degree_program">Degree Program</a>
+            <a href="/vision">Vision and Mission</a>
+            <a href="/outcomes">Outcomes</a>
+            <a href="/cources">Cources</a>
+            <a href="/coordinates">Coordinators</a>
+            <a href="/committee">Committee</a>
+            <a href="/newsletter">Department Newsletter</a>
+          </div>
+        </div>
+
+        <div class="dropdown">
+          <button class="dropbtn">
+            People
+            <i class="fa fa-caret-down"></i>
+          </button>
+          <div class="dropdown-content">
+            <a href="/faculty">Faculty</a>
+            <a href="/phd_students">PhD Student</a>
+            <a href="/btech_studets">B-Tech Student</a>
+            <a href="/staf">Staff</a>
+          </div>
+        </div>
+
+        <div class="dropdown">
+          <button class="dropbtn">
+            Research
+            <i class="fa fa-caret-down"></i>
+          </button>
+          <div class="dropdown-content">
+            <a href="/areas">Areas</a>
+            <a href="/papers">Papers</a>
+            <a href="/labs">LABs</a>
+          </div>
+        </div>
+
+        <div class="dropdown">
+          <button class="dropbtn">
+            Student Activities
+            <i class="fa fa-caret-down"></i>
+          </button>
+          <div class="dropdown-content">
+            <a href="/awards">Awards</a>
+            <a href="/">Facilities</a>
+            <a href="/">Placement Brochure</a>
+            <a href="/">Graduate Batch Photos</a>
+          </div>
+        </div>
+
+        <div class="dropdown">
+          <button class="dropbtn">
+            Dropdown
+            <i class="fa fa-caret-down"></i>
+          </button>
+          <div class="dropdown-content">
+            <a href="/">Link 1</a>
+            <a href="/">Link 2</a>
+            <a href="/">Link 3</a>
+          </div>
+        </div>
+        <a href="/about">About</a>
+        <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
+      </div>
+    </section>
+
+    {% comment %}---------------------- Nav End ------------------------{% endcomment %}
+
+    {% block content %}
+
+    {% endblock %}
+  </body>
+  <script>
+ 
+  </script>
+  <script src="{% static 'script.js' %}"></script>
+  {% comment %} <script src="{% static 'myfirst.js' %}"></script> {% endcomment %}
+</html>

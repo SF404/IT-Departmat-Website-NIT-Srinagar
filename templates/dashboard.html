@@ -1,0 +1,39 @@
+{% extends "index.html" %}
+
+{% block title %}
+Dashboard
+{% endblock title %}
+
+{% block content %}
+<div class="bar">
+    <h1>{{name}}</h1>
+</div>
+<div class="container">
+     <div class="aside">
+        <div class="upper-section">
+            <div class="btn-container">
+                <button class="aside-button">Operating System</button>
+                <p>5th</p>
+            </div>
+            <div class="btn-container">
+                <button class="aside-button">Operating System</button>
+                <p>5th</p>
+            </div>
+            <div class="btn-container">
+                <button class="aside-button">Operating System</button>
+                <p>5th</p>
+            </div>
+            <div class="btn-container">
+                <button class="aside-button">Operating System</button>
+                <p>5th</p>
+            </div>
+        </div> 
+        <div class="lower-section">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatum facilis quos officia quae dolores iure debitis nesciunt, ab deserunt corrupti voluptates aut tempore.</div>
+    </div> 
+    <div class="panel">
+        {% block panelA %}
+        {% include target %}
+        {% endblock panelA %}
+    </div>
+</div>
+{% endblock content %}
