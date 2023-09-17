@@ -30,6 +30,13 @@ def signup(request):
         print("data saved")
     return render(request,"signup.html")
 def dashboard(request):
-    return render(request,"dashboard.html")
+    context = {
+        'name':'Suhaib Ahmad'
+    }
+    return render(request,"dashboard.html", context)
+def home(request):
+    return render(request, "main.html")
+def os(request):
+    return render(request, "os.html")
 
 
