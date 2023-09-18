@@ -6,7 +6,7 @@
 
 {% block content %}
   <div class="bar">
-    <h1>{{ name }}</h1>
+    <h2>{{ name }}</h2>
   </div>
   <div class="container">
     <div class="aside">
@@ -14,12 +14,18 @@
         {% for subject in subjects %}
           <form class="btn-container" method="POST">
             {% csrf_token %}
-            <input class="aside-button" type="submit" name="identifier" value="{{ subject }}"/>
-            {% comment %} <p>{{ semester }}</p> {% endcomment %}
+            <input class="aside-button" type="submit" name="identifier" value="{{ subject }}" />
+            {% comment %} <p>5th</p> {% endcomment %}
           </form>
         {% endfor %}
       </div>
-      <div class="lower-section">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatum facilis quos officia quae dolores iure debitis nesciunt, ab deserunt corrupti voluptates aut tempore.</div>
+      <hr />
+      <div class="lower-section">
+        <form class="btn-container" method="POST">
+          {% csrf_token %}
+          <input class="aside-button" type="submit" name="identifier" value="ADD +" />
+        </form>
+      </div>
     </div>
     <div class="panel">
       {% block panel %}
@@ -27,12 +33,4 @@
       {% endblock %}
     </div>
   </div>
-
-  <script>
-    function handleSubjectChange(subject){
-
-    }
-  </script>
 {% endblock %}
-
-

@@ -3,20 +3,11 @@
   Home
 {% endblock %}
 {% block content %}
-  <div class="banner">kkgdfgjkdffjgldfg</div>
+  <div class="banner"></div>
   <marquee behavior="scroll" direction="left" class="marquee">
-    <a href="#">Lorem ipsum dolor sit.</a>
-    <a href="#">Lorem ipsum dolor sit.</a>
-    <a href="#">Lorem ipsum dolor sit.</a>
-    <a href="#">Lorem ipsum dolor sit.</a>
-    <a href="#">Lorem ipsum dolor sit.</a>
-    <a href="#">Lorem ipsum dolor sit.</a>
-    <a href="#">Lorem ipsum dolor sit.</a>
-    <a href="#">Lorem ipsum dolor sit.</a>
-    <a href="#">Lorem ipsum dolor sit.</a>
-    <a href="#">Lorem ipsum dolor sit.</a>
-    <a href="#">Lorem ipsum dolor sit.</a>
-    <a href="#">Lorem ipsum dolor sit.</a>
+  {% for x in alert %}
+    <a href="#">{{x.message}}</a>
+  {% endfor %}
   </marquee>
 
   <div class="grid">
@@ -29,4 +20,10 @@
     <button>Faculty</button>
     <button>Faculty</button>
   </div>
+
+  <marquee behavior="scroll" direction="up" class="marquee announcement-marquee">
+    {% for x in announcement %}
+      <p>{{x.description}}</p>
+    {% endfor %}
+    </marquee>
 {% endblock %}

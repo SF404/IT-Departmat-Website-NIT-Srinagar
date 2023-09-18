@@ -1,6 +1,6 @@
 
 from django.shortcuts import render,redirect
-from IT_DEPARTMENT.models import Teacher,Course
+from IT_DEPARTMENT.models import Teacher,Course, Alert, Announcement
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
@@ -41,6 +41,13 @@ def signupUser(request):
 
 
 def home(request):
-    return render(request, "main.html")
+    context={
+
+    }
+    alert = Alert.objects.values()
+    announcement = Announcement.objects.values()
+    context["alert"] = alert
+    context["announcement"] = announcement
+    return render(request, "main.html", context)
 def os(request):
     return render(request, "os.html")

@@ -9,6 +9,7 @@
     font-size: 16px;
     --bg-primary: #192e59;
     --bg-secondary: #3db166;
+    --border-thin: 1px solid rgb(128, 128, 128, 0.4);
 }
 
 body {
@@ -169,6 +170,13 @@ body {
     box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
 }
 
+.announcement-marquee{
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
 .marquee a {
     color: red;
     /* text-decoration: none; */
@@ -233,108 +241,187 @@ form {
 
 /* -------------------- Dashboard -------------------------- */
 .bar {
-    height: 64px;
+    grid-column: span 3;
+    height: 46px;
     width: 100%;
-    background-color: rgb(213, 213, 213);
-    border-bottom: 1px solid gray;
+    border-bottom: 1px solid var(--bg-secondary);
     display: flex;
     align-items: center;
     font-size: 12px;
-    padding-left: 1em;
+    padding-left: 1.5em;
+    color: var(--bg-primary);
 }
 
 .container {
-    min-height: calc(100vh - 174px);
-    max-height: calc(100vh - 174px);
+    min-height: calc(100vh - 156px);
+    max-height: calc(100vh - 156px);
     width: 100%;
     display: flex;
+    overflow: hidden;
     z-index: 0;
 }
 
 .aside {
-    background-color: rgb(201, 201, 201);
-    background-color: rgb(213, 213, 213);
     min-width: 260px;
     max-width: 260px;
-    padding: 1em;
-    position: sticky;
-    top: 174px;
-    bottom: 0;
+    border-right: 1px solid var(--bg-secondary);
+    padding: 1em 1em 1em 0;
 }
 
-.aside>div{
-    padding: 1em 0;
+.aside>div {
+    padding: 0em 0;
     display: flex;
     flex-direction: column;
-    gap: 0.5em;
+    gap: 0.6em;
 }
 
-.aside .btn-container{
+.aside .btn-container {
     display: flex;
     align-items: center;
-    background-color: #ebebeb;
-    border-radius: 30px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-
-
-}
-.aside .btn-container p{
-      padding: 0.5em;
-      padding-right: 1.5em;
-      font-size: 0.8em;
-      z-index: 8888;
-      /* box-shadow: inset  1px 0px 4px -5px black; */
-      border-left:1px solid rgb(177, 177, 177);
-      
+    background-color: #e7f4ea ;
+    background-color: #e8f0fd;
+    border-radius: 0 30px 30px 0;
+    /* box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.2); */
+    border: var(--border-thin);
 }
 
-.aside .upper-section{
-    border-bottom: 2px dotted white;
+
+.aside .btn-container p {
+    width: 50px;
+    padding: 0.5em;
+    padding-right: 1.5em;
+    font-size: 0.8em;
+    z-index: 8888;
+    border-left: 1px solid rgb(177, 177, 177);
 }
 
-.aside-button{
+.aside-button {
     width: 100%;
-    padding: 1em 0.5em;
-    border-radius: 30px 0 0 30px;
+    padding: 1em;
     outline: none;
     border: none;
+    text-align: left;
     background-color: transparent;
-
+    overflow:hidden;
+    font-weight: bold;
+    color: var(--bg-primary);
+    cursor: pointer;
 }
 
-.panel{
+.panel {
     flex-grow: 1;
     padding: 1em;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 48px 1fr;
     grid-gap: 1em;
-
+    overflow-y: scroll;
+    margin-bottom: 2rem;
 }
 
-.sub-header{
-    background-color: #3db166;
+.sub-header {
+    background-color: var(--bg-primary);
     height: 46px;
     width: 100%;
     grid-column: span 3;
+    display: flex;
+    align-items: center;
+    padding: 0 1em;
+    color: white;
 }
 
-.panel-section{
-    /* min-width: 360px; */
-    /* max-width: 360px; */
-    height: 400px;
-    background: #d5d5d5;
+.panel-section {
+    background-color: #e7f4ea ;
     border-radius: 0.5em;
     display: flex;
     align-items: center;
     flex-direction: column;
-    /* padding: 1em; */
+    height: fit-content;
+    border: var(--border-thin);
 }
-.panel-section>h3{
-    background-color: var(--bg-primary);
+
+.panel-section>h3 {
+    background-color: var(--bg-secondary);
     width: 100%;
-    padding: 0.5em;
+    padding: 0.4em;
     color: white;
     text-align: center;
-    border-radius: 0.5em 0.5em 0 0;
+    border-radius: 0.4em 0.4em 0 0;
+}
 
+.content{
+    width: 100%;
+    padding: 1em;
+    position: relative;
+}
+
+.add-btn-form {
+    width: 100%;
+    text-align: center;
+    margin: 0;
+    padding: 0.5em;
+    background-color: white;
+    border-radius: 30px;
+    border: var(--border-thin);
+}
+
+/* --------------- ADD + ------------------ */
+.anouncement-section{
+    grid-column: span 2;
+}
+
+/* .data-container{
+    max-height: 30vh;
+    overflow-y: scroll;
+    padding: 0.5em 0;
+} */
+
+.announcement{
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    padding: 0.5em;
+    margin: 0.2em 0;
+    border-radius: 0.25em;
+}
+
+.anouncement-section .add-btn-form, .alert-section .add-btn-form{
+    display: flex;
+    flex-direction: column;
+    border-radius: 1em;
+    padding: 1em;
+}
+
+.anouncement-section .add-btn-form input, textarea, .alert-section .add-btn-form input{
+    height: 100%;
+    width: 100%;
+    border: none;
+    letter-spacing: 1px;
+    font-family: monospace;
+    padding: 0em;
+    outline: none;
+    resize: none;
+    background-color: transparent;
+}
+
+#ok-btn{
+    color: white;
+    background-color: var(--bg-primary);
+    padding: 0.5em;
+    font-size: 1em;
+    border-radius: 30px;
+
+}
+
+
+
+/* -------------- special Classes ------------------ */
+.hide {
+    display: none;
+}
+
+hr{
+    margin: 1em 0;
+}
+
+form{
+    margin: 0;
 }

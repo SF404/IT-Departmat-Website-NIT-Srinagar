@@ -1,5 +1,6 @@
 from django.db import models
 
+# Create your models here.
 class Teacher(models.Model):
     sid = models.CharField(max_length=255, unique=True)
     name = models.CharField(max_length=255)
@@ -15,4 +16,16 @@ class Course(models.Model):
     description = models.TextField(blank=True)
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE,null=True,blank=True)
 
-# Create your models here.
+class Announcement(models.Model):
+    aid = models.CharField(max_length=255)
+    name = models.CharField(max_length=255)
+    description = models.CharField(max_length=255)
+    link = models.CharField(max_length=255)
+    date =  models.DateTimeField(auto_now=True)
+
+class Alert(models.Model):
+    aid = models.CharField(max_length=255)
+    message = models.CharField(max_length=255)
+    valid = models.IntegerField()
+    date = models.DateTimeField(auto_now_add=True)
+
