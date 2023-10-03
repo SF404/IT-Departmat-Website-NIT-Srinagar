@@ -27,6 +27,8 @@ def dashboard(request):
 
     }
 
+    print("hello")
+
     announcement = Announcement.objects.filter(aid=context.get('sid')).values()
     alert = Alert.objects.filter(aid=context.get('sid')).values()
     context["alert"] = alert

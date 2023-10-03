@@ -6,11 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
       {% block title %}
-      {% endblock %} | IT Department
+
+      {% endblock %}| IT Department
     </title>
     <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />
     <style>
-      @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque&family=Inconsolata:wght@300&family=Montserrat:ital@0;1&family=Poppins:wght@300&family=Rubik&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque&family=Calligraffitti&family=Inconsolata:wght@300&family=Montserrat:ital@0;1&family=Poppins:wght@300&family=Rubik&display=swap');
     </style>
     <script src="https://kit.fontawesome.com/8cc96fae0f.js" crossorigin="anonymous"></script>
   </head>
@@ -103,10 +104,14 @@
     {% block content %}
 
     {% endblock %}
+
+    {% block script %}
+      <script>
+        function myFunction() {
+          document.getElementById('myDropdown').classList.toggle('hide')
+        }
+      </script>
+    {% endblock %}
   </body>
-  <script>
- 
-  </script>
-  <script src="{% static 'script.js' %}"></script>
-  {% comment %} <script src="{% static 'myfirst.js' %}"></script> {% endcomment %}
+  <script src="https://kit.fontawesome.com/8cc96fae0f.js" crossorigin="anonymous"></script>
 </html>

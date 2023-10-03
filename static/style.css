@@ -17,6 +17,15 @@ body {
     font-family: 'Bricolage Grotesque', sans-serif;
 }
 
+.title {
+    width: 100%;
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: var(--bg-secondary);
+    margin: 0.5em;
+}
+
 /* -------------------- header Section -------------------------- */
 .header {
     position: sticky;
@@ -111,6 +120,10 @@ body {
     display: block;
 }
 
+.show {
+    display: block;
+}
+
 @media screen and (max-width: 600px) {
 
     .sub-nav a:not(:first-child),
@@ -156,34 +169,146 @@ body {
     }
 }
 
+/* ---------------------------------- Footer ----------------------------------- */
+footer {
+    margin-top: 2em;
+    background-color: #181818;
+    padding: 2em;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    grid-gap: 2em;
+}
+
+.footer-tile {
+    /* min-width: 300px; */
+    color: white;
+}
+
+.footer-tile .address {
+    font-size: 1.2em;
+}
+
+.footer-tile .connect {
+    text-align: center;
+}
+.footer-tile .connect img{
+    width: 30px;
+    margin: 5px;
+}
+
+.footer-tile:nth-child(1) {
+    flex-grow: 1;
+    height: 100%;
+    /* text-align: center; */
+}
+
+
+.footer-bar {
+    width: 100%;
+    opacity: 0.6;
+    grid-column: 1/ -1;
+}
+@media screen and (max-width: 900px){
+    footer{
+        grid-template-columns: 1fr;
+    }
+}
+
+.footer-bar hr {
+    border-color: var(--bg-secondary);
+}
+
+.footer-bar p a {
+    color: white;
+}
+
+
+
+.footer-tile-title {
+    color: white;
+    padding-bottom: 1em;
+    border-bottom: 3px solid var(--bg-secondary);
+    /* text-align: center; */
+}
+
+.footer-tile li {
+    padding: 0.5em 0;
+    margin: 0.5em 0;
+    list-style: none;
+}
+
+.footer-tile li a {
+    color: white;
+    text-decoration: none;
+    opacity: 0.6;
+}
+
+.footer-tile li a:hover {
+    opacity: 1;
+}
+
 /* ------------------------------------ Banner -------------------------------------- */
 .banner {
     width: 100%;
     height: 500px;
-    background: black;
+    background-color: black;
+    background: url('./images/banner.jpeg')no-repeat center center/cover;
+    position: relative;
+}
+
+.banner-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    /* background-color: rgba(0, 0, 0, 0.3); */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-shadow: 0 0 24px black;
+    font-size: 1.6em;
+    text-align: center;
+    /* box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.5); */
+}
+
+.banner-overlay h1 {
+    margin-top: -150px;
+    font-weight: bolder;
+    text-justify: center;
+
+}
+
+/* ----------------- main --------------------------- */
+.main {
+    /* border: 1px solid green; */
+    margin-top: 2rem;
 }
 
 .marquee {
-    margin: 2em;
+    margin: 0 2em;
     padding: 5px;
-    background: whitesmoke;
-    box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
+    background: rgb(240, 240, 240);
+    /* box-shadow: 0 0 12px rgba(0, 0, 0, 0.2); */
 }
 
-.announcement-marquee{
-    padding: 1em;
+.announcement-marquee {
     display: flex;
     flex-direction: column;
     gap: 1em;
 }
 
 .marquee a {
-    color: red;
-    /* text-decoration: none; */
+    color: var(--bg-secondary);
     margin: 0 10px;
-    font-size: small;
-    font-weight: 100;
+    text-decoration: none;
+    font-size: large;
+}
 
+marquee a img {
+    height: 1.2em;
+    margin-bottom: -5px;
+    margin-right: 5px;
+    /* margin: 5px 5px 0 10px; */
 }
 
 .grid {
@@ -193,8 +318,67 @@ body {
     margin: 2em;
 }
 
-.grid button {
+.quick-links button {
     padding: 1em;
+    border: none;
+    outline: none;
+    color: white;
+    text-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
+    font-weight: bold;
+    border-radius: 0.25em;
+    transition: all 0.2s ease-in;
+    cursor: pointer;
+}
+
+
+
+.quick-links button:nth-child(1) {
+    background-color: rgb(243, 152, 147);
+}
+
+.quick-links button:nth-child(2) {
+    background-color: rgb(184, 140, 191);
+    ;
+}
+
+.quick-links button:nth-child(3) {
+    background-color: rgb(33, 137, 140);
+}
+
+.quick-links button:nth-child(4) {
+    background-color: rgb(98, 122, 146);
+}
+
+.quick-links button:nth-child(5) {
+    background-color: rgb(190, 215, 235);
+}
+
+.quick-links button:nth-child(6) {
+    background-color: rgb(124, 135, 165);
+}
+
+.quick-links button:nth-child(7) {
+    background-color: rgb(171, 209, 148);
+}
+
+.quick-links button:nth-child(8) {
+    background-color: rgb(48, 121, 172);
+}
+
+.quick-links button:hover {
+    background-color: black;
+}
+
+.quick-links button img {
+    height: 100px;
+    margin-bottom: 10px;
+}
+
+@media screen and (max-width: 800px) {
+    .grid {
+        grid-template-columns: 1fr 1fr;
+
+    }
 }
 
 
@@ -278,7 +462,7 @@ form {
 .aside .btn-container {
     display: flex;
     align-items: center;
-    background-color: #e7f4ea ;
+    background-color: #e7f4ea;
     background-color: #e8f0fd;
     border-radius: 0 30px 30px 0;
     /* box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.2); */
@@ -302,7 +486,7 @@ form {
     border: none;
     text-align: left;
     background-color: transparent;
-    overflow:hidden;
+    overflow: hidden;
     font-weight: bold;
     color: var(--bg-primary);
     cursor: pointer;
@@ -331,7 +515,7 @@ form {
 }
 
 .panel-section {
-    background-color: #e7f4ea ;
+    background-color: #e7f4ea;
     border-radius: 0.5em;
     display: flex;
     align-items: center;
@@ -349,7 +533,7 @@ form {
     border-radius: 0.4em 0.4em 0 0;
 }
 
-.content{
+.content {
     width: 100%;
     padding: 1em;
     position: relative;
@@ -366,7 +550,7 @@ form {
 }
 
 /* --------------- ADD + ------------------ */
-.anouncement-section{
+.anouncement-section {
     grid-column: span 2;
 }
 
@@ -376,21 +560,24 @@ form {
     padding: 0.5em 0;
 } */
 
-.announcement{
+.announcement {
     border: 1px solid rgba(0, 0, 0, 0.2);
     padding: 0.5em;
     margin: 0.2em 0;
     border-radius: 0.25em;
 }
 
-.anouncement-section .add-btn-form, .alert-section .add-btn-form{
+.anouncement-section .add-btn-form,
+.alert-section .add-btn-form {
     display: flex;
     flex-direction: column;
     border-radius: 1em;
     padding: 1em;
 }
 
-.anouncement-section .add-btn-form input, textarea, .alert-section .add-btn-form input{
+.anouncement-section .add-btn-form input,
+textarea,
+.alert-section .add-btn-form input {
     height: 100%;
     width: 100%;
     border: none;
@@ -402,7 +589,7 @@ form {
     background-color: transparent;
 }
 
-#ok-btn{
+#ok-btn {
     color: white;
     background-color: var(--bg-primary);
     padding: 0.5em;
@@ -418,10 +605,10 @@ form {
     display: none;
 }
 
-hr{
+hr {
     margin: 1em 0;
 }
 
-form{
+form {
     margin: 0;
 }

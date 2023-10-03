@@ -7,16 +7,23 @@ from django.contrib.auth.decorators import login_required
 def index(request):
     return render(request,"index.html")
 def loginUser(request):
-    usern=request.POST.get("username") 
-    passw=request.POST.get("password")
-    try:
-        teacher = Teacher.objects.get(username=usern, password=passw)
-        if teacher:
-            request.session['username'] = usern
-            request.session['password'] = passw
-            return redirect("dashboard")
-    except Teacher.DoesNotExist:
-        pass  
+    usern = request.session.get("username")
+    passw = request.session.get("password")
+
+    if usern and passw:
+        return redirect("dashboard")
+
+    if(request.method == "POST"):
+        usern=request.POST.get("username") 
+        passw=request.POST.get("password")
+        try:
+            teacher = Teacher.objects.get(username=usern, password=passw)
+            if teacher:
+                request.session['username'] = usern
+                request.session['password'] = passw
+                return redirect("dashboard")
+        except Teacher.DoesNotExist:
+            pass  
         
     return render(request,"login.html")
 def signupUser(request):
@@ -44,7 +51,7 @@ def home(request):
     context={
 
     }
-    alert = Alert.objects.values()
+    alert = Alert.objects.order_by('-date').values()
     announcement = Announcement.objects.values()
     context["alert"] = alert
     context["announcement"] = announcement
