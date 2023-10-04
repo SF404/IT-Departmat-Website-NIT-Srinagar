@@ -16,33 +16,33 @@ function Dashboard() {
   const [assignment, setAssignment] = useState([]);
   const [notes, setNotes] = useState([]);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await axios.get('http://localhost:8000/api/your-model/');
-                setCourses(response.data);
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }
-          };
-          console.log(data)
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('http://localhost:8000/api/your-model/');
+        setCourses(response.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+    console.log(data)
 
-        fetchData();
-    }, []);
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const assignment = await axios.get('http://localhost:8000/api/assignments/');
-                setAssignment(assignment.data);
-                const notes = await axios.get('http://localhost:8000/api/notes/');
-                setAssignment(notes.data);
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }
-          };
-          console.log(data)
-        fetchData();
-    }, [selecctedCourse]);
+    fetchData();
+  }, []);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const assignment = await axios.get('http://localhost:8000/api/assignments/');
+        setAssignment(assignment.data);
+        const notes = await axios.get('http://localhost:8000/api/notes/');
+        setAssignment(notes.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+    console.log(data)
+    fetchData();
+  }, [selecctedCourse]);
 
   const [assignmnetFormData, setAssignmentFormData] = useState({
     title: '',
@@ -103,12 +103,12 @@ function Dashboard() {
 
           {
             courses.map((item) => (
-            <Button w={'full'} justifyContent={'flex-start'} borderRadius={'full'} activeStyle={{ color: "red", border: "2px solid red" }} 
-            key={item.id}>
-            {item.name}
-            </Button>))
+              <Button w={'full'} justifyContent={'flex-start'} borderRadius={'full'} activeStyle={{ color: "red", border: "2px solid red" }}
+                key={item.id}>
+                {item.name}
+              </Button>))
           }
-          
+
           <Button w={'full'} justifyContent={'flex-start'} borderRadius={'full'} as={Link} to={'/microprocessor'} activeStyle={{ color: "red" }}>Microprocessor</Button>
           <Button w={'full'} justifyContent={'flex-start'} borderRadius={'full'} as={Link} to={'/computer-architecture'} activeStyle={{ color: "red" }}>Computer Architecture</Button>
 
@@ -153,6 +153,28 @@ function Dashboard() {
               <Text bg={'#d8dcf0'} p={2} borderRadius={6}>Notes</Text>
               <Divider my={2} />
               <VStack>
+
+                <Accordion allowToggle>
+                  {
+                    notes.map((item) => (
+
+
+                      <AccordionItem>
+                        <h2>
+                          <AccordionButton>
+                            <Box as="span" flex='1' textAlign='left'>
+                              {item.title}
+                            </Box>
+                            <AccordionIcon />
+                          </AccordionButton>
+                        </h2>
+                        <AccordionPanel pb={4}>
+                          <Button>Download</Button>
+                        </AccordionPanel>
+                      </AccordionItem>
+                    ))
+                  }
+                </Accordion>
 
               </VStack>
               <Divider my={2} />
