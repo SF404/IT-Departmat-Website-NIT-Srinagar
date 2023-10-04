@@ -10,39 +10,67 @@ import illustration_C from './../../assets/images/illustration_C.png'
 import { DownloadIcon } from '@chakra-ui/icons'
 
 function Dashboard() {
+  const [user, setUser] = useState([]);
   const [data, setData] = useState([]);
-  const [courses, setCourses] = useState([]);
-  const [selecctedCourse, setSelectedCourse] = useState([]);
+  const [courses, setCourses] = useState([
+    {
+      id: 1,
+      name: "Operating System"
+    },
+    {
+      id: 2,
+      name: "Microprocessor"
+    },
+  ]);
+  const [selectedCourse, setSelectedCourse] = useState(null);
   const [assignment, setAssignment] = useState([]);
-  const [notes, setNotes] = useState([]);
+  const [notes, setNotes] = useState([{
+    title: "Arman",
+  },
+  {
+    title: "Suhaib"
+  }
+  ]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/api/your-model/');
+        const getUser = await axios.get(`http://localhost:8000/api/temp/?sid=${1001}`)
+        console.log(getUser.data)
+        setUser(getUser.data[0]);
+        const response = await axios.get(`http://localhost:8000/api/courses/?sid=${1001}`);
+        console.log(response.data)
         setCourses(response.data);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     };
-    console.log(data)
 
     fetchData();
   }, []);
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const assignment = await axios.get('http://localhost:8000/api/assignments/');
-        setAssignment(assignment.data);
-        const notes = await axios.get('http://localhost:8000/api/notes/');
-        setAssignment(notes.data);
+        if (selectedCourse!=null) {
+          const assignment = await axios.get(`http://localhost:8000/api/assignments/?id=${selectedCourse}`);
+          setAssignment(assignment.data);
+          const notes = await axios.get(`http://localhost:8000/api/notes/?id=${selectedCourse}`);
+          setNotes(notes.data);
+        }
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     };
-    console.log(data)
     fetchData();
-  }, [selecctedCourse]);
+  }, [selectedCourse]);
+
+  const handleCourseSelect = (id) => {
+    console.log(id)
+    setSelectedCourse(id);
+  }
+
+
+
 
   const [assignmnetFormData, setAssignmentFormData] = useState({
     title: '',
@@ -83,7 +111,7 @@ function Dashboard() {
           <HStack padding={3} w={'full'} bg={'#ebedf7'} borderRadius={'2xl'}>
             <Popover>
               <PopoverTrigger>
-                <Avatar cursor={'pointer'} name='Dr. Janibul Bashir'></Avatar>
+                <Avatar cursor={'pointer'} name={user.name}></Avatar>
               </PopoverTrigger>
               <PopoverContent w={200}>
                 <PopoverArrow />
@@ -96,29 +124,26 @@ function Dashboard() {
                 </PopoverBody>
               </PopoverContent>
             </Popover>
-            <Text>Dr. Janibul Bashir</Text>
+            <Text>{user.name}</Text>
           </HStack>
 
           <Divider borderColor={'blackAlpha.300'} my={1} />
 
           {
             courses.map((item) => (
-              <Button w={'full'} justifyContent={'flex-start'} borderRadius={'full'} activeStyle={{ color: "red", border: "2px solid red" }}
-                key={item.id}>
+              <Button w={'full'} justifyContent={'flex-start'} flexWrap={'wrap'} overflow={'hidden'} borderRadius={'full'} activeStyle={{ color: "red", border: "2px solid red" }}
+                key={item.id} onClick={() => handleCourseSelect(item.cid)}>
                 {item.name}
               </Button>))
           }
 
-          <Button w={'full'} justifyContent={'flex-start'} borderRadius={'full'} as={Link} to={'/microprocessor'} activeStyle={{ color: "red" }}>Microprocessor</Button>
-          <Button w={'full'} justifyContent={'flex-start'} borderRadius={'full'} as={Link} to={'/computer-architecture'} activeStyle={{ color: "red" }}>Computer Architecture</Button>
-
           <Divider borderColor={'blackAlpha.300'} my={1} />
 
-          <Button w={'full'} justifyContent={'flex-start'} borderRadius={'full'} as={Link} to={'/announcements'} activeStyle={{ color: "red" }}>Announcements</Button>
-          <Button w={'full'} justifyContent={'flex-start'} borderRadius={'full'} as={Link} to={'/alert-messages'} activeStyle={{ color: "red" }}>Alert Messages</Button>
-          <Button w={'full'} justifyContent={'flex-start'} borderRadius={'full'} as={Link} to={'/manage-events'} activeStyle={{ color: "red" }}>Manage Events</Button>
-          <Button w={'full'} justifyContent={'flex-start'} borderRadius={'full'} as={Link} to={'/manage-events'} activeStyle={{ color: "red" }}>List Students</Button>
-          <Button w={'full'} justifyContent={'flex-start'} borderRadius={'full'} as={Link} to={'/manage-tutorials'} activeStyle={{ color: "red" }}>Manage Tutorials</Button>
+          <Button w={'full'} justifyContent={'flex-start'} borderRadius={'full'} activeStyle={{ color: "red" }}>Announcements</Button>
+          <Button w={'full'} justifyContent={'flex-start'} borderRadius={'full'} activeStyle={{ color: "red" }}>Alert Messages</Button>
+          <Button w={'full'} justifyContent={'flex-start'} borderRadius={'full'} activeStyle={{ color: "red" }}>Manage Events</Button>
+          <Button w={'full'} justifyContent={'flex-start'} borderRadius={'full'} activeStyle={{ color: "red" }}>List Students</Button>
+          <Button w={'full'} justifyContent={'flex-start'} borderRadius={'full'} activeStyle={{ color: "red" }}>Manage Tutorials</Button>
 
         </VStack>
         <Flex flexGrow={1} position={'relative'}>
@@ -154,12 +179,12 @@ function Dashboard() {
               <Divider my={2} />
               <VStack>
 
-                <Accordion allowToggle>
+                <Accordion allowToggle w={'full'}>
                   {
                     notes.map((item) => (
 
 
-                      <AccordionItem>
+                      <AccordionItem key={item.id}>
                         <h2>
                           <AccordionButton>
                             <Box as="span" flex='1' textAlign='left'>
