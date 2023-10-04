@@ -11,11 +11,16 @@ import { DownloadIcon } from '@chakra-ui/icons'
 
 function Dashboard() {
   const [data, setData] = useState([]);
+  const [courses, setCourses] = useState([]);
+  const [selecctedCourse, setSelectedCourse] = useState([]);
+  const [assignment, setAssignment] = useState([]);
+  const [notes, setNotes] = useState([]);
+
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const response = await axios.get('http://localhost:8000/api/your-model/');
-                setData(response.data);
+                setCourses(response.data);
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
@@ -24,6 +29,20 @@ function Dashboard() {
 
         fetchData();
     }, []);
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const assignment = await axios.get('http://localhost:8000/api/assignments/');
+                setAssignment(assignment.data);
+                const notes = await axios.get('http://localhost:8000/api/notes/');
+                setAssignment(notes.data);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+          };
+          console.log(data)
+        fetchData();
+    }, [selecctedCourse]);
 
   const [assignmnetFormData, setAssignmentFormData] = useState({
     title: '',
@@ -81,7 +100,15 @@ function Dashboard() {
           </HStack>
 
           <Divider borderColor={'blackAlpha.300'} my={1} />
-          <Button w={'full'} justifyContent={'flex-start'} borderRadius={'full'} as={Link} to={'/faculty'} activeStyle={{ color: "red", border: "2px solid red" }}>Operating System</Button>
+
+          {
+            courses.map((item) => (
+            <Button w={'full'} justifyContent={'flex-start'} borderRadius={'full'} activeStyle={{ color: "red", border: "2px solid red" }} 
+            key={item.id}>
+            {item.name}
+            </Button>))
+          }
+          
           <Button w={'full'} justifyContent={'flex-start'} borderRadius={'full'} as={Link} to={'/microprocessor'} activeStyle={{ color: "red" }}>Microprocessor</Button>
           <Button w={'full'} justifyContent={'flex-start'} borderRadius={'full'} as={Link} to={'/computer-architecture'} activeStyle={{ color: "red" }}>Computer Architecture</Button>
 
