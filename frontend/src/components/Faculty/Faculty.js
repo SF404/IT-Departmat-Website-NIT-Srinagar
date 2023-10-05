@@ -97,7 +97,7 @@ function Faculty() {
                     {
                         faculty.map((item) => (
 
-                            <Flex w={'full'} p={2} boxShadow='0px 4px 16px rgba(149, 157, 165, 0.2)' borderRadius={4} key={item.id}>
+                            <Flex w={'full'} p={2} boxShadow='0px 4px 16px rgba(149, 157, 165, 0.2)' borderRadius={4} key={item.id} bg={'white'}>
                                 <WrapItem ml={2}>
                                     <Avatar size='2xl' name={item.name} src='https://bit.ly/sage-adebayo' />
                                 </WrapItem>
