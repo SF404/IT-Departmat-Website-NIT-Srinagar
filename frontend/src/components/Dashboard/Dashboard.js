@@ -1,7 +1,8 @@
-import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Avatar, Box, Button, Divider, Flex, FormControl, FormLabel, HStack, Image, Input, Popover, PopoverArrow, PopoverBody, PopoverCloseButton, PopoverContent, PopoverHeader, PopoverTrigger, Text, Textarea, VStack } from '@chakra-ui/react'
+import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Avatar, Box, Button, Center, Divider, Flex, FormControl, FormLabel, HStack, IconButton, Image, Input, Popover, PopoverArrow, PopoverBody, PopoverCloseButton, PopoverContent, PopoverHeader, PopoverTrigger, Stack, Text, Textarea, VStack, textDecoration } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Calendar from 'react-calendar'
+import { FaDownload, FaTrash } from "react-icons/fa6";
 import { Link } from 'react-router-dom'
 import './Calendar.css';
 import illustration_A from './../../assets/images/illustration_A.png'
@@ -25,11 +26,23 @@ function Dashboard() {
   const [selectedCourse, setSelectedCourse] = useState(null);
   const [assignment, setAssignment] = useState([]);
   const [notes, setNotes] = useState([{
-    title: "Arman",
+    title: "Arman, An Untold Story, Based on true events, Somedfnsjfks",
   },
   {
     title: "Suhaib"
-  }
+  },
+  {
+    title: "Suhaib"
+  },
+  {
+    title: "Suhaib"
+  },
+  {
+    title: "Suhaib"
+  },
+  {
+    title: "Suhaib"
+  },
   ]);
 
   useEffect(() => {
@@ -51,7 +64,7 @@ function Dashboard() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        if (selectedCourse!=null) {
+        if (selectedCourse != null) {
           const assignment = await axios.get(`http://localhost:8000/api/assignments/?id=${selectedCourse}`);
           setAssignment(assignment.data);
           const notes = await axios.get(`http://localhost:8000/api/notes/?id=${selectedCourse}`);
@@ -148,7 +161,7 @@ function Dashboard() {
         </VStack>
         <Flex flexGrow={1} position={'relative'}>
 
-          <Flex flexGrow={1} justify={'space-evenly'} gap={'24px'} p={'16px'}>
+          <Flex flexGrow={1} justify={'space-evenly'} gap={'24px'} p={'16px'} overflowY={'scroll'} fontFamily={'sans-serif'}>
             {/* <Box>
                 <Image src={illustration_A} opacity={1} />
                 <Text textAlign={'justify'} mt={-10} bg={'#ebedf7'} fontSize={14} p={3} borderRadius={10}>
@@ -175,11 +188,11 @@ function Dashboard() {
               </Box> */}
 
             <Box w={'full'} textAlign={'center'}>
-              <Text bg={'#d8dcf0'} p={2} borderRadius={6}>Notes</Text>
+              <Text bg={'#c5cae8'} p={2} fontWeight={'semibold'} borderRadius={6}>Notes</Text>
               <Divider my={2} />
               <VStack>
 
-                <Accordion allowToggle w={'full'}>
+                {/* <Accordion allowToggle w={'full'}>
                   {
                     notes.map((item) => (
 
@@ -199,7 +212,30 @@ function Dashboard() {
                       </AccordionItem>
                     ))
                   }
-                </Accordion>
+                </Accordion> */}
+
+                {
+                  notes.map((item) => (
+
+                    <Flex w={'full'} bg={'#cbeae7'} p={2} borderRadius={4} justifyContent={'space-between'} alignItems={'center'} key={item.id} fontSize={14}>
+                      <Text as={Link} textAlign={'left'} pr={2}  to={'https://react-icons.github.io/react-icons/icons?name=fa6'} _hover={{textDecoration: 'underline'}}>
+                        {item.title}
+
+                      </Text>
+
+                      <HStack>
+                        <IconButton isRound={true} variant='solid' colorScheme='purple' aria-label='Done' icon={<FaDownload/>}/>
+                        <IconButton isRound={true} variant='solid' colorScheme='teal' aria-label='Done' icon={<FaTrash />}/>
+                        
+                      </HStack>
+                    </Flex>
+                  ))
+
+                }
+
+
+
+
 
               </VStack>
               <Divider my={2} />
@@ -251,7 +287,7 @@ function Dashboard() {
             </Box>
 
             <Box w={'full'} textAlign={'center'}>
-              <Text bg={'#d8dcf0'} p={2} borderRadius={6}>Assignment</Text>
+              <Text bg={'#c5cae8'} p={2} fontWeight={'semibold'} borderRadius={6}>Assignment</Text>
               <Divider my={2} />
               <VStack>
 
@@ -332,7 +368,6 @@ function Dashboard() {
           <Divider orientation='vertical' borderColor={'blackAlpha.200'} />
 
           <VStack h={'full'} minW={300} p={4}>
-
             <Calendar />
           </VStack>
 

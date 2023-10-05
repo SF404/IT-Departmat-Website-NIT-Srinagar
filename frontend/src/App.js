@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from './components/Layout/Layout';
 import Dashboard from './components/Dashboard/Dashboard';
 import Login from './components/Authenticate/Login';
+import Faculty from './components/Faculty/Faculty';
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
         <Route path="/" element={<Layout />}>
           {/* <Route index element={<Dashboard />} /> */}
           <Route path="dashboard" element={<Dashboard />}></Route>
+          <Route path="faculty" element={<Faculty />}></Route>
           <Route path="login" element={<Login />}></Route>
         </Route>
       </Routes>
