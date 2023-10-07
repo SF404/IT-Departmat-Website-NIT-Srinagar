@@ -1,20 +1,14 @@
 
 from django.shortcuts import render,redirect
-from IT_DEPARTMENT.models import Teacher,Course, Alert, Announcement
-from django.contrib.auth.decorators import login_required
+from IT_DEPARTMENT.models import Teacher,Course, Alert, Announcement,Assignment,Notes
 from django.http import JsonResponse
-# from corsheaders.decorators import cors_headers
-from . import views
-# from corsheaders.decorators import cors_headers
 from django.views.decorators.csrf import csrf_exempt
-
-
- 
-# import view sets from the REST framework
-from rest_framework import viewsets
- 
-# import the TeacherSerializer from the serializer file
-from .serializers import TeacherSerializer, CourseSerializer
+from rest_framework.views import APIView
+from rest_framework import generics,status,response,viewsets
+from .serializers import TeacherSerializer, CourseSerializer,AssignmentSerializer,NotesSerializer
+from django.contrib.sessions.models import Session
+from rest_framework.response import Response
+import random
 
  
 
@@ -36,6 +30,52 @@ class CourseView(viewsets.ModelViewSet):
         queryset = Course.objects.filter(teacher=teacher)
         print(queryset[0].cid)
         return queryset
+
+
+class NotesUpload(viewsets.ModelViewSet):
+    serializer_class = NotesSerializer
+    def create(self, request, *args, **kwargs):
+        title = request.data.get("title")
+        file = request.data.get("file")
+        nid=random.randint(1, 10000)
+        print(title)
+        print(file)
+        try:
+            note = Notes(name=title, pdf=file,nid=nid)
+            note.save()
+            return Response({"message": "Notes created successfully"}, status=status.HTTP_201_CREATED)
+        except Exception as e:
+            return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+
+
+class AssignmentUpload (viewsets.ModelViewSet):
+    serializer_class = AssignmentSerializer
+    def create(self, request, *args, **kwargs):
+        title = request.data.get("title")
+        file = request.data.get("file")
+        aid=random.randint(1, 10000)
+        print(title)
+        print(file)
+        try:
+            note = Assignment(name=title, pdf=file,aid=aid)
+            note.save()
+            return Response({"message": "Assignment created successfully"}, status=status.HTTP_201_CREATED)
+        except Exception as e:
+            return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+        
+
+class NotesShow(viewsets.ModelViewSet):
+    serializer_class = NotesSerializer
+    def get_queryset(self):
+        notes = Notes.objects.all()
+        return notes
+    
+class AssignmentShow(viewsets.ModelViewSet):
+    serializer_class = AssignmentSerializer
+    def get_queryset(self):
+        assignment = Assignment.objects.all()
+        return assignment
+    
 
 
 

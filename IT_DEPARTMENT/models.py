@@ -29,3 +29,29 @@ class Alert(models.Model):
     valid = models.IntegerField()
     date = models.DateTimeField(auto_now_add=True)
 
+class Assignment(models.Model):
+    aid=models.CharField(max_length=255,unique=True)
+    name = models.CharField(max_length=255)
+    pdf = models.FileField(upload_to='pdfs/')
+    description = models.CharField(max_length=255,null=True,blank=True)
+    date=models.DateTimeField(auto_now_add=True)
+    course=models.ForeignKey(Course,on_delete=models.CASCADE,null=True,blank=True)
+    class Meta:
+        ordering = ['name']
+     
+    def __str__(self):
+        return f"{self.name}"
+    
+class Notes(models.Model):
+    nid=models.CharField(max_length=255,unique=True)
+    name = models.CharField(max_length=255)
+    pdf = models.FileField(upload_to='pdfs/')
+    description = models.CharField(max_length=255,null=True,blank=True)
+    date=models.DateTimeField(auto_now_add=True)
+    course=models.ForeignKey(Course,on_delete=models.CASCADE,null=True,blank=True)
+    class Meta:
+        ordering = ['name']
+     
+    def __str__(self):
+        return f"{self.name}"
+
