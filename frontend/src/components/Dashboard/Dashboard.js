@@ -1,170 +1,93 @@
-import {
-  Accordion,
-  AccordionButton,
-  AccordionIcon,
-  AccordionItem,
-  AccordionPanel,
-  Avatar,
-  Box,
-  Button,
-  Center,
-  Divider,
-  Flex,
-  FormControl,
-  FormLabel,
-  HStack,
-  IconButton,
-  Image,
-  Input,
-  Popover,
-  PopoverArrow,
-  PopoverBody,
-  PopoverCloseButton,
-  PopoverContent,
-  PopoverHeader,
-  PopoverTrigger,
-  Stack,
-  Text,
-  Textarea,
-  VStack,
-  textDecoration,
-  useDisclosure,
-} from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import Calendar from "react-calendar";
+import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Avatar, Box, Button, Center, Divider, Flex, FormControl, FormLabel, HStack, IconButton, Image, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Popover, PopoverArrow, PopoverBody, PopoverCloseButton, PopoverContent, PopoverHeader, PopoverTrigger, Stack, Tag, Text, Textarea, VStack, textDecoration, useDisclosure } from '@chakra-ui/react'
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import Calendar from 'react-calendar'
 import { FaDownload, FaTrash } from "react-icons/fa6";
-import { Link } from "react-router-dom";
-import "./Calendar.css";
-import illustration_A from "./../../assets/images/illustration_A.png";
-import illustration_B from "./../../assets/images/illustration_B.png";
-import illustration_C from "./../../assets/images/illustration_C.png";
-import { DownloadIcon } from "@chakra-ui/icons";
-import ProfileModal from "../Modals/ProfileModal";
+import { Link } from 'react-router-dom'
+import { useToast } from '@chakra-ui/react'
+import './Calendar.css';
+import { DownloadIcon } from '@chakra-ui/icons'
+import ProfileModal from '../Modals/ProfileModal';
+import DashboardPlaceholder from '../Placeholders/DashboardPlaceholder';
 
 function Dashboard() {
-  // Model Hooks
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  // Hooks
-  const [user, setUser] = useState([]);
-  const [data, setData] = useState([]);
-  const [courses, setCourses] = useState([
-    {
-      id: 1,
-      name: "Operating System",
-    },
-    {
-      id: 2,
-      name: "Microprocessor",
-    },
-  ]);
-  const [selectedCourse, setSelectedCourse] = useState(null);
-  const [assignment, setAssignment] = useState([]);
-  const [notes, setNotes] = useState([
-    {
-      title: "Arman, An Untold Story, Based on true events, Somedfnsjfks",
-    },
-    {
-      title: "Suhaib"
-    },
-    {
-      title: "Suhaib"
-    },
-    {
-      title: "Suhaib"
-    },
-    {
-      title: "Suhaib"
-    },
-    {
-      title: "Suhaib"
-    },
-  ]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const getUser = await axios.get(
-          `http://localhost:8000/api/temp/?sid=${1001}`
-        );
-        console.log(getUser.data);
-        setUser(getUser.data[0]);
-        const response = await axios.get(
-          `http://localhost:8000/api/courses/?sid=${1001}`
-        );
-        console.log(response.data);
-        setCourses(response.data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const assignment = await axios.get(
-          `http://localhost:8000/api/assignments/?id=${selectedCourse}`
-        );
-        setAssignment(assignment.data);
-        const notes = await axios.get(
-          `http://localhost:8000/api/notes/?id=${selectedCourse}`
-        );
-        setNotes(notes.data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-    fetchData();
-  }, [selectedCourse]);
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const notes_back = await axios.get(
-          `http://localhost:8000/api/shownotes/`
-        );
-        console.log(notes_back.data);
-        setNotes(notes_back.data);
-        const assignment_back = await axios.get(
-          `http://localhost:8000/api/showassignment/`
-        );
-        console.log(assignment_back.data);
-        setAssignment(assignment_back.data);
-      } catch (error) {
-        // console.error("Error fetching data:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  const handleCourseSelect = (cid) => {
-    setSelectedCourse(cid);
-
-  }
-
-
-
-
+  // Form States
   const [assignmnetFormData, setAssignmentFormData] = useState({
-    title: "",
-    description: "",
+    title: '',
+    description: '',
+    deadline: '',
+    file: '',
   });
 
   const [notesFormData, setNotesFormData] = useState({
-    title: "",
-    description: "",
+    title: '',
+    file: '',
   });
+  // Model Hooks
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { isOpen: openNotesModel, onOpen: addNotes, onClose: closeNotesModel } = useDisclosure()
+  const { isOpen: openAssignmentModel, onOpen: addAssignment, onClose: closeAssignmentModel } = useDisclosure()
+  // Hooks
+  const toast = useToast();
+  // Page States
+  const [user, setUser] = useState([]);
+  const [courses, setCourses] = useState([]);
+  const [selectedCourse, setSelectedCourse] = useState(null);
+  const [assignment, setAssignment] = useState([]);
+  const [notes, setNotes] = useState([]);
 
-  const handleChangeAssignment = (e) => {
+  // On Load Use_effect
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const getUser = await axios.get(`http://localhost:8000/api/temp/?sid=${1001}`)
+        console.log(getUser.data)
+        setUser(getUser.data[0]);
+        const response = await axios.get(`http://localhost:8000/api/courses/?sid=${1001}`);
+        console.log(response.data)
+        setCourses(response.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  // On Course Change Use_effect
+  const fetchData = async () => {
+    try {
+      if (selectedCourse != null) {
+        const assignment = await axios.get(`http://localhost:8000/api/showassignments/?cid=${selectedCourse}`);
+        setAssignment(assignment.data);
+        const notes = await axios.get(`http://localhost:8000/api/shownotes/?cid=${selectedCourse}`);
+        setNotes(notes.data);
+
+      }
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+  useEffect(() => {
+    fetchData();
+  }, [selectedCourse]);
+
+  // Function For changing Selected Course
+  const handleCourseSelect = (cid) => {
+    setSelectedCourse(cid);
+  }
+
+  // Function for writing Assignment form Data
+  const handleAssignmentFormChange = (e) => {
     const { name, value } = e.target;
     setAssignmentFormData((prevData) => ({
       ...prevData,
       [name]: value,
     }));
   };
-  const handleChangeNotes = (e) => {
+
+  // Function for writing Notes form Data
+  const handleNotesFormChange = (e) => {
     const { name, value } = e.target;
     setNotesFormData((prevData) => ({
       ...prevData,
@@ -172,66 +95,111 @@ function Dashboard() {
     }));
   };
 
+  // Function for Handling Assignment Submit
   const handleAssignmentSubmit = async (e) => {
     e.preventDefault();
-    // Perform any action with the form data, like sending it to an API
     const formData = new FormData();
     formData.append("title", assignmnetFormData.title);
     formData.append("file", assignmnetFormData.file);
+    formData.append("description", assignmnetFormData.description);
+    formData.append("deadline", assignmnetFormData.deadline);
+    formData.append("cid", selectedCourse);
     try {
       const response = await axios.post(
         "http://localhost:8000/api/assignmentupload/",
         formData,
         {
           headers: {
-            "Content-Type": "multipart/form-data", // Set the content type to multipart/form-data
+            "Content-Type": "multipart/form-data",
           },
         }
       );
+
+      closeAssignmentModel();
+      await fetchData();
+
+      // Display success toast
+      toast({
+        title: "Assignment Uploaded",
+        description: "Your assignment has been successfully uploaded.",
+        status: "success",
+        duration: 5000, // Duration in milliseconds
+        isClosable: true,
+      });
+
       console.log("Response data assignment:", response.data);
-      // Handle the response data as needed
     } catch (error) {
+      // Display error toast
+      toast({
+        title: "Error",
+        description: "There was an error uploading the assignment.",
+        status: "error",
+        duration: 5000, // Duration in milliseconds
+        isClosable: true,
+      });
+
       console.error("Error:", error);
-      // Handle errors here
     }
     console.log("Form Data:", assignmnetFormData);
   };
+
+
+  // Function For Handeling Notes Submit
   const handleNotesSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
     formData.append("title", notesFormData.title);
     formData.append("file", notesFormData.file);
-
+    formData.append("cid", selectedCourse);
     try {
       const response = await axios.post(
         "http://localhost:8000/api/notesupload/",
         formData,
         {
           headers: {
-            "Content-Type": "multipart/form-data", // Set the content type to multipart/form-data
+            "Content-Type": "multipart/form-data",
           },
         }
       );
+
+      // openNotesModel=false;
+      closeNotesModel();
+      await fetchData();
+      // Display success toast
+      toast({
+        title: "Notes Uploaded",
+        description: "Your notes have been successfully uploaded.",
+        status: "success",
+        duration: 5000, // Duration in milliseconds
+        isClosable: true,
+      });
+
       console.log("Response data notes:", response.data);
-      // Handle the response data as needed
     } catch (error) {
+      // Display error toast
+      toast({
+        title: "Error",
+        description: "There was an error uploading the notes.",
+        status: "error",
+        duration: 5000, // Duration in milliseconds
+        isClosable: true,
+      });
+
       console.error("Error:", error);
-      // Handle errors here
     }
-    // console.log("Form Data:", assignmnetFormData);
   };
-  console.log(notes);
+
+
   return (
     <>
-
       <Flex position={'fixed'} bottom={0} top={110} w={'full'} bg={'whitesmoke'}>
         <Box minW={'64px'} maxW={'64px'} bg={'#d8dcf0'}></Box>
         <VStack minW={250} maxW={250} p={3} bg={'white'} userSelect={'none'}>
 
-          <HStack padding={3} w={'full'} bg={'#d8dcf0'} borderRadius={'2xl'}>
+          <HStack padding={3} w={'full'} bg={'#d8dcf0'} borderRadius={'2xl'} onClick={() => setSelectedCourse(null)}>
             <Popover>
               <PopoverTrigger>
-                <Avatar cursor={"pointer"} name={user.name}></Avatar>
+                <Avatar cursor={'pointer'} name={user.name} onClick={(e) => e.stopPropagation()}></Avatar>
               </PopoverTrigger>
               <PopoverContent w={200}>
                 <PopoverArrow />
@@ -241,15 +209,12 @@ function Dashboard() {
                   <Button w={'full'} colorScheme='facebook' onClick={onOpen}>My Profile</Button>
                   <ProfileModal isOpen={isOpen} onClose={onClose} user={user} />
                   <Divider my={2} />
-                  <Button w={"full"} colorScheme="telegram">
-                    Logout
-                  </Button>
+                  <Button w={'full'} colorScheme='telegram'>Logout</Button>
                 </PopoverBody>
               </PopoverContent>
             </Popover>
             <Text>{user.name}</Text>
           </HStack>
-
           <Divider borderColor={'blackAlpha.300'} my={1} />
           <VStack w={'full'} spacing={1}>
 
@@ -265,6 +230,8 @@ function Dashboard() {
                 </Button>))
             }
 
+          </VStack>
+
           <Divider borderColor={'blackAlpha.300'} my={1} />
 
           <VStack w={'full'}>
@@ -273,293 +240,193 @@ function Dashboard() {
             <Button w={'full'} justifyContent={'flex-start'} borderRadius={'full'} fontSize={13} h={30} overflow={'hidden'} bg={'transparent'}>Manage Events</Button>
             <Button w={'full'} justifyContent={'flex-start'} borderRadius={'full'} fontSize={13} h={30} overflow={'hidden'} bg={'transparent'}>List Students</Button>
             <Button w={'full'} justifyContent={'flex-start'} borderRadius={'full'} fontSize={13} h={30} overflow={'hidden'} bg={'transparent'}>Manage Tutorials</Button>
-
           </VStack>
-
 
         </VStack>
-        <Flex flexGrow={1} position={"relative"}>
-          <Flex
-            flexGrow={1}
-            justify={"space-evenly"}
-            gap={"24px"}
-            p={"16px"}
-            overflowY={"scroll"}
-            fontFamily={"sans-serif"}
-          >
-            {/* <Box>
-                <Image src={illustration_A} opacity={1} />
-                <Text textAlign={'justify'} mt={-10} bg={'#ebedf7'} fontSize={14} p={3} borderRadius={10}>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, autem!
-                  Lorem ipsum dolor sit ame
-                </Text>
+        <Flex flexGrow={1} position={'relative'}>
+          {
+            selectedCourse ? (
+              <Flex flexGrow={1} justify={'space-evenly'} gap={'24px'} p={'16px'} overflowY={'scroll'} fontFamily={'sans-serif'}>
 
-              </Box>
+                <Box w={'full'} textAlign={'center'}>
+                  <Text bg={'#c5cae8'} p={2} fontWeight={'semibold'} borderRadius={6}>Notes / Material</Text>
+                  <Divider my={2} />
+                  <VStack>
+                    {
+                      notes.map((item) => (
 
-              <Box>
-                <Image src={illustration_B} opacity={1} />
-                <Text textAlign={'justify'} mt={-10} bg={'#ebedf7'} fontSize={14} p={3} borderRadius={10}>
-                  autem!
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo, aspernatur.
-                </Text>
-
-              </Box>
-              <Box>
-                <Image src={illustration_C} opacity={1} />
-                <Text textAlign={'justify'} mt={-10} bg={'#ebedf7'} fontSize={14} p={3} borderRadius={10}>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elitt amet consectetur adipisicing elit. Illo, aspernatur.
-                </Text>
-
-              </Box> */}
-
-            <Box w={"full"} textAlign={"center"}>
-              <Text
-                bg={"#c5cae8"}
-                p={2}
-                fontWeight={"semibold"}
-                borderRadius={6}
-              >
-                Notes
-              </Text>
-              <Divider my={2} />
-              <VStack>
-                {/* <Accordion allowToggle w={'full'}>
-                  {
-                    notes.map((item) => (
-
-
-                      <AccordionItem key={item.id}>
-                        <h2>
-                          <AccordionButton>
-                            <Box as="span" flex='1' textAlign='left'>
-                              {item.title}
-                            </Box>
-                            <AccordionIcon />
-                          </AccordionButton>
-                        </h2>
-                        <AccordionPanel pb={4}>
-                          <Button>Download</Button>
-                        </AccordionPanel>
-                      </AccordionItem>
-                    ))
-                  }
-                </Accordion> */}
-
-                {notes.map((item) => (
-                  <Flex
-                    w={"full"}
-                    bg={"#cbeae7"}
-                    p={2}
-                    borderRadius={4}
-                    justifyContent={"space-between"}
-                    alignItems={"center"}
-                    key={item.nid}
-                    fontSize={14}
-                  >
-                    <Text
-                      as={Link}
-                      textAlign={"left"}
-                      pr={2}
-                      to={
-                        "https://react-icons.github.io/react-icons/icons?name=fa6"
-                      }
-                      _hover={{ textDecoration: "underline" }}
-                    >
-                      {item.name}
-                    </Text>
-
-                    <HStack>
-                      <IconButton
-                        isRound={true}
-                        variant="solid"
-                        colorScheme="purple"
-                        aria-label="Done"
-                        icon={<FaDownload />}
-                      />
-                      <IconButton
-                        isRound={true}
-                        variant="solid"
-                        colorScheme="teal"
-                        aria-label="Done"
-                        icon={<FaTrash />}
-                      />
-                    </HStack>
-                  </Flex>
-                ))}
-              </VStack>
-              <Divider my={2} />
-              <Accordion allowToggle>
-                <AccordionItem>
-                  <h2>
-                    <AccordionButton bg={"#d2eafc"}>
-                      <Box as="span" flex="1" textAlign="left">
-                        Upload Notes
-                      </Box>
-                      <AccordionIcon />
-                    </AccordionButton>
-                  </h2>
-                  <AccordionPanel pb={4}>
-                    <form onSubmit={handleNotesSubmit}>
-                      <FormControl>
-                        <FormLabel>Title</FormLabel>
-                        <Input
-                          type="text"
-                          name="title"
-                          value={notesFormData.title}
-                          onChange={handleChangeNotes}
-                          placeholder="Enter title"
-                        />
-                      </FormControl>
-
-                      <FormControl mt={4}>
-                        <FormLabel
-                          bg={"#e5e5e5"}
-                          p={3}
-                          borderRadius={"10px"}
-                          m={0}
-                        >
-                          Upload Notes
-                          {/* <DownloadIcon transform="rotate(180deg)"/> */}
-                        </FormLabel>
-                        <Input
-                          type="file"
-                          name="file"
-                          onChange={handleChangeNotes}
-                          display={"none"}
-                        />
-                      </FormControl>
-
-                      <Button
-                        type="submit"
-                        colorScheme="facebook"
-                        mt={4}
-                        w={"full"}
-                      >
-                        Upload
-                      </Button>
-                    </form>
-                  </AccordionPanel>
-                </AccordionItem>
-              </Accordion>
-            </Box>
-
-            <Box w={"full"} textAlign={"center"}>
-              <Text
-                bg={"#c5cae8"}
-                p={2}
-                fontWeight={"semibold"}
-                borderRadius={6}
-              >
-                Assignment
-              </Text>
-              <Divider my={2} />
-              <VStack>
-                <Accordion allowToggle w={"full"}>
-                  {assignment.map((item) => (
-                    <AccordionItem key={item.id}>
-                      <h2>
-                        <AccordionButton>
-                          <Box as="span" flex="1" textAlign="left">
+                        <Flex w={'full'} bg={'#cbeae7'} p={2} borderRadius={4} justifyContent={'space-between'} alignItems={'center'} key={item.id} fontSize={14}>
+                          <Text as={Link} textAlign={'left'} pr={2} to={`${item.pdf}`} _hover={{ textDecoration: 'underline' }}>
                             {item.name}
-                          </Box>
-                          <AccordionIcon />
-                        </AccordionButton>
-                      </h2>
-                      <AccordionPanel pb={4}>
-                        <Button>Download</Button>
-                      </AccordionPanel>
-                    </AccordionItem>
-                  ))}
-                </Accordion>
-              </VStack>
-              <Divider my={2} />
+                          </Text>
 
-              <Accordion allowToggle>
-                <AccordionItem>
-                  <h2>
-                    <AccordionButton bg={"#d2eafc"}>
-                      <Box as="span" flex="1" textAlign="left">
-                        Add New Assignment
-                      </Box>
-                      <AccordionIcon />
-                    </AccordionButton>
-                  </h2>
-                  <AccordionPanel pb={4}>
-                    <form onSubmit={handleAssignmentSubmit}>
-                      <FormControl>
-                        <FormLabel>Title</FormLabel>
-                        <Input
-                          type="text"
-                          name="title"
-                          value={assignmnetFormData.title}
-                          onChange={handleChangeAssignment}
-                          placeholder="Enter title"
-                        />
-                      </FormControl>
+                          <HStack>
+                            <IconButton isRound={true} variant='solid' colorScheme='purple' aria-label='Done' icon={<FaDownload />} />
+                            <IconButton isRound={true} variant='solid' colorScheme='teal' aria-label='Done' icon={<FaTrash />} />
 
-                      <FormControl mt={4}>
-                        <FormLabel>Description</FormLabel>
-                        <Textarea
-                          name="description"
-                          value={assignmnetFormData.description}
-                          onChange={handleChangeAssignment}
-                          placeholder="Enter description"
-                        />
-                      </FormControl>
+                          </HStack>
+                        </Flex>
+                      ))
+                    }
 
-                      <FormControl>
-                        <FormLabel>Deadline</FormLabel>
-                        <Input
-                          type="text"
-                          name="title"
-                          value={assignmnetFormData.deadline}
-                          onChange={handleChangeAssignment}
-                          placeholder="Deadline"
-                        />
-                      </FormControl>
+                  </VStack>
+                  <Divider my={2} />
 
-                      <FormControl mt={4}>
-                        <FormLabel
-                          bg={"#e5e5e5"}
-                          p={3}
-                          borderRadius={"10px"}
-                          m={0}
-                        >
-                          Upload File
-                          {/* <DownloadIcon transform="rotate(180deg)"/> */}
-                        </FormLabel>
-                        <Input
-                          type="file"
-                          name="file"
-                          onChange={handleChangeAssignment}
-                          display={"none"}
-                        />
-                      </FormControl>
+                  <Button onClick={addNotes} w={'full'} colorScheme='green'>Add Notes / Material</Button>
 
-                      <Button
-                        type="submit"
-                        colorScheme="facebook"
-                        mt={4}
-                        w={"full"}
-                      >
-                        Submit
-                      </Button>
-                    </form>
-                  </AccordionPanel>
-                </AccordionItem>
-              </Accordion>
-            </Box>
-          </Flex>
+                  <Modal closeOnOverlayClick={false} isOpen={openNotesModel} onClose={closeNotesModel}>
+                    <ModalOverlay />
+                    <ModalContent>
+                      <ModalHeader>Add Study Material</ModalHeader>
+                      <ModalCloseButton />
+                      <ModalBody pb={6}>
+                        <form onSubmit={handleNotesSubmit}>
+                          <FormControl>
+                            <FormLabel>Title</FormLabel>
+                            <Input
+                              type="text"
+                              name="title"
+                              value={notesFormData.title}
+                              onChange={handleNotesFormChange}
+                              placeholder="Enter title"
+                            />
+                          </FormControl>
 
-          <Divider orientation="vertical" borderColor={"blackAlpha.200"} />
+                          <FormControl mt={4}>
+                            <FormLabel bg={'#e5e5e5'} p={3} borderRadius={'10px'} m={0}>
+                              Upload Notes
+                              {/* <DownloadIcon transform="rotate(180deg)"/> */}
+                            </FormLabel>
+                            <Input
+                              type="file"
+                              name="file"
+                              onChange={handleNotesFormChange}
+                              display={'none'}
+                            />
+                          </FormControl>
+                          <Divider my={4} />
 
-          <VStack h={"full"} minW={300} p={4}>
+                          <Button type="submit" colorScheme='blue' w={'full'}>
+                            Upload
+                          </Button>
+                        </form>
+                      </ModalBody>
+
+
+                    </ModalContent>
+                  </Modal>
+                </Box>
+
+                <Box w={'full'} textAlign={'center'}>
+                  <Text bg={'#c5cae8'} p={2} fontWeight={'semibold'} borderRadius={6}>Assignment</Text>
+                  <Divider my={2} />
+                  <VStack w={'full'}>
+
+                    <Accordion allowToggle w={'full'} textAlign={'left'}>
+                      {
+                        assignment.map((item) => (
+                          <AccordionItem w={'full'}>
+                            <h2>
+                              <AccordionButton  w={'full'}>
+                                <Box as="span" flex='1' textAlign='left'>
+                                  {item.name}
+                                </Box>
+                                <AccordionIcon />
+                              </AccordionButton>
+                            </h2>
+                            <AccordionPanel pb={4} w={'full'}>
+                              {item.description}
+                              <br />
+                              <Tag>Deadline: <Text color={'red'}>{item.deadline}</Text></Tag>
+                            </AccordionPanel>
+                          </AccordionItem>
+                        ))
+                      }
+                    </Accordion>
+
+                  </VStack>
+                  <Divider my={2} />
+
+                  <Button onClick={addAssignment} w={'full'} colorScheme='green'>Add New Assignment</Button>
+
+                  <Modal closeOnOverlayClick={false} isOpen={openAssignmentModel} onClose={closeAssignmentModel}>
+                    <ModalOverlay />
+                    <ModalContent>
+                      <ModalHeader>Add Assignment</ModalHeader>
+                      <ModalCloseButton />
+                      <ModalBody pb={6}>
+                        <form onSubmit={handleAssignmentSubmit}>
+                          <FormControl>
+                            <FormLabel>Title</FormLabel>
+                            <Input
+                              type="text"
+                              name="title"
+                              value={assignmnetFormData.title}
+                              onChange={handleAssignmentFormChange}
+                              placeholder="Enter title"
+                            />
+                          </FormControl>
+
+                          <FormControl mt={4}>
+                            <FormLabel>Description</FormLabel>
+                            <Textarea
+                              name="description"
+                              value={assignmnetFormData.description}
+                              onChange={handleAssignmentFormChange}
+                              placeholder="Enter description"
+                            />
+                          </FormControl>
+
+                          <FormControl>
+                            <FormLabel>Deadline</FormLabel>
+                            <Input
+                              type="text"
+                              name="deadline"
+                              value={assignmnetFormData.deadline}
+                              onChange={handleAssignmentFormChange}
+                              placeholder="Deadline"
+                            />
+                          </FormControl>
+
+
+                          <FormControl mt={4}>
+                            <FormLabel bg={'#e5e5e5'} p={3} borderRadius={'10px'} m={0}>
+                              Upload File
+                              {/* <DownloadIcon transform="rotate(180deg)"/> */}
+                            </FormLabel>
+                            <Input
+                              type="file"
+                              name="file"
+                              onChange={handleAssignmentFormChange}
+                              display={'none'}
+                            />
+                          </FormControl>
+
+                          <Button type="submit" colorScheme="facebook" mt={4} w={'full'} >
+                            Submit
+                          </Button>
+                        </form>
+                      </ModalBody>
+
+
+                    </ModalContent>
+                  </Modal>
+                </Box>
+              </Flex>
+            ) : (<DashboardPlaceholder />)
+          }
+
+          <Divider orientation='vertical' borderColor={'blackAlpha.200'} />
+
+          <VStack h={'full'} minW={300} p={4}>
             <Calendar />
           </VStack>
+
+
         </Flex>
       </Flex>
     </>
-  );
+  )
 }
 
-export default Dashboard;
+export default Dashboard

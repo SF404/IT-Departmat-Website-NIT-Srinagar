@@ -34,6 +34,8 @@ class Assignment(models.Model):
     name = models.CharField(max_length=255)
     pdf = models.FileField(upload_to='pdfs/')
     description = models.CharField(max_length=255,null=True,blank=True)
+    deadline = models.CharField(max_length=255,null=True,blank=True)
+    cid = models.CharField(max_length=255,null=True)
     date=models.DateTimeField(auto_now_add=True)
     course=models.ForeignKey(Course,on_delete=models.CASCADE,null=True,blank=True)
     class Meta:
@@ -47,6 +49,7 @@ class Notes(models.Model):
     name = models.CharField(max_length=255)
     pdf = models.FileField(upload_to='pdfs/')
     description = models.CharField(max_length=255,null=True,blank=True)
+    cid = models.CharField(max_length=255,null=True)
     date=models.DateTimeField(auto_now_add=True)
     course=models.ForeignKey(Course,on_delete=models.CASCADE,null=True,blank=True)
     class Meta:

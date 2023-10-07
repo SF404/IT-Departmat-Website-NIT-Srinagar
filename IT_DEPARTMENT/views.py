@@ -37,11 +37,13 @@ class NotesUpload(viewsets.ModelViewSet):
     def create(self, request, *args, **kwargs):
         title = request.data.get("title")
         file = request.data.get("file")
+        cid = request.data.get("cid")
         nid=random.randint(1, 10000)
+        print(cid, "CID-----------")
         print(title)
         print(file)
         try:
-            note = Notes(name=title, pdf=file,nid=nid)
+            note = Notes(name=title, pdf=file,nid=nid, cid=cid)
             note.save()
             return Response({"message": "Notes created successfully"}, status=status.HTTP_201_CREATED)
         except Exception as e:
@@ -53,11 +55,12 @@ class AssignmentUpload (viewsets.ModelViewSet):
     def create(self, request, *args, **kwargs):
         title = request.data.get("title")
         file = request.data.get("file")
+        cid = request.data.get("cid")
+        description = request.data.get("description")
+        deadline = request.data.get("deadline")
         aid=random.randint(1, 10000)
-        print(title)
-        print(file)
         try:
-            note = Assignment(name=title, pdf=file,aid=aid)
+            note = Assignment(name=title, pdf=file,aid=aid, cid=cid, description=description, deadline=deadline)
             note.save()
             return Response({"message": "Assignment created successfully"}, status=status.HTTP_201_CREATED)
         except Exception as e:
@@ -67,13 +70,15 @@ class AssignmentUpload (viewsets.ModelViewSet):
 class NotesShow(viewsets.ModelViewSet):
     serializer_class = NotesSerializer
     def get_queryset(self):
-        notes = Notes.objects.all()
+        cid = self.request.query_params.get('cid')
+        notes = Notes.objects.filter(cid=cid)
         return notes
     
 class AssignmentShow(viewsets.ModelViewSet):
     serializer_class = AssignmentSerializer
     def get_queryset(self):
-        assignment = Assignment.objects.all()
+        cid = self.request.query_params.get('cid')        
+        assignment = Assignment.objects.filter(cid=cid)
         return assignment
     
 
