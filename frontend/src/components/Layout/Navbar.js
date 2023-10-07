@@ -11,7 +11,7 @@ function Navbar() {
                 <Image src={mainLogo} h={50} />
                 <Text mx={'10px'} fontWeight={'bold'}>DEPARTMENT OF INFORMATION TECHNOLOGY <br /> <small>National Institute Of Technology, Srinagar</small></Text>
             </Box>
-            <Flex align="center" h={'46px'} zIndex={9999} justify="space-between" p="0" bg="#192e59" color="#192e59">
+            <Flex align="center" h={'46px'} zIndex={99} justify="space-between" p="0" bg="#192e59" color="#192e59" position={'sticky'} top={0}>
                 {/* <Text fontSize="2xl" fontWeight="bold">
                     Your Logo
                 </Text> */}

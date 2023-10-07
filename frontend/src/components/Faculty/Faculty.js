@@ -1,8 +1,10 @@
-import { PhoneIcon} from '@chakra-ui/icons'
-import {  AiOutlineMail  } from "react-icons/ai";
-import { Avatar, Badge, Button, Card, CardBody, CardFooter, CardHeader, Center, Divider, Flex, Heading, IconButton, Tag, Text, Tooltip, VStack, WrapItem } from '@chakra-ui/react'
+import { EmailIcon, PhoneIcon } from '@chakra-ui/icons'
+import { AiOutlineMail } from "react-icons/ai";
+import { Avatar, Badge, Button, Card, CardBody, CardFooter, CardHeader, Center, Divider, Flex, Heading, IconButton, Popover, PopoverArrow, PopoverBody, PopoverCloseButton, PopoverContent, PopoverHeader, PopoverTrigger, Tag, Text, Tooltip, VStack, WrapItem } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { useToast } from '@chakra-ui/react'
+import Typewriter from "typewriter-effect";
+import Footer from '../Layout/Footer';
 
 function Faculty() {
     const [faculty, setFaculty] = useState([
@@ -88,6 +90,13 @@ function Faculty() {
             });
         }
     };
+
+
+    const [showText, setShowText] = useState(false)
+
+
+
+
     return (
         <>
             <VStack p={4} bg={'whitesmoke'}>
@@ -97,9 +106,45 @@ function Faculty() {
                     {
                         faculty.map((item) => (
 
-                            <Flex w={'full'} p={2} boxShadow='0px 4px 16px rgba(149, 157, 165, 0.2)' borderRadius={4} key={item.id} bg={'white'}>
-                                <WrapItem ml={2}>
-                                    <Avatar size='2xl' name={item.name} src='https://bit.ly/sage-adebayo' />
+                            <Flex w={'full'} p={2} boxShadow='0px 4px 16px rgba(149, 157, 165, 0.2)' borderRadius={4} key={item.id} bg={'white'} userSelect={'none'}>
+
+                                <WrapItem ml={2} >
+                                    <Popover placement='top-end'>
+                                        <PopoverTrigger>
+                                            <Avatar
+                                                size='2xl'
+                                                name={item.name}
+                                                src='https://bit.ly/sage-adebayo'
+                                                onMouseEnter={(e) => { setShowText(true); e.target.click() }}
+                                                onMouseLeave={(e) => { setShowText(false); e.target.click() }}
+                                            // Add any other props you need for the Avatar
+                                            />
+                                        </PopoverTrigger>
+                                        <PopoverContent
+                                            boxShadow="0px 7px 29px 0px rgba(100, 100, 111, 0.2)"
+                                            _focus={{ outline: 'none', boxShadow: 'none' }}
+                                            borderColor={'#9fa8da'}
+                                            bg={'#c5cae8'}
+                                            fontFamily={'monospace'}
+                                            borderRadius={10}
+                                            color='darkblue'
+                                        >
+                                            <PopoverArrow  bg={'#c5cae8'}/>
+                                            <PopoverBody _focus={{ outline: 'none' }}>
+                                                {showText && (
+                                                    <Typewriter
+                                                        options={{
+                                                            strings: [`Hi, I'm ${item.name}`, item.speciality, 'Thank You'],
+                                                            autoStart: true,
+                                                            loop: true,
+                                                            delay: 50,
+                                                            deleteSpeed: 10,
+                                                        }}
+                                                    />
+                                                )}
+                                            </PopoverBody>
+                                        </PopoverContent>
+                                    </Popover>
                                 </WrapItem>
 
                                 <Card shadow={'none'} >
@@ -124,11 +169,11 @@ function Faculty() {
                                         </Tooltip>
                                         <Tooltip hasArrow label={item.email} bg='gray.300' color='black'>
                                             <IconButton
-                                                colorScheme='messenger'
+                                                colorScheme='linkedin'
                                                 aria-label='Call Segun'
                                                 size='sm'
                                                 onClick={() => handleClick(`${item.email}`)}
-                                                icon={<AiOutlineMail />}
+                                                icon={<EmailIcon />}
                                             />
                                         </Tooltip>
 
@@ -147,6 +192,8 @@ function Faculty() {
                 </VStack>
 
             </VStack>
+
+            <Footer/>
 
         </>
     )

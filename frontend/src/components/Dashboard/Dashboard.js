@@ -1,4 +1,4 @@
-import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Avatar, Box, Button, Center, Divider, Flex, FormControl, FormLabel, HStack, IconButton, Image, Input, Popover, PopoverArrow, PopoverBody, PopoverCloseButton, PopoverContent, PopoverHeader, PopoverTrigger, Stack, Text, Textarea, VStack, textDecoration } from '@chakra-ui/react'
+import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Avatar, Box, Button, Center, Divider, Flex, FormControl, FormLabel, HStack, IconButton, Image, Input, Popover, PopoverArrow, PopoverBody, PopoverCloseButton, PopoverContent, PopoverHeader, PopoverTrigger, Stack, Text, Textarea, VStack, textDecoration, useDisclosure } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Calendar from 'react-calendar'
@@ -9,8 +9,12 @@ import illustration_A from './../../assets/images/illustration_A.png'
 import illustration_B from './../../assets/images/illustration_B.png'
 import illustration_C from './../../assets/images/illustration_C.png'
 import { DownloadIcon } from '@chakra-ui/icons'
+import ProfileModal from '../Modals/ProfileModal';
 
 function Dashboard() {
+  // Model Hooks
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  // Hooks
   const [user, setUser] = useState([]);
   const [data, setData] = useState([]);
   const [courses, setCourses] = useState([
@@ -114,6 +118,8 @@ function Dashboard() {
     console.log('Form Data:', assignmnetFormData);
   };
 
+
+
   return (
     <>
 
@@ -131,7 +137,8 @@ function Dashboard() {
                 <PopoverCloseButton />
                 <PopoverBody>
                   <br />
-                  <Button w={'full'} colorScheme='facebook'>My Profile</Button>
+                  <Button w={'full'} colorScheme='facebook' onClick={onOpen}>My Profile</Button>
+                  <ProfileModal isOpen={isOpen} onClose={onClose} user={user}/>
                   <Divider my={2} />
                   <Button w={'full'} colorScheme='telegram'>Logout</Button>
                 </PopoverBody>
@@ -218,15 +225,15 @@ function Dashboard() {
                   notes.map((item) => (
 
                     <Flex w={'full'} bg={'#cbeae7'} p={2} borderRadius={4} justifyContent={'space-between'} alignItems={'center'} key={item.id} fontSize={14}>
-                      <Text as={Link} textAlign={'left'} pr={2}  to={'https://react-icons.github.io/react-icons/icons?name=fa6'} _hover={{textDecoration: 'underline'}}>
+                      <Text as={Link} textAlign={'left'} pr={2} to={'https://react-icons.github.io/react-icons/icons?name=fa6'} _hover={{ textDecoration: 'underline' }}>
                         {item.title}
 
                       </Text>
 
                       <HStack>
-                        <IconButton isRound={true} variant='solid' colorScheme='purple' aria-label='Done' icon={<FaDownload/>}/>
-                        <IconButton isRound={true} variant='solid' colorScheme='teal' aria-label='Done' icon={<FaTrash />}/>
-                        
+                        <IconButton isRound={true} variant='solid' colorScheme='purple' aria-label='Done' icon={<FaDownload />} />
+                        <IconButton isRound={true} variant='solid' colorScheme='teal' aria-label='Done' icon={<FaTrash />} />
+
                       </HStack>
                     </Flex>
                   ))
