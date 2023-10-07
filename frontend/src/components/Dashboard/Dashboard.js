@@ -29,24 +29,25 @@ function Dashboard() {
   ]);
   const [selectedCourse, setSelectedCourse] = useState(null);
   const [assignment, setAssignment] = useState([]);
-  const [notes, setNotes] = useState([{
-    title: "Arman, An Untold Story, Based on true events, Somedfnsjfks",
-  },
-  {
-    title: "Suhaib"
-  },
-  {
-    title: "Suhaib"
-  },
-  {
-    title: "Suhaib"
-  },
-  {
-    title: "Suhaib"
-  },
-  {
-    title: "Suhaib"
-  },
+  const [notes, setNotes] = useState([
+    {
+      title: "Arman, An Untold Story, Based on true events, Somedfnsjfks",
+    },
+    {
+      title: "Suhaib"
+    },
+    {
+      title: "Suhaib"
+    },
+    {
+      title: "Suhaib"
+    },
+    {
+      title: "Suhaib"
+    },
+    {
+      title: "Suhaib"
+    },
   ]);
 
   useEffect(() => {
@@ -81,9 +82,9 @@ function Dashboard() {
     fetchData();
   }, [selectedCourse]);
 
-  const handleCourseSelect = (id) => {
-    console.log(id)
-    setSelectedCourse(id);
+  const handleCourseSelect = (cid) => {
+    setSelectedCourse(cid);
+
   }
 
 
@@ -125,9 +126,9 @@ function Dashboard() {
 
       <Flex position={'fixed'} bottom={0} top={110} w={'full'} bg={'whitesmoke'}>
         <Box minW={'64px'} maxW={'64px'} bg={'#d8dcf0'}></Box>
-        <VStack minW={250} maxW={250} p={3} bg={'white'}>
+        <VStack minW={250} maxW={250} p={3} bg={'white'} userSelect={'none'}>
 
-          <HStack padding={3} w={'full'} bg={'#ebedf7'} borderRadius={'2xl'}>
+          <HStack padding={3} w={'full'} bg={'#d8dcf0'} borderRadius={'2xl'}>
             <Popover>
               <PopoverTrigger>
                 <Avatar cursor={'pointer'} name={user.name}></Avatar>
@@ -138,7 +139,7 @@ function Dashboard() {
                 <PopoverBody>
                   <br />
                   <Button w={'full'} colorScheme='facebook' onClick={onOpen}>My Profile</Button>
-                  <ProfileModal isOpen={isOpen} onClose={onClose} user={user}/>
+                  <ProfileModal isOpen={isOpen} onClose={onClose} user={user} />
                   <Divider my={2} />
                   <Button w={'full'} colorScheme='telegram'>Logout</Button>
                 </PopoverBody>
@@ -148,22 +149,33 @@ function Dashboard() {
           </HStack>
 
           <Divider borderColor={'blackAlpha.300'} my={1} />
+          <VStack w={'full'} spacing={1}>
 
-          {
-            courses.map((item) => (
-              <Button w={'full'} justifyContent={'flex-start'} flexWrap={'wrap'} overflow={'hidden'} borderRadius={'full'} activeStyle={{ color: "red", border: "2px solid red" }}
-                key={item.id} onClick={() => handleCourseSelect(item.cid)}>
-                {item.name}
-              </Button>))
-          }
+            {
+              courses.map((item) => (
+                <Button w={'full'} justifyContent={'flex-start'} flexWrap={'wrap'} h={30} overflow={'hidden'} bg={'transparent'} borderRadius={'full'} fontSize={13}
+                  key={item.id} onClick={() => handleCourseSelect(item.cid)}
+                  {...(selectedCourse === item.cid ? { backgroundColor: '#d8dcf0', _hover: { backgroundColor: '#d8dcf0' } } : {})}
+                  {...(selectedCourse !== item.cid ? { _hover: { backgroundColor: '#e5e5e5' }, } : {})}
+                  _active={{ color: "darkblue" }}>
+
+                  {item.name}
+                </Button>))
+            }
+
+          </VStack>
 
           <Divider borderColor={'blackAlpha.300'} my={1} />
 
-          <Button w={'full'} justifyContent={'flex-start'} borderRadius={'full'} activeStyle={{ color: "red" }}>Announcements</Button>
-          <Button w={'full'} justifyContent={'flex-start'} borderRadius={'full'} activeStyle={{ color: "red" }}>Alert Messages</Button>
-          <Button w={'full'} justifyContent={'flex-start'} borderRadius={'full'} activeStyle={{ color: "red" }}>Manage Events</Button>
-          <Button w={'full'} justifyContent={'flex-start'} borderRadius={'full'} activeStyle={{ color: "red" }}>List Students</Button>
-          <Button w={'full'} justifyContent={'flex-start'} borderRadius={'full'} activeStyle={{ color: "red" }}>Manage Tutorials</Button>
+          <VStack w={'full'}>
+            <Button w={'full'} justifyContent={'flex-start'} borderRadius={'full'} fontSize={13} h={30} overflow={'hidden'} bg={'transparent'}>Announcements</Button>
+            <Button w={'full'} justifyContent={'flex-start'} borderRadius={'full'} fontSize={13} h={30} overflow={'hidden'} bg={'transparent'}>Alert Messages</Button>
+            <Button w={'full'} justifyContent={'flex-start'} borderRadius={'full'} fontSize={13} h={30} overflow={'hidden'} bg={'transparent'}>Manage Events</Button>
+            <Button w={'full'} justifyContent={'flex-start'} borderRadius={'full'} fontSize={13} h={30} overflow={'hidden'} bg={'transparent'}>List Students</Button>
+            <Button w={'full'} justifyContent={'flex-start'} borderRadius={'full'} fontSize={13} h={30} overflow={'hidden'} bg={'transparent'}>Manage Tutorials</Button>
+
+          </VStack>
+
 
         </VStack>
         <Flex flexGrow={1} position={'relative'}>

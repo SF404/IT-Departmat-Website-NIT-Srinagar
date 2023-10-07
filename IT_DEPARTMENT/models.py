@@ -29,3 +29,4 @@ class Alert(models.Model):
     valid = models.IntegerField()
     date = models.DateTimeField(auto_now_add=True)
 
+
