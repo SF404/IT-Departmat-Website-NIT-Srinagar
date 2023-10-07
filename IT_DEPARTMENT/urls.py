@@ -8,9 +8,11 @@ from rest_framework import routers
 # create a router object
 router = routers.DefaultRouter()
 router.register(r'temp',views.TeacherView, 'task')
-router.register(r'courses',views.CourseView, 'courses')
-router.register(r'assignments',views.CourseView, 'assignments')
-router.register(r'notes',views.CourseView, 'notes')
+router.register(r'courses',views.CourseView, 'task')
+router.register(r'notesupload', views.NotesUpload, basename='login')
+router.register(r'assignmentupload', views.AssignmentUpload, basename='login')
+router.register(r'shownotes', views.NotesShow, basename='login')
+router.register(r'showassignment', views.AssignmentShow, basename='login')
 
 
 
