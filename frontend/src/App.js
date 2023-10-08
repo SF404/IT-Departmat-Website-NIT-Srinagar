@@ -4,6 +4,7 @@ import Layout from "./components/Layout/Layout";
 import Dashboard from "./components/Dashboard/Dashboard";
 import Login from "./components/Auth/Login";
 import Faculty from "./components/Faculty/Faculty";
+import Signup from "./components/Auth/Signup";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route path="dashboard" element={<Dashboard />}></Route>
           <Route path="faculty" element={<Faculty />}></Route>
           <Route path="login" element={<Login />}></Route>
+          <Route path="signup" element={<Signup />}></Route>
         </Route>
       </Routes>
     </BrowserRouter>

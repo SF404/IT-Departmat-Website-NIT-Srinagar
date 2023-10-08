@@ -1,16 +1,22 @@
-
+from rest_framework import viewsets
 from django.shortcuts import render,redirect
-from IT_DEPARTMENT.models import Teacher,Course, Alert, Announcement,Assignment,Notes
+from rest_framework.authentication import TokenAuthentication, SessionAuthentication
+from IT_DEPARTMENT.models import *
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.views import APIView
 from rest_framework import generics,status,response,viewsets
-from .serializers import TeacherSerializer, CourseSerializer,AssignmentSerializer,NotesSerializer
+from .serializers import *
 from django.contrib.sessions.models import Session
 from rest_framework.response import Response
+from django.contrib.auth import authenticate
 import random
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
+from rest_framework.permissions import IsAuthenticated
+from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework_simplejwt.authentication import JWTAuthentication
 
- 
 
 class TeacherView(viewsets.ModelViewSet):
     serializer_class = TeacherSerializer
@@ -79,66 +85,52 @@ class AssignmentShow(viewsets.ModelViewSet):
 
 
 
-# @cors_headers()
-@csrf_exempt
-def temporary(request):
-    sid = request.GET.get('sid')
-    teacher = Teacher.objects.get(sid=sid)
-    print(sid)
-    return JsonResponse(teacher)
 
-# Create your views here.
-def index(request):
-    return render(request,"index.html")
-def loginUser(request):
-    usern = request.session.get("username")
-    passw = request.session.get("password")
+class RegistrationView(APIView):
+    def post(self, request):
+        username = request.data.get('username')
+        password = request.data.get('password')
+        name = request.data.get('name')
+        email = request.data.get('email')
+        print(password)
+        if not username or not password:
+            return Response({'message': 'Username and password are required.'}, status=status.HTTP_400_BAD_REQUEST)
+        if User.objects.filter(username=username).exists():
+            return Response({'message': 'Username already exists.'}, status=status.HTTP_400_BAD_REQUEST)
+        user = User.objects.create_user(username=username, password=password,is_active=True)
+        user.first_name = name
+        user.email = email
+        user.save()
+        return Response({'message': 'User created but not Verified.'}, status=status.HTTP_201_CREATED)
 
-    if usern and passw:
-        return redirect("dashboard")
+class CustomObtainTokenView(APIView):
+    def post(self, request):
+        username = request.data.get('username')
+        password = request.data.get('password')
+        print(password)
+        if not username or not password:
+            return Response({'message': 'Username and password are required.'}, status=status.HTTP_400_BAD_REQUEST)
+        user = authenticate(username=username, password=password)
+        if user is None:
+            return Response({'message': 'Invalid credentials.'}, status=status.HTTP_401_UNAUTHORIZED)
+        # if not user.is_active:
+        #     return Response({'message': 'User is not Verified.'}, status=status.HTTP_403_FORBIDDEN)
+        login(request, user)
+        refresh = RefreshToken.for_user(user)
+        access_token = str(refresh.access_token)
+        return Response({'access_token': access_token,'refresh_token': str(refresh),'message': 'Logging in'}, status=status.HTTP_200_OK)
 
-    if(request.method == "POST"):
-        usern=request.POST.get("username") 
-        passw=request.POST.get("password")
-        try:
-            teacher = Teacher.objects.get(username=usern, password=passw)
-            if teacher:
-                request.session['username'] = usern
-                request.session['password'] = passw
-                return redirect("dashboard")
-        except Teacher.DoesNotExist:
-            pass  
-        
-    return render(request,"login.html")
-def signupUser(request):
-    if request.method=="POST":
-        k="password"
-        selected_options = request.POST.getlist('option')
-        sid =request.POST.get("sid")
-        name =request.POST.get("name")
-        username=  request.POST.get("username") 
-        email = request.POST.get("email")
-        password = k
-        temporary= "H is good"
-        teacher=Teacher(sid=sid,name=name,username=username,email=email,password=password,temporary=temporary)
-        teacher.save()
-        for course_name in selected_options:
-            course = Course.objects.get(cid=course_name)
-            course.teacher=teacher
-            course.save()
-    print("Data Saved")
-    return render(request,"signup.html")
+class CustomRefreshTokenView(APIView):
+    authentication_classes=[JWTAuthentication]
+    permission_classes = (IsAuthenticated,)
+    def post(self, request):
+        refresh = RefreshToken(request.data.get('refresh_token'))
+        access_token = str(refresh.access_token)
+        return Response({'access_token': access_token,'refresh_token': str(refresh)}, status=status.HTTP_200_OK)
 
-
-
-def home(request):
-    context={
-
-    }
-    alert = Alert.objects.order_by('-date').values()
-    announcement = Announcement.objects.values()
-    context["alert"] = alert
-    context["announcement"] = announcement
-    return render(request, "main.html", context)
-def os(request):
-    return render(request, "os.html")
+class LogoutView(APIView):
+    authentication_classes=[JWTAuthentication]
+    permission_classes = (IsAuthenticated,)
+    def post(self, request):
+        logout(request)
+        return Response({'message': 'Logged out successfully.'}, status=status.HTTP_200_OK)

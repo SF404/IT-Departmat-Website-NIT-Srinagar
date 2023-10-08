@@ -6,10 +6,12 @@ class Signup extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      name: "",
       username: "",
       email: "",
       password: "",
       confirmPassword: "",
+      message: "",
       error: "",
     };
   }
@@ -20,53 +22,54 @@ class Signup extends Component {
   };
 
   handleSubmit = async (event) => {
-    const data = 1001;
-    console.log(data);
-    axios
-      .get(`/api/temp/?sid=${data}`)
-      .then((response) => {
-        // Handle the response data here
-        console.log("Response:", response.data);
-      })
-      .catch((error) => {
-        // Handle errors here
-        console.error("Error:", error);
+    event.preventDefault();
+    const { name, username, email, password, confirmPassword } = this.state;
+    try {
+      const response = await axios.post(
+        "http://127.0.0.1:8000/api/auth/register/",
+        {
+          name,
+          username,
+          email,
+          password,
+        }
+      );
+
+      if (response.status === 201) {
+        // Registration successful
+        this.setState({
+          message: response.data.message,
+        });
+      } else {
+        this.setState({
+          message: "Somthing went Wrong in Frontend! Please contact TechTeam",
+        });
+      }
+    } catch (error) {
+      this.setState({
+        message: "username already exists use different",
       });
-    // event.preventDefault();
-    // try {
-    //   const response = await fetch("/api/save_teacher/", {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify({
-    //       sid,
-    //       name,
-    //       username,
-    //       email,
-    //       password,
-    //       temporary,
-    //     }),
-    //   });
-    //   if (response.ok) {
-    //     // Teacher saved successfully, handle the response as needed
-    //     console.log("Teacher saved successfully");
-    //   } else {
-    //     // Handle error response
-    //     const data = await response.json();
-    //     console.error(data.error);
-    //   }
-    // } catch (error) {
-    //   console.error("An error occurred:", error);
-    // }
+    }
   };
+
   render() {
-    const { username, email, password, confirmPassword, error } = this.state;
+    const { name, username, email, password, confirmPassword, error, message } =
+      this.state;
     return (
       <div className="signup-container">
         <h2>Sign Up</h2>
         {error && <div className="error-message">{error}</div>}
         <form onSubmit={this.handleSubmit} className="signup-form">
+          <div>
+            <label>Name:</label>
+            <input
+              type="text"
+              name="name"
+              value={name}
+              onChange={this.handleInputChange}
+              required
+            />
+          </div>
           <div>
             <label>Username:</label>
             <input
@@ -100,6 +103,7 @@ class Signup extends Component {
           <div>
             <button type="submit">Sign Up</button>
           </div>
+          <p>*{message}</p>
         </form>
       </div>
     );

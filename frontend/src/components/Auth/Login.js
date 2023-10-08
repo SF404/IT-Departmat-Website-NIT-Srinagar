@@ -1,15 +1,17 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useHistory, useNavigate } from "react-router-dom";
 import "./Login.css";
 
 function Login() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     username: "",
     password: "",
   });
-
-  const navigate = useNavigate();
+  const [message, setMessage] = useState({
+    message: "",
+  });
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -21,21 +23,29 @@ function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { username, password } = formData;
     try {
-      console.log(username, password);
       const response = await axios.post(
-        `http://localhost:8000/api/loginpost/`,
+        "http://127.0.0.1:8000/api/auth/login/",
         formData
       );
-      if (response.status === 201 && response.data.sid !== undefined) {
-        localStorage.setItem("usernameToken", username);
-        localStorage.setItem("sidToken", response.data.sid);
-        navigate("/dashboard", { state: response.data });
-      } else {
-        console.log("status failed");
+      console.log("Response Status Code:", response.status);
+      setMessage({ message: response.data.message });
+      switch (response.status) {
+        case 200:
+          const accessToken = response.data.access_token;
+          const refreshToken = response.data.refresh_token;
+          localStorage.setItem("TokenA", accessToken);
+          localStorage.setItem("TokenR", refreshToken);
+          navigate("/dashboard");
+          break;
+        default:
+          setMessage({
+            message: "Somthing went Wrong in Frontend! Please contact TechTeam",
+          });
+          break;
       }
     } catch (error) {
+      setMessage({ message: "Username and Password is Unauthorized" });
       console.log("post failed");
     }
   };
@@ -50,6 +60,8 @@ function Login() {
             type="text"
             name="username"
             value={formData.username}
+            required
+            minLength="2"
             onChange={handleInputChange}
           />
         </div>
@@ -59,12 +71,15 @@ function Login() {
             type="password"
             name="password"
             value={formData.password}
+            required
+            minLength="2"
             onChange={handleInputChange}
           />
         </div>
         <div>
           <button type="submit">Login</button>
         </div>
+        <p>*{message.message}</p>
       </form>
     </div>
   );

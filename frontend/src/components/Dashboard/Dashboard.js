@@ -30,6 +30,7 @@ import {
   textDecoration,
   useDisclosure,
 } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Calendar from "react-calendar";
@@ -43,11 +44,13 @@ import { DownloadIcon } from "@chakra-ui/icons";
 import ProfileModal from "../Modals/ProfileModal";
 
 function Dashboard() {
+  const navigate = useNavigate();
   // Model Hooks
   const { isOpen, onOpen, onClose } = useDisclosure();
   // Hooks
   const [user, setUser] = useState([]);
   const [data, setData] = useState([]);
+  let TokenA, TokenR;
   const [courses, setCourses] = useState([
     {
       id: 1,
@@ -60,25 +63,39 @@ function Dashboard() {
   ]);
   const [selectedCourse, setSelectedCourse] = useState(null);
   const [assignment, setAssignment] = useState([]);
-  const [notes, setNotes] = useState([
-    {
-      name: "Arman, An Untold Story, Based on true events, Somedfnsjfks",
-    },
-  ]);
-
+  const [notes, setNotes] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
+      TokenA = localStorage.getItem("TokenA");
+      TokenR = localStorage.getItem("TokenR");
+      if (!TokenA || !TokenR) {
+        navigate("/login");
+        return;
+      }
       try {
-        const getUser = await axios.get(
-          `http://localhost:8000/api/temp/?sid=${1001}`
+        const body = {
+          refresh_token: TokenR,
+        };
+        const new_token = await axios.post(
+          `http://127.0.0.1:8000/api/auth/refresh-token/`,
+          body,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("TokenA")}`,
+            },
+          }
         );
-        console.log(getUser.data);
-        setUser(getUser.data[0]);
-        const response = await axios.get(
-          `http://localhost:8000/api/courses/?sid=${1001}`
-        );
-        console.log(response.data);
-        setCourses(response.data);
+        console.log("Token Refreshed");
+        const accessToken = new_token.data.access_token;
+        const refreshToken = new_token.data.refresh_token;
+        localStorage.setItem("TokenA", accessToken);
+        localStorage.setItem("TokenR", refreshToken);
+        // const getUser = await axios.get(``);
+        // console.log(getUser.data);
+        // setUser(getUser.data[0]);
+        // const response = await axios.get(``);
+        // console.log(response.data);
+        // setCourses(response.data);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -89,40 +106,18 @@ function Dashboard() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const assignment = await axios.get(
-          `http://localhost:8000/api/assignments/?id=${selectedCourse}`
-        );
-        setAssignment(assignment.data);
-        const notes = await axios.get(
-          `http://localhost:8000/api/notes/?id=${selectedCourse}`
-        );
-        setNotes(notes.data);
+        // if (selectedCourse != null) {
+        //   const assignment = await axios.get(``);
+        //   setAssignment(assignment.data);
+        //   const notes = await axios.get(``);
+        //   setNotes(notes.data);
+        // }
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
     fetchData();
   }, [selectedCourse]);
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const notes_back = await axios.get(
-          `http://localhost:8000/api/shownotes/`
-        );
-        console.log(notes_back.data);
-        setNotes(notes_back.data);
-        const assignment_back = await axios.get(
-          `http://localhost:8000/api/showassignment/`
-        );
-        console.log(assignment_back.data);
-        setAssignment(assignment_back.data);
-      } catch (error) {
-        // console.error("Error fetching data:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
 
   const handleCourseSelect = (id) => {
     console.log(id);
@@ -139,70 +134,52 @@ function Dashboard() {
     description: "",
   });
 
-  const handleChangeAssignment = (e) => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
     setAssignmentFormData((prevData) => ({
       ...prevData,
       [name]: value,
     }));
   };
-  const handleChangeNotes = (e) => {
-    const { name, value } = e.target;
-    setNotesFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
 
-  const handleAssignmentSubmit = async (e) => {
+  const handleAssignmentSubmit = (e) => {
     e.preventDefault();
     // Perform any action with the form data, like sending it to an API
-    const formData = new FormData();
-    formData.append("title", assignmnetFormData.title);
-    formData.append("file", assignmnetFormData.file);
-    try {
-      const response = await axios.post(
-        "http://localhost:8000/api/assignmentupload/",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data", // Set the content type to multipart/form-data
-          },
-        }
-      );
-      console.log("Response data assignment:", response.data);
-      // Handle the response data as needed
-    } catch (error) {
-      console.error("Error:", error);
-      // Handle errors here
-    }
     console.log("Form Data:", assignmnetFormData);
   };
-  const handleNotesSubmit = async (e) => {
+  const handleNotesSubmit = (e) => {
     e.preventDefault();
-    const formData = new FormData();
-    formData.append("title", notesFormData.title);
-    formData.append("file", notesFormData.file);
+    // Perform any action with the form data, like sending it to an API
+    console.log("Form Data:", assignmnetFormData);
+  };
 
+  const handleLogout = async () => {
     try {
+      const temporary = {
+        key: "value",
+      };
       const response = await axios.post(
-        "http://localhost:8000/api/notesupload/",
-        formData,
+        "http://127.0.0.1:8000/api/auth/logout/",
+        temporary,
         {
           headers: {
-            "Content-Type": "multipart/form-data", // Set the content type to multipart/form-data
+            Authorization: `Bearer ${localStorage.getItem("TokenA")}`,
           },
         }
       );
-      console.log("Response data notes:", response.data);
-      // Handle the response data as needed
+      if (response.status === 200) {
+        localStorage.removeItem("TokenA");
+        localStorage.removeItem("TokenR");
+        navigate("/login");
+      } else {
+        console.log(
+          "Senstive Error Occurs Data Breach may be possible! Contact the managing team"
+        );
+      }
     } catch (error) {
-      console.error("Error:", error);
-      // Handle errors here
+      console.error("Logout failed:", error);
     }
-    // console.log("Form Data:", assignmnetFormData);
   };
-  console.log(notes);
   return (
     <>
       <Flex
@@ -229,7 +206,11 @@ function Dashboard() {
                   </Button>
                   <ProfileModal isOpen={isOpen} onClose={onClose} user={user} />
                   <Divider my={2} />
-                  <Button w={"full"} colorScheme="telegram">
+                  <Button
+                    w={"full"}
+                    colorScheme="telegram"
+                    onClick={handleLogout}
+                  >
                     Logout
                   </Button>
                 </PopoverBody>
@@ -365,7 +346,7 @@ function Dashboard() {
                   }
                 </Accordion> */}
 
-                {notes.map((item) => (
+                {/* {notes.map((item) => (
                   <Flex
                     w={"full"}
                     bg={"#cbeae7"}
@@ -373,7 +354,7 @@ function Dashboard() {
                     borderRadius={4}
                     justifyContent={"space-between"}
                     alignItems={"center"}
-                    key={item.nid}
+                    key={item.id}
                     fontSize={14}
                   >
                     <Text
@@ -385,7 +366,7 @@ function Dashboard() {
                       }
                       _hover={{ textDecoration: "underline" }}
                     >
-                      {item.name}
+                      {item.title}
                     </Text>
 
                     <HStack>
@@ -405,7 +386,7 @@ function Dashboard() {
                       />
                     </HStack>
                   </Flex>
-                ))}
+                ))} */}
               </VStack>
               <Divider my={2} />
               <Accordion allowToggle>
@@ -426,7 +407,7 @@ function Dashboard() {
                           type="text"
                           name="title"
                           value={notesFormData.title}
-                          onChange={handleChangeNotes}
+                          onChange={handleChange}
                           placeholder="Enter title"
                         />
                       </FormControl>
@@ -444,7 +425,7 @@ function Dashboard() {
                         <Input
                           type="file"
                           name="file"
-                          onChange={handleChangeNotes}
+                          onChange={handleChange}
                           display={"none"}
                         />
                       </FormControl>
@@ -473,25 +454,7 @@ function Dashboard() {
                 Assignment
               </Text>
               <Divider my={2} />
-              <VStack>
-                <Accordion allowToggle w={"full"}>
-                  {assignment.map((item) => (
-                    <AccordionItem key={item.id}>
-                      <h2>
-                        <AccordionButton>
-                          <Box as="span" flex="1" textAlign="left">
-                            {item.name}
-                          </Box>
-                          <AccordionIcon />
-                        </AccordionButton>
-                      </h2>
-                      <AccordionPanel pb={4}>
-                        <Button>Download</Button>
-                      </AccordionPanel>
-                    </AccordionItem>
-                  ))}
-                </Accordion>
-              </VStack>
+              <VStack></VStack>
               <Divider my={2} />
 
               <Accordion allowToggle>
@@ -512,7 +475,7 @@ function Dashboard() {
                           type="text"
                           name="title"
                           value={assignmnetFormData.title}
-                          onChange={handleChangeAssignment}
+                          onChange={handleChange}
                           placeholder="Enter title"
                         />
                       </FormControl>
@@ -522,7 +485,7 @@ function Dashboard() {
                         <Textarea
                           name="description"
                           value={assignmnetFormData.description}
-                          onChange={handleChangeAssignment}
+                          onChange={handleChange}
                           placeholder="Enter description"
                         />
                       </FormControl>
@@ -533,7 +496,7 @@ function Dashboard() {
                           type="text"
                           name="title"
                           value={assignmnetFormData.deadline}
-                          onChange={handleChangeAssignment}
+                          onChange={handleChange}
                           placeholder="Deadline"
                         />
                       </FormControl>
@@ -551,7 +514,7 @@ function Dashboard() {
                         <Input
                           type="file"
                           name="file"
-                          onChange={handleChangeAssignment}
+                          onChange={handleChange}
                           display={"none"}
                         />
                       </FormControl>

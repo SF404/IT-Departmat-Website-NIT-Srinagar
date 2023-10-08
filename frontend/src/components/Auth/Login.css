@@ -63,3 +63,10 @@
   margin-top: 10px;
   text-align: center;
 }
+.login-container p {
+  padding: 10px;
+  color: red;
+}
+.login-container h2 {
+  font-size: 26px;
+}
