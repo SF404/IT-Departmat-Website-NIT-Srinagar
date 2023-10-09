@@ -13,6 +13,7 @@ class Course(models.Model):
     cid = models.CharField(max_length=255, unique=True)
     name = models.CharField(max_length=255)
     semester=models.CharField(max_length=255)
+    
     description = models.TextField(blank=True)
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE,null=True,blank=True)
 
@@ -34,6 +35,8 @@ class Assignment(models.Model):
     name = models.CharField(max_length=255)
     pdf = models.FileField(upload_to='pdfs/')
     description = models.CharField(max_length=255,null=True,blank=True)
+    deadline = models.CharField(max_length=255,null=True,blank=True)
+    cid = models.CharField(max_length=255,null=True)
     date=models.DateTimeField(auto_now_add=True)
     course=models.ForeignKey(Course,on_delete=models.CASCADE,null=True,blank=True)
     class Meta:
@@ -47,6 +50,7 @@ class Notes(models.Model):
     name = models.CharField(max_length=255)
     pdf = models.FileField(upload_to='pdfs/')
     description = models.CharField(max_length=255,null=True,blank=True)
+    cid = models.CharField(max_length=255,null=True)
     date=models.DateTimeField(auto_now_add=True)
     course=models.ForeignKey(Course,on_delete=models.CASCADE,null=True,blank=True)
     class Meta:

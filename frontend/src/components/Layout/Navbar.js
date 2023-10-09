@@ -12,10 +12,6 @@ function Navbar() {
                 <Text mx={'10px'} fontWeight={'bold'}>DEPARTMENT OF INFORMATION TECHNOLOGY <br /> <small>National Institute Of Technology, Srinagar</small></Text>
             </Box>
             <Flex align="center" h={'46px'} zIndex={99} justify="space-between" p="0" bg="#192e59" color="#192e59" position={'sticky'} top={0}>
-                {/* <Text fontSize="2xl" fontWeight="bold">
-                    Your Logo
-                </Text> */}
-
                 <Stack direction={'row'} spacing="2" align="stretch" display={{ base: 'none', md: 'flex' }}>
                     <Button variant="ghost" colorScheme="whiteAlpha" color={'whiteAlpha.800'} as={Link} to="/">
                         Home
@@ -50,6 +46,15 @@ function Navbar() {
 
                     <Menu>
                         <MenuButton as={Button} variant="ghost" colorScheme="whiteAlpha" color={'whiteAlpha.800'}>
+                            For Faculty
+                        </MenuButton>
+                        <MenuList>
+                            <MenuItem as={Link} to="/dashboard">Dashboard</MenuItem>
+                        </MenuList>
+                    </Menu>
+
+                    <Menu>
+                        <MenuButton as={Button} variant="ghost" colorScheme="whiteAlpha" color={'whiteAlpha.800'}>
                             Research
                         </MenuButton>
                         <MenuList>
@@ -73,10 +78,20 @@ function Navbar() {
 
                     <Menu>
                         <MenuButton as={Button} variant="ghost" colorScheme="whiteAlpha" color={'whiteAlpha.800'}>
-                            For Faculty
+                            For Students
                         </MenuButton>
                         <MenuList>
-                            <MenuItem as={Link} to="/dashboard">Dashboard</MenuItem>
+                            <MenuItem as={Link} to="/semester/1">Semester 1</MenuItem>
+                            <MenuItem as={Link} to="/semester/2">Semester 2</MenuItem>
+                            <MenuItem as={Link} to="/semester/3">Semester 3</MenuItem>
+                            <MenuItem as={Link} to="/semester/4">Semester 4</MenuItem>
+                            <MenuItem as={Link} to="/semester/5">Semester 5</MenuItem>
+                            <MenuItem as={Link} to="/semester/6">Semester 6</MenuItem>
+                            <MenuItem as={Link} to="/semester/7">Semester 7</MenuItem>
+                            <MenuItem as={Link} to="/semester/8">Semester 8</MenuItem>
+                            <MenuItem as={Link} to="/semester/all">Semester All</MenuItem>
+                            <MenuItem as={Link} to="/phd">Phd</MenuItem>
+                            <MenuItem as={Link} to="/others">Others</MenuItem>
                         </MenuList>
                     </Menu>
 
