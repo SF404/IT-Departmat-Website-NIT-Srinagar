@@ -121,6 +121,28 @@ class DownloadNotes(APIView):
 
 
 
+class DeleteFilesAPIView(APIView):
+    def post(self, request, *args, **kwargs):
+        aid = request.data.get("aid")
+        nid = request.data.get("nid")
+        if not aid and not nid:
+            return Response({"message": "Either 'aid' or 'nid' is required"}, status=status.HTTP_400_BAD_REQUEST)
+        if aid:
+            try:
+                assignment_entry = Assignment.objects.get(aid=aid)
+                assignment_entry.delete()
+                return Response({"message": "Assignment entry deleted successfully"}, status=status.HTTP_204_NO_CONTENT)
+            except Assignment.DoesNotExist:
+                return Response({"message": "Assignment entry not found"}, status=status.HTTP_404_NOT_FOUND)
+        if nid:
+            try:
+                notes_entry = Notes.objects.get(nid=nid)
+                notes_entry.delete()
+                return Response({"message": "Notes entry deleted successfully"}, status=status.HTTP_204_NO_CONTENT)
+            except Notes.DoesNotExist:
+                return Response({"message": "Notes entry not found"}, status=status.HTTP_404_NOT_FOUND)
+        return Response({"message": "Invalid request"}, status=status.HTTP_400_BAD_REQUEST)
+    
 
 class RegistrationView(APIView):
     def post(self, request):

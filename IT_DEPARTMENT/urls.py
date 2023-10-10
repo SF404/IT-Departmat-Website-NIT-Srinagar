@@ -25,6 +25,7 @@ urlpatterns = [
     path('api/', include(router.urls)),
     path('api/assignmentdownload', DownloadAssignment,name='registration'),
     path('api/notesdownload/', DownloadNotes.as_view(),name='registration'),
+    path('api/filesdelete/', DeleteFilesAPIView.as_view(),name='registration'),
     path('api/auth/register/', RegistrationView.as_view(), name='registration'),
     path('api/auth/login/', CustomObtainTokenView.as_view(), name='login'),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
