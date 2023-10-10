@@ -33,13 +33,4 @@ urlpatterns = [
     path('api/auth/refresh-token/', CustomRefreshTokenView.as_view(), name='refresh-token'),
     path('api/auth/logout/', LogoutView.as_view(), name='logout'),
     re_path('', TemplateView.as_view(template_name='index.html')),
-
-    # path('', views.home, name="Home"),
-    # path('home/', views.home, name="Home"),
-    # path('login/', views.loginUser, name="login"),
-    # path('signup/', views.signupUser, name="signup"),
-    # path('dashboard/', include('Admin_Panel.urls'), name="dashboard"),
 ]
-
-
-# "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoic2xpZGluZyIsImV4cCI6MTY5OTM3MTcxMSwiaWF0IjoxNjk2Nzc5NzExLCJqdGkiOiJjZmQ1OWZjNDE5YTE0ODI0ODM1YmU1OGM5ZWYxOGYyYiIsInJlZnJlc2hfZXhwIjoxNjk2ODY2MTExLCJ1c2VyX2lkIjoxfQ.3UHPVO0kNDS_3LK5nXBWAlZwaSoNSbLE_Vjf3ksp-EE"

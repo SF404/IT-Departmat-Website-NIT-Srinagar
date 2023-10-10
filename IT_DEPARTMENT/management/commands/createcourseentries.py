@@ -9,7 +9,7 @@ class Command(BaseCommand):
             
             teacher=Teacher.objects.create(
                 sid =1001,
-                name = "Rajes Manna",
+                name = "Dr. Janib ul Bashir",
                 username="rajesmanna",
                 email = "temp@temp.com",
                 password = "password",
