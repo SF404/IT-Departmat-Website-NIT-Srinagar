@@ -4,6 +4,13 @@ import {
   AccordionIcon,
   AccordionItem,
   AccordionPanel,
+  AlertDialog,
+  AlertDialogBody,
+  AlertDialogCloseButton,
+  AlertDialogContent,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogOverlay,
   Avatar,
   Box,
   Button,
@@ -66,6 +73,8 @@ function Dashboard() {
   });
   // Model Hooks
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { isOpen: openAlert, onOpen: showAlertConfirmNotes, onClose: closeAlert } = useDisclosure();
+  const { isOpen: openAlertAssignment, onOpen: showAlertConfirmAssignment, onClose: closeAlertAssignmet } = useDisclosure();
   const {
     isOpen: openNotesModel,
     onOpen: addNotes,
@@ -78,6 +87,7 @@ function Dashboard() {
   } = useDisclosure();
   // Hooks
   const toast = useToast();
+  const cancelRef = React.useRef()
   // Page States
   const [user, setUser] = useState([]);
   let TokenA, TokenR;
@@ -98,6 +108,8 @@ function Dashboard() {
       nid: "",
     },
   ]);
+
+
 
   function get_token() {
     return {
@@ -319,6 +331,11 @@ function Dashboard() {
     //   console.error("Error downloading notes:", error);
     // }
   }
+
+  const handleDelete = async (id) => {
+    console.log(id)
+  }
+
   return (
     <>
       <Flex
@@ -379,9 +396,10 @@ function Dashboard() {
                 onClick={() => handleCourseSelect(item.cid)}
                 {...(selectedCourse === item.cid
                   ? {
-                      backgroundColor: "#d8dcf0",
-                      _hover: { backgroundColor: "#d8dcf0" },
-                    }
+                    backgroundColor: "#d8dcf0",
+                    color: "darkblue",
+                    _hover: { backgroundColor: "#d8dcf0" },
+                  }
                   : {})}
                 {...(selectedCourse !== item.cid
                   ? { _hover: { backgroundColor: "#e5e5e5" } }
@@ -474,48 +492,76 @@ function Dashboard() {
                 </Text>
                 <Divider my={2} />
                 <VStack>
-                  {notes.map((item) => (
-                    <Flex
-                      w={"full"}
-                      bg={"#cbeae7"}
-                      p={2}
-                      borderRadius={4}
-                      justifyContent={"space-between"}
-                      alignItems={"center"}
-                      key={item.id}
-                      fontSize={14}
-                    >
-                      <Text
-                        as={Link}
-                        textAlign={"left"}
-                        pr={2}
-                        to={`${item.pdf}`}
-                        _hover={{ textDecoration: "underline" }}
-                      >
-                        {item.name}
-                      </Text>
+                  <Accordion allowToggle w={"full"} textAlign={"left"}>
+                    {
+                      notes.map((item) => (
+                        <AccordionItem w={"full"} key={item.key}>
+                          <h2>
+                            <AccordionButton w={"full"}>
+                              <Box as="span" flex="1" textAlign="left">
+                                {item.name}
+                              </Box>
+                              <AccordionIcon />
+                            </AccordionButton>
+                          </h2>
+                          <AccordionPanel pb={4} w={"full"}>
+                            <HStack justifyContent={"right"}>
+                              <IconButton
+                                isRound={true}
+                                variant="solid"
+                                colorScheme="purple"
+                                aria-label="Done"
+                                onClick={() => {
+                                  download_notes(item.nid);
+                                }}
+                                icon={<FaDownload />}
+                                
+                              />
 
-                      <HStack>
-                        <IconButton
-                          isRound={true}
-                          variant="solid"
-                          colorScheme="purple"
-                          aria-label="Done"
-                          onClick={() => {
-                            download_notes(item.nid);
-                          }}
-                          icon={<FaDownload />}
-                        />
-                        <IconButton
-                          isRound={true}
-                          variant="solid"
-                          colorScheme="teal"
-                          aria-label="Done"
-                          icon={<FaTrash />}
-                        />
-                      </HStack>
-                    </Flex>
-                  ))}
+                             
+
+                              <IconButton
+                                isRound={true}
+                                variant="solid"
+                                colorScheme="teal"
+                                aria-label="Done"
+                                icon={<FaTrash />}
+                                onClick={showAlertConfirmNotes}
+                              />
+                              <AlertDialog
+                                motionPreset='slideInBottom'
+                                leastDestructiveRef={cancelRef}
+                                onClose={closeAlert}
+                                isOpen={openAlert}
+                                isCentered
+                              >
+                                <AlertDialogOverlay />
+
+                                <AlertDialogContent>
+                                  <AlertDialogHeader>Discard Changes?</AlertDialogHeader>
+                                  <AlertDialogCloseButton />
+                                  <AlertDialogBody>
+                                    Are you sure you want to delete "{item.name}" ?
+                                  </AlertDialogBody>
+                                  <AlertDialogFooter>
+                                    <Button ref={cancelRef} onClick={closeAlert}>
+                                      No
+                                    </Button>
+                                    <Button colorScheme='red' ml={3} onClick={() => handleDelete({ nid: item.nid })}>
+                                      Yes
+                                    </Button>
+                                  </AlertDialogFooter>
+                                </AlertDialogContent>
+                              </AlertDialog>
+
+
+                            </HStack>
+                          </AccordionPanel>
+                        </AccordionItem>
+                      ))}
+                  </Accordion>
+
+
                 </VStack>
                 <Divider my={2} />
 
@@ -585,7 +631,7 @@ function Dashboard() {
                 <Divider my={2} />
                 <VStack w={"full"}>
                   <Accordion allowToggle w={"full"} textAlign={"left"}>
-                    {assignment != null &&
+                    {
                       assignment.map((item) => (
                         <AccordionItem w={"full"}>
                           <h2>
@@ -603,6 +649,59 @@ function Dashboard() {
                               Deadline:{" "}
                               <Text color={"red"}>{item.deadline}</Text>
                             </Tag>
+
+                            <Divider/>
+                            <HStack justifyContent={"right"}>
+                              <IconButton
+                                isRound={true}
+                                variant="solid"
+                                colorScheme="purple"
+                                aria-label="Done"
+                                onClick={() => {
+                                  download_notes(item.nid);
+                                }}
+                                icon={<FaDownload />}
+                                
+                              />
+
+                             
+
+                              <IconButton
+                                isRound={true}
+                                variant="solid"
+                                colorScheme="teal"
+                                aria-label="Done"
+                                icon={<FaTrash />}
+                                onClick={showAlertConfirmAssignment}
+                              />
+                              <AlertDialog
+                                motionPreset='slideInBottom'
+                                leastDestructiveRef={cancelRef}
+                                onClose={closeAlertAssignmet}
+                                isOpen={openAlertAssignment}
+                                isCentered
+                              >
+                                <AlertDialogOverlay />
+
+                                <AlertDialogContent>
+                                  <AlertDialogHeader>Discard Changes?</AlertDialogHeader>
+                                  <AlertDialogCloseButton />
+                                  <AlertDialogBody>
+                                    Are you sure you want to delete "{item.name}" ?
+                                  </AlertDialogBody>
+                                  <AlertDialogFooter>
+                                    <Button ref={cancelRef} onClick={closeAlertAssignmet}>
+                                      No
+                                    </Button>
+                                    <Button colorScheme='red' ml={3} onClick={() => handleDelete({ aid: item.aid })}>
+                                      Yes
+                                    </Button>
+                                  </AlertDialogFooter>
+                                </AlertDialogContent>
+                              </AlertDialog>
+
+
+                            </HStack>
                           </AccordionPanel>
                         </AccordionItem>
                       ))}
