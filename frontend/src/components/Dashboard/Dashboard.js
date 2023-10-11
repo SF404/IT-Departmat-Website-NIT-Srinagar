@@ -167,14 +167,12 @@ function Dashboard() {
   // On Course Change Use_effect
   // On Course Change Use_effect
   const fetchData = async () => {
-    console.log("hello");
     try {
       if (selectedCourse != null) {
         const assignment = await axios.get(
           `http://localhost:8000/api/showassignment/?cid=${selectedCourse}`
         );
         setAssignment(assignment.data);
-        console.log(assignment.data);
         const notes = await axios.get(
           `http://localhost:8000/api/shownotes/?cid=${selectedCourse}`
         );
@@ -195,32 +193,40 @@ function Dashboard() {
 
   // Function for writing Notes form Data
   const handleNotesFormChange = (e) => {
-    const { name, value } = e.target;
-    setNotesFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+    const { name, value, type } = e.target;
+    const updatedFormData = { ...notesFormData };
+    if (type === "file" && e.target.files.length > 0) {
+      const file = e.target.files[0];
+      updatedFormData[name] = file;
+    } else {
+      updatedFormData[name] = value;
+    }
+    setNotesFormData(updatedFormData);
   };
 
   const handleAssignmentFormChange = (e) => {
-    const { name, value } = e.target;
-    setAssignmentFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+    const { name, value, type } = e.target;
+    const updatedFormData = { ...assignmnetFormData };
+    if (type === "file" && e.target.files.length > 0) {
+      const file = e.target.files[0];
+      updatedFormData[name] = file;
+    } else {
+      updatedFormData[name] = value;
+    }
+    setAssignmentFormData(updatedFormData);
   };
 
   // Function for Handling Assignment Submit
   const handleAssignmentSubmit = async (e) => {
     e.preventDefault();
     e.stopPropagation();
-    console.log(assignmnetFormData.file);
     const formData = new FormData();
     formData.append("title", assignmnetFormData.title);
     formData.append("file", assignmnetFormData.file);
     formData.append("description", assignmnetFormData.description);
     formData.append("deadline", assignmnetFormData.deadline);
     formData.append("cid", selectedCourse);
+    console.log(formData);
     try {
       const response = await axios.post(
         "http://localhost:8000/api/assignmentupload/",
@@ -260,6 +266,7 @@ function Dashboard() {
     formData.append("title", notesFormData.title);
     formData.append("file", notesFormData.file);
     formData.append("cid", selectedCourse);
+    console.log(formData);
     try {
       const response = await axios.post(
         "http://127.0.0.1:8000/api/notesupload/",
@@ -314,26 +321,45 @@ function Dashboard() {
     }
   };
 
-  async function download_notes(nid) {
+  const download_notes = async (nid) => {
     console.log(nid);
-    // try {
-    //   const response = await axios.post(
-    //     "http://127.0.0.1:8000/api/notesdownload/",
-    //     { nid: nid },
-    //     { responseType: "blob" } // Make sure to set responseType to 'blob'
-    //   );
+    try {
+      const response = await axios.post(
+        "http://127.0.0.1:8000/api/notesdownload/",
+        { nid: nid },
+        { responseType: "blob" } // Make sure to set responseType to 'blob'
+      );
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", "notes.pdf"); // You can set the filename here
+      document.body.appendChild(link);
+      link.click();
+      window.URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error("Error downloading notes:", error);
+    }
+  };
 
-    //   const url = window.URL.createObjectURL(new Blob([response.data]));
-    //   const link = document.createElement("a");
-    //   link.href = url;
-    //   link.setAttribute("download", "notes.pdf"); // You can set the filename here
-    //   document.body.appendChild(link);
-    //   link.click();
-    //   window.URL.revokeObjectURL(url);
-    // } catch (error) {
-    //   console.error("Error downloading notes:", error);
-    // }
-  }
+  const download_assignment = async (aid) => {
+    console.log(aid);
+    try {
+      const response = await axios.post(
+        "http://127.0.0.1:8000/api/assignmentdownload/",
+        { aid: aid },
+        { responseType: "blob" } // Make sure to set responseType to 'blob'
+      );
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", "assignment.pdf"); // You can set the filename here
+      document.body.appendChild(link);
+      link.click();
+      window.URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error("Error downloading notes:", error);
+    }
+  };
 
   const handleDelete = async (id) => {
     try {
@@ -532,7 +558,6 @@ function Dashboard() {
                               }}
                               icon={<FaDownload />}
                             />
-
                             <IconButton
                               isRound={true}
                               variant="solid"
@@ -549,7 +574,6 @@ function Dashboard() {
                               isCentered
                             >
                               <AlertDialogOverlay />
-
                               <AlertDialogContent>
                                 <AlertDialogHeader>
                                   Discard Changes?
@@ -597,7 +621,10 @@ function Dashboard() {
                     <ModalHeader>Add Study Material</ModalHeader>
                     <ModalCloseButton />
                     <ModalBody pb={6}>
-                      <form onSubmit={handleNotesSubmit}>
+                      <form
+                        onSubmit={handleNotesSubmit}
+                        encType="multipart/form-data"
+                      >
                         <FormControl>
                           <FormLabel>Title</FormLabel>
                           <Input
@@ -674,7 +701,7 @@ function Dashboard() {
                               colorScheme="purple"
                               aria-label="Done"
                               onClick={() => {
-                                download_notes(item.nid);
+                                download_assignment(item.aid);
                               }}
                               icon={<FaDownload />}
                             />

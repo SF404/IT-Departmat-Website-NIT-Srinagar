@@ -67,6 +67,8 @@ TEMPLATES = [
         },
     },
 ]
+MEDIA_URL = '/assets/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'assets')
 
 WSGI_APPLICATION = 'IT_Department_NIT_Srinagar.wsgi.application'
 
