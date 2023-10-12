@@ -1,50 +1,4 @@
-import {
-  Accordion,
-  AccordionButton,
-  AccordionIcon,
-  AccordionItem,
-  AccordionPanel,
-  AlertDialog,
-  AlertDialogBody,
-  AlertDialogCloseButton,
-  AlertDialogContent,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogOverlay,
-  Avatar,
-  Box,
-  Button,
-  Center,
-  Divider,
-  Flex,
-  FormControl,
-  FormLabel,
-  HStack,
-  IconButton,
-  Image,
-  Input,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
-  Popover,
-  PopoverArrow,
-  PopoverBody,
-  PopoverCloseButton,
-  PopoverContent,
-  PopoverHeader,
-  PopoverTrigger,
-  Stack,
-  Tag,
-  Text,
-  Textarea,
-  VStack,
-  textDecoration,
-  useDisclosure,
-} from "@chakra-ui/react";
+import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, AlertDialog, AlertDialogBody, AlertDialogCloseButton, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogOverlay, Avatar, Box, Button, Center, Divider, Flex, FormControl, FormLabel, HStack, IconButton, Image, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Popover, PopoverArrow, PopoverBody, PopoverCloseButton, PopoverContent, PopoverHeader, PopoverTrigger, Stack, Tag, Text, Textarea, VStack, textDecoration, useDisclosure, } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
@@ -71,18 +25,20 @@ function Dashboard() {
     title: "",
     file: "",
   });
+  const [deleteInfo, setDeleteInfo] = useState({
+    name: "",
+    id: "",
+  });
+
+
   // Model Hooks
   const { isOpen, onOpen, onClose } = useDisclosure();
   const {
-    isOpen: openAlert,
-    onOpen: showAlertConfirmNotes,
-    onClose: closeAlert,
+    isOpen: openDeleteAlert,
+    onOpen: showDeleteAlert,
+    onClose: closeDeleteAlert,
   } = useDisclosure();
-  const {
-    isOpen: openAlertAssignment,
-    onOpen: showAlertConfirmAssignment,
-    onClose: closeAlertAssignmet,
-  } = useDisclosure();
+
   const {
     isOpen: openNotesModel,
     onOpen: addNotes,
@@ -342,8 +298,7 @@ function Dashboard() {
         id,
         get_token()
       );
-      closeAlert();
-      closeAlertAssignmet();
+      closeDeleteAlert();
       if (response.status === 204) {
         await fetchData();
         console.log("Successfully deleted");
@@ -413,10 +368,10 @@ function Dashboard() {
                 onClick={() => handleCourseSelect(item.cid)}
                 {...(selectedCourse === item.cid
                   ? {
-                      backgroundColor: "#d8dcf0",
-                      color: "darkblue",
-                      _hover: { backgroundColor: "#d8dcf0" },
-                    }
+                    backgroundColor: "#d8dcf0",
+                    color: "darkblue",
+                    _hover: { backgroundColor: "#d8dcf0" },
+                  }
                   : {})}
                 {...(selectedCourse !== item.cid
                   ? { _hover: { backgroundColor: "#e5e5e5" } }
@@ -539,42 +494,13 @@ function Dashboard() {
                               colorScheme="teal"
                               aria-label="Done"
                               icon={<FaTrash />}
-                              onClick={showAlertConfirmNotes}
+                              onClick={() => {
+                                setDeleteInfo({name: item.name, id: item.nid})
+                                showDeleteAlert();
+                              }
+                              }
                             />
-                            <AlertDialog
-                              motionPreset="slideInBottom"
-                              leastDestructiveRef={cancelRef}
-                              onClose={closeAlert}
-                              isOpen={openAlert}
-                              isCentered
-                            >
-                              <AlertDialogOverlay />
 
-                              <AlertDialogContent>
-                                <AlertDialogHeader>
-                                  Discard Changes?
-                                </AlertDialogHeader>
-                                <AlertDialogCloseButton />
-                                <AlertDialogBody>
-                                  Are you sure you want to delete "{item.name}"
-                                  ?
-                                </AlertDialogBody>
-                                <AlertDialogFooter>
-                                  <Button ref={cancelRef} onClick={closeAlert}>
-                                    No
-                                  </Button>
-                                  <Button
-                                    colorScheme="red"
-                                    ml={3}
-                                    onClick={() =>
-                                      handleDelete({ nid: item.nid })
-                                    }
-                                  >
-                                    Yes
-                                  </Button>
-                                </AlertDialogFooter>
-                              </AlertDialogContent>
-                            </AlertDialog>
                           </HStack>
                         </AccordionPanel>
                       </AccordionItem>
@@ -685,45 +611,12 @@ function Dashboard() {
                               colorScheme="teal"
                               aria-label="Done"
                               icon={<FaTrash />}
-                              onClick={showAlertConfirmAssignment}
+                              onClick={() => {
+                                showDeleteAlert();
+                                setDeleteInfo({ name: item.name, id: item.aid });
+                              }}
                             />
-                            <AlertDialog
-                              motionPreset="slideInBottom"
-                              leastDestructiveRef={cancelRef}
-                              onClose={closeAlertAssignmet}
-                              isOpen={openAlertAssignment}
-                              isCentered
-                            >
-                              <AlertDialogOverlay />
 
-                              <AlertDialogContent>
-                                <AlertDialogHeader>
-                                  Discard Changes?
-                                </AlertDialogHeader>
-                                <AlertDialogCloseButton />
-                                <AlertDialogBody>
-                                  Are you sure you want to delete "{item.name}"
-                                  ?
-                                </AlertDialogBody>
-                                <AlertDialogFooter>
-                                  <Button
-                                    ref={cancelRef}
-                                    onClick={closeAlertAssignmet}
-                                  >
-                                    No
-                                  </Button>
-                                  <Button
-                                    colorScheme="red"
-                                    ml={3}
-                                    onClick={() =>
-                                      handleDelete({ aid: item.aid })
-                                    }
-                                  >
-                                    Yes
-                                  </Button>
-                                </AlertDialogFooter>
-                              </AlertDialogContent>
-                            </AlertDialog>
                           </HStack>
                         </AccordionPanel>
                       </AccordionItem>
@@ -813,6 +706,43 @@ function Dashboard() {
           ) : (
             <DashboardPlaceholder />
           )}
+
+
+          {/* Delete Alert  */}
+          <AlertDialog
+            motionPreset="slideInBottom"
+            leastDestructiveRef={cancelRef}
+            onClose={closeDeleteAlert}
+            isOpen={openDeleteAlert}
+            isCentered
+          >
+            <AlertDialogOverlay />
+
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                Discard Changes?
+              </AlertDialogHeader>
+              <AlertDialogCloseButton />
+              <AlertDialogBody>
+                Are you sure you want to delete "{deleteInfo.name}"
+                ?
+              </AlertDialogBody>
+              <AlertDialogFooter>
+                <Button ref={cancelRef} onClick={closeDeleteAlert}>
+                  No
+                </Button>
+                <Button
+                  colorScheme="red"
+                  ml={3}
+                  onClick={() =>
+                    handleDelete({ nid: deleteInfo.id })
+                  }
+                >
+                  Yes
+                </Button>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
 
           <Divider orientation="vertical" borderColor={"blackAlpha.200"} />
 
