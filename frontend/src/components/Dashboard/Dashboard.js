@@ -1,4 +1,50 @@
-import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, AlertDialog, AlertDialogBody, AlertDialogCloseButton, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogOverlay, Avatar, Box, Button, Center, Divider, Flex, FormControl, FormLabel, HStack, IconButton, Image, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Popover, PopoverArrow, PopoverBody, PopoverCloseButton, PopoverContent, PopoverHeader, PopoverTrigger, Stack, Tag, Text, Textarea, VStack, textDecoration, useDisclosure, } from "@chakra-ui/react";
+import {
+  Accordion,
+  AccordionButton,
+  AccordionIcon,
+  AccordionItem,
+  AccordionPanel,
+  AlertDialog,
+  AlertDialogBody,
+  AlertDialogCloseButton,
+  AlertDialogContent,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogOverlay,
+  Avatar,
+  Box,
+  Button,
+  Center,
+  Divider,
+  Flex,
+  FormControl,
+  FormLabel,
+  HStack,
+  IconButton,
+  Image,
+  Input,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  Popover,
+  PopoverArrow,
+  PopoverBody,
+  PopoverCloseButton,
+  PopoverContent,
+  PopoverHeader,
+  PopoverTrigger,
+  Stack,
+  Tag,
+  Text,
+  Textarea,
+  VStack,
+  textDecoration,
+  useDisclosure,
+} from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
@@ -29,7 +75,6 @@ function Dashboard() {
     name: "",
     id: "",
   });
-
 
   // Model Hooks
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -123,14 +168,12 @@ function Dashboard() {
   // On Course Change Use_effect
   // On Course Change Use_effect
   const fetchData = async () => {
-    console.log("hello");
     try {
       if (selectedCourse != null) {
         const assignment = await axios.get(
           `http://localhost:8000/api/showassignment/?cid=${selectedCourse}`
         );
         setAssignment(assignment.data);
-        console.log(assignment.data);
         const notes = await axios.get(
           `http://localhost:8000/api/shownotes/?cid=${selectedCourse}`
         );
@@ -151,32 +194,40 @@ function Dashboard() {
 
   // Function for writing Notes form Data
   const handleNotesFormChange = (e) => {
-    const { name, value } = e.target;
-    setNotesFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+    const { name, value, type } = e.target;
+    const updatedFormData = { ...notesFormData };
+    if (type === "file" && e.target.files.length > 0) {
+      const file = e.target.files[0];
+      updatedFormData[name] = file;
+    } else {
+      updatedFormData[name] = value;
+    }
+    setNotesFormData(updatedFormData);
   };
 
   const handleAssignmentFormChange = (e) => {
-    const { name, value } = e.target;
-    setAssignmentFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+    const { name, value, type } = e.target;
+    const updatedFormData = { ...assignmnetFormData };
+    if (type === "file" && e.target.files.length > 0) {
+      const file = e.target.files[0];
+      updatedFormData[name] = file;
+    } else {
+      updatedFormData[name] = value;
+    }
+    setAssignmentFormData(updatedFormData);
   };
 
   // Function for Handling Assignment Submit
   const handleAssignmentSubmit = async (e) => {
     e.preventDefault();
     e.stopPropagation();
-    console.log(assignmnetFormData.file);
     const formData = new FormData();
     formData.append("title", assignmnetFormData.title);
     formData.append("file", assignmnetFormData.file);
     formData.append("description", assignmnetFormData.description);
     formData.append("deadline", assignmnetFormData.deadline);
     formData.append("cid", selectedCourse);
+    console.log(formData);
     try {
       const response = await axios.post(
         "http://localhost:8000/api/assignmentupload/",
@@ -216,6 +267,7 @@ function Dashboard() {
     formData.append("title", notesFormData.title);
     formData.append("file", notesFormData.file);
     formData.append("cid", selectedCourse);
+    console.log(formData);
     try {
       const response = await axios.post(
         "http://127.0.0.1:8000/api/notesupload/",
@@ -270,26 +322,45 @@ function Dashboard() {
     }
   };
 
-  async function download_notes(nid) {
+  const download_notes = async (nid) => {
     console.log(nid);
-    // try {
-    //   const response = await axios.post(
-    //     "http://127.0.0.1:8000/api/notesdownload/",
-    //     { nid: nid },
-    //     { responseType: "blob" } // Make sure to set responseType to 'blob'
-    //   );
+    try {
+      const response = await axios.post(
+        "http://127.0.0.1:8000/api/notesdownload/",
+        { nid: nid },
+        { responseType: "blob" } // Make sure to set responseType to 'blob'
+      );
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", "notes.pdf"); // You can set the filename here
+      document.body.appendChild(link);
+      link.click();
+      window.URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error("Error downloading notes:", error);
+    }
+  };
 
-    //   const url = window.URL.createObjectURL(new Blob([response.data]));
-    //   const link = document.createElement("a");
-    //   link.href = url;
-    //   link.setAttribute("download", "notes.pdf"); // You can set the filename here
-    //   document.body.appendChild(link);
-    //   link.click();
-    //   window.URL.revokeObjectURL(url);
-    // } catch (error) {
-    //   console.error("Error downloading notes:", error);
-    // }
-  }
+  const download_assignment = async (aid) => {
+    console.log(aid);
+    try {
+      const response = await axios.post(
+        "http://127.0.0.1:8000/api/assignmentdownload/",
+        { aid: aid },
+        { responseType: "blob" } // Make sure to set responseType to 'blob'
+      );
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", "assignment.pdf"); // You can set the filename here
+      document.body.appendChild(link);
+      link.click();
+      window.URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error("Error downloading notes:", error);
+    }
+  };
 
   const handleDelete = async (id) => {
     try {
@@ -368,10 +439,10 @@ function Dashboard() {
                 onClick={() => handleCourseSelect(item.cid)}
                 {...(selectedCourse === item.cid
                   ? {
-                    backgroundColor: "#d8dcf0",
-                    color: "darkblue",
-                    _hover: { backgroundColor: "#d8dcf0" },
-                  }
+                      backgroundColor: "#d8dcf0",
+                      color: "darkblue",
+                      _hover: { backgroundColor: "#d8dcf0" },
+                    }
                   : {})}
                 {...(selectedCourse !== item.cid
                   ? { _hover: { backgroundColor: "#e5e5e5" } }
@@ -482,25 +553,27 @@ function Dashboard() {
                               variant="solid"
                               colorScheme="purple"
                               aria-label="Done"
+                              size={"sm"}
                               onClick={() => {
                                 download_notes(item.nid);
                               }}
-                              icon={<FaDownload />}
+                              icon={<FaDownload/>}
                             />
-
                             <IconButton
                               isRound={true}
                               variant="solid"
                               colorScheme="teal"
                               aria-label="Done"
                               icon={<FaTrash />}
+                              size={"sm"}
                               onClick={() => {
-                                setDeleteInfo({name: item.name, id: item.nid})
+                                setDeleteInfo({
+                                  name: item.name,
+                                  id: item.nid,
+                                });
                                 showDeleteAlert();
-                              }
-                              }
+                              }}
                             />
-
                           </HStack>
                         </AccordionPanel>
                       </AccordionItem>
@@ -523,7 +596,10 @@ function Dashboard() {
                     <ModalHeader>Add Study Material</ModalHeader>
                     <ModalCloseButton />
                     <ModalBody pb={6}>
-                      <form onSubmit={handleNotesSubmit}>
+                      <form
+                        onSubmit={handleNotesSubmit}
+                        encType="multipart/form-data"
+                      >
                         <FormControl>
                           <FormLabel>Title</FormLabel>
                           <Input
@@ -600,7 +676,7 @@ function Dashboard() {
                               colorScheme="purple"
                               aria-label="Done"
                               onClick={() => {
-                                download_notes(item.nid);
+                                download_assignment(item.aid);
                               }}
                               icon={<FaDownload />}
                             />
@@ -613,10 +689,12 @@ function Dashboard() {
                               icon={<FaTrash />}
                               onClick={() => {
                                 showDeleteAlert();
-                                setDeleteInfo({ name: item.name, id: item.aid });
+                                setDeleteInfo({
+                                  name: item.name,
+                                  id: item.aid,
+                                });
                               }}
                             />
-
                           </HStack>
                         </AccordionPanel>
                       </AccordionItem>
@@ -707,7 +785,6 @@ function Dashboard() {
             <DashboardPlaceholder />
           )}
 
-
           {/* Delete Alert  */}
           <AlertDialog
             motionPreset="slideInBottom"
@@ -719,13 +796,10 @@ function Dashboard() {
             <AlertDialogOverlay />
 
             <AlertDialogContent>
-              <AlertDialogHeader>
-                Discard Changes?
-              </AlertDialogHeader>
+              <AlertDialogHeader>Discard Changes?</AlertDialogHeader>
               <AlertDialogCloseButton />
               <AlertDialogBody>
-                Are you sure you want to delete "{deleteInfo.name}"
-                ?
+                Are you sure you want to delete "{deleteInfo.name}" ?
               </AlertDialogBody>
               <AlertDialogFooter>
                 <Button ref={cancelRef} onClick={closeDeleteAlert}>
@@ -734,9 +808,7 @@ function Dashboard() {
                 <Button
                   colorScheme="red"
                   ml={3}
-                  onClick={() =>
-                    handleDelete({ nid: deleteInfo.id })
-                  }
+                  onClick={() => handleDelete({ nid: deleteInfo.id })}
                 >
                   Yes
                 </Button>

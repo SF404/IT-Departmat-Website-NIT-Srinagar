@@ -5,6 +5,8 @@ from .views import *
 from . import views
 from django.views.generic import TemplateView
 from rest_framework import routers
+from django.conf.urls.static import static
+from django.conf import settings
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
@@ -23,7 +25,7 @@ router.register(r'showassignment', views.AssignmentShow, basename='login')
 
 urlpatterns = [
     path('api/', include(router.urls)),
-    path('api/assignmentdownload', DownloadAssignment,name='registration'),
+    path('api/assignmentdownload/', DownloadAssignment.as_view(),name='registration'),
     path('api/notesdownload/', DownloadNotes.as_view(),name='registration'),
     path('api/filesdelete/', DeleteFilesAPIView.as_view(),name='registration'),
     path('api/auth/register/', RegistrationView.as_view(), name='registration'),
@@ -33,4 +35,4 @@ urlpatterns = [
     path('api/auth/refresh-token/', CustomRefreshTokenView.as_view(), name='refresh-token'),
     path('api/auth/logout/', LogoutView.as_view(), name='logout'),
     re_path('', TemplateView.as_view(template_name='index.html')),
-]
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

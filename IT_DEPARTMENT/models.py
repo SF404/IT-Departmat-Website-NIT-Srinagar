@@ -33,7 +33,7 @@ class Alert(models.Model):
 class Assignment(models.Model):
     aid=models.CharField(max_length=255,unique=True)
     name = models.CharField(max_length=255)
-    pdf = models.FileField(upload_to='pdfs/')
+    pdf = models.FileField(upload_to='assignments/')
     description = models.CharField(max_length=255,null=True,blank=True)
     deadline = models.CharField(max_length=255,null=True,blank=True)
     cid = models.CharField(max_length=255,null=True)
@@ -48,7 +48,7 @@ class Assignment(models.Model):
 class Notes(models.Model):
     nid=models.CharField(max_length=255,unique=True)
     name = models.CharField(max_length=255)
-    pdf = models.FileField(upload_to='pdfs/')
+    pdf = models.FileField(upload_to='notes/')
     description = models.CharField(max_length=255,null=True,blank=True)
     cid = models.CharField(max_length=255,null=True)
     date=models.DateTimeField(auto_now_add=True)

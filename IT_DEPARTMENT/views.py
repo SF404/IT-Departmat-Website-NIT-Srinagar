@@ -1,9 +1,10 @@
 from rest_framework import viewsets
+from rest_framework.parsers import MultiPartParser
 from django.shortcuts import get_object_or_404
 from django.shortcuts import HttpResponse
 from rest_framework.authentication import TokenAuthentication, SessionAuthentication
 from IT_DEPARTMENT.models import *
-from django.http import JsonResponse
+from django.http import JsonResponse,FileResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.views import APIView
 from rest_framework import generics,status,response,viewsets
@@ -45,18 +46,21 @@ class NotesUpload(viewsets.ModelViewSet):
     serializer_class = NotesSerializer
     def create(self, request, *args, **kwargs):
         title = request.data.get("title")
-        file = request.data.get("file")
+        uploaded_file = request.FILES.get("file")
         cid = request.data.get("cid")
-        nid=random.randint(1, 10000)
-        print(cid, "CID-----------")
+        nid = random.randint(1, 10000)
         print(title)
-        print(file)
-        try:
-            note = Notes(name=title, pdf=file,nid=nid, cid=cid)
-            note.save()
-            return Response({"message": "Notes created successfully"}, status=status.HTTP_201_CREATED)
-        except Exception as e:
-            return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+        print(uploaded_file)
+        print(cid)
+        if uploaded_file:
+            try:
+                note = Notes(name=title, pdf=uploaded_file, nid=nid, cid=cid)
+                note.save()
+                return Response({"message": "Notes created successfully"}, status=status.HTTP_201_CREATED)
+            except Exception as e:
+                return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            return Response({"error": "No file uploaded"}, status=status.HTTP_400_BAD_REQUEST)
 
 
 class AssignmentUpload (viewsets.ModelViewSet):
@@ -65,9 +69,8 @@ class AssignmentUpload (viewsets.ModelViewSet):
     serializer_class = AssignmentSerializer
     def create(self, request, *args, **kwargs):
         title = request.data.get("title")
-        file = request.data.get("file")
+        file = request.FILES.get("file")
         cid = request.data.get("cid")
-        print("hello")
         description = request.data.get("description")
         deadline = request.data.get("deadline")
         aid=random.randint(1, 10000)
@@ -93,31 +96,26 @@ class AssignmentShow(viewsets.ModelViewSet):
         assignment = Assignment.objects.filter(cid=cid)
         return assignment
     
-def DownloadAssignment(request):
-    file_id=request.data.get("aid")
-    my_model_instance = Assignment.objects.get(aid=file_id)
-    file_path = my_model_instance.pdf.path
-    with open(file_path, 'rb') as pdf_file:
-        response = HttpResponse(pdf_file.read(), content_type='application/pdf')
-        response['Content-Disposition'] = f'attachment; filename="{my_model_instance.pdf.name}"'
-        return response
+class DownloadAssignment(APIView):
+    def post(self, request, *args, **kwargs):
+        file_id = request.data.get("aid")
+        my_model_instance = Assignment.objects.get(aid=file_id)
+        
+        if not my_model_instance:
+            return Response({"message": "Assignment not found."}, status=status.HTTP_404_NOT_FOUND)
+        file_path = my_model_instance.pdf.path
+        return FileResponse(open(file_path, 'rb'), as_attachment=True)
     
 class DownloadNotes(APIView):
-    def post(self, request):
+    def post(self, request, *args, **kwargs):
         file_id = request.data.get("nid")
-        my_model_instance = Notes.objects.filter(nid=file_id).first()
+        my_model_instance = Notes.objects.get(nid=file_id)
         
         if not my_model_instance:
             return Response({"message": "Note not found."}, status=status.HTTP_404_NOT_FOUND)
         
         file_path = my_model_instance.pdf.path
-        if os.path.exists(file_path):
-            with open(file_path, 'rb') as pdf_file:
-                response = HttpResponse(pdf_file.read(), content_type='application/pdf')
-                response['Content-Disposition'] = f'attachment; filename="{my_model_instance.pdf.name}"'
-                return response
-        else:
-            return Response({"message": "File not found."}, status=status.HTTP_404_NOT_FOUND)
+        return FileResponse(open(file_path, 'rb'), as_attachment=True)
 
 
 
