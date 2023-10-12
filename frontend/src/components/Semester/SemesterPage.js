@@ -47,7 +47,15 @@ const SemesterPage = () => {
         deadline: '',
     });
 
+    const [activeTab, setActiveTab] = useState(0);
+
     // functions
+
+    function handleTabChange(index) {
+        setActiveTab(index);
+    }
+
+
     async function fetchAssignments() {
         try {
             const assignment = await axios.get(
@@ -77,13 +85,50 @@ const SemesterPage = () => {
         }
     };
 
-    function handleDownload() {
-
-    }
 
     const showDetails = (name, details, deadline) => {
         setDetails({ name, details, deadline });
         onOpen();
+    };
+
+    const download_notes = async (nid) => {
+        console.log(nid);
+        try {
+            const response = await axios.post(
+                "http://127.0.0.1:8000/api/notesdownload/",
+                { nid: nid },
+                { responseType: "blob" } // Make sure to set responseType to 'blob'
+            );
+            const url = window.URL.createObjectURL(new Blob([response.data]));
+            const link = document.createElement("a");
+            link.href = url;
+            link.setAttribute("download", "notes.pdf"); // You can set the filename here
+            document.body.appendChild(link);
+            link.click();
+            window.URL.revokeObjectURL(url);
+        } catch (error) {
+            console.error("Error downloading notes:", error);
+        }
+    };
+
+    const download_assignment = async (aid) => {
+        console.log(aid);
+        try {
+            const response = await axios.post(
+                "http://127.0.0.1:8000/api/assignmentdownload/",
+                { aid: aid },
+                { responseType: "blob" } // Make sure to set responseType to 'blob'
+            );
+            const url = window.URL.createObjectURL(new Blob([response.data]));
+            const link = document.createElement("a");
+            link.href = url;
+            link.setAttribute("download", "assignment.pdf"); // You can set the filename here
+            document.body.appendChild(link);
+            link.click();
+            window.URL.revokeObjectURL(url);
+        } catch (error) {
+            console.error("Error downloading notes:", error);
+        }
     };
 
 
@@ -106,7 +151,7 @@ const SemesterPage = () => {
 
     function DataTabs() {
         return (<>
-            <Tabs position="relative" defaultIndex={0} size='md' variant="unstyled" borderRadius={16} boxShadow="rgba(100, 100, 111, 0.2) 0px 7px 29px 0px">
+            <Tabs position="relative" defaultIndex={0} size='md' variant="unstyled" borderRadius={16} boxShadow="rgba(100, 100, 111, 0.2) 0px 7px 29px 0px" index={activeTab} onChange={handleTabChange}>
                 <TabList bg={'green.100'} color={'green'} borderRadius="16px 16px 0 0" >
                     <Tab fontWeight={'bold'}>Notes</Tab>
                     <Tab fontWeight={'bold'}>Assignments</Tab>
@@ -127,7 +172,7 @@ const SemesterPage = () => {
                                     notes.map((item) => (
                                         <Flex w={'full'} key={item.id} justifyContent={'space-between'} alignItems={'center'} gap={4}>
                                             <Text>{item.name}</Text>
-                                            <Button onClick={() => handleDownload(item.id)}>Download</Button>
+                                            <Button onClick={() => download_notes(item.nid)}>Download</Button>
                                         </Flex>
                                     ))
                             }
@@ -139,21 +184,26 @@ const SemesterPage = () => {
                                 loading ? (<Spinner size="lg" />) :
                                     assignments.map((item) => (
                                         <Flex w={'full'} key={item.id} justifyContent={'space-between'} alignItems={'center'} gap={4}>
-                                            <Text >{item.name}</Text>
+                                            <HStack>
+                                                <Text >{item.name}</Text>
+                                                <Badge>Due: <span style={{ color: 'red' }}>{item.deadline}</span></Badge>
 
-                                            <Badge>Due: <span style={{ color: 'red' }}>{item.deadline}</span></Badge>
-                                            <Button onClick={() => { showDetails(item.name, item.details, item.deadline); onOpen() }}>Details</Button>
-                                            <Button onClick={() => handleDownload(item.id)}>Download</Button>
+                                            </HStack>
+
+                                            <HStack>
+                                                <Button onClick={() => download_assignment(item.aid)}>Download</Button>
+                                                <Button onClick={() => { showDetails(item.name, item.details, item.deadline); onOpen() }}>Details</Button>
+                                            </HStack>
                                         </Flex>
                                     ))
                             }
-                            <Modal closeOnOverlayClick={false} isOpen={isOpen} onClose={onClose}>
-                                <ModalOverlay />
+                            <Modal closeOnOverlayClick={false} isOpen={isOpen} onClose={onClose} size={'2xl'}>
+                            <ModalOverlay bg="rgba(0, 0, 0, 0.5)" />
                                 <ModalContent>
                                     <ModalHeader>Create your account</ModalHeader>
                                     <ModalCloseButton />
                                     <ModalBody pb={6}>
-
+ffdsfdgdfgfdgdf
                                     </ModalBody>
 
                                     <ModalFooter>
