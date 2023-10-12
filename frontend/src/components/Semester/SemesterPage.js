@@ -1,7 +1,7 @@
 // SemesterPage.js
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Box, Heading, Text, List, ListItem, Button, HStack, Divider, Flex, TabIndicator, UnorderedList } from '@chakra-ui/react';
+import { Box, Heading, Text, List, ListItem, Button, HStack, Divider, Flex, TabIndicator, UnorderedList, Badge, Spinner } from '@chakra-ui/react';
 import { Accordion, AccordionItem, AccordionButton, AccordionPanel, AccordionIcon, } from '@chakra-ui/react'
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
 import Footer from '../Layout/Footer';
@@ -32,6 +32,45 @@ const SemesterPage = () => {
 
     const semester = fetchSemesterData(semesterId);
 
+    // states
+    const [loading, setLoading] = useState(true);
+
+
+    function TabSection() {
+        return (
+            <>
+                <Tabs  minH={'100px'} position="relative" defaultIndex={0} size='md' variant="unstyled" borderRadius={16} boxShadow={'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px'}>
+                    <TabList bg={'green.100'} borderRadius='16px 16px 0 0 '>
+                        <Tab fontWeight={'bold'}>Notes</Tab>
+                        <Tab fontWeight={'bold'}>Assignments</Tab>
+                        <Tab fontWeight={'bold'}>Other</Tab>
+                    </TabList>
+                    <TabIndicator
+                        mt="-1.5px"
+                        height="2px"
+                        bg="#81c784"
+                        borderRadius="1px"
+                    />
+                    {
+                        loading ? (<Spinner />) : (
+                            <TabPanels>
+                                <TabPanel>
+                                    <p>Notes</p>
+                                </TabPanel>
+                                <TabPanel>
+                                    <p>Assignments</p>
+                                </TabPanel>
+                                <TabPanel>
+                                    <p>Other</p>
+                                </TabPanel>
+                            </TabPanels>
+                        )
+                    }
+                </Tabs>
+            </>
+        )
+    }
+
     return (
         <>
             <Box p={6} borderRadius="lg" overflow="hidden">
@@ -50,63 +89,35 @@ const SemesterPage = () => {
 
 
 
-                <Accordion allowToggle>
+                <Accordion allowToggle userSelect={'none'}>
 
                     {
                         semester.subjects.map((subject) => (
-                            <AccordionItem>
+                            <AccordionItem w={'full'} cursor={'pointer'}>
                                 <h2>
-                                    <AccordionButton _expanded={{ bg: 'purple', color: 'white' }} h={'64px'}>
+                                    <AccordionButton _expanded={{ bg: '#009688', color: 'white' }} h={'64px'} as={Badge}>
                                         <Box as="span" flex='1' textAlign='left' fontWeight={'bold'}>
                                             <Flex justifyContent={'space-between'}>
                                                 <Text> {subject.courseId} | {subject.name}</Text>
-                                                <Text>{subject.instructor}</Text>
                                             </Flex>
                                         </Box>
                                         <AccordionIcon />
                                     </AccordionButton>
                                 </h2>
-                                <AccordionPanel pb={4} bg={'AppWorkspace'}>
-                                    <Box>
+                                <AccordionPanel pb={4}>
+                                    <HStack justifyContent={'space-between'}>
+                                        <Box>
+                                            <Text>{subject.instructor}</Text>
+                                            <Badge colorScheme='green'>Credit: {subject.credit}</Badge>
+                                        </Box>
                                         <Text>Syllabus: <Button>Download</Button></Text>
-                                        <Text>Credit: {subject.credit}</Text>
-                                        <Text>Course Outcomes</Text>
-                                        <UnorderedList>
-                                            <ListItem>Lorem ipsum dolor sit amet</ListItem>
-                                            <ListItem>Consectetur adipiscing elit</ListItem>
-                                            <ListItem>Integer molestie lorem at massa</ListItem>
-                                            <ListItem>Facilisis in pretium nisl aliquet</ListItem>
-                                        </UnorderedList>
-                                    </Box>
+                                    </HStack>
 
                                     <Divider my={2} />
 
+                                    <TabSection />
 
 
-                                    <Tabs position="relative" defaultIndex={0} size='md' variant="unstyled" borderRadius={22} border={'2px solid #81c784'}>
-                                        <TabList bg={'green.100'} borderRadius={20} pl={5} fontWeight={'semibold'}>
-                                            <Tab>Notes</Tab>
-                                            <Tab>Assignments</Tab>
-                                            <Tab>Other</Tab>
-                                        </TabList>
-                                        <TabIndicator
-                                            mt="-1.5px"
-                                            height="2px"
-                                            bg="#81c784"
-                                            borderRadius="1px"
-                                        />
-                                        <TabPanels>
-                                            <TabPanel>
-                                                <p>Notes</p>
-                                            </TabPanel>
-                                            <TabPanel>
-                                                <p>Assignments</p>
-                                            </TabPanel>
-                                            <TabPanel>
-                                                <p>Other</p>
-                                            </TabPanel>
-                                        </TabPanels>
-                                    </Tabs>
                                 </AccordionPanel>
                             </AccordionItem>
                         ))
