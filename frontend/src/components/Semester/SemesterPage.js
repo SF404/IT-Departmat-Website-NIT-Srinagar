@@ -1,11 +1,13 @@
 // SemesterPage.js
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Box, Heading, Text, List, ListItem, Button, HStack, Divider, Flex, TabIndicator, UnorderedList, Tag, Badge, Spinner, VStack, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, useDisclosure } from '@chakra-ui/react';
+import { Box, Heading, Text, List, ListItem, Button, HStack, Divider, Flex, TabIndicator, UnorderedList, Tag, Badge, Spinner, VStack, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, useDisclosure, useColorMode, Center, StatGroup, Stat, StatLabel, StatNumber } from '@chakra-ui/react';
 import { Accordion, AccordionItem, AccordionButton, AccordionPanel, AccordionIcon, } from '@chakra-ui/react'
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
 import Footer from '../Layout/Footer';
 import axios from 'axios';
+import CountUp from 'react-countup'
+import bannerImage from './../../assets/images/image.jpeg'
 
 
 const SemesterPage = () => {
@@ -38,7 +40,7 @@ const SemesterPage = () => {
     // states 
     const [notes, setNotes] = useState([])
     const [assignments, setAssignments] = useState([])
-    const [selectedCourse, setSelectedCourse] = useState([])
+    const [selectedCourse, setSelectedCourse] = useState(null)
     const [loading, setLoading] = useState(true);
     const { isOpen, onOpen, onClose } = useDisclosure()
     const [details, setDetails] = useState({
@@ -46,14 +48,30 @@ const SemesterPage = () => {
         details: '',
         deadline: '',
     });
-
     const [activeTab, setActiveTab] = useState(0);
+    const [courses, setCourses] = useState([])
+
+
+    const { toggleColorMode } = useColorMode();
 
     // functions
 
     function handleTabChange(index) {
         setActiveTab(index);
     }
+
+    async function fetchCourses() {
+        try {
+            const response = await axios.get(
+              `http://localhost:8000/api/semester/?semesterId=${semesterId}`
+            );
+            const data = response.data;
+            setCourses(data);
+            console.log(courses);
+          } catch (error) {
+            console.error("Error fetching data:", error);
+          }
+    };
 
 
     async function fetchAssignments() {
@@ -143,6 +161,10 @@ const SemesterPage = () => {
 
     }, [selectedCourse])
 
+    useEffect(() => {
+            fetchCourses();
+    }, [, semesterId])
+
 
     // handlers
 
@@ -198,12 +220,12 @@ const SemesterPage = () => {
                                     ))
                             }
                             <Modal closeOnOverlayClick={false} isOpen={isOpen} onClose={onClose} size={'2xl'}>
-                            <ModalOverlay bg="rgba(0, 0, 0, 0.5)" />
+                                <ModalOverlay bg="rgba(0, 0, 0, 0.1)" />
                                 <ModalContent>
                                     <ModalHeader>Create your account</ModalHeader>
                                     <ModalCloseButton />
                                     <ModalBody pb={6}>
-ffdsfdgdfgfdgdf
+
                                     </ModalBody>
 
                                     <ModalFooter>
@@ -228,14 +250,35 @@ ffdsfdgdfgfdgdf
 
     return (
         <>
-            <Box p={6} borderRadius="lg" overflow="hidden">
-                <Heading as="h2" size="lg" mb={2}>
+            <VStack w={'full'} h={'200px'} bg={'brown'} color={'white'} p={6}
+                backgroundImage={bannerImage} // Replace with your image path
+                backgroundSize="cover"
+                backgroundPosition="center"
+                backgroundRepeat="no-repeat"
+                textShadow={'0 0 24px black'}
+            >
+                <Heading as="h2" size="xl" mb={2}>
                     {semester.name}
                 </Heading>
                 <Text>{semester.nicname}</Text>
+                <Center w={'full'} gap={9}>
+                    <Heading>
+                        <CountUp start={0} end={345670} duration={3} delay={0} />+
+                    </Heading>
+                    <Heading>
+                        <CountUp start={0} end={100000} duration={3} delay={0} />+
+                    </Heading>
+                </Center>
+
+                <Text color={'white'}>
+
+                </Text>
+            </VStack>
+            <Box p={6} borderRadius="lg" overflow="hidden" fontSize={{ base: 'sm', md: 'md' }}>
+
                 <Divider my={2} />
-                <HStack>
-                    <Button colorScheme='purple'>Download Syllabus</Button>
+                <HStack justifyContent={'center'}>
+                    <Button onClick={toggleColorMode} colorScheme='purple'>Download Syllabus</Button>
                     <Button colorScheme='teal'>Teaching Faculty</Button>
                     <Button colorScheme='red'>Academic Calender</Button>
                     <Button colorScheme='orange'>List Students</Button>
@@ -244,26 +287,28 @@ ffdsfdgdfgfdgdf
 
 
 
-                <Accordion allowToggle userSelect={'none'}>
+                <Accordion allowToggle userSelect={'none'} gap={2}>
 
                     {
-                        semester.subjects.map((subject) => (
-                            <AccordionItem key={subject.courseId}>
+                        courses.map((course) => (
+                            <AccordionItem key={course.course_id} mt={2} border={'1px solid #e5e5e5'} borderRadius={8}>
                                 <h2>
-                                    <AccordionButton as={Badge} cursor={'pointer'} _expanded={{ bg: "teal", color: "white" }} h={'64px'} onClick={() => { setSelectedCourse(subject.courseId); console.log('clicked') }}>
+                                    <AccordionButton as={Badge} colorScheme='blackAlpha' cursor={'pointer'} borderRadius={8} h={'64px'}
+                                        _expanded={{ bg: "teal", color: "white" }}
+                                        onClick={() => { setSelectedCourse(course.course_id) }}>
                                         <Box as="span" flex='1' textAlign='left' fontWeight={'bold'}>
                                             <Flex justifyContent={'space-between'}>
-                                                <Text> {subject.courseId} | {subject.name}</Text>
+                                                <Text> {course.course_id} | {course.name}</Text>
                                             </Flex>
                                         </Box>
                                         <AccordionIcon />
                                     </AccordionButton>
                                 </h2>
-                                <AccordionPanel pb={4} zz>
+                                <AccordionPanel pb={4} >
                                     <Box display={'flex'} justifyContent={'space-between'}>
                                         <Box>
-                                            <Text>{subject.instructor}</Text>
-                                            <Badge colorScheme='green'>Credit: {subject.credit}</Badge>
+                                            <Text>{course.teacher}</Text>
+                                            <Badge colorScheme='green'>Credit: {course.credit}</Badge>
                                         </Box>
                                         <Text>Syllabus: <Button>Download</Button></Text>
                                     </Box>
