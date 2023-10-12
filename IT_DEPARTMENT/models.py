@@ -1,42 +1,55 @@
 from django.db import models
+from django.contrib.auth.models import User
+from django.utils import timezone
 
 # Create your models here.
 class Teacher(models.Model):
-    sid = models.CharField(max_length=255, unique=True)
+    teacher_id = models.CharField(max_length=255, unique=True)
     name = models.CharField(max_length=255)
-    username=models.CharField(max_length=255, default="NIT_Sgr77890")
     email = models.EmailField(unique=True)
-    password = models.CharField(max_length=255)
-    temporary = models.TextField(max_length=255,blank=True)
+    description = models.CharField(max_length=255,blank=True)
+    phone =models.PositiveIntegerField(unique=True)
+    research_field = models.TextField(max_length=255,blank=True)
+    date=models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE,null=True,blank=True)
+
 
 class Course(models.Model):
-    cid = models.CharField(max_length=255, unique=True)
+    course_id = models.CharField(max_length=255, unique=True)
     name = models.CharField(max_length=255)
+    credit=models.PositiveIntegerField()
     semester=models.CharField(max_length=255)
-    
+    syllabus=models.JSONField(blank=True,null=True)
     description = models.TextField(blank=True)
+    date=models.DateTimeField(auto_now_add=True)
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE,null=True,blank=True)
+    
+
+
 
 class Announcement(models.Model):
-    aid = models.CharField(max_length=255)
-    name = models.CharField(max_length=255)
+    announcement_id = models.CharField(max_length=255,unique=True)
     description = models.CharField(max_length=255)
-    link = models.CharField(max_length=255)
+    link = models.URLField(max_length=255)
     date =  models.DateTimeField(auto_now=True)
+    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE,null=True,blank=True)
+    
 
 class Alert(models.Model):
-    aid = models.CharField(max_length=255)
-    message = models.CharField(max_length=255)
-    valid = models.IntegerField()
-    date = models.DateTimeField(auto_now_add=True)
+    alert_id = models.CharField(max_length=255,unique=True,default="default_id")
+    description = models.CharField(max_length=255)
+    link = models.URLField(max_length=255,default="https://it.nitsri.ac.in/")
+    date =  models.DateTimeField(auto_now=True)
+    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE,null=True,blank=True)
+
+
 
 class Assignment(models.Model):
-    aid=models.CharField(max_length=255,unique=True)
+    assignment_id=models.CharField(max_length=255,unique=True)
     name = models.CharField(max_length=255)
     pdf = models.FileField(upload_to='assignments/')
-    description = models.CharField(max_length=255,null=True,blank=True)
-    deadline = models.CharField(max_length=255,null=True,blank=True)
-    cid = models.CharField(max_length=255,null=True)
+    description = models.CharField(max_length=1000,null=True,blank=True)
+    validity = models.CharField(max_length=255,null=True,blank=True)
     date=models.DateTimeField(auto_now_add=True)
     course=models.ForeignKey(Course,on_delete=models.CASCADE,null=True,blank=True)
     class Meta:
@@ -46,11 +59,10 @@ class Assignment(models.Model):
         return f"{self.name}"
     
 class Notes(models.Model):
-    nid=models.CharField(max_length=255,unique=True)
+    notes_id=models.CharField(max_length=255,unique=True)
     name = models.CharField(max_length=255)
     pdf = models.FileField(upload_to='notes/')
     description = models.CharField(max_length=255,null=True,blank=True)
-    cid = models.CharField(max_length=255,null=True)
     date=models.DateTimeField(auto_now_add=True)
     course=models.ForeignKey(Course,on_delete=models.CASCADE,null=True,blank=True)
     class Meta:

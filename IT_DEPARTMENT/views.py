@@ -22,10 +22,9 @@ import os
 
 class TeacherView(viewsets.ModelViewSet):
     serializer_class = TeacherSerializer
- 
     def get_queryset(self):
         sid = self.request.query_params.get('sid')
-        queryset = Teacher.objects.filter(sid=sid)
+        queryset = Teacher.objects.filter(teacher_id=sid)
         return queryset
     
 class CourseView(viewsets.ModelViewSet):
@@ -33,10 +32,9 @@ class CourseView(viewsets.ModelViewSet):
  
     def get_queryset(self):
         sid = self.request.query_params.get('sid')
-        teacher = Teacher.objects.get(sid=sid)
+        teacher = Teacher.objects.get(teacher_id=sid)
         print("sid", teacher.name)
         queryset = Course.objects.filter(teacher=teacher)
-        print(queryset[0].cid)
         return queryset
 
 
@@ -47,14 +45,12 @@ class NotesUpload(viewsets.ModelViewSet):
     def create(self, request, *args, **kwargs):
         title = request.data.get("title")
         uploaded_file = request.FILES.get("file")
-        cid = request.data.get("cid")
+        course_id=request.data.get("cid")
+        course = Course.objects.get(course_id=course_id)
         nid = random.randint(1, 10000)
-        print(title)
-        print(uploaded_file)
-        print(cid)
         if uploaded_file:
             try:
-                note = Notes(name=title, pdf=uploaded_file, nid=nid, cid=cid)
+                note = Notes(name=title, pdf=uploaded_file, notes_id=nid,course=course)
                 note.save()
                 return Response({"message": "Notes created successfully"}, status=status.HTTP_201_CREATED)
             except Exception as e:
@@ -70,12 +66,13 @@ class AssignmentUpload (viewsets.ModelViewSet):
     def create(self, request, *args, **kwargs):
         title = request.data.get("title")
         file = request.FILES.get("file")
-        cid = request.data.get("cid")
         description = request.data.get("description")
         deadline = request.data.get("deadline")
+        course_id=request.data.get("cid")
+        course = Course.objects.get(course_id=course_id)
         aid=random.randint(1, 10000)
         try:
-            note = Assignment(name=title, pdf=file,aid=aid, cid=cid, description=description, deadline=deadline)
+            note = Assignment(name=title, pdf=file,assignment_id=aid,description=description, validity=deadline,course=course)
             note.save()
             return Response({"message": "Assignment created successfully"}, status=status.HTTP_201_CREATED)
         except Exception as e:
@@ -86,20 +83,22 @@ class NotesShow(viewsets.ModelViewSet):
     serializer_class = NotesSerializer
     def get_queryset(self):
         cid = self.request.query_params.get('cid')
-        notes = Notes.objects.filter(cid=cid)
+        course = Course.objects.get(course_id=cid)
+        notes = Notes.objects.filter(course=course)
         return notes
     
 class AssignmentShow(viewsets.ModelViewSet):
     serializer_class = AssignmentSerializer
     def get_queryset(self):
-        cid = self.request.query_params.get('cid')        
-        assignment = Assignment.objects.filter(cid=cid)
+        cid = self.request.query_params.get('cid') 
+        course = Course.objects.get(course_id=cid)       
+        assignment = Assignment.objects.filter(course=course)
         return assignment
     
 class DownloadAssignment(APIView):
     def post(self, request, *args, **kwargs):
         file_id = request.data.get("aid")
-        my_model_instance = Assignment.objects.get(aid=file_id)
+        my_model_instance = Assignment.objects.get(assignment_id=file_id)
         
         if not my_model_instance:
             return Response({"message": "Assignment not found."}, status=status.HTTP_404_NOT_FOUND)
@@ -109,7 +108,7 @@ class DownloadAssignment(APIView):
 class DownloadNotes(APIView):
     def post(self, request, *args, **kwargs):
         file_id = request.data.get("nid")
-        my_model_instance = Notes.objects.get(nid=file_id)
+        my_model_instance = Notes.objects.get(notes_id=file_id)
         
         if not my_model_instance:
             return Response({"message": "Note not found."}, status=status.HTTP_404_NOT_FOUND)
@@ -121,20 +120,20 @@ class DownloadNotes(APIView):
 
 class DeleteFilesAPIView(APIView):
     def post(self, request, *args, **kwargs):
-        aid = request.data.get("aid")
-        nid = request.data.get("nid")
+        aid = request.data.get("assignment_id")
+        nid = request.data.get("notes_id")
         if not aid and not nid:
             return Response({"message": "Either 'aid' or 'nid' is required"}, status=status.HTTP_400_BAD_REQUEST)
         if aid:
             try:
-                assignment_entry = Assignment.objects.get(aid=aid)
+                assignment_entry = Assignment.objects.get(assignment_id=aid)
                 assignment_entry.delete()
                 return Response({"message": "Assignment entry deleted successfully"}, status=status.HTTP_204_NO_CONTENT)
             except Assignment.DoesNotExist:
                 return Response({"message": "Assignment entry not found"}, status=status.HTTP_404_NOT_FOUND)
         if nid:
             try:
-                notes_entry = Notes.objects.get(nid=nid)
+                notes_entry = Notes.objects.get(notes_id=nid)
                 notes_entry.delete()
                 return Response({"message": "Notes entry deleted successfully"}, status=status.HTTP_204_NO_CONTENT)
             except Notes.DoesNotExist:

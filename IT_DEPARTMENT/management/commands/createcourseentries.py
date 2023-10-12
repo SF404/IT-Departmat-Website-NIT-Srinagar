@@ -8,41 +8,71 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
             
             teacher=Teacher.objects.create(
-                sid =1001,
+                teacher_id =1001,
                 name = "Dr. Janib ul Bashir",
-                username="rajesmanna",
-                email = "temp@temp.com",
-                password = "password",
-                temporary = "he is a good boy"
+                description = "he is a good teacher",
+                phone=9149780560,
+                research_field="hello"
             )
+            
+            Course.objects.create(
+                course_id ="IT_701",
+                name = "Wireless & Mobile Communication",
+                credit=4,
+                semester="7TH",
+                syllabus="Introduction-Evolution of mobile radio communications",
+                description = "Networks- Integrated Services Digital Network (ISDN)",
+                teacher = teacher        
+                )
+            
 
             Course.objects.create(
-                cid='COA5th',
-                name='Computer Architecture and Organization',
-                semester='5th',
-                description='Course Description 1',
-                teacher=teacher
-            )
-
+                course_id = "IT_703",
+                name = "Information Security",
+                credit=3,
+                semester="7TH",
+                syllabus="Balancing Information Security and Access",
+                description ="Introduction to the Concepts of Security",
+                teacher = teacher        
+                )
+             
             Course.objects.create(
-                cid='DAA5th',
-                name='Design and Analysis of Algorithm',
-                semester='5th',
-                description='Course Description 2',
-                teacher=teacher
-            )
-
+                course_id = "IT_705",
+                name = "Image Processing",
+                credit=3,
+                semester="7TH",
+                syllabus="IMAGE ENHANCEMENT IN THE SPATIAL DOMAIN",
+                description ="COLOUR IMAGE PROCESSING",
+                teacher = teacher        
+                )
+            
             Course.objects.create(
-                cid='MICRO5th',
-                name='Microprocessor',
-                semester='5th',
-                description='Course Description 3',
-            )
+                course_id = "IT_707",
+                name = "Cloud Computing",
+                credit=4,
+                semester="7TH",
+                syllabus="CLOUD COMPUTING SECURITY CHALLENGES:",
+                description ="INTRODUCTION TO CLOUD COMPUTING",
+                teacher = teacher        
+                )
+            
             Course.objects.create(
-                cid='TOC5th',
-                name='Theory of computation',
-                semester='5th',
-                description='Course Description 3',
-                teacher=teacher
-            )
+                course_id = "IT_601",
+                name = "Java Programming",
+                credit=3,
+                semester="6TH",
+                syllabus="Java Programming DETAILS",
+                description ="INTRODUCTION TO JAVA",
+                teacher = teacher        
+                )
+            
+            Course.objects.create(
+                course_id = "IT_603",
+                name = "Big Data",
+                credit=4,
+                semester="6TH",
+                syllabus="Big Data DETAILS",
+                description ="INTRODUCTION TO Big Data",
+                teacher = teacher        
+                )
             self.stdout.write(self.style.SUCCESS('ALL Course entries created.'))

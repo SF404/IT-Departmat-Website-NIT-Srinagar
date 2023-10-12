@@ -63,7 +63,7 @@ function Dashboard() {
   const [assignmnetFormData, setAssignmentFormData] = useState({
     title: "",
     description: "",
-    deadline: "",
+    validity: "",
     file: "",
   });
 
@@ -168,6 +168,7 @@ function Dashboard() {
   // On Course Change Use_effect
   // On Course Change Use_effect
   const fetchData = async () => {
+    console.log(selectedCourse);
     try {
       if (selectedCourse != null) {
         const assignment = await axios.get(
@@ -267,6 +268,8 @@ function Dashboard() {
     formData.append("title", notesFormData.title);
     formData.append("file", notesFormData.file);
     formData.append("cid", selectedCourse);
+    console.log(selectedCourse);
+    console.log(notesFormData.file);
     console.log(formData);
     try {
       const response = await axios.post(
@@ -363,6 +366,11 @@ function Dashboard() {
   };
 
   const handleDelete = async (id) => {
+    if (id.assignment_id == undefined)
+      console.log(
+        "suhaib you are using only one function for deleting both notes and assignment differentiate both with there assignment_id and notes_id after that delete this console"
+      );
+    console.log(id);
     try {
       const response = await axios.post(
         "http://127.0.0.1:8000/api/filesdelete/",
@@ -375,7 +383,7 @@ function Dashboard() {
         console.log("Successfully deleted");
       }
     } catch (error) {
-      console.error("Logout failed:", error);
+      console.error("File Cannot be deleted", error);
     }
   };
 
@@ -436,15 +444,15 @@ function Dashboard() {
                 borderRadius={"full"}
                 fontSize={13}
                 key={item.id}
-                onClick={() => handleCourseSelect(item.cid)}
-                {...(selectedCourse === item.cid
+                onClick={() => handleCourseSelect(item.course_id)}
+                {...(selectedCourse === item.course_id
                   ? {
                       backgroundColor: "#d8dcf0",
                       color: "darkblue",
                       _hover: { backgroundColor: "#d8dcf0" },
                     }
                   : {})}
-                {...(selectedCourse !== item.cid
+                {...(selectedCourse !== item.course_id
                   ? { _hover: { backgroundColor: "#e5e5e5" } }
                   : {})}
                 _active={{ color: "darkblue" }}
@@ -554,7 +562,7 @@ function Dashboard() {
                               colorScheme="purple"
                               aria-label="Done"
                               onClick={() => {
-                                download_notes(item.nid);
+                                download_notes(item.notes_id);
                               }}
                               icon={<FaDownload />}
                             />
@@ -674,7 +682,7 @@ function Dashboard() {
                               colorScheme="purple"
                               aria-label="Done"
                               onClick={() => {
-                                download_assignment(item.aid);
+                                download_assignment(item.assignment_id);
                               }}
                               icon={<FaDownload />}
                             />
@@ -689,7 +697,7 @@ function Dashboard() {
                                 showDeleteAlert();
                                 setDeleteInfo({
                                   name: item.name,
-                                  id: item.aid,
+                                  id: item.assignment_id,
                                 });
                               }}
                             />
@@ -742,7 +750,7 @@ function Dashboard() {
                           <Input
                             type="text"
                             name="deadline"
-                            value={assignmnetFormData.deadline}
+                            value={assignmnetFormData.validity}
                             onChange={handleAssignmentFormChange}
                             placeholder="Deadline"
                           />
@@ -806,7 +814,7 @@ function Dashboard() {
                 <Button
                   colorScheme="red"
                   ml={3}
-                  onClick={() => handleDelete({ nid: deleteInfo.id })}
+                  onClick={() => handleDelete({ assignment_id: deleteInfo.id })}
                 >
                   Yes
                 </Button>
