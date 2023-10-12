@@ -561,10 +561,11 @@ function Dashboard() {
                               variant="solid"
                               colorScheme="purple"
                               aria-label="Done"
+                              size={"sm"}
                               onClick={() => {
                                 download_notes(item.notes_id);
                               }}
-                              icon={<FaDownload />}
+                              icon={<FaDownload/>}
                             />
                             <IconButton
                               isRound={true}
@@ -572,6 +573,7 @@ function Dashboard() {
                               colorScheme="teal"
                               aria-label="Done"
                               icon={<FaTrash />}
+                              size={"sm"}
                               onClick={() => {
                                 setDeleteInfo({
                                   name: item.name,
