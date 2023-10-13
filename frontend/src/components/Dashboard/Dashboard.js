@@ -149,12 +149,12 @@ function Dashboard() {
         localStorage.setItem("TokenR", refreshToken);
 
         const getUser = await axios.get(
-          `http://localhost:8000/api/temp/?sid=${1001}`
+          `http://localhost:8000/api/temp/?sid=janibbashir@nitsri.ac.in`
         );
         console.log(getUser.data);
         setUser(getUser.data[0]);
         const response = await axios.get(
-          `http://localhost:8000/api/courses/?sid=${1001}`
+          `http://localhost:8000/api/courses/?sid=janibbashir@nitsri.ac.in`
         );
         console.log(response.data);
         setCourses(response.data);
@@ -565,7 +565,7 @@ function Dashboard() {
                               onClick={() => {
                                 download_notes(item.notes_id);
                               }}
-                              icon={<FaDownload/>}
+                              icon={<FaDownload />}
                             />
                             <IconButton
                               isRound={true}
