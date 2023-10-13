@@ -11,6 +11,7 @@ class Teacher(models.Model):
     phone =models.PositiveIntegerField(unique=True)
     research_field = models.TextField(max_length=255,blank=True)
     date=models.DateTimeField(auto_now_add=True)
+    profile_photo = models.ImageField(upload_to='teacher_profile/')
     user = models.ForeignKey(User, on_delete=models.CASCADE,null=True,blank=True)
 
 

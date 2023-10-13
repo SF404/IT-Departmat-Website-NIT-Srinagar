@@ -122,6 +122,8 @@ class DeleteFilesAPIView(APIView):
     def post(self, request, *args, **kwargs):
         aid = request.data.get("assignment_id")
         nid = request.data.get("notes_id")
+        print(aid)
+        print(nid)
         if not aid and not nid:
             return Response({"message": "Either 'aid' or 'nid' is required"}, status=status.HTTP_400_BAD_REQUEST)
         if aid:
