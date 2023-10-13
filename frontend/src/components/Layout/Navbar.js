@@ -13,12 +13,12 @@ function Navbar() {
             </Box>
             <Flex align="center" h={'46px'} zIndex={99} justify="space-between" p="0" bg="#192e59" color="#192e59" position={'sticky'} top={0}>
                 <Stack direction={'row'} spacing="2" align="stretch" display={{ base: 'none', md: 'flex' }}>
-                    <Button variant="ghost" colorScheme="whiteAlpha" color={'whiteAlpha.800'} as={Link} to="/">
+                    <Button variant="ghost" colorScheme="whiteAlpha" color={'white'} as={Link} to="/">
                         Home
                     </Button>
 
                     <Menu>
-                        <MenuButton as={Button} variant="ghost" colorScheme="whiteAlpha" color={'whiteAlpha.800'}>
+                        <MenuButton as={Button} variant="ghost" colorScheme="whiteAlpha" color={'white'}>
                             Academics
                         </MenuButton>
                         <MenuList>
@@ -33,7 +33,7 @@ function Navbar() {
                     </Menu>
 
                     <Menu>
-                        <MenuButton as={Button} variant="ghost" colorScheme="whiteAlpha" color={'whiteAlpha.800'}>
+                        <MenuButton as={Button} variant="ghost" colorScheme="whiteAlpha" color={'white'}>
                             People
                         </MenuButton>
                         <MenuList>
@@ -45,7 +45,7 @@ function Navbar() {
                     </Menu>
 
                     <Menu>
-                        <MenuButton as={Button} variant="ghost" colorScheme="whiteAlpha" color={'whiteAlpha.800'}>
+                        <MenuButton as={Button} variant="ghost" colorScheme="whiteAlpha" color={'white'}>
                             For Faculty
                         </MenuButton>
                         <MenuList>
@@ -54,7 +54,7 @@ function Navbar() {
                     </Menu>
 
                     <Menu>
-                        <MenuButton as={Button} variant="ghost" colorScheme="whiteAlpha" color={'whiteAlpha.800'}>
+                        <MenuButton as={Button} variant="ghost" colorScheme="whiteAlpha" color={'white'}>
                             Research
                         </MenuButton>
                         <MenuList>
@@ -65,7 +65,7 @@ function Navbar() {
                     </Menu>
 
                     <Menu>
-                        <MenuButton as={Button} variant="ghost" colorScheme="whiteAlpha" color={'whiteAlpha.800'}>
+                        <MenuButton as={Button} variant="ghost" colorScheme="whiteAlpha" color={'white'}>
                             Student Activities
                         </MenuButton>
                         <MenuList>
@@ -77,7 +77,7 @@ function Navbar() {
                     </Menu>
 
                     <Menu>
-                        <MenuButton as={Button} variant="ghost" colorScheme="whiteAlpha" color={'whiteAlpha.800'}>
+                        <MenuButton as={Button} variant="ghost" colorScheme="whiteAlpha" color={'white'}>
                             For Students
                         </MenuButton>
                         <MenuList>
@@ -95,7 +95,7 @@ function Navbar() {
                         </MenuList>
                     </Menu>
 
-                    <Button variant="ghost" colorScheme="whiteAlpha" color={'whiteAlpha.800'} as={Link} to="/about">
+                    <Button variant="ghost" colorScheme="whiteAlpha" color={'white'} as={Link} to="/about">
                         About
                     </Button>
                 </Stack>
@@ -105,7 +105,7 @@ function Navbar() {
                     display={{ base: 'flex', md: 'none' }}
                     icon={<Box as="span" fontSize="xl">&#9776;</Box>}
                     variant="ghost"
-                    colorScheme="whiteAlpha" color={'whiteAlpha.800'}
+                    colorScheme="whiteAlpha" color={'white'}
                     onClick={() => {/* Handle mobile menu toggle */ }}
                 />
             </Flex>

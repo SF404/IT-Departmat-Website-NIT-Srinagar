@@ -37,6 +37,17 @@ class CourseView(viewsets.ModelViewSet):
         queryset = Course.objects.filter(teacher=teacher)
         return queryset
 
+class SemesterCourseView(viewsets.ModelViewSet):
+    serializer_class = CourseSerializer
+ 
+    def get_queryset(self):
+        semester_id = self.request.query_params.get('semesterId')
+        semester = f"{semester_id}TH"
+        print(semester)
+        queryset = Course.objects.filter(semester=semester)
+        print("Number of items in queryset:", queryset.count())
+        return queryset
+
 
 class NotesUpload(viewsets.ModelViewSet):
     authentication_classes=[JWTAuthentication]
