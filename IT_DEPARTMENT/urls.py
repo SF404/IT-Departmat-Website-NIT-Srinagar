@@ -21,6 +21,7 @@ router.register(r'assignmentupload', views.AssignmentUpload, basename='login')
 router.register(r'shownotes', views.NotesShow, basename='login')
 router.register(r'showassignment', views.AssignmentShow, basename='login')
 router.register(r'semester', SemesterCourseView, basename='Semester Data')
+router.register(r'listholidays', HolidayView, basename='Holiday Data')
 
 
 

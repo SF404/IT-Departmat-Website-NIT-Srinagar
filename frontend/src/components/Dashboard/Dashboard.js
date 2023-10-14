@@ -24,6 +24,9 @@ import {
   IconButton,
   Image,
   Input,
+  List,
+  ListIcon,
+  ListItem,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -42,6 +45,7 @@ import {
   Tag,
   Text,
   Textarea,
+  UnorderedList,
   VStack,
   textDecoration,
   useDisclosure,
@@ -54,7 +58,7 @@ import { FaDownload, FaTrash } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { useToast } from "@chakra-ui/react";
 import "./Calendar.css";
-import { DownloadIcon } from "@chakra-ui/icons";
+import { DownloadIcon, DragHandleIcon } from "@chakra-ui/icons";
 import ProfileModal from "../Modals/ProfileModal";
 import DashboardPlaceholder from "../Placeholders/DashboardPlaceholder";
 
@@ -105,6 +109,7 @@ function Dashboard() {
   const [selectedCourse, setSelectedCourse] = useState(null);
   const [assignment, setAssignment] = useState([]);
   const [notes, setNotes] = useState([]);
+  const [Holidays, setHolidays] = useState(null);
 
   function get_token() {
     return {
@@ -354,7 +359,7 @@ function Dashboard() {
   };
 
   const handleDelete = async (delete_id) => {
-    console.log(delete_id)
+    console.log(delete_id);
     try {
       const response = await axios.post(
         "http://127.0.0.1:8000/api/filesdelete/",
@@ -371,19 +376,34 @@ function Dashboard() {
     }
   };
 
-  const handleViewChange = ({ activeStartDate, view }) => {
+  const handleViewChange = async ({ activeStartDate, view }) => {
     const activeMonth = activeStartDate.getMonth() + 1;
     const activeYear = activeStartDate.getFullYear();
-    console.log('Active Month:', activeMonth);
-    console.log('Active Year:', activeYear);
+    try {
+      const response = await axios.get(
+        `http://127.0.0.1:8000/api/listholidays/?activeMonth=${activeMonth}`
+      );
+      if (response.data.length) setHolidays(response.data);
+      else setHolidays(null);
+    } catch (error) {
+      console.error("Failed to fetch Holidays", error);
+    }
   };
-  const highlightedDate = new Date('2023-10-15');
 
-  const tileContent = ({ date, view }) => {
-    return date.toDateString() === highlightedDate.toDateString() ? (
-      <div className="highlighted-date" style={{background:"black", height:'10px', width:'20px'}}></div>
-    ) : null;
-  };
+  useEffect(() => {
+    handleViewChange({ activeStartDate: new Date() });
+  }, []);
+
+  // const highlightedDate = new Date("2023-10-15");
+
+  // const tileContent = ({ date, view }) => {
+  //   return date.toDateString() === highlightedDate.toDateString() ? (
+  //     <div
+  //       className="highlighted-date"
+  //       style={{ background: "orange", height: "4px", width: "4px", borderRadius:"100%",}}
+  //     ></div>
+  //   ) : null;
+  // };
 
   return (
     <>
@@ -445,10 +465,10 @@ function Dashboard() {
                 onClick={() => handleCourseSelect(item.course_id)}
                 {...(selectedCourse === item.course_id
                   ? {
-                    backgroundColor: "#d8dcf0",
-                    color: "darkblue",
-                    _hover: { backgroundColor: "#d8dcf0" },
-                  }
+                      backgroundColor: "#d8dcf0",
+                      color: "darkblue",
+                      _hover: { backgroundColor: "#d8dcf0" },
+                    }
                   : {})}
                 {...(selectedCourse !== item.course_id
                   ? { _hover: { backgroundColor: "#e5e5e5" } }
@@ -582,15 +602,14 @@ function Dashboard() {
                             <AccordionIcon />
                           </AccordionButton>
                         </h2>
-                        <AccordionPanel pb={4} w={"full"}>
-                        </AccordionPanel>
+                        <AccordionPanel pb={4} w={"full"}></AccordionPanel>
                       </AccordionItem>
                     ))}
                   </Accordion>
                 </VStack>
                 <Divider my={2} />
 
-                <Button onClick={addNotes} w={"full"} colorScheme="green">
+                <Button onClick={addNotes} w={"full"} colorScheme="teal" mb={6}>
                   Add Notes / Material
                 </Button>
 
@@ -704,7 +723,10 @@ function Dashboard() {
                           {item.description}
                           <br />
                           <Badge display={"inline-block"}>
-                            <HStack><Text> Due:</Text> <Box color={"red"}>{item.validity}</Box></HStack>
+                            <HStack>
+                              <Text> Due:</Text>{" "}
+                              <Box color={"red"}>{item.validity}</Box>
+                            </HStack>
                           </Badge>
                         </AccordionPanel>
                       </AccordionItem>
@@ -713,7 +735,12 @@ function Dashboard() {
                 </VStack>
                 <Divider my={2} />
 
-                <Button onClick={addAssignment} w={"full"} colorScheme="green">
+                <Button
+                  onClick={addAssignment}
+                  w={"full"}
+                  colorScheme="teal"
+                  mb={6}
+                >
                   Add New Assignment
                 </Button>
 
@@ -826,10 +853,34 @@ function Dashboard() {
             </AlertDialogContent>
           </AlertDialog>
 
-          <Divider orientation="vertical" borderColor={"blackAlpha.200"} />
-
           <VStack h={"full"} minW={300} p={4}>
-            <Calendar  onActiveStartDateChange={handleViewChange} showNeighboringMonth={false}  tileContent={tileContent}/>
+            <Calendar
+              onActiveStartDateChange={handleViewChange}
+              showNeighboringMonth={false}
+              // tileContent={tileContent}
+            />
+            {Holidays != null && (
+              <Box
+                w={"full"}
+                border={"1px solid rgba(0,0,0,0.2)"}
+                borderRadius={"0.5em"}
+                p={2}
+                bg={"white"}
+              >
+                <List>
+                  {Holidays.map((item) => (
+                    <ListItem key={item.id}>
+                      <ListIcon as={DragHandleIcon} color="green.500" />
+                      {new Date(item.date)
+                        .getDate()
+                        .toString()
+                        .padStart(2, "0")}{" "}
+                      {item.description}
+                    </ListItem>
+                  ))}
+                </List>
+              </Box>
+            )}
           </VStack>
         </Flex>
       </Flex>

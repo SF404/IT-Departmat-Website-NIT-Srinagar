@@ -202,3 +202,13 @@ class LogoutView(APIView):
     def post(self, request):
         logout(request)
         return Response({'message': 'Logged out successfully.'}, status=status.HTTP_200_OK)
+
+class HolidayView(viewsets.ModelViewSet):
+    serializer_class = HolidaySerializer
+    def get_queryset(self):
+        month = self.request.query_params.get('activeMonth')
+        print(month)
+        
+        queryset = Holiday.objects.filter(date__month=month)
+
+        return queryset

@@ -26,3 +26,8 @@ class NotesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Notes
         fields = '__all__'
+        
+class HolidaySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Holiday
+        fields = '__all__'

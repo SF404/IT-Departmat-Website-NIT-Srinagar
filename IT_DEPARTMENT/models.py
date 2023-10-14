@@ -72,3 +72,11 @@ class Notes(models.Model):
     def __str__(self):
         return f"{self.name}"
 
+class Holiday(models.Model):
+    id = models.AutoField(primary_key=True)
+    date = models.DateTimeField()
+    description = models.TextField()
+    
+    def _str_(self):
+        return self.name
+
