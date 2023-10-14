@@ -31,3 +31,8 @@ class HolidaySerializer(serializers.ModelSerializer):
     class Meta:
         model = Holiday
         fields = '__all__'
+
+class TeacherMails(serializers.ModelSerializer):
+    class Meta:
+        model = Teacher
+        fields = ('email','user')
