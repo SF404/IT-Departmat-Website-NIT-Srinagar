@@ -42,7 +42,7 @@ class SemesterCourseView(viewsets.ModelViewSet):
  
     def get_queryset(self):
         semester_id = self.request.query_params.get('semesterId')
-        semester = f"{semester_id}TH"
+        semester = semester_id
         print(semester)
         queryset = Course.objects.filter(semester=semester)
         print("Number of items in queryset:", queryset.count())
@@ -78,12 +78,12 @@ class AssignmentUpload (viewsets.ModelViewSet):
         title = request.data.get("title")
         file = request.FILES.get("file")
         description = request.data.get("description")
-        deadline = request.data.get("deadline")
+        validity = request.data.get("validity")
         course_id=request.data.get("cid")
         course = Course.objects.get(course_id=course_id)
         aid=random.randint(1, 10000)
         try:
-            note = Assignment(name=title, pdf=file,assignment_id=aid,description=description, validity=deadline,course=course)
+            note = Assignment(name=title, pdf=file, assignment_id=aid, description=description, validity=validity, course=course)
             note.save()
             return Response({"message": "Assignment created successfully"}, status=status.HTTP_201_CREATED)
         except Exception as e:

@@ -12,6 +12,7 @@ import {
   AlertDialogHeader,
   AlertDialogOverlay,
   Avatar,
+  Badge,
   Box,
   Button,
   Center,
@@ -102,21 +103,8 @@ function Dashboard() {
   let TokenA, TokenR;
   const [courses, setCourses] = useState([]);
   const [selectedCourse, setSelectedCourse] = useState(null);
-  const [assignment, setAssignment] = useState([
-    {
-      name: "asd",
-      aid: "",
-      deadline: "",
-      discription: "",
-      pdf: "",
-    },
-  ]);
-  const [notes, setNotes] = useState([
-    {
-      name: "fas",
-      nid: "",
-    },
-  ]);
+  const [assignment, setAssignment] = useState([]);
+  const [notes, setNotes] = useState([]);
 
   function get_token() {
     return {
@@ -149,12 +137,12 @@ function Dashboard() {
         localStorage.setItem("TokenR", refreshToken);
 
         const getUser = await axios.get(
-          `http://localhost:8000/api/temp/?sid=janibbashir@nitsri.ac.in`
+          `http://localhost:8000/api/temp/?sid=suhaibsworkspace@gmail.com`
         );
         console.log(getUser.data);
         setUser(getUser.data[0]);
         const response = await axios.get(
-          `http://localhost:8000/api/courses/?sid=janibbashir@nitsri.ac.in`
+          `http://localhost:8000/api/courses/?sid=suhaibsworkspace@gmail.com`
         );
         console.log(response.data);
         setCourses(response.data);
@@ -226,7 +214,7 @@ function Dashboard() {
     formData.append("title", assignmnetFormData.title);
     formData.append("file", assignmnetFormData.file);
     formData.append("description", assignmnetFormData.description);
-    formData.append("deadline", assignmnetFormData.deadline);
+    formData.append("validity", assignmnetFormData.validity);
     formData.append("cid", selectedCourse);
     console.log(formData);
     try {
@@ -365,16 +353,12 @@ function Dashboard() {
     }
   };
 
-  const handleDelete = async (id) => {
-    if (id.assignment_id == undefined)
-      console.log(
-        "suhaib you are using only one function for deleting both notes and assignment differentiate both with there assignment_id and notes_id after that delete this console"
-      );
-    console.log(id);
+  const handleDelete = async (delete_id) => {
+    console.log(delete_id)
     try {
       const response = await axios.post(
         "http://127.0.0.1:8000/api/filesdelete/",
-        id,
+        delete_id,
         get_token()
       );
       closeDeleteAlert();
@@ -385,6 +369,20 @@ function Dashboard() {
     } catch (error) {
       console.error("File Cannot be deleted", error);
     }
+  };
+
+  const handleViewChange = ({ activeStartDate, view }) => {
+    const activeMonth = activeStartDate.getMonth() + 1;
+    const activeYear = activeStartDate.getFullYear();
+    console.log('Active Month:', activeMonth);
+    console.log('Active Year:', activeYear);
+  };
+  const highlightedDate = new Date('2023-10-15');
+
+  const tileContent = ({ date, view }) => {
+    return date.toDateString() === highlightedDate.toDateString() ? (
+      <div className="highlighted-date" style={{background:"black", height:'10px', width:'20px'}}></div>
+    ) : null;
   };
 
   return (
@@ -447,10 +445,10 @@ function Dashboard() {
                 onClick={() => handleCourseSelect(item.course_id)}
                 {...(selectedCourse === item.course_id
                   ? {
-                      backgroundColor: "#d8dcf0",
-                      color: "darkblue",
-                      _hover: { backgroundColor: "#d8dcf0" },
-                    }
+                    backgroundColor: "#d8dcf0",
+                    color: "darkblue",
+                    _hover: { backgroundColor: "#d8dcf0" },
+                  }
                   : {})}
                 {...(selectedCourse !== item.course_id
                   ? { _hover: { backgroundColor: "#e5e5e5" } }
@@ -551,38 +549,40 @@ function Dashboard() {
                             <Box as="span" flex="1" textAlign="left">
                               {item.name}
                             </Box>
+                            <HStack justifyContent={"right"}>
+                              <IconButton
+                                isRound={true}
+                                variant="solid"
+                                colorScheme="purple"
+                                aria-label="Done"
+                                size={"xs"}
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  download_notes(item.notes_id);
+                                }}
+                                icon={<FaDownload />}
+                              />
+                              <IconButton
+                                isRound={true}
+                                variant="solid"
+                                colorScheme="teal"
+                                aria-label="Done"
+                                icon={<FaTrash />}
+                                size={"xs"}
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  setDeleteInfo({
+                                    name: item.name,
+                                    id: { notes_id: item.notes_id },
+                                  });
+                                  showDeleteAlert();
+                                }}
+                              />
+                            </HStack>
                             <AccordionIcon />
                           </AccordionButton>
                         </h2>
                         <AccordionPanel pb={4} w={"full"}>
-                          <HStack justifyContent={"right"}>
-                            <IconButton
-                              isRound={true}
-                              variant="solid"
-                              colorScheme="purple"
-                              aria-label="Done"
-                              size={"sm"}
-                              onClick={() => {
-                                download_notes(item.notes_id);
-                              }}
-                              icon={<FaDownload />}
-                            />
-                            <IconButton
-                              isRound={true}
-                              variant="solid"
-                              colorScheme="teal"
-                              aria-label="Done"
-                              icon={<FaTrash />}
-                              size={"sm"}
-                              onClick={() => {
-                                setDeleteInfo({
-                                  name: item.name,
-                                  id: item.nid,
-                                });
-                                showDeleteAlert();
-                              }}
-                            />
-                          </HStack>
                         </AccordionPanel>
                       </AccordionItem>
                     ))}
@@ -666,44 +666,46 @@ function Dashboard() {
                             <Box as="span" flex="1" textAlign="left">
                               {item.name}
                             </Box>
+                            <HStack justifyContent={"right"}>
+                              <IconButton
+                                isRound={true}
+                                variant="solid"
+                                colorScheme="blackAlpha"
+                                aria-label="Done"
+                                size={"xs"}
+                                icon={<FaDownload />}
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  download_assignment(item.assignment_id);
+                                }}
+                              />
+
+                              <IconButton
+                                isRound={true}
+                                variant="solid"
+                                colorScheme="blackAlpha"
+                                aria-label="Done"
+                                icon={<FaTrash />}
+                                size={"xs"}
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  setDeleteInfo({
+                                    name: item.name,
+                                    id: { assignment_id: item.assignment_id },
+                                  });
+                                  showDeleteAlert();
+                                }}
+                              />
+                            </HStack>
                             <AccordionIcon />
                           </AccordionButton>
                         </h2>
                         <AccordionPanel pb={4} w={"full"}>
                           {item.description}
                           <br />
-                          <Tag>
-                            Deadline: <Text color={"red"}>{item.deadline}</Text>
-                          </Tag>
-
-                          <Divider />
-                          <HStack justifyContent={"right"}>
-                            <IconButton
-                              isRound={true}
-                              variant="solid"
-                              colorScheme="purple"
-                              aria-label="Done"
-                              onClick={() => {
-                                download_assignment(item.assignment_id);
-                              }}
-                              icon={<FaDownload />}
-                            />
-
-                            <IconButton
-                              isRound={true}
-                              variant="solid"
-                              colorScheme="teal"
-                              aria-label="Done"
-                              icon={<FaTrash />}
-                              onClick={() => {
-                                showDeleteAlert();
-                                setDeleteInfo({
-                                  name: item.name,
-                                  id: item.assignment_id,
-                                });
-                              }}
-                            />
-                          </HStack>
+                          <Badge display={"inline-block"}>
+                            <HStack><Text> Due:</Text> <Box color={"red"}>{item.validity}</Box></HStack>
+                          </Badge>
                         </AccordionPanel>
                       </AccordionItem>
                     ))}
@@ -748,13 +750,13 @@ function Dashboard() {
                         </FormControl>
 
                         <FormControl>
-                          <FormLabel>Deadline</FormLabel>
+                          <FormLabel>validity</FormLabel>
                           <Input
                             type="text"
-                            name="deadline"
+                            name="validity"
                             value={assignmnetFormData.validity}
                             onChange={handleAssignmentFormChange}
-                            placeholder="Deadline"
+                            placeholder="Submission"
                           />
                         </FormControl>
 
@@ -816,7 +818,7 @@ function Dashboard() {
                 <Button
                   colorScheme="red"
                   ml={3}
-                  onClick={() => handleDelete({ assignment_id: deleteInfo.id })}
+                  onClick={() => handleDelete(deleteInfo.id)}
                 >
                   Yes
                 </Button>
@@ -827,7 +829,7 @@ function Dashboard() {
           <Divider orientation="vertical" borderColor={"blackAlpha.200"} />
 
           <VStack h={"full"} minW={300} p={4}>
-            <Calendar />
+            <Calendar  onActiveStartDateChange={handleViewChange} showNeighboringMonth={false}  tileContent={tileContent}/>
           </VStack>
         </Flex>
       </Flex>

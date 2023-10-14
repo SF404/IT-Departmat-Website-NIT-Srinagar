@@ -12,30 +12,7 @@ import bannerImage from './../../assets/images/image.jpeg'
 
 const SemesterPage = () => {
     const { semesterId } = useParams();
-
-    const fetchSemesterData = (id) => {
-        return {
-            id: parseInt(id),
-            name: `Semester ${id}`,
-            nicname: "Autumn 2023",
-            details: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-            subjects: [
-                { id: 1, credit: 4, name: 'Computer Organization and Architecture', courseId: 'ITT303', instructor: 'Instructor 1' },
-                { id: 2, credit: 4, name: 'Data Communication', courseId: 'ITT304', instructor: 'Instructor 2' },
-                { id: 2, credit: 4, name: 'Design And Analysis of Algorithm', courseId: 'ITT305', instructor: 'Instructor 3' },
-                { id: 2, credit: 4, name: 'Microprocessor', courseId: 'ITT306', instructor: 'Instructor 4' },
-                { id: 2, credit: 4, name: 'Theory of Computation', courseId: 'ITT307', instructor: 'Instructor 5' },
-                { id: 2, credit: 3, name: 'Introduction to probability and Statistics', courseId: 'ITT308', instructor: 'Instructor 6' },
-                { id: 2, credit: 1, name: 'Design And Analysis of Algorithm Lab', courseId: 'ITT309', instructor: 'Instructor 7' },
-                { id: 2, credit: 1, name: 'Microprocessor Lab', courseId: 'ITT310', instructor: 'Instructor 7' },
-                // Add more subjects as needed
-            ],
-            // Add more properties as needed
-        };
-    };
-
-    const semester = fetchSemesterData(semesterId);
-
+    const colors = ['blackAlpha.200', 'blackAlpha.100'];
 
     // states 
     const [notes, setNotes] = useState([])
@@ -63,14 +40,14 @@ const SemesterPage = () => {
     async function fetchCourses() {
         try {
             const response = await axios.get(
-              `http://localhost:8000/api/semester/?semesterId=${semesterId}`
+                `http://localhost:8000/api/semester/?semesterId=${semesterId}`
             );
             const data = response.data;
             setCourses(data);
             console.log(courses);
-          } catch (error) {
+        } catch (error) {
             console.error("Error fetching data:", error);
-          }
+        }
     };
 
 
@@ -96,7 +73,7 @@ const SemesterPage = () => {
             if (notes.status === 200) {
                 setTimeout(() => {
                     setLoading(false);
-                }, 1000);
+                }, 500);
             }
         } catch (error) {
             console.error("Error fetching data:", error);
@@ -109,12 +86,12 @@ const SemesterPage = () => {
         onOpen();
     };
 
-    const download_notes = async (nid) => {
-        console.log(nid);
+    const download_notes = async (notes_id) => {
+        console.log(notes_id);
         try {
             const response = await axios.post(
                 "http://127.0.0.1:8000/api/notesdownload/",
-                { nid: nid },
+                { nid: notes_id },
                 { responseType: "blob" } // Make sure to set responseType to 'blob'
             );
             const url = window.URL.createObjectURL(new Blob([response.data]));
@@ -129,12 +106,12 @@ const SemesterPage = () => {
         }
     };
 
-    const download_assignment = async (aid) => {
-        console.log(aid);
+    const download_assignment = async (assignment_id) => {
+        console.log(assignment_id);
         try {
             const response = await axios.post(
                 "http://127.0.0.1:8000/api/assignmentdownload/",
-                { aid: aid },
+                { aid: assignment_id },
                 { responseType: "blob" } // Make sure to set responseType to 'blob'
             );
             const url = window.URL.createObjectURL(new Blob([response.data]));
@@ -158,11 +135,11 @@ const SemesterPage = () => {
             fetchNotes();
             fetchAssignments();
         }
-
     }, [selectedCourse])
 
+
     useEffect(() => {
-            fetchCourses();
+        fetchCourses();
     }, [, semesterId])
 
 
@@ -173,48 +150,44 @@ const SemesterPage = () => {
 
     function DataTabs() {
         return (<>
-            <Tabs position="relative" defaultIndex={0} size='md' variant="unstyled" borderRadius={16} boxShadow="rgba(100, 100, 111, 0.2) 0px 7px 29px 0px" index={activeTab} onChange={handleTabChange}>
-                <TabList bg={'green.100'} color={'green'} borderRadius="16px 16px 0 0" >
-                    <Tab fontWeight={'bold'}>Notes</Tab>
+
+            <Tabs size='md' variant='enclosed' boxShadow="rgba(100, 100, 111, 0.2) 0px 7px 29px 0px" index={activeTab} onChange={handleTabChange} py={2}>
+                <TabList>
+                    <Tab fontWeight={'bold'} >Notes</Tab>
                     <Tab fontWeight={'bold'}>Assignments</Tab>
                     <Tab fontWeight={'bold'}>Other</Tab>
                 </TabList>
-                <TabIndicator
-                    mt="-1.5px"
-                    height="2px"
-                    bg="#81c784"
-                    borderRadius="1px"
-                />
-                <TabPanels minH={100}>
-                    <TabPanel >
 
-                        <VStack spacing={2}>
+                <TabPanels minH={50} fontFamily={'sans-serif'} fontSize={'14px'}>
+                    <TabPanel>
+
+                        <VStack gap={0}>
                             {
                                 loading ? (<Spinner size="lg" />) :
-                                    notes.map((item) => (
-                                        <Flex w={'full'} key={item.id} justifyContent={'space-between'} alignItems={'center'} gap={4}>
-                                            <Text>{item.name}</Text>
-                                            <Button onClick={() => download_notes(item.nid)}>Download</Button>
+                                    notes.map((item, index) => (
+                                        <Flex w={'full'} px={4} py={2} key={item.notes_id} justifyContent={'space-between'} alignItems={'center'} bg={colors[index % colors.length]}>
+                                            <Text _hover={{ color: "blue", textDecoration:"underline" }}
+                                                onClick={() => download_notes(item.notes_id)}>{item.name}</Text>
                                         </Flex>
                                     ))
                             }
                         </VStack>
                     </TabPanel>
                     <TabPanel>
-                        <VStack spacing={2}>
+                        <VStack gap={0}>
                             {
                                 loading ? (<Spinner size="lg" />) :
-                                    assignments.map((item) => (
-                                        <Flex w={'full'} key={item.id} justifyContent={'space-between'} alignItems={'center'} gap={4}>
+                                    assignments.map((item, index) => (
+                                        <Flex w={'full'} px={4} py={2} key={item.assignment_id} justifyContent={'space-between'} alignItems={'center'} bg={colors[index % colors.length]}>
                                             <HStack>
-                                                <Text >{item.name}</Text>
+                                                <Text _hover={{ color: "blue", textDecoration:'underline' }}
+                                                    onClick={() => download_assignment(item.assignment_id)}>{item.name}</Text>
                                                 <Badge>Due: <span style={{ color: 'red' }}>{item.deadline}</span></Badge>
 
                                             </HStack>
 
                                             <HStack>
-                                                <Button onClick={() => download_assignment(item.aid)}>Download</Button>
-                                                <Button onClick={() => { showDetails(item.name, item.details, item.deadline); onOpen() }}>Details</Button>
+                                                <Button size={'sm'} onClick={() => { showDetails(item.name, item.details, item.deadline); onOpen() }}>Details</Button>
                                             </HStack>
                                         </Flex>
                                     ))
@@ -258,9 +231,9 @@ const SemesterPage = () => {
                 textShadow={'0 0 24px black'}
             >
                 <Heading as="h2" size="xl" mb={2}>
-                    {semester.name}
+                    Semester {semesterId}
                 </Heading>
-                <Text>{semester.nicname}</Text>
+                <Text>Autumn 2023</Text>
                 <Center w={'full'} gap={9}>
                     <Heading>
                         <CountUp start={0} end={345670} duration={3} delay={0} />+
@@ -293,7 +266,7 @@ const SemesterPage = () => {
                         courses.map((course) => (
                             <AccordionItem key={course.course_id} mt={2} border={'1px solid #e5e5e5'} borderRadius={8}>
                                 <h2>
-                                    <AccordionButton as={Badge} colorScheme='blackAlpha' cursor={'pointer'} borderRadius={8} h={'64px'}
+                                    <AccordionButton as={Badge} colorScheme='blackAlpha' cursor={'pointer'} borderRadius={'8px 8px 0 0'} h={'64px'}
                                         _expanded={{ bg: "teal", color: "white" }}
                                         onClick={() => { setSelectedCourse(course.course_id) }}>
                                         <Box as="span" flex='1' textAlign='left' fontWeight={'bold'}>
@@ -308,9 +281,9 @@ const SemesterPage = () => {
                                     <Box display={'flex'} justifyContent={'space-between'}>
                                         <Box>
                                             <Text>{course.teacher}</Text>
-                                            <Badge colorScheme='green'>Credit: {course.credit}</Badge>
+                                            <Badge colorScheme='blue'>Credit: {course.credit}</Badge>
                                         </Box>
-                                        <Text>Syllabus: <Button>Download</Button></Text>
+                                        <Text>Syllabus: <Button size={'sm'}>Download</Button></Text>
                                     </Box>
 
                                     <Divider my={2} />
