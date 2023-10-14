@@ -26,3 +26,8 @@ class NotesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Notes
         fields = '__all__'
+
+class TeacherMails(serializers.ModelSerializer):
+    class Meta:
+        model = Teacher
+        fields = ('email','user')

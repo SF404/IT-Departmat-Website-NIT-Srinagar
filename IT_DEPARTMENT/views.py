@@ -1,16 +1,9 @@
-from rest_framework import viewsets
-from rest_framework.parsers import MultiPartParser
-from django.shortcuts import get_object_or_404
-from django.shortcuts import HttpResponse
-from rest_framework.authentication import TokenAuthentication, SessionAuthentication
 from IT_DEPARTMENT.models import *
-from django.http import JsonResponse,FileResponse
-from django.views.decorators.csrf import csrf_exempt
+from rest_framework import viewsets
 from rest_framework.views import APIView
-from rest_framework import generics,status,response,viewsets
-from .serializers import *
-from django.contrib.sessions.models import Session
+from rest_framework import status,viewsets
 from rest_framework.response import Response
+from .serializers import *
 from django.contrib.auth import authenticate
 import random
 from django.contrib.auth import authenticate, login, logout
@@ -18,36 +11,15 @@ from django.contrib.auth.models import User
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.authentication import JWTAuthentication
-import os
 
-class TeacherView(viewsets.ModelViewSet):
-    serializer_class = TeacherSerializer
-    def get_queryset(self):
-        sid = self.request.query_params.get('sid')
-        queryset = Teacher.objects.filter(teacher_id=sid)
-        return queryset
+
+
+class TeacherList(APIView):
+    def get(self, request):
+        teachers = Teacher.objects.all()
+        serializer = TeacherMails(teachers, many=True)
+        return Response(serializer.data)
     
-class CourseView(viewsets.ModelViewSet):
-    serializer_class = CourseSerializer
- 
-    def get_queryset(self):
-        sid = self.request.query_params.get('sid')
-        teacher = Teacher.objects.get(teacher_id=sid)
-        print("sid", teacher.name)
-        queryset = Course.objects.filter(teacher=teacher)
-        return queryset
-
-class SemesterCourseView(viewsets.ModelViewSet):
-    serializer_class = CourseSerializer
- 
-    def get_queryset(self):
-        semester_id = self.request.query_params.get('semesterId')
-        semester = semester_id
-        print(semester)
-        queryset = Course.objects.filter(semester=semester)
-        print("Number of items in queryset:", queryset.count())
-        return queryset
-
 
 class NotesUpload(viewsets.ModelViewSet):
     authentication_classes=[JWTAuthentication]
@@ -89,46 +61,6 @@ class AssignmentUpload (viewsets.ModelViewSet):
         except Exception as e:
             return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
         
-
-class NotesShow(viewsets.ModelViewSet):
-    serializer_class = NotesSerializer
-    def get_queryset(self):
-        cid = self.request.query_params.get('cid')
-        course = Course.objects.get(course_id=cid)
-        notes = Notes.objects.filter(course=course)
-        return notes
-    
-class AssignmentShow(viewsets.ModelViewSet):
-    serializer_class = AssignmentSerializer
-    def get_queryset(self):
-        cid = self.request.query_params.get('cid') 
-        course = Course.objects.get(course_id=cid)       
-        assignment = Assignment.objects.filter(course=course)
-        return assignment
-    
-class DownloadAssignment(APIView):
-    def post(self, request, *args, **kwargs):
-        file_id = request.data.get("aid")
-        my_model_instance = Assignment.objects.get(assignment_id=file_id)
-        
-        if not my_model_instance:
-            return Response({"message": "Assignment not found."}, status=status.HTTP_404_NOT_FOUND)
-        file_path = my_model_instance.pdf.path
-        return FileResponse(open(file_path, 'rb'), as_attachment=True)
-    
-class DownloadNotes(APIView):
-    def post(self, request, *args, **kwargs):
-        file_id = request.data.get("nid")
-        my_model_instance = Notes.objects.get(notes_id=file_id)
-        
-        if not my_model_instance:
-            return Response({"message": "Note not found."}, status=status.HTTP_404_NOT_FOUND)
-        
-        file_path = my_model_instance.pdf.path
-        return FileResponse(open(file_path, 'rb'), as_attachment=True)
-
-
-
 class DeleteFilesAPIView(APIView):
     def post(self, request, *args, **kwargs):
         aid = request.data.get("assignment_id")
@@ -153,7 +85,6 @@ class DeleteFilesAPIView(APIView):
                 return Response({"message": "Notes entry not found"}, status=status.HTTP_404_NOT_FOUND)
         return Response({"message": "Invalid request"}, status=status.HTTP_400_BAD_REQUEST)
     
-
 class RegistrationView(APIView):
     def post(self, request):
         username = request.data.get('username')
@@ -187,7 +118,6 @@ class CustomObtainTokenView(APIView):
         refresh = RefreshToken.for_user(user)
         access_token = str(refresh.access_token)
         return Response({'access_token': access_token,'refresh_token': str(refresh),'message': 'Logging in'}, status=status.HTTP_200_OK)
-
 class CustomRefreshTokenView(APIView):
     authentication_classes=[JWTAuthentication]
     permission_classes = (IsAuthenticated,)
@@ -195,10 +125,11 @@ class CustomRefreshTokenView(APIView):
         refresh = RefreshToken(request.data.get('refresh_token'))
         access_token = str(refresh.access_token)
         return Response({'access_token': access_token,'refresh_token': str(refresh)}, status=status.HTTP_200_OK)
-
 class LogoutView(APIView):
     authentication_classes=[JWTAuthentication]
     permission_classes = (IsAuthenticated,)
     def post(self, request):
         logout(request)
         return Response({'message': 'Logged out successfully.'}, status=status.HTTP_200_OK)
+    
+
