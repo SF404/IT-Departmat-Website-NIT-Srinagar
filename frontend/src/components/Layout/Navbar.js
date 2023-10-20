@@ -21,12 +21,12 @@ function Navbar() {
                         <MenuButton as={Button} variant="ghost" colorScheme="whiteAlpha" color={'white'}>
                             Academics
                         </MenuButton>
-                        <MenuList>
-                            <MenuItem as={Link} to="/degree_program">Degree Program</MenuItem>
-                            <MenuItem as={Link} to="/vision">Vision and Mission</MenuItem>
+                        <MenuList bg='whitesmoke'>
+                            <MenuItem as={Link} to="/degree-program">Degree Program</MenuItem>
+                            <MenuItem as={Link} to="/vision-mission">Vision and Mission</MenuItem>
                             <MenuItem as={Link} to="/outcomes">Outcomes</MenuItem>
-                            <MenuItem as={Link} to="/cources">Courses</MenuItem>
-                            <MenuItem as={Link} to="/coordinates">Coordinators</MenuItem>
+                            <MenuItem as={Link} to="/courses">Courses</MenuItem>
+                            <MenuItem as={Link} to="/coordinators">Coordinators</MenuItem>
                             <MenuItem as={Link} to="/committee">Committee</MenuItem>
                             <MenuItem as={Link} to="/newsletter">Department Newsletter</MenuItem>
                         </MenuList>
@@ -36,10 +36,10 @@ function Navbar() {
                         <MenuButton as={Button} variant="ghost" colorScheme="whiteAlpha" color={'white'}>
                             People
                         </MenuButton>
-                        <MenuList>
+                        <MenuList bg='whitesmoke'>
                             <MenuItem as={Link} to="/faculty">Faculty</MenuItem>
-                            <MenuItem as={Link} to="/phd_students">PhD Student</MenuItem>
-                            <MenuItem as={Link} to="/btech_students">B-Tech Student</MenuItem>
+                            <MenuItem as={Link} to="/phd-students">PhD Student</MenuItem>
+                            <MenuItem as={Link} to="/btech-students">B-Tech Student</MenuItem>
                             <MenuItem as={Link} to="/staff">Staff</MenuItem>
                         </MenuList>
                     </Menu>
@@ -48,7 +48,7 @@ function Navbar() {
                         <MenuButton as={Button} variant="ghost" colorScheme="whiteAlpha" color={'white'}>
                             For Faculty
                         </MenuButton>
-                        <MenuList>
+                        <MenuList bg='whitesmoke'>
                             <MenuItem as={Link} to="/dashboard">Dashboard</MenuItem>
                         </MenuList>
                     </Menu>
@@ -57,7 +57,7 @@ function Navbar() {
                         <MenuButton as={Button} variant="ghost" colorScheme="whiteAlpha" color={'white'}>
                             Research
                         </MenuButton>
-                        <MenuList>
+                        <MenuList bg='whitesmoke'>
                             <MenuItem as={Link} to="/areas">Areas</MenuItem>
                             <MenuItem as={Link} to="/papers">Papers</MenuItem>
                             <MenuItem as={Link} to="/labs">LABs</MenuItem>
@@ -68,7 +68,7 @@ function Navbar() {
                         <MenuButton as={Button} variant="ghost" colorScheme="whiteAlpha" color={'white'}>
                             Student Activities
                         </MenuButton>
-                        <MenuList>
+                        <MenuList bg='whitesmoke'>
                             <MenuItem as={Link} to="/awards">Awards</MenuItem>
                             <MenuItem as={Link} to="/">Facilities</MenuItem>
                             <MenuItem as={Link} to="/">Placement Brochure</MenuItem>
@@ -80,7 +80,7 @@ function Navbar() {
                         <MenuButton as={Button} variant="ghost" colorScheme="whiteAlpha" color={'white'}>
                             For Students
                         </MenuButton>
-                        <MenuList>
+                        <MenuList bg='whitesmoke'>
                             <MenuItem as={Link} to="/semester/1">Semester 1</MenuItem>
                             <MenuItem as={Link} to="/semester/2">Semester 2</MenuItem>
                             <MenuItem as={Link} to="/semester/3">Semester 3</MenuItem>

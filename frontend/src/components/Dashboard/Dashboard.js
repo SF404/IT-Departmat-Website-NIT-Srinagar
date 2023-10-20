@@ -569,13 +569,14 @@ function Dashboard() {
                             <Box as="span" flex="1" textAlign="left">
                               {item.name}
                             </Box>
-                            <HStack justifyContent={"right"}>
+                            <HStack justifyContent={"right"} >
                               <IconButton
                                 isRound={true}
-                                variant="solid"
-                                colorScheme="purple"
+                                variant="outline"
+                                // colorScheme="purple"
                                 aria-label="Done"
                                 size={"xs"}
+                                color={"blackAlpha.800"}
                                 onClick={(e) => {
                                   e.stopPropagation();
                                   download_notes(item.notes_id);
@@ -584,11 +585,12 @@ function Dashboard() {
                               />
                               <IconButton
                                 isRound={true}
-                                variant="solid"
-                                colorScheme="teal"
+                                variant="outline"
+                                // colorScheme="teal"
                                 aria-label="Done"
                                 icon={<FaTrash />}
                                 size={"xs"}
+                                color={"blackAlpha.800"}
                                 onClick={(e) => {
                                   e.stopPropagation();
                                   setDeleteInfo({
@@ -609,7 +611,7 @@ function Dashboard() {
                 </VStack>
                 <Divider my={2} />
 
-                <Button onClick={addNotes} w={"full"} colorScheme="teal" mb={6}>
+                <Button onClick={addNotes} w={"full"} border={'1px solid rgba(0, 0, 0, 0.1)'} mb={6}>
                   Add Notes / Material
                 </Button>
 
@@ -688,10 +690,10 @@ function Dashboard() {
                             <HStack justifyContent={"right"}>
                               <IconButton
                                 isRound={true}
-                                variant="solid"
-                                colorScheme="blackAlpha"
+                                variant="outline"
                                 aria-label="Done"
                                 size={"xs"}
+                                color={"blackAlpha.800"}
                                 icon={<FaDownload />}
                                 onClick={(e) => {
                                   e.stopPropagation();
@@ -701,11 +703,11 @@ function Dashboard() {
 
                               <IconButton
                                 isRound={true}
-                                variant="solid"
-                                colorScheme="blackAlpha"
+                                variant="outline"
                                 aria-label="Done"
                                 icon={<FaTrash />}
                                 size={"xs"}
+                                color={"blackAlpha.800"}
                                 onClick={(e) => {
                                   e.stopPropagation();
                                   setDeleteInfo({
@@ -738,8 +740,8 @@ function Dashboard() {
                 <Button
                   onClick={addAssignment}
                   w={"full"}
-                  colorScheme="teal"
                   mb={6}
+                  border={'1px solid rgba(0, 0, 0, 0.1)'}
                 >
                   Add New Assignment
                 </Button>
