@@ -25,13 +25,6 @@ class SemesterCourseView(viewsets.ModelViewSet):
         queryset = Course.objects.filter(semester=semester)
         print("Number of items in queryset:", queryset.count())
         return queryset
-    
-class TeacherData(viewsets.ModelViewSet):
-    serializer_class = TeacherSerializer
-    def get_queryset(self):
-        sid = self.request.query_params.get('sid')
-        queryset = Teacher.objects.filter(teacher_id=sid)
-        return queryset
 class CourseView(viewsets.ModelViewSet):
     serializer_class = CourseSerializer
     def get_queryset(self):
