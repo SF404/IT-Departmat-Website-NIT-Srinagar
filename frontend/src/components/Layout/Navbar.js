@@ -12,7 +12,7 @@ function Navbar() {
                 <Text mx={'10px'} fontWeight={'bold'}>DEPARTMENT OF INFORMATION TECHNOLOGY <br /> <small>National Institute Of Technology, Srinagar</small></Text>
             </Box>
             <Flex align="center" h={'46px'} zIndex={99} justify="space-between" p="0" bg="#192e59" color="#192e59" position={'sticky'} top={0}>
-                <Stack direction={'row'} spacing="2" align="stretch" display={{ base: 'none', md: 'flex' }}>
+                <Stack as={'nav'} direction={{base:'column', md:'row'}} spacing="2" align="stretch" display={{ base: 'none', md: 'flex' }}>
                     <Button variant="ghost" colorScheme="whiteAlpha" color={'white'} as={Link} to="/">
                         Home
                     </Button>

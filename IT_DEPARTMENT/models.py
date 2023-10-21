@@ -26,8 +26,6 @@ class Course(models.Model):
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE,null=True,blank=True)
     
 
-
-
 class Announcement(models.Model):
     announcement_id = models.CharField(max_length=255,unique=True)
     description = models.CharField(max_length=255)

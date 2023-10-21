@@ -18,6 +18,7 @@ import Courses from "./Pages/Academics/Courses/Courses";
 import Coordinators from "./Pages/Academics/Coordinators/Coordinators";
 import Committee from "./Pages/Academics/Committee/Committee";
 import DepartmentNewsletter from "./Pages/Academics/Department Newsletter/DepartmentNewsletter";
+import ImageDisplay from "./components/DisplayImage";
 
 function App() {
   return (
@@ -25,7 +26,6 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
-          <Route path="dashboard" element={<Dashboard />}></Route>
           <Route path="semester/all" element={<SemesterAll />}></Route>
           <Route path="faculty" element={<Faculty />}></Route>
           <Route path="login" element={<Login />}></Route>
@@ -33,7 +33,6 @@ function App() {
           <Route path="reset" element={<Reset_pass />}></Route>
           <Route path="request" element={<Request_page />}></Route>
           <Route path="semester/:semesterId" element={<SemesterPage />} />
-
           <Route path="degree-program" element={<DegreePrograms />}></Route>
           <Route path="vision-mission" element={<VissionMission />}></Route>
           <Route path="outcomes" element={<Outcomes />}></Route>
@@ -41,8 +40,10 @@ function App() {
           <Route path="coordinators" element={<Coordinators />}></Route>
           <Route path="committee" element={<Committee />}></Route>
           <Route path="newsletter" element={<DepartmentNewsletter />}></Route>
+          <Route path="image" element={<ImageDisplay />}></Route>
           <Route path="*" element={<NotFound />}></Route>
         </Route>
+        <Route path="dashboard" element={<Dashboard />}></Route>
       </Routes>
     </BrowserRouter>
   );

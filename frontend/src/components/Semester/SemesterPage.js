@@ -360,16 +360,21 @@ const SemesterPage = () => {
                   colorScheme="blackAlpha"
                   cursor={"pointer"}
                   borderRadius={"8px 8px 0 0"}
-                  h={"64px"} 
-                  
+                  h={"64px"}
                   _expanded={{ bg: "teal", color: "white" }}
                   onClick={() => {
                     setSelectedCourse(course.course_id);
                   }}
                 >
-                  <Box as="span" flex="1" textAlign="left" fontWeight={"bold"} overflow={"hidden"}>
+                  <Box
+                    as="span"
+                    flex="1"
+                    textAlign="left"
+                    fontWeight={"bold"}
+                    overflow={"hidden"}
+                  >
                     <Flex justifyContent={"space-between"}>
-                      <Text >
+                      <Text>
                         {" "}
                         {course.course_id} | {course.name}
                       </Text>
@@ -397,8 +402,6 @@ const SemesterPage = () => {
           ))}
         </Accordion>
       </Box>
-
-      <Footer></Footer>
     </>
   );
 };

@@ -199,8 +199,6 @@ function Faculty() {
           ))}
         </VStack>
       </VStack>
-
-      <Footer />
     </>
   );
 }

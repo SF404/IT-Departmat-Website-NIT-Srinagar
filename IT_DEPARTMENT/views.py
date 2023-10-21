@@ -12,6 +12,10 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
+from django.http import FileResponse
+from django.conf import settings
+import os
+
 
 
 class TeacherList(APIView):

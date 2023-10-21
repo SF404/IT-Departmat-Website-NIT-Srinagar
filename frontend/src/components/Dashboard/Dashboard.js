@@ -1,55 +1,4 @@
-import {
-  Accordion,
-  AccordionButton,
-  AccordionIcon,
-  AccordionItem,
-  AccordionPanel,
-  AlertDialog,
-  AlertDialogBody,
-  AlertDialogCloseButton,
-  AlertDialogContent,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogOverlay,
-  Avatar,
-  Badge,
-  Box,
-  Button,
-  Center,
-  Divider,
-  Flex,
-  FormControl,
-  FormLabel,
-  HStack,
-  IconButton,
-  Image,
-  Input,
-  List,
-  ListIcon,
-  ListItem,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
-  Popover,
-  PopoverArrow,
-  PopoverBody,
-  PopoverCloseButton,
-  PopoverContent,
-  PopoverHeader,
-  PopoverTrigger,
-  Stack,
-  Tag,
-  Text,
-  Textarea,
-  UnorderedList,
-  VStack,
-  textDecoration,
-  useDisclosure,
-} from "@chakra-ui/react";
+import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, AlertDialog, AlertDialogBody, AlertDialogCloseButton, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogOverlay, Avatar, Badge, Box, Button, Center, Divider, Flex, FormControl, FormLabel, HStack, IconButton, Image, Input, List, ListIcon, ListItem, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Popover, PopoverArrow, PopoverBody, PopoverCloseButton, PopoverContent, PopoverHeader, PopoverTrigger, Stack, Tag, Text, Textarea, UnorderedList, VStack, textDecoration, useDisclosure, } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
@@ -61,6 +10,7 @@ import "./Calendar.css";
 import { DownloadIcon, DragHandleIcon } from "@chakra-ui/icons";
 import ProfileModal from "../Modals/ProfileModal";
 import DashboardPlaceholder from "../Placeholders/DashboardPlaceholder";
+import Navbar from "../Layout/Navbar";
 
 function Dashboard() {
   const navigate = useNavigate();
@@ -83,33 +33,23 @@ function Dashboard() {
 
   // Model Hooks
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const {
-    isOpen: openDeleteAlert,
-    onOpen: showDeleteAlert,
-    onClose: closeDeleteAlert,
-  } = useDisclosure();
-
-  const {
-    isOpen: openNotesModel,
-    onOpen: addNotes,
-    onClose: closeNotesModel,
-  } = useDisclosure();
-  const {
-    isOpen: openAssignmentModel,
-    onOpen: addAssignment,
-    onClose: closeAssignmentModel,
-  } = useDisclosure();
+  const { isOpen: openDeleteAlert, onOpen: showDeleteAlert, onClose: closeDeleteAlert, } = useDisclosure();
+  const { isOpen: openNotesModel, onOpen: addNotes, onClose: closeNotesModel, } = useDisclosure();
+  const { isOpen: openAssignmentModel, onOpen: addAssignment, onClose: closeAssignmentModel, } = useDisclosure();
   // Hooks
   const toast = useToast();
   const cancelRef = React.useRef();
   // Page States
   const [user, setUser] = useState([]);
-  let TokenA, TokenR;
   const [courses, setCourses] = useState([]);
   const [selectedCourse, setSelectedCourse] = useState(null);
   const [assignment, setAssignment] = useState([]);
   const [notes, setNotes] = useState([]);
   const [Holidays, setHolidays] = useState(null);
+  
+  // Variables
+  let TokenA, TokenR;
+
 
   function get_token() {
     return {
@@ -221,13 +161,8 @@ function Dashboard() {
     formData.append("description", assignmnetFormData.description);
     formData.append("validity", assignmnetFormData.validity);
     formData.append("cid", selectedCourse);
-    console.log(formData);
     try {
-      const response = await axios.post(
-        "http://localhost:8000/api/assignmentupload/",
-        formData,
-        get_token()
-      );
+      const response = await axios.post("http://localhost:8000/api/assignmentupload/", formData, get_token());
       closeAssignmentModel();
       await fetchData();
       // Display success toast
@@ -407,6 +342,7 @@ function Dashboard() {
 
   return (
     <>
+      <Navbar />
       <Flex
         position={"fixed"}
         bottom={0}
@@ -439,7 +375,9 @@ function Dashboard() {
                   <Button w={"full"} colorScheme="facebook" onClick={onOpen}>
                     My Profile
                   </Button>
-                  <ProfileModal isOpen={isOpen} onClose={onClose} user={user} />
+                  {
+                    user && Object.keys(user).length > 0 && <ProfileModal isOpen={isOpen} onClose={onClose} user={user} />
+                  }
                   <Divider my={2} />
                   <Button w={"full"} colorScheme="telegram" onClick={Logout}>
                     Logout
@@ -465,10 +403,10 @@ function Dashboard() {
                 onClick={() => handleCourseSelect(item.course_id)}
                 {...(selectedCourse === item.course_id
                   ? {
-                      backgroundColor: "#d8dcf0",
-                      color: "darkblue",
-                      _hover: { backgroundColor: "#d8dcf0" },
-                    }
+                    backgroundColor: "#d8dcf0",
+                    color: "darkblue",
+                    _hover: { backgroundColor: "#d8dcf0" },
+                  }
                   : {})}
                 {...(selectedCourse !== item.course_id
                   ? { _hover: { backgroundColor: "#e5e5e5" } }
@@ -569,7 +507,7 @@ function Dashboard() {
                             <Box as="span" flex="1" textAlign="left">
                               {item.name}
                             </Box>
-                            <HStack justifyContent={"right"} >
+                            <HStack justifyContent={"right"}>
                               <IconButton
                                 isRound={true}
                                 variant="outline"
@@ -611,7 +549,12 @@ function Dashboard() {
                 </VStack>
                 <Divider my={2} />
 
-                <Button onClick={addNotes} w={"full"} border={'1px solid rgba(0, 0, 0, 0.1)'} mb={6}>
+                <Button
+                  onClick={addNotes}
+                  w={"full"}
+                  border={"1px solid rgba(0, 0, 0, 0.1)"}
+                  mb={6}
+                >
                   Add Notes / Material
                 </Button>
 
@@ -741,7 +684,7 @@ function Dashboard() {
                   onClick={addAssignment}
                   w={"full"}
                   mb={6}
-                  border={'1px solid rgba(0, 0, 0, 0.1)'}
+                  border={"1px solid rgba(0, 0, 0, 0.1)"}
                 >
                   Add New Assignment
                 </Button>
@@ -859,7 +802,7 @@ function Dashboard() {
             <Calendar
               onActiveStartDateChange={handleViewChange}
               showNeighboringMonth={false}
-              // tileContent={tileContent}
+            // tileContent={tileContent}
             />
             {Holidays != null && (
               <Box
