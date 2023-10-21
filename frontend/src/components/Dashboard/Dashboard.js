@@ -140,19 +140,33 @@ function Dashboard() {
         const refreshToken = new_token.data.refresh_token;
         localStorage.setItem("TokenA", accessToken);
         localStorage.setItem("TokenR", refreshToken);
-
         const getUser = await axios.get(
-          `http://localhost:8000/api/temp/?sid=suhaibsworkspace@gmail.com`
+          "http://localhost:8000/api/auth/getuser/",
+          {
+            params: {
+              refresh_token: localStorage.getItem("TokenR"),
+              access_token: localStorage.getItem("TokenA"),
+            },
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("TokenA")}`,
+            },
+          }
         );
-        console.log(getUser.data);
         setUser(getUser.data[0]);
         const response = await axios.get(
-          `http://localhost:8000/api/courses/?sid=suhaibsworkspace@gmail.com`
+          "http://localhost:8000/api/courses/",
+          {
+            params: {
+              sid: getUser.data[0].teacher_id,
+            },
+          },
+          get_token()
         );
         console.log(response.data);
         setCourses(response.data);
       } catch (error) {
         console.error("Error fetching data:", error);
+        navigate("/login");
       }
     };
     fetchData();
@@ -569,7 +583,7 @@ function Dashboard() {
                             <Box as="span" flex="1" textAlign="left">
                               {item.name}
                             </Box>
-                            <HStack justifyContent={"right"} >
+                            <HStack justifyContent={"right"}>
                               <IconButton
                                 isRound={true}
                                 variant="outline"
@@ -611,7 +625,12 @@ function Dashboard() {
                 </VStack>
                 <Divider my={2} />
 
-                <Button onClick={addNotes} w={"full"} border={'1px solid rgba(0, 0, 0, 0.1)'} mb={6}>
+                <Button
+                  onClick={addNotes}
+                  w={"full"}
+                  border={"1px solid rgba(0, 0, 0, 0.1)"}
+                  mb={6}
+                >
                   Add Notes / Material
                 </Button>
 
@@ -741,7 +760,7 @@ function Dashboard() {
                   onClick={addAssignment}
                   w={"full"}
                   mb={6}
-                  border={'1px solid rgba(0, 0, 0, 0.1)'}
+                  border={"1px solid rgba(0, 0, 0, 0.1)"}
                 >
                   Add New Assignment
                 </Button>

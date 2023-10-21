@@ -14,7 +14,7 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 
 
 
-class TeacherList(APIView):
+class MailTeacherList(APIView):
     def get(self, request):
         teachers = Teacher.objects.all()
         serializer = TeacherMails(teachers, many=True)
@@ -141,3 +141,32 @@ class HolidayView(viewsets.ModelViewSet):
         queryset = Holiday.objects.filter(date__month=month)
 
         return queryset
+    
+class GetUserFromTokenView(APIView):
+    authentication_classes=[JWTAuthentication]
+    permission_classes = (IsAuthenticated,)
+    def get(self, request):
+        refresh_token = request.query_params.get('refresh_token')
+        access_token = request.query_params.get('access_token')
+        print(refresh_token,access_token)
+        if not refresh_token or not access_token:
+            return Response({'error': 'Token cannout found'}, status=status.HTTP_400_BAD_REQUEST)
+        try:
+            refresh_token = RefreshToken(refresh_token)
+            access_token = refresh_token.access_token
+            user_id = access_token['user_id']
+            user = User.objects.get(id=user_id)
+            if not user :
+                return Response({'error': 'User not found token Exists.'}, status=status.HTTP_401_UNAUTHORIZED)
+            auth_email=user.email
+            auth_name=user.first_name
+            print(auth_email,auth_name)
+            if not auth_email or not auth_name:
+                return Response({'error': 'User not found token Exists.'}, status=status.HTTP_401_UNAUTHORIZED)
+            teacher=Teacher.objects.filter(email=auth_email)
+            if not teacher:
+                return Response({'error': 'Data not exists in Teacher Table'}, status=status.HTTP_401_UNAUTHORIZED)
+            serializer = TeacherSerializer(teacher, many=True)
+            return Response(serializer.data)
+        except Exception as e:
+            return Response({'error': 'Invalid token or token has expired.'}, status=status.HTTP_401_UNAUTHORIZED)
