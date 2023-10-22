@@ -1,0 +1,14 @@
+{
+    "builds": [
+      {
+        "src": "IT_Department_NIT_Srinagar/wsgi.py",
+        "use": "@vercel/python"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/(.*)",
+        "dest": "IT_Department_NIT_Srinagar/wsgi.py"
+      }
+    ]
+}

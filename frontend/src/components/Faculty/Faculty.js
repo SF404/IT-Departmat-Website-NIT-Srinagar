@@ -2,32 +2,7 @@ import { EmailIcon, PhoneIcon } from "@chakra-ui/icons";
 import janibulbashirImage from "./JanibSir.jpg";
 import axios from "axios";
 import { AiOutlineMail } from "react-icons/ai";
-import {
-  Avatar,
-  Badge,
-  Button,
-  Card,
-  CardBody,
-  CardFooter,
-  CardHeader,
-  Center,
-  Divider,
-  Flex,
-  Heading,
-  IconButton,
-  Popover,
-  PopoverArrow,
-  PopoverBody,
-  PopoverCloseButton,
-  PopoverContent,
-  PopoverHeader,
-  PopoverTrigger,
-  Tag,
-  Text,
-  Tooltip,
-  VStack,
-  WrapItem,
-} from "@chakra-ui/react";
+import { Avatar, Badge, Button, Card, CardBody, CardFooter, CardHeader, Center, Divider, Flex, Heading, IconButton, Popover, PopoverArrow, PopoverBody, PopoverCloseButton, PopoverContent, PopoverHeader, PopoverTrigger, Tag, Text, Tooltip, VStack, WrapItem, } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { useToast } from "@chakra-ui/react";
 import Typewriter from "typewriter-effect";
@@ -108,20 +83,7 @@ function Faculty() {
               <WrapItem ml={2}>
                 <Popover placement="top-end">
                   <PopoverTrigger>
-                    <Avatar
-                      size="2xl"
-                      name={item.name}
-                      src={item.profile_photo}
-                      onMouseEnter={(e) => {
-                        setShowText(true);
-                        e.target.click();
-                      }}
-                      onMouseLeave={(e) => {
-                        setShowText(false);
-                        e.target.click();
-                      }}
-                      // Add any other props you need for the Avatar
-                    />
+                    <Avatar size="2xl" name={item.name} src={item.profile_photo} onMouseEnter={(e) => { setShowText(true); e.target.click(); }} onMouseLeave={(e) => { setShowText(false); e.target.click(); }} />
                   </PopoverTrigger>
                   <PopoverContent
                     boxShadow="0px 7px 29px 0px rgba(100, 100, 111, 0.2)"

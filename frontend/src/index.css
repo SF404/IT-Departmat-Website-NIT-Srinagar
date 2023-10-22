@@ -11,3 +11,9 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+*:focus {
+  outline: none; /* Remove the default focus outline */
+  box-shadow: none; /* Remove any box shadow */
+  -webkit-tap-highlight-color: transparent;
+}
