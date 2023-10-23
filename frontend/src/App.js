@@ -5,8 +5,8 @@ import Dashboard from "./components/Dashboard/Dashboard";
 import Login from "./components/Auth/Login";
 import Signup from "./components/Auth/Signup";
 import Faculty from "./components/Faculty/Faculty";
-import SemesterAll from "./components/Semester/SemesterAll";
-import SemesterPage from "./components/Semester/SemesterPage";
+import CoursesAll from "./components/Courses/CoursesAll";
+import SemesterPage from "./components/Courses/SemesterPage";
 import Reset_pass from "./components/Auth/forgot_password";
 import Request_page from "./components/Auth/Request";
 import Home from "./components/Landing/Home";
@@ -26,7 +26,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
-          <Route path="semester/all" element={<SemesterAll />}></Route>
+          <Route path="semester/all" element={<CoursesAll />}></Route>
           <Route path="faculty" element={<Faculty />}></Route>
           <Route path="login" element={<Login />}></Route>
           <Route path="signup" element={<Signup />}></Route>

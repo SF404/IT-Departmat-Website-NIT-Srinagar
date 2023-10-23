@@ -9,7 +9,7 @@ function Layout() {
   return (
     <>
       <Navbar />
-      <Box minH={'90vh'}>
+      <Box minH={'85vh'}>
         <Outlet />
       </Box>
       <Footer />
