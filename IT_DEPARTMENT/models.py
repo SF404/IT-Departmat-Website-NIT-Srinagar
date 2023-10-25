@@ -8,7 +8,7 @@ class Teacher(models.Model):
     name = models.CharField(max_length=255)
     email = models.EmailField(unique=True)
     description = models.CharField(max_length=255,blank=True)
-    phone =models.PositiveIntegerField(unique=True)
+    phone =models.BigIntegerField(unique=True)
     research_field = models.TextField(max_length=255,blank=True)
     date=models.DateTimeField(auto_now_add=True)
     profile_photo = models.ImageField(upload_to='teacher_profile/')
@@ -18,7 +18,7 @@ class Teacher(models.Model):
 class Course(models.Model):
     course_id = models.CharField(max_length=255, unique=True)
     name = models.CharField(max_length=255)
-    credit=models.PositiveIntegerField()
+    credit=models.BigIntegerField()
     semester=models.CharField(max_length=255)
     syllabus=models.JSONField(blank=True,null=True)
     description = models.TextField(blank=True)

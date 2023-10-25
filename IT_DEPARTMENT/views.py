@@ -178,7 +178,6 @@ class GetUserFromTokenView(APIView):
             return Response({'error': 'Invalid token or token has expired.'}, status=status.HTTP_401_UNAUTHORIZED)
 
 class GetEvents(APIView):
-
      def get(self, request, *args, **kwargs):
 
         print("hello")
@@ -223,24 +222,17 @@ class GetEvents(APIView):
 class GetNews(APIView):
 
      def get(self, request, *args, **kwargs):
-
         print("hello")
         if request.method == "GET":
             url = 'https://www.instagram.com/nitsriofficial/?__a=1&__d=dis'
-           
-
             user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.1000.0 Safari/537.36'
-
             headers = {
                 'User-Agent': user_agent,
                 'Accept-Language': 'en-US,en;q=0.5',
             }
-
             req = requests.get(url=url, headers=headers)
             web_s = req.text
             data = json.loads(web_s)
             news_data = data["graphql"]["user"]["edge_owner_to_timeline_media"]["edges"]
-
             return Response(news_data)
-
-            return Response({"data":"not found"})
+        return Response({"data":"not found"})
