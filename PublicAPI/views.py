@@ -5,6 +5,8 @@ from rest_framework.views import APIView
 from rest_framework import status,viewsets
 from rest_framework.response import Response
 from django.http import FileResponse
+import requests
+from django.http import JsonResponse
 
 # Create your views here.
 
@@ -65,6 +67,6 @@ class DownloadNotes(APIView):
             return Response({"message": "Note not found."}, status=status.HTTP_404_NOT_FOUND)
         
         file_path = my_model_instance.pdf.path
-        return FileResponse(open(file_path, 'rb'), as_attachment=True)
+        return FileResponse(open(file_path, 'rb'), as_attachment=True) 
 
 

@@ -50,7 +50,7 @@ const Footer = () => {
         </GridItem>
       </Grid>
       <HStack justify={'center'} bg={'#202020'} p={6} mt={6}>
-        <Box w={'full'} >Copyright All Right Reserved 2023, <Text as={Link} to={'about'} _hover={{textDecoration:'underline'}} color='#3db166'>IT Web Team</Text>, NIT Srinagar</Box>
+        <Box w={'full'} >Copyright All Right Reserved 2023, <Link to={'about'} _hover={{textDecoration:'underline'}} color='#3db166'>IT Web Team</Link>, NIT Srinagar</Box>
         <HStack spacing={2}>
           <IconButton
             variant="link"

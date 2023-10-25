@@ -20,15 +20,15 @@ const SemesterAll = () => {
                 <Heading size={'md'} mb={6} color={'blue.900'}>B-TECH</Heading>
                 <SimpleGrid columns={[2, 3, 4]} spacing={4}>
                     {semesters.map((semester) => (
-                        <Button as={Link} to={`/semester/${semester.id}`}>
+                        <Button as={Link} to={`/semester/${semester.id}`} boxShadow={'0 0 6px rgba(0,0,0,0.1)'}>
                             {semester.name}
                         </Button>
                     ))}
                 </SimpleGrid>
-                <Heading size={'md'} mb={6} color={'blue.900'} mt={6}>M-TECH</Heading>
+                <Heading size={'md'} mb={6} color={'blue.900'} mt={6} >M-TECH</Heading>
                 <SimpleGrid columns={[2, 3, 4]} spacing={4}>
                     {semesters.map((semester) => (
-                        <Button as={Link} to={`/semester/${semester.id}`}>
+                        <Button as={Link} to={`/semester/${semester.id}`}  boxShadow={'0 0 6px rgba(0,0,0,0.1)'}>
                             {semester.name}
                         </Button>
                     ))}
@@ -36,7 +36,7 @@ const SemesterAll = () => {
                 <Heading size={'md'} mb={6} color={'blue.900'} mt={6}>PHD</Heading>
                 <SimpleGrid columns={[2, 3, 4]} spacing={4}>
                     {semesters.map((semester) => (
-                        <Button as={Link} to={`/semester/${semester.id}`}>
+                        <Button as={Link} to={`/semester/${semester.id}`}  boxShadow={'0 0 6px rgba(0,0,0,0.1)'}>
                             {semester.name}
                         </Button>
                     ))}

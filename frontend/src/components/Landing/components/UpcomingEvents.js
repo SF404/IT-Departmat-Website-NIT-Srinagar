@@ -1,27 +1,32 @@
-import React from 'react';
-import './style.css'
-import { SimpleGrid } from '@chakra-ui/react';
+import React, { useEffect, useState } from 'react';
+import './z_style.css'
+import { Box, Center, CircularProgress, Flex, HStack, Link, SimpleGrid, Text, VStack, baseTheme } from '@chakra-ui/react';
+import Holidays from './Holidays';
 
-function UpcomingEvents({ events }) {
-    // Sort events by date, assuming your event object has a 'date' property.
-    const sortedEvents = events.sort((a, b) => new Date(a.date) - new Date(b.date));
-
+function UpcomingEvents({ events, holidays }) {
     return (
-        <div className="upcoming-events">
-            <h2>Upcoming Events</h2>
-            <ul>
-                <SimpleGrid columns={[1, 2, 3, 4, 5]} spacing={4}>
-                    {sortedEvents.map((event, index) => (
+        <Box>
+            <div className="h-title" style={{ marginBottom: "0.5em" }}>
+                <h1>UPCOMING EVENTS</h1>
+            </div>
+            <VStack margin={"1em"}>
+                {events ? (events.slice().reverse().map((event, index) => (
 
-                        <li key={index}>
-                            <h3>{event.title}</h3>
-                            <p>Date: {event.date}</p>
-                            <p>{event.description}</p>
-                        </li>
-                    ))}
-                </SimpleGrid>
-            </ul>
-        </div>
+                    <Flex key={index} fontSize={'0.8em'} gap={4} borderRadius={'0.5em'} p={2} w={'full'} bg={'white'} color={'black'} boxShadow={'0 0 5px rgba(0,0,0,0.1)'}>
+                        <Flex flexDir={'column'} alignItems={'center'} minW={'60px'} minH='60px' maxH='60px' borderBottom={'4px solid #5cc181'} >
+                            <Text fontWeight={'extrabold'} fontSize={'2xl'} color={'#5cc181'}>{event.date}</Text>
+                            <Text fontWeight={'bold'} color={'#232c64'}>{event.month}</Text>
+                        </Flex>
+                        <Box fontWeight={'semibold'}>
+                            <Text as={Link} href={"https://nitsri.ac.in/" + event.url} color={'#232c64'} fontSize={'lg'} fontWeight={'bold'}>{event.title}</Text>
+                            <Text color={'#5cc181'} >{event.time}  &nbsp; | &nbsp;  {event.location}</Text>
+                        </Box>
+                    </Flex>
+                ))) : (<CircularProgress isIndeterminate color='#5cc181' />)
+                }
+            </VStack>
+            <Holidays holidays={holidays}/>
+        </Box>
     );
 }
 

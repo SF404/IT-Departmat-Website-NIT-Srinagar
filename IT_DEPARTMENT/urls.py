@@ -23,6 +23,7 @@ router.register(r'semester', SemesterCourseView, basename='Semester Data')
 router.register(r'listholidays', HolidayView, basename='Holiday Data')
 router.register(r'public/getteacher', TeacherView, basename='Semester Data')
 
+
 urlpatterns = [
     path('api/', include(router.urls)),
     path('api/assignmentdownload/', DownloadAssignment.as_view(),name='registration'),
@@ -34,6 +35,9 @@ urlpatterns = [
     path('api/auth/refresh-token/', CustomRefreshTokenView.as_view(), name='refresh-token'),
     path('api/auth/logout/', LogoutView.as_view(), name='logout'),
     path('api/auth/getuser/', GetUserFromTokenView.as_view(), name='logout'),
+    path('api/events_data/', GetEvents.as_view(),name='registration'),
+    path('api/news_data/', GetNews.as_view(),name='registration'),
+
     re_path('', TemplateView.as_view(template_name='index.html')),
 ]
 

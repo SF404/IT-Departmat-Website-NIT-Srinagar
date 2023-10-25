@@ -37,7 +37,7 @@
 .banner {
     width: 100%;
     height: calc(100vh - 300px);
-    background: url('./../../assets/images/image.jpeg') no-repeat center center/cover;
+    background: url('./../../assets/images/image.webp') no-repeat center center/cover;
     position: relative;
     background-attachment: fixed;
 }
@@ -157,25 +157,33 @@
     text-align: center;
 }
 
+.h-title-icon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5em;
+}
+
 .a-container{
     display: flex;
     gap: 1em;
     flex-direction: column;
     align-items: center;
     /* border: 1px solid #d8dcf0; */
-    background-color: white;
+    background-color: transparent;
     min-height: fit-content;
 }
 
 .a-tile{
-    width: 70%;
+    width: 100%;
     background-color: white;
     border-radius: 50px;
     display: flex;
     align-items: center;
     justify-content: flex-start;
     background-color: white;
-    border: 1px solid #d8dcf0;
+    /* border: 1px solid #d8dcf0; */
+    box-shadow: 0 0 4px rgba(0,0,0,0.1);
 
 }
 .a-icon{

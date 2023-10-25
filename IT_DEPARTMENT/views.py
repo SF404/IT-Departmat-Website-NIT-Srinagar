@@ -11,11 +11,13 @@ from django.contrib.auth.models import User
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.authentication import JWTAuthentication
-
+import requests
+from bs4 import BeautifulSoup
 from django.http import FileResponse
 from django.conf import settings
 import os
-
+from django.views.generic import TemplateView
+import json
 
 
 class MailTeacherList(APIView):
@@ -174,3 +176,71 @@ class GetUserFromTokenView(APIView):
             return Response(serializer.data)
         except Exception as e:
             return Response({'error': 'Invalid token or token has expired.'}, status=status.HTTP_401_UNAUTHORIZED)
+
+class GetEvents(APIView):
+
+     def get(self, request, *args, **kwargs):
+
+        print("hello")
+        if request.method == "GET":
+            url = 'https://nitsri.ac.in/'
+
+            user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.1000.0 Safari/537.36'
+
+            headers = {
+                'User-Agent': user_agent,
+                'Accept-Language': 'en-US,en;q=0.5',
+            }
+
+            req = requests.get(url=url)
+            web_s = req.text
+            soup = BeautifulSoup(web_s, "html.parser")
+            event_container = soup.find(class_="gdlr-core-event-item-holder clearfix")
+
+            events_data = []
+
+            event_items = event_container.find_all(class_="gdlr-core-event-item-list gdlr-core-style-widget gdlr-core-item-pdlr clearfix")
+            for event_item in event_items:
+                event_data = {
+                    "date": event_item.find(class_="gdlr-core-date").text.strip(),
+                    "month": event_item.find(class_="gdlr-core-month").text.strip(),
+                    "title": event_item.find(class_="gdlr-core-event-item-title").a.text.strip(),
+                    "url": event_item.find(class_="gdlr-core-event-item-title").a.get('href'),
+                    "time": "",
+                    "location": "",
+                }
+                time_location = event_item.find_all(class_="gdlr-core-tail")
+                event_data["time"]=time_location[0].text.strip()
+                event_data["location"]=time_location[1].text.strip()
+                events_data.append(event_data)
+            if(events_data):
+                return Response(events_data)
+
+            return Response({"data":"not found"})
+
+
+
+class GetNews(APIView):
+
+     def get(self, request, *args, **kwargs):
+
+        print("hello")
+        if request.method == "GET":
+            url = 'https://www.instagram.com/nitsriofficial/?__a=1&__d=dis'
+           
+
+            user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.1000.0 Safari/537.36'
+
+            headers = {
+                'User-Agent': user_agent,
+                'Accept-Language': 'en-US,en;q=0.5',
+            }
+
+            req = requests.get(url=url, headers=headers)
+            web_s = req.text
+            data = json.loads(web_s)
+            news_data = data["graphql"]["user"]["edge_owner_to_timeline_media"]["edges"]
+
+            return Response(news_data)
+
+            return Response({"data":"not found"})

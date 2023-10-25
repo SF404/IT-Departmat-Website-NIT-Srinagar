@@ -1,9 +1,8 @@
 import { Image, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Portal, Stack, useDisclosure } from '@chakra-ui/react'
 import { Box, Flex, Text, Button, VStack, IconButton, Menu, MenuButton, MenuItem, MenuList } from '@chakra-ui/react';
 import React from 'react'
-import mainLogo from '../../assets/images/download.jpeg'
+import mainLogo from '../../assets/images/download.webp'
 import { Link } from 'react-router-dom';
-import { CloseIcon, HamburgerIcon } from '@chakra-ui/icons';
 import { FaBarsStaggered } from 'react-icons/fa6';
 
 function NavLinks({ color }) {
@@ -99,15 +98,14 @@ function NavLinks({ color }) {
 }
 
 function Navbar() {
-    const { isOpen, onOpen, onClose } = useDisclosure()
     const { isOpen: isNavOpen, onOpen: openNav, onClose: closeNav } = useDisclosure()
     return (
         <>
             <Box h={'64px'} display={'flex'} zIndex={99} alignItems={'center'} px={'10px'}>
-                <Image src={mainLogo} h={50} />
+                <Image src={mainLogo} h={"50px"} w={"50px"} alt='logo'/>
                 <Text mx={'10px'} fontSize={{ base: 'sm', md: 'lg' }} fontWeight={'bold'}>DEPARTMENT OF INFORMATION TECHNOLOGY <br /> <small>National Institute Of Technology, Srinagar</small></Text>
             </Box>
-            <Flex align="center" h={'46px'} zIndex={99} justify="space-between" p="0" px={2} bg="#192e59" color="#192e59" position={'sticky'} top={0}>
+            <Flex align="center" h={'46px'} zIndex={99} justify="space-between" p="0" px={2} bg="#192e59" color="#192e59" position={'sticky'} top={0} boxShadow={'0 2px 12px rgba(0,0,0,0.5)'}>
                 <Stack as={'nav'} direction={{ base: 'column', md: 'row' }} spacing="2" align="stretch" display={{ base: 'none', md: 'flex' }}>
                     <NavLinks color={'white'} />
                 </Stack>
