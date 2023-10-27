@@ -75,6 +75,7 @@ const SemesterPage = () => {
       const data = response.data;
       setCourses(data);
       console.log(courses);
+      console.log(data);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -243,7 +244,6 @@ const SemesterPage = () => {
                           <span style={{ color: "red" }}>{item.validity}</span>
                         </Badge>
                       </HStack>
-
                       <HStack>
                         <IconButton
                           isRound={true}
@@ -271,7 +271,6 @@ const SemesterPage = () => {
                     <ModalHeader>Create your account</ModalHeader>
                     <ModalCloseButton />
                     <ModalBody pb={6}></ModalBody>
-
                     <ModalFooter>
                       <Button colorScheme="blue" mr={3}>
                         Save
@@ -290,7 +289,6 @@ const SemesterPage = () => {
       </>
     );
   }
-
   return (
     <>
       <VStack
@@ -317,7 +315,6 @@ const SemesterPage = () => {
             <CountUp start={0} end={100000} duration={3} delay={0} />+
           </Heading>
         </Center>
-
         <Text color={"white"}></Text>
       </VStack>
       <Box
@@ -336,7 +333,6 @@ const SemesterPage = () => {
           <Button colorScheme="orange">List Students</Button>
         </HStack>
         <Divider my={2} />
-
         <Accordion allowToggle userSelect={"none"} gap={2}>
           {courses &&
             courses.map((course) => (
