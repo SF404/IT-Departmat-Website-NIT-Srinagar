@@ -6,6 +6,7 @@ from .views import *
 from . import views
 from django.views.generic import TemplateView
 from rest_framework import routers
+from django.conf import settings
 
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
@@ -37,7 +38,6 @@ urlpatterns = [
     path('api/auth/getuser/', GetUserFromTokenView.as_view(), name='logout'),
     path('api/events_data/', GetEvents.as_view(),name='registration'),
     path('api/news_data/', GetNews.as_view(),name='registration'),
-
     re_path('', TemplateView.as_view(template_name='index.html')),
 ]
 
