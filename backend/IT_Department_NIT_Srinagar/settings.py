@@ -173,6 +173,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:8000",
     "http://192.168.6.67:3000",
     "http://192.168.6.152:3000",
+    "https://it-departmat-website-nit-srinagar-mu.vercel.app",
 
 ]
 

@@ -57,7 +57,7 @@ const SemesterPage = () => {
     deadline: "",
   });
   const [activeTab, setActiveTab] = useState(0);
-  const [courses, setCourses] = useState([]);
+  const [courses, setCourses] = useState(null);
 
   const { toggleColorMode } = useColorMode();
 
@@ -338,59 +338,60 @@ const SemesterPage = () => {
         <Divider my={2} />
 
         <Accordion allowToggle userSelect={"none"} gap={2}>
-          {courses.map((course) => (
-            <AccordionItem
-              key={course.course_id}
-              mt={2}
-              border={"1px solid #e5e5e5"}
-              borderRadius={8}
-            >
-              <h2>
-                <AccordionButton
-                  as={Badge}
-                  colorScheme="blackAlpha"
-                  cursor={"pointer"}
-                  borderRadius={"8px 8px 0 0"}
-                  h={"64px"}
-                  _expanded={{ bg: "teal", color: "white" }}
-                  onClick={() => {
-                    setSelectedCourse(course.course_id);
-                  }}
-                >
-                  <Box
-                    as="span"
-                    flex="1"
-                    textAlign="left"
-                    fontWeight={"bold"}
-                    overflow={"hidden"}
+          {courses &&
+            courses.map((course) => (
+              <AccordionItem
+                key={course.course_id}
+                mt={2}
+                border={"1px solid #e5e5e5"}
+                borderRadius={8}
+              >
+                <h2>
+                  <AccordionButton
+                    as={Badge}
+                    colorScheme="blackAlpha"
+                    cursor={"pointer"}
+                    borderRadius={"8px 8px 0 0"}
+                    h={"64px"}
+                    _expanded={{ bg: "teal", color: "white" }}
+                    onClick={() => {
+                      setSelectedCourse(course.course_id);
+                    }}
                   >
-                    <Flex justifyContent={"space-between"}>
-                      <Text>
-                        {" "}
-                        {course.course_id} | {course.name}
-                      </Text>
-                    </Flex>
+                    <Box
+                      as="span"
+                      flex="1"
+                      textAlign="left"
+                      fontWeight={"bold"}
+                      overflow={"hidden"}
+                    >
+                      <Flex justifyContent={"space-between"}>
+                        <Text>
+                          {" "}
+                          {course.course_id} | {course.name}
+                        </Text>
+                      </Flex>
+                    </Box>
+                    <AccordionIcon />
+                  </AccordionButton>
+                </h2>
+                <AccordionPanel pb={4}>
+                  <Box display={"flex"} justifyContent={"space-between"}>
+                    <Box>
+                      <Text>{course.teacher}</Text>
+                      <Badge colorScheme="blue">Credit: {course.credit}</Badge>
+                    </Box>
+                    <Text>
+                      Syllabus: <Button size={"sm"}>Download</Button>
+                    </Text>
                   </Box>
-                  <AccordionIcon />
-                </AccordionButton>
-              </h2>
-              <AccordionPanel pb={4}>
-                <Box display={"flex"} justifyContent={"space-between"}>
-                  <Box>
-                    <Text>{course.teacher}</Text>
-                    <Badge colorScheme="blue">Credit: {course.credit}</Badge>
-                  </Box>
-                  <Text>
-                    Syllabus: <Button size={"sm"}>Download</Button>
-                  </Text>
-                </Box>
 
-                <Divider my={2} />
+                  <Divider my={2} />
 
-                {selectedCourse && <DataTabs />}
-              </AccordionPanel>
-            </AccordionItem>
-          ))}
+                  {selectedCourse && <DataTabs />}
+                </AccordionPanel>
+              </AccordionItem>
+            ))}
         </Accordion>
       </Box>
     </>
