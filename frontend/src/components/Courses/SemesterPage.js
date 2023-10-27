@@ -70,7 +70,7 @@ const SemesterPage = () => {
   async function fetchCourses() {
     try {
       const response = await axios.get(
-        `http://localhost:8000/api/semester/?semesterId=${semesterId}`
+        `https://it-departmat-website-nit-srinagar-rnu1.vercel.app/api/semester/?semesterId=${semesterId}`
       );
       const data = response.data;
       setCourses(data);

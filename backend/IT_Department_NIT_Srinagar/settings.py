@@ -78,8 +78,8 @@ DATABASES = {
         'NAME': 'it_department_db',
         'USERNAME':'rajesmanna',
         'PASSWORD':'admin',
-        'HOST':'localhost',
-        'POST':'',
+        'HOST':'it-departmat-website-nit-srinagar-rnu1.vercel.app',
+        'POST':'5432',
     }
 }
 
