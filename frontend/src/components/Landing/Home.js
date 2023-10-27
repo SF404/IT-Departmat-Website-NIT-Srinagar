@@ -74,7 +74,7 @@ function Home() {
               <Announcements />
               <SimpleGrid columns={[1, 2, 3]}>
                 <LatestNews news={news} />
-                <UpcomingEvents events={events} holidays={holidays} />
+                {/* <UpcomingEvents events={events} holidays={holidays} /> */}
                 <Box gridColumn={"span 2"}></Box>
               </SimpleGrid>
             </Box>
