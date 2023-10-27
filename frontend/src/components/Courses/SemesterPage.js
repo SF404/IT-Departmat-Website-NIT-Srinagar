@@ -70,7 +70,7 @@ const SemesterPage = () => {
   async function fetchCourses() {
     try {
       const response = await axios.get(
-        `/api/semester/?semesterId=${semesterId}`
+        `http://localhost:8000/api/semester/?semesterId=${semesterId}`
       );
       const data = response.data;
       setCourses(data);
