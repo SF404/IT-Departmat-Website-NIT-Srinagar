@@ -1,8 +1,40 @@
 // SemesterPage.js
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Box, Heading, Text, Button, HStack, Divider, Flex, Badge, Spinner, VStack, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, useDisclosure, useColorMode, Center, StatGroup, Stat, StatLabel, StatNumber, IconButton, } from "@chakra-ui/react";
-import { Accordion, AccordionItem, AccordionButton, AccordionPanel, AccordionIcon, } from "@chakra-ui/react";
+import {
+  Box,
+  Heading,
+  Text,
+  Button,
+  HStack,
+  Divider,
+  Flex,
+  Badge,
+  Spinner,
+  VStack,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalCloseButton,
+  ModalBody,
+  ModalFooter,
+  useDisclosure,
+  useColorMode,
+  Center,
+  StatGroup,
+  Stat,
+  StatLabel,
+  StatNumber,
+  IconButton,
+} from "@chakra-ui/react";
+import {
+  Accordion,
+  AccordionItem,
+  AccordionButton,
+  AccordionPanel,
+  AccordionIcon,
+} from "@chakra-ui/react";
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 import axios from "axios";
 import CountUp from "react-countup";
@@ -38,7 +70,7 @@ const SemesterPage = () => {
   async function fetchCourses() {
     try {
       const response = await axios.get(
-        `http://localhost:8000/api/semester/?semesterId=${semesterId}`
+        `/api/semester/?semesterId=${semesterId}`
       );
       const data = response.data;
       setCourses(data);
@@ -51,7 +83,7 @@ const SemesterPage = () => {
   async function fetchAssignments() {
     try {
       const assignment = await axios.get(
-        `http://localhost:8000/api/showassignment/?cid=${selectedCourse}`
+        `/api/showassignment/?cid=${selectedCourse}`
       );
       setAssignments(assignment.data);
     } catch (error) {
@@ -62,9 +94,7 @@ const SemesterPage = () => {
   async function fetchNotes() {
     setLoading(true);
     try {
-      const notes = await axios.get(
-        `http://localhost:8000/api/shownotes/?cid=${selectedCourse}`
-      );
+      const notes = await axios.get(`/api/shownotes/?cid=${selectedCourse}`);
       setNotes(notes.data);
       if (notes.status === 200) {
         setTimeout(() => {
@@ -85,7 +115,7 @@ const SemesterPage = () => {
     console.log(notes_id);
     try {
       const response = await axios.post(
-        "http://127.0.0.1:8000/api/notesdownload/",
+        "/api/notesdownload/",
         { nid: notes_id },
         { responseType: "blob" } // Make sure to set responseType to 'blob'
       );
@@ -105,7 +135,7 @@ const SemesterPage = () => {
     console.log(assignment_id);
     try {
       const response = await axios.post(
-        "http://127.0.0.1:8000/api/assignmentdownload/",
+        "/api/assignmentdownload/",
         { aid: assignment_id },
         { responseType: "blob" } // Make sure to set responseType to 'blob'
       );
