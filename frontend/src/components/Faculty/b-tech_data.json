@@ -1,0 +1,1470 @@
+{
+  "2022": [
+    {
+      "id": "1",
+      "Reg": "2022NITSGR0991",
+      "enroll": "2022BITE001",
+      "name": "RIZWAN AHMAD SHAH"
+    },
+    {
+      "id": "2",
+      "Reg": "2022NITSGR0971",
+      "enroll": "2022BITE002",
+      "name": "KHUSHBOO DAR"
+    },
+    {
+      "id": "3",
+      "Reg": "2022NITSGR0964",
+      "enroll": "2022BITE003",
+      "name": "HITESH BHARDWAJ"
+    },
+    {
+      "id": "4",
+      "Reg": "2022NITSGR0993",
+      "enroll": "2022BITE004",
+      "name": "MOHAMMAD MUZAMIL BHAT"
+    },
+    {
+      "id": "5",
+      "Reg": "2022NITSGR0986",
+      "enroll": "2022BITE005",
+      "name": "FURQAN MUSHTAQ MAKHDOOMI"
+    },
+    {
+      "id": "6",
+      "Reg": "2022NITSGR0987",
+      "enroll": "2022BITE006",
+      "name": "MOHAMMAD OYAISS USSMAN"
+    },
+    {
+      "id": "7",
+      "Reg": "2022NITSGR0996",
+      "enroll": "2022BITE007",
+      "name": "KARAN KHARADI"
+    },
+    {
+      "id": "8",
+      "Reg": "2022NITSGR0968",
+      "enroll": "2022BITE008",
+      "name": "TAVAHEED TARIQ BHAT"
+    },
+    {
+      "id": "9",
+      "Reg": "2022NITSGR0988",
+      "enroll": "2022BITE009",
+      "name": "MUSKAAN CHOUDHARY"
+    },
+    {
+      "id": "10",
+      "Reg": "2022NITSGR0960",
+      "enroll": "2022BITE010",
+      "name": "SIBGAT FAROOQ"
+    },
+    {
+      "id": "11",
+      "Reg": "2022NITSGR0973",
+      "enroll": "2022BITE011",
+      "name": "SHIV OM NARANG"
+    },
+    {
+      "id": "12",
+      "Reg": "2022NITSGR0974",
+      "enroll": "2022BITE012",
+      "name": "BURHAAN RASHEED ZARGAR"
+    },
+    {
+      "id": "13",
+      "Reg": "2022NITSGR0962",
+      "enroll": "2022BITE013",
+      "name": "NAVNEET SINGH"
+    },
+    {
+      "id": "14",
+      "Reg": "2022NITSGR0959",
+      "enroll": "2022BITE014",
+      "name": "DREVJOT SINGH"
+    },
+    {
+      "id": "15",
+      "Reg": "2022NITSGR0967",
+      "enroll": "2022BITE015",
+      "name": "SAHIL KUMAR"
+    },
+    {
+      "id": "16",
+      "Reg": "2022NITSGR0984",
+      "enroll": "2022BITE016",
+      "name": "BENISH AIJAZ"
+    },
+    {
+      "id": "17",
+      "Reg": "2022NITSGR0961",
+      "enroll": "2022BITE017",
+      "name": "FAYAZ ALI"
+    },
+    {
+      "id": "18",
+      "Reg": "2022NITSGR0975",
+      "enroll": "2022BITE018",
+      "name": "VARDAN PAL"
+    },
+    {
+      "id": "19",
+      "Reg": "2022NITSGR1004",
+      "enroll": "2022BITE019",
+      "name": "KASHISH"
+    },
+    {
+      "id": "20",
+      "Reg": "2022NITSGR0963",
+      "enroll": "2022BITE020",
+      "name": "MOHAMMED MOHSEN PEERZADA"
+    },
+    {
+      "id": "21",
+      "Reg": "2022NITSGR1000",
+      "enroll": "2022BITE021",
+      "name": "KANCHAN KUMARI"
+    },
+    {
+      "id": "22",
+      "Reg": "2022NITSGR0985",
+      "enroll": "2022BITE022",
+      "name": "RITISH SHARMA"
+    },
+    {
+      "id": "23",
+      "Reg": "2022NITSGR0994",
+      "enroll": "2022BITE023",
+      "name": "SAMIKSHA"
+    },
+    {
+      "id": "24",
+      "Reg": "2022NITSGR0977",
+      "enroll": "2022BITE024",
+      "name": "SAHIL"
+    },
+    {
+      "id": "25",
+      "Reg": "2022NITSGR0976",
+      "enroll": "2022BITE025",
+      "name": "VISHAL KUMAR YADAV"
+    },
+    {
+      "id": "26",
+      "Reg": "2022NITSGR0999",
+      "enroll": "2022BITE026",
+      "name": "TUFAD NAIK"
+    },
+    {
+      "id": "27",
+      "Reg": "2022NITSGR1003",
+      "enroll": "2022BITE034",
+      "name": "NITIN KUNDAL"
+    },
+    {
+      "id": "28",
+      "Reg": "2022NITSGR0965",
+      "enroll": "2022BITE035",
+      "name": "VANSH CHARAK"
+    },
+    {
+      "id": "29",
+      "Reg": "2022NITSGR0989",
+      "enroll": "2022BITE036",
+      "name": "DEV KARAN"
+    },
+    {
+      "id": "30",
+      "Reg": "2022NITSGR1005",
+      "enroll": "2022BITE037",
+      "name": "U RAJESHWAR"
+    },
+    {
+      "id": "31",
+      "Reg": "2022NITSGR0982",
+      "enroll": "2022BITE038",
+      "name": "ARYAN VERMA"
+    },
+    {
+      "id": "32",
+      "Reg": "2022NITSGR1014",
+      "enroll": "2022BITE039",
+      "name": "SHOAIB AKHTER"
+    },
+    {
+      "id": "33",
+      "Reg": "2022NITSGR0995",
+      "enroll": "2022BITE040",
+      "name": "SAKSHAM MAURYA"
+    },
+    {
+      "id": "34",
+      "Reg": "2022NITSGR0978",
+      "enroll": "2022BITE041",
+      "name": "RAKSHIT TRATTHA"
+    },
+    {
+      "id": "35",
+      "Reg": "2022NITSGR1001",
+      "enroll": "2022BITE042",
+      "name": "PARIDHI"
+    },
+    {
+      "id": "36",
+      "Reg": "2022NITSGR0979",
+      "enroll": "2022BITE043",
+      "name": "ANOOP JANGRAL"
+    },
+    {
+      "id": "37",
+      "Reg": "2022NITSGR1023",
+      "enroll": "2022BITE044",
+      "name": "KHUSHI KESHRI"
+    },
+    {
+      "id": "38",
+      "Reg": "2022NITSGR0997",
+      "enroll": "2022BITE045",
+      "name": "KASI REDDY VISHNU VARDHAN REDD"
+    },
+    {
+      "id": "39",
+      "Reg": "2022NITSGR1011",
+      "enroll": "2022BITE046",
+      "name": "KUTHADI SAI SIDDARTH"
+    },
+    {
+      "id": "40",
+      "Reg": "2022NITSGR1029",
+      "enroll": "2022BITE047",
+      "name": "MOHAMMAD HUZAIF"
+    },
+    {
+      "id": "41",
+      "Reg": "2022NITSGR1028",
+      "enroll": "2022BITE048",
+      "name": "AFSHEEN SAJAD"
+    },
+    {
+      "id": "42",
+      "Reg": "2022NITSGR1010",
+      "enroll": "2022BITE049",
+      "name": "GAZI MOHAMMAD RAYAN SHAH"
+    },
+    {
+      "id": "43",
+      "Reg": "2022NITSGR1009",
+      "enroll": "2022BITE050",
+      "name": "MRIDUL KUMAR"
+    },
+    {
+      "id": "44",
+      "Reg": "2022NITSGR1026",
+      "enroll": "2022BITE051",
+      "name": "MANIK SHIVGOTRA"
+    },
+    {
+      "id": "45",
+      "Reg": "2022NITSGR1008",
+      "enroll": "2022BITE052",
+      "name": "RISHU KUMAR"
+    },
+    {
+      "id": "46",
+      "Reg": "2022NITSGR1006",
+      "enroll": "2022BITE053",
+      "name": "MUSHARAF MAQBOOL"
+    },
+    {
+      "id": "47",
+      "Reg": "2022NITSGR1020",
+      "enroll": "2022BITE054",
+      "name": "MOHAMMAD HASHID BEG"
+    },
+    {
+      "id": "48",
+      "Reg": "2022NITSGR1018",
+      "enroll": "2022BITE055",
+      "name": "SHREESH SINGH CHAUHAN"
+    },
+    {
+      "id": "49",
+      "Reg": "2022NITSGR1031",
+      "enroll": "2022BITE056",
+      "name": "DIVYA TRIVEDI"
+    },
+    {
+      "id": "50",
+      "Reg": "2022NITSGR1007",
+      "enroll": "2022BITE057",
+      "name": "ABRAR UL RIYAZ"
+    },
+    {
+      "id": "51",
+      "Reg": "2022NITSGR0970",
+      "enroll": "2022BITE058",
+      "name": "ALAPATI HARSHA VARDHAN SAI"
+    },
+    {
+      "id": "52",
+      "Reg": "2022NITSGR0992",
+      "enroll": "2022BITE059",
+      "name": "PRIYANSHU KUMAR"
+    },
+    {
+      "id": "53",
+      "Reg": "2022NITSGR1012",
+      "enroll": "2022BITE060",
+      "name": "NENAVATH SRIJA"
+    },
+    {
+      "id": "54",
+      "Reg": "2022NITSGR1032",
+      "enroll": "2022BITE061",
+      "name": "NEERAJ SHARMA"
+    },
+    {
+      "id": "55",
+      "Reg": "2022NITSGR1033",
+      "enroll": "2022BITE062",
+      "name": "VIVEK RATHORE"
+    },
+    {
+      "id": "56",
+      "Reg": "2022NITSGR1030",
+      "enroll": "2022BITE063",
+      "name": "DADI SASHANK SATYA VISWANADH"
+    },
+    {
+      "id": "57",
+      "Reg": "2022NITSGR1037",
+      "enroll": "2022BITE064",
+      "name": "ENUKONDA VISHNU VARDHAN REDD"
+    },
+    {
+      "id": "58",
+      "Reg": "2022NITSGR0983",
+      "enroll": "2022BITE065",
+      "name": "SANCHARI SINGH"
+    },
+    {
+      "id": "59",
+      "Reg": "2022NITSGR1036",
+      "enroll": "2022BITE066",
+      "name": "SAIF UD DIN"
+    },
+    {
+      "id": "60",
+      "Reg": "2022NITSGR1015",
+      "enroll": "2022BITE067",
+      "name": "CHHAVI SARSWAT"
+    },
+
+    {
+      "id": "61",
+      "Reg": "2022NITSGR1038",
+      "enroll": "2022BITE068",
+      "name": "TEJPAL SINGH"
+    },
+    {
+      "id": "62",
+      "Reg": "2022NITSGR1019",
+      "enroll": "2022BITE069",
+      "name": "YASH SIMAR"
+    },
+    {
+      "id": "63",
+      "Reg": "2022NITSGR1002",
+      "enroll": "2022BITE070",
+      "name": "GOGINA SRIRAM"
+    },
+    {
+      "id": "64",
+      "Reg": "2022NITSGR1013",
+      "enroll": "2022BITE071",
+      "name": "OM GUPTA"
+    },
+    {
+      "id": "65",
+      "Reg": "2022NITSGR1021",
+      "enroll": "2022BITE072",
+      "name": "AVTAR SINGH"
+    },
+    {
+      "id": "66",
+      "Reg": "2022NITSGR1035",
+      "enroll": "2022BITE073",
+      "name": "SLOK KUMAR YASH"
+    },
+    {
+      "id": "67",
+      "Reg": "2022NITSGR1017",
+      "enroll": "2022BITE074",
+      "name": "RAJEEV SHARMA"
+    },
+    {
+      "id": "68",
+      "Reg": "2022NITSGR1039",
+      "enroll": "2022BITE075",
+      "name": "ANUJ PRATAP SINGH"
+    },
+    {
+      "id": "69",
+      "Reg": "2022NITSGR1025",
+      "enroll": "2022BITE076",
+      "name": "SHUBHAM KUMAR"
+    },
+    {
+      "id": "70",
+      "Reg": "2022NITSGR1034",
+      "enroll": "2022BITE077",
+      "name": "VIKAS KUMAR"
+    },
+    {
+      "id": "71",
+      "Reg": "2022NITSGR1016",
+      "enroll": "2022BITE078",
+      "name": "OMPRAKASH"
+    },
+    {
+      "id": "72",
+      "Reg": "2022NITSGR1024",
+      "enroll": "2022BITE079",
+      "name": "DIVYANSH RADHA"
+    },
+    {
+      "id": "73",
+      "Reg": "2022NITSGR1041",
+      "enroll": "2022BITE080",
+      "name": "AYASHA NEERAJ"
+    },
+    {
+      "id": "74",
+      "Reg": "2022NITSGR1042",
+      "enroll": "2022BITE081",
+      "name": "PAVAN GARG"
+    },
+    {
+      "id": "75",
+      "Reg": "2022NITSGR1022",
+      "enroll": "2022BITE082",
+      "name": "SALLANGI ROHITH"
+    },
+    {
+      "id": "76",
+      "Reg": "2022NITSGR1040",
+      "enroll": "2022BITE083",
+      "name": "TEJAL KUMARI"
+    },
+    {
+      "id": "77",
+      "Reg": "2022NITSGR1043",
+      "enroll": "2022BITE084",
+      "name": "SWAPNIL GAUTAM"
+    },
+    {
+      "id": "78",
+      "Reg": "2022NITSGR1027",
+      "enroll": "2022BITE085",
+      "name": "SAGAR"
+    }
+  ],
+
+  "2021": [
+    {
+      "id": "1",
+      "name": "SYED MINAM SHAH",
+      "enroll": "2021BITE003",
+      "Reg": "2021NITSGR0633"
+    },
+    {
+      "id": "2",
+      "name": "MIR AATIF RAFIQ",
+      "enroll": "2021BITE004",
+      "Reg": "2021NITSGR0634"
+    },
+    {
+      "id": "3",
+      "name": "HARSH VARDHAN SINGH",
+      "enroll": "2021BITE005",
+      "Reg": "2021NITSGR0635"
+    },
+    {
+      "id": "4",
+      "name": "BABA ADIL NAIK",
+      "enroll": "2021BITE006",
+      "Reg": "2021NITSGR0636"
+    },
+    {
+      "id": "5",
+      "name": "ABDUL MUQSIT ZARGAR",
+      "enroll": "2021BITE007",
+      "Reg": "2021NITSGR0637"
+    },
+    {
+      "id": "6",
+      "name": "SALIQ NISSAR BHAT",
+      "enroll": "2021BITE008",
+      "Reg": "2021NITSGR0638"
+    },
+    {
+      "id": "7",
+      "name": "ADITYA SINGH",
+      "enroll": "2021BITE009",
+      "Reg": "2021NITSGR0639"
+    },
+    {
+      "id": "8",
+      "name": "ABHISHEK SINGH",
+      "enroll": "2021BITE010",
+      "Reg": "2021NITSGR0640"
+    },
+    {
+      "id": "9",
+      "name": "SHUBHAM",
+      "enroll": "2021BITE011",
+      "Reg": "2021NITSGR0641"
+    },
+    {
+      "id": "10",
+      "name": "SHASHWAT SARAN",
+      "enroll": "2021BITE012",
+      "Reg": "2021NITSGR0642"
+    },
+    {
+      "id": "11",
+      "name": "HARRIS GULZAR",
+      "enroll": "2021BITE013",
+      "Reg": "2021NITSGR0643"
+    },
+    {
+      "id": "12",
+      "name": "SHUBAM SHARMA",
+      "enroll": "2021BITE014",
+      "Reg": "2021NITSGR0644"
+    },
+    {
+      "id": "13",
+      "name": "SHAH INAM UL HAQ",
+      "enroll": "2021BITE015",
+      "Reg": "2021NITSGR0645"
+    },
+    {
+      "id": "14",
+      "name": "SUHAIL HAMID SHEIKH",
+      "enroll": "2021BITE016",
+      "Reg": "2021NITSGR0646"
+    },
+    {
+      "id": "15",
+      "name": "SAKSHAM SHARMA",
+      "enroll": "2021BITE017",
+      "Reg": "2021NITSGR0647"
+    },
+    {
+      "id": "16",
+      "name": "MUNEEB ILLAHI KHAN",
+      "enroll": "2021BITE018",
+      "Reg": "2021NITSGR0648"
+    },
+    {
+      "id": "17",
+      "name": "MIR TASLEEM",
+      "enroll": "2021BITE019",
+      "Reg": "2021NITSGR0649"
+    },
+    {
+      "id": "18",
+      "name": "RIDDHI",
+      "enroll": "2021BITE020",
+      "Reg": "2021NITSGR0650"
+    },
+    {
+      "id": "19",
+      "name": "ALIZA MUSHTAQ",
+      "enroll": "2021BITE021",
+      "Reg": "2021NITSGR0651"
+    },
+    {
+      "id": "20",
+      "name": "DIYA PURI",
+      "enroll": "2021BITE022",
+      "Reg": "2021NITSGR0652"
+    },
+    {
+      "id": "21",
+      "name": "ANVI VERMA",
+      "enroll": "2021BITE023",
+      "Reg": "2021NITSGR0653"
+    },
+    {
+      "id": "22",
+      "name": "SHEIKH AZAL ABID",
+      "enroll": "2021BITE024",
+      "Reg": "2021NITSGR0654"
+    },
+    {
+      "id": "23",
+      "name": "QAZI IZMA",
+      "enroll": "2021BITE025",
+      "Reg": "2021NITSGR0655"
+    },
+    {
+      "id": "24",
+      "name": "SNIGDHA MAHAJAN",
+      "enroll": "2021BITE026",
+      "Reg": "2021NITSGR0656"
+    },
+    {
+      "id": "25",
+      "name": "IFRAH MANZOOR",
+      "enroll": "2021BITE027",
+      "Reg": "2021NITSGR0657"
+    },
+    {
+      "id": "26",
+      "name": "SYED HANAN SHAKEEL",
+      "enroll": "2021BITE028",
+      "Reg": "2021NITSGR0658"
+    },
+    {
+      "id": "27",
+      "name": "SHIVAM SHARMA",
+      "enroll": "2021BITE029",
+      "Reg": "2021NITSGR0659"
+    },
+    {
+      "id": "28",
+      "name": "PODUGU MANI CHARAN",
+      "enroll": "2021BITE030",
+      "Reg": "2021NITSGR0660"
+    },
+    {
+      "id": "29",
+      "name": "SUMAN KUMAR",
+      "enroll": "2021BITE031",
+      "Reg": "2021NITSGR0661"
+    },
+    {
+      "id": "30",
+      "name": "VINAYAK SINGHAL",
+      "enroll": "2021BITE032",
+      "Reg": "2021NITSGR0662"
+    },
+    {
+      "id": "52",
+      "name": "MOHIT KUMAR",
+      "enroll": "2021BITE054",
+      "Reg": "2021NITSGR0684"
+    },
+    {
+      "id": "53",
+      "name": "SHAKIL KATHAT",
+      "enroll": "2021BITE055",
+      "Reg": "2021NITSGR0685"
+    },
+    {
+      "id": "54",
+      "name": "KREITIKA YADAV",
+      "enroll": "2021BITE056",
+      "Reg": "2021NITSGR0686"
+    },
+    {
+      "id": "55",
+      "name": "POONAM KUMARI",
+      "enroll": "2021BITE057",
+      "Reg": "2021NITSGR0687"
+    },
+    {
+      "id": "56",
+      "name": "SAMEER HAMEED NAJAR",
+      "enroll": "2021BITE058",
+      "Reg": "2021NITSGR0688"
+    },
+    {
+      "id": "57",
+      "name": "SHIVAM PRADHAN",
+      "enroll": "2021BITE059",
+      "Reg": "2021NITSGR0689"
+    },
+    {
+      "id": "58",
+      "name": "SUHAIB AHMAD SALMANI",
+      "enroll": "2021BITE060",
+      "Reg": "2021NITSGR0690"
+    },
+    {
+      "id": "59",
+      "name": "TAWKEER AHMAD",
+      "enroll": "2021BITE061",
+      "Reg": "2021NITSGR0691"
+    },
+    {
+      "id": "60",
+      "name": "WAJID MUSHTAQ TELI",
+      "enroll": "2021BITE062",
+      "Reg": "2021NITSGR0692"
+    },
+    {
+      "id": "61",
+      "name": "RAJES MANNA",
+      "enroll": "2021BITE063",
+      "Reg": "2021NITSGR0693"
+    },
+    {
+      "id": "62",
+      "name": "UMAR ADAB ANSARI",
+      "enroll": "2021BITE064",
+      "Reg": "2021NITSGR0694"
+    },
+    {
+      "id": "63",
+      "name": "TUSHAR VERMA",
+      "enroll": "2021BITE065",
+      "Reg": "2021NITSGR0695"
+    },
+    {
+      "id": "64",
+      "name": "AMAN SEWALEYA",
+      "enroll": "2021BITE066",
+      "Reg": "2021NITSGR0696"
+    },
+    {
+      "id": "65",
+      "name": "ADARSH DEWANAND FULZELE",
+      "enroll": "2021BITE067",
+      "Reg": "2021NITSGR0697"
+    },
+    {
+      "id": "66",
+      "name": "UPPU VAMSI",
+      "enroll": "2021BITE068",
+      "Reg": "2021NITSGR0698"
+    },
+    {
+      "id": "67",
+      "name": "YEDKE VAIBHAV RAMESHWAR",
+      "enroll": "2021BITE069",
+      "Reg": "2021NITSGR0699"
+    },
+    {
+      "id": "68",
+      "name": "ARYAN NARAYAN KUTTARMARE",
+      "enroll": "2021BITE070",
+      "Reg": "2021NITSGR0700"
+    },
+    {
+      "id": "69",
+      "name": "RAKHI",
+      "enroll": "2021BITE071",
+      "Reg": "2021NITSGR0701"
+    },
+    {
+      "id": "70",
+      "name": "KANCHAN MORE",
+      "enroll": "2021BITE072",
+      "Reg": "2021NITSGR0702"
+    },
+    {
+      "id": "71",
+      "name": "KARTIV SHANT",
+      "enroll": "2021BITE073",
+      "Reg": "2021NITSGR0703"
+    },
+    {
+      "id": "72",
+      "name": "ROHINISH.K.SINGH",
+      "enroll": "2021BITE074",
+      "Reg": "2021NITSGR0704"
+    },
+    {
+      "id": "73",
+      "name": "KHUSHI RENU",
+      "enroll": "2021BITE075",
+      "Reg": "2021NITSGR0705"
+    },
+    {
+      "id": "74",
+      "name": "TUSHAR DOGRA",
+      "enroll": "2021BITE076",
+      "Reg": "2021NITSGR0706"
+    },
+    {
+      "id": "75",
+      "name": "LOKESHWAR BHAGAT",
+      "enroll": "2021BITE077",
+      "Reg": "2021NITSGR0707"
+    },
+    {
+      "id": "76",
+      "name": "NISHANT CHANGOTRA",
+      "enroll": "2021BITE078",
+      "Reg": "2021NITSGR0708"
+    },
+    {
+      "id": "77",
+      "name": "RAHUL MEENA",
+      "enroll": "2021BITE079",
+      "Reg": "2021NITSGR0709"
+    },
+    {
+      "id": "78",
+      "name": "SHAKIL HUSSAIN",
+      "enroll": "2021BITE080",
+      "Reg": "2021NITSGR0710"
+    },
+    {
+      "id": "79",
+      "name": "MOHAMMAD TAHIR RAZZA",
+      "enroll": "2021BITE081",
+      "Reg": "2021NITSGR0711"
+    },
+    {
+      "id": "80",
+      "name": "UMAR GEELANI",
+      "enroll": "2021BITE082",
+      "Reg": "2021NITSGR0712"
+    },
+    {
+      "id": "81",
+      "name": "MANUPATI JAIDEEP",
+      "enroll": "2021BITE083",
+      "Reg": "2021NITSGR0713"
+    },
+    {
+      "id": "82",
+      "name": "VISLAVATH PAVANI",
+      "enroll": "2021BITE084",
+      "Reg": "2021NITSGR0714"
+    },
+    {
+      "id": "83",
+      "name": "HAKIMA BANOO",
+      "enroll": "2021BITE085",
+      "Reg": "2021NITSGR0715"
+    },
+    {
+      "id": "84",
+      "name": "ZULFIQAR ALI",
+      "enroll": "2021BITE086",
+      "Reg": "2021NITSGR0716"
+    },
+    {
+      "id": "85",
+      "name": "DANISHTA AKHTER",
+      "enroll": "2021BITE087",
+      "Reg": "2021NITSGR0717"
+    }
+  ],
+
+  "2020": [
+    {
+      "id": "1",
+      "Reg": "2020NITSGR0413",
+      "enroll": "2020BITE001",
+      "name": "JAMEEL KAISAR KHAN",
+      "gender": "MALE"
+    },
+    {
+      "id": "2",
+      "Reg": "2020NITSGR0414",
+      "enroll": "2020BITE002",
+      "name": "SAQIB HUSSAIN GANAIE",
+      "gender": "MALE"
+    },
+    {
+      "id": "3",
+      "Reg": "2020NITSGR0415",
+      "enroll": "2020BITE003",
+      "name": "IRTIQA",
+      "gender": "FEMALE"
+    },
+    {
+      "id": "4",
+      "Reg": "2020NITSGR0416",
+      "enroll": "2020BITE004",
+      "name": "ARPUNIT KOUR",
+      "gender": "FEMALE"
+    },
+    {
+      "id": "5",
+      "Reg": "2020NITSGR0417",
+      "enroll": "2020BITE005",
+      "name": "MANDEEP SINGH",
+      "gender": "MALE"
+    },
+    {
+      "id": "6",
+      "Reg": "2020NITSGR0418",
+      "enroll": "2020BITE006",
+      "name": "PRANAV SANOTRA",
+      "gender": "MALE"
+    },
+    {
+      "id": "7",
+      "Reg": "2020NITSGR0419",
+      "enroll": "2020BITE007",
+      "name": "UDAY BHAN",
+      "gender": "MALE"
+    },
+    {
+      "id": "8",
+      "Reg": "2020NITSGR0420",
+      "enroll": "2020BITE008",
+      "name": "ROHIT SINGH",
+      "gender": "MALE"
+    },
+    {
+      "id": "9",
+      "Reg": "2020NITSGR0421",
+      "enroll": "2020BITE009",
+      "name": "AKARSHIT KUMAR",
+      "gender": "MALE"
+    },
+    {
+      "id": "10",
+      "Reg": "2020NITSGR0422",
+      "enroll": "2020BITE010",
+      "name": "GAURAV MEENA",
+      "gender": "MALE"
+    },
+    {
+      "id": "11",
+      "Reg": "2020NITSGR0423",
+      "enroll": "2020BITE011",
+      "name": "SHAGUN BHATT",
+      "gender": "FEMALE"
+    },
+    {
+      "id": "12",
+      "Reg": "2020NITSGR0424",
+      "enroll": "2020BITE012",
+      "name": "ZEESHAN SHARIF",
+      "gender": "MALE"
+    },
+    {
+      "id": "13",
+      "Reg": "2020NITSGR0425",
+      "enroll": "2020BITE013",
+      "name": "ISHITA SHARMA",
+      "gender": "FEMALE"
+    },
+    {
+      "id": "14",
+      "Reg": "2020NITSGR0697",
+      "enroll": "2020BITE015",
+      "name": "SHAIK ARSH HUSSSAIN",
+      "gender": "MALE"
+    },
+    {
+      "id": "15",
+      "Reg": "2020NITSGR0699",
+      "enroll": "2020BITE016",
+      "name": "ASTITVA MISHRA",
+      "gender": "MALE"
+    },
+    {
+      "id": "16",
+      "Reg": "2020NITSGR0701",
+      "enroll": "2020BITE018",
+      "name": "HARDIK SRIVASTAVA",
+      "gender": "MALE"
+    },
+    {
+      "id": "17",
+      "Reg": "2020NITSGR0705",
+      "enroll": "2020BITE020",
+      "name": "ASHISH KUMAR",
+      "gender": "MALE"
+    },
+    {
+      "id": "18",
+      "Reg": "2020NITSGR0706",
+      "enroll": "2020BITE021",
+      "name": "DEVANSH",
+      "gender": "MALE"
+    },
+    {
+      "id": "19",
+      "Reg": "2020NITSGR0708",
+      "enroll": "2020BITE022",
+      "name": "PARATH SAFAYA",
+      "gender": "MALE"
+    },
+    {
+      "id": "20",
+      "Reg": "2020NITSGR0709",
+      "enroll": "2020BITE023",
+      "name": "HEMANSHU SHARMA",
+      "gender": "MALE"
+    },
+    {
+      "id": "21",
+      "Reg": "2020NITSGR0712",
+      "enroll": "2020BITE025",
+      "name": "MRIDUL SHARMA",
+      "gender": "MALE"
+    },
+    {
+      "id": "22",
+      "Reg": "2020NITSGR0713",
+      "enroll": "2020BITE026",
+      "name": "SHREYA",
+      "gender": "FEMALE"
+    },
+    {
+      "id": "23",
+      "Reg": "2020NITSGR0715",
+      "enroll": "2020BITE027",
+      "name": "KETAN SHARMA",
+      "gender": "MALE"
+    },
+    {
+      "id": "24",
+      "Reg": "2020NITSGR0716",
+      "enroll": "2020BITE028",
+      "name": "FASIL SHAFI",
+      "gender": "MALE"
+    },
+    {
+      "id": "25",
+      "Reg": "2020NITSGR0718",
+      "enroll": "2020BITE029",
+      "name": "AGRIM SANGOTRA",
+      "gender": "MALE"
+    },
+    {
+      "id": "26",
+      "Reg": "2020NITSGR0719",
+      "enroll": "2020BITE030",
+      "name": "ANKITA RAJPUT",
+      "gender": "FEMALE"
+    },
+    {
+      "id": "27",
+      "Reg": "2020NITSGR0721",
+      "enroll": "2020BITE031",
+      "name": "RISHITA SHARMA",
+      "gender": "FEMALE"
+    },
+    {
+      "id": "28",
+      "Reg": "2020NITSGR0723",
+      "enroll": "2020BITE032",
+      "name": "HASEEB HIJAZI KHAN",
+      "gender": "MALE"
+    },
+    {
+      "id": "29",
+      "Reg": "2020NITSGR0724",
+      "enroll": "2020BITE033",
+      "name": "DHANANJAY MAHAJAN",
+      "gender": "MALE"
+    },
+    {
+      "id": "30",
+      "Reg": "2020NITSGR0727",
+      "enroll": "2020BITE034",
+      "name": "ADNAN ALI GANAIE",
+      "gender": "MALE"
+    },
+    {
+      "id": "31",
+      "Reg": "2020NITSGR0729",
+      "enroll": "2020BITE035",
+      "name": "RAVISHTA KOHLI",
+      "gender": "FEMALE"
+    },
+    {
+      "id": "32",
+      "Reg": "2020NITSGR0730",
+      "enroll": "2020BITE036",
+      "name": "JAPSIMAR SOIN",
+      "gender": "FEMALE"
+    },
+    {
+      "id": "33",
+      "Reg": "2020NITSGR0733",
+      "enroll": "2020BITE037",
+      "name": "SYEDA AZHAR FATIMAH",
+      "gender": "FEMALE"
+    },
+    {
+      "id": "34",
+      "Reg": "2020NITSGR0735",
+      "enroll": "2020BITE038",
+      "name": "SADIYA AJAZ CHUROO",
+      "gender": "FEMALE"
+    },
+    {
+      "id": "35",
+      "Reg": "2020NITSGR0736",
+      "enroll": "2020BITE039",
+      "name": "SHAHZAREENA",
+      "gender": "FEMALE"
+    },
+    {
+      "id": "36",
+      "Reg": "2020NITSGR0738",
+      "enroll": "2020BITE040",
+      "name": "ADARSH KUMAR",
+      "gender": "MALE"
+    },
+    {
+      "id": "37",
+      "Reg": "2020NITSGR0740",
+      "enroll": "2020BITE041",
+      "name": "ABHAY GARG",
+      "gender": "MALE"
+    },
+    {
+      "id": "38",
+      "Reg": "2020NITSGR0741",
+      "enroll": "2020BITE042",
+      "name": "SARVESHWARA MISHRA",
+      "gender": "MALE"
+    },
+    {
+      "id": "39",
+      "Reg": "2020NITSGR0743",
+      "enroll": "2020BITE043",
+      "name": "ARYAN PATEL",
+      "gender": "MALE"
+    },
+    {
+      "id": "40",
+      "Reg": "2020NITSGR0744",
+      "enroll": "2020BITE044",
+      "name": "RITURAJ KUMAR SINGH",
+      "gender": "MALE"
+    },
+    {
+      "id": "41",
+      "Reg": "2020NITSGR0746",
+      "enroll": "2020BITE045",
+      "name": "GADE VENKATA KASI SUNIL",
+      "gender": "MALE"
+    },
+    {
+      "id": "42",
+      "Reg": "2020NITSGR0747",
+      "enroll": "2020BITE046",
+      "name": "ADITYA GUPTA",
+      "gender": "MALE"
+    },
+    {
+      "id": "43",
+      "Reg": "2020NITSGR0748",
+      "enroll": "2020BITE047",
+      "name": "HARSH RAJ",
+      "gender": "MALE"
+    },
+    {
+      "id": "44",
+      "Reg": "2020NITSGR0749",
+      "enroll": "2020BITE048",
+      "name": "HARSHIT DUBEY",
+      "gender": "MALE"
+    },
+    {
+      "id": "45",
+      "Reg": "2020NITSGR0752",
+      "enroll": "2020BITE050",
+      "name": "YASIR MOHI UD DIN",
+      "gender": "MALE"
+    },
+    {
+      "id": "46",
+      "Reg": "2020NITSGR0755",
+      "enroll": "2020BITE051",
+      "name": "DEEPAK KACHHOT",
+      "gender": "MALE"
+    },
+    {
+      "id": "47",
+      "Reg": "2020NITSGR0756",
+      "enroll": "2020BITE052",
+      "name": "ROHIT PRAJAPAT",
+      "gender": "MALE"
+    },
+    {
+      "id": "48",
+      "Reg": "2020NITSGR0758",
+      "enroll": "2020BITE053",
+      "name": "RAHUL SINGH",
+      "gender": "MALE"
+    },
+    {
+      "id": "49",
+      "Reg": "2020NITSGR0759",
+      "enroll": "2020BITE054",
+      "name": "DOKIBURRA ISAIAH PAULSON",
+      "gender": "MALE"
+    },
+    {
+      "id": "50",
+      "Reg": "2020NITSGR0761",
+      "enroll": "2020BITE055",
+      "name": "SRINATH RAKESH YATAWAR",
+      "gender": "MALE"
+    },
+    {
+      "id": "51",
+      "Reg": "2020NITSGR0762",
+      "enroll": "2020BITE056",
+      "name": "KUNDAN KUMAR YADAV",
+      "gender": "MALE"
+    },
+    {
+      "id": "52",
+      "Reg": "2020NITSGR0763",
+      "enroll": "2020BITE057",
+      "name": "DINESH DHIDHARIYA",
+      "gender": "MALE"
+    },
+    {
+      "id": "53",
+      "Reg": "2020NITSGR0764",
+      "enroll": "2020BITE058",
+      "name": "ANKIT KUMAR",
+      "gender": "MALE"
+    },
+    {
+      "id": "54",
+      "Reg": "2020NITSGR0765",
+      "enroll": "2020BITE059",
+      "name": "YACHALAPU LOVA SAI PRASANTH",
+      "gender": "MALE"
+    },
+    {
+      "id": "55",
+      "Reg": "2020NITSGR0766",
+      "enroll": "2020BITE060",
+      "name": "LANKA KOUSHIK",
+      "gender": "MALE"
+    },
+    {
+      "id": "56",
+      "Reg": "2020NITSGR0767",
+      "enroll": "2020BITE061",
+      "name": "STUTI SINGH",
+      "gender": "FEMALE"
+    },
+    {
+      "id": "57",
+      "Reg": "2020NITSGR0768",
+      "enroll": "2020BITE062",
+      "name": "GURUJU AKHILA",
+      "gender": "FEMALE"
+    },
+    {
+      "id": "58",
+      "Reg": "2020NITSGR0769",
+      "enroll": "2020BITE063",
+      "name": "ISMAIL BASHIR",
+      "gender": "MALE"
+    },
+    {
+      "id": "59",
+      "Reg": "2020NITSGR0770",
+      "enroll": "2020BITE064",
+      "name": "SHIVAM SINGH KHATRI",
+      "gender": "MALE"
+    },
+    {
+      "id": "60",
+      "Reg": "2020NITSGR0771",
+      "enroll": "2020BITE065",
+      "name": "ZAHOOR AHMAD SHERGUJRY",
+      "gender": "MALE"
+    },
+    {
+      "id": "61",
+      "Reg": "2020NITSGR0772",
+      "enroll": "2020BITE066",
+      "name": "SHAHID MUSHTAQ",
+      "gender": "MALE"
+    },
+    {
+      "id": "62",
+      "Reg": "2020NITSGR0773",
+      "enroll": "2020BITE067",
+      "name": "RAYEES ZAHOOR",
+      "gender": "MALE"
+    },
+    {
+      "id": "63",
+      "Reg": "2020NITSGR0776",
+      "enroll": "2020BITE068",
+      "name": "ABHISHIEK",
+      "gender": "MALE"
+    },
+    {
+      "id": "64",
+      "Reg": "2020NITSGR0777",
+      "enroll": "2020BITE069",
+      "name": "KUNDAN KUMAR",
+      "gender": "MALE"
+    },
+    {
+      "id": "65",
+      "Reg": "2020NITSGR0779",
+      "enroll": "2020BITE070",
+      "name": "BHAGAT SNEHANKIT NARENDRA",
+      "gender": "MALE"
+    },
+    {
+      "id": "66",
+      "Reg": "2020NITSGR0780",
+      "enroll": "2020BITE071",
+      "name": "RAHUL KUMAR",
+      "gender": "MALE"
+    },
+    {
+      "id": "67",
+      "Reg": "2020NITSGR0782",
+      "enroll": "2020BITE072",
+      "name": "UDAYVEER SINGH",
+      "gender": "MALE"
+    },
+    {
+      "id": "68",
+      "Reg": "2020NITSGR0783",
+      "enroll": "2020BITE073",
+      "name": "MOUSUMI BISWAS",
+      "gender": "FEMALE"
+    },
+    {
+      "id": "69",
+      "Reg": "2020NITSGR0785",
+      "enroll": "2020BITE074",
+      "name": "SONIA",
+      "gender": "FEMALE"
+    },
+    {
+      "id": "70",
+      "Reg": "2020NITSGR0787",
+      "enroll": "2020BITE075",
+      "name": "SOMMIT THAPPA",
+      "gender": "MALE"
+    },
+    {
+      "id": "71",
+      "Reg": "2020NITSGR0788",
+      "enroll": "2020BITE076",
+      "name": "TANIA",
+      "gender": "FEMALE"
+    },
+    {
+      "id": "72",
+      "Reg": "2020NITSGR0789",
+      "enroll": "2020BITE077",
+      "name": "VIKRAM DIGRA",
+      "gender": "MALE"
+    },
+    {
+      "id": "73",
+      "Reg": "2020NITSGR0790",
+      "enroll": "2020BITE078",
+      "name": "AKANKSHA KUMARI",
+      "gender": "FEMALE"
+    },
+    {
+      "id": "74",
+      "Reg": "2020NITSGR0792",
+      "enroll": "2020BITE079",
+      "name": "GOUTAM MECH",
+      "gender": "MALE"
+    },
+    {
+      "id": "75",
+      "Reg": "2020NITSGR0794",
+      "enroll": "2020BITE080",
+      "name": "RATHLAVATH GANESH",
+      "gender": "MALE"
+    },
+    {
+      "id": "76",
+      "Reg": "2020NITSGR0797",
+      "enroll": "2020BITE082",
+      "name": "RISHAV HODOKER",
+      "gender": "MALE"
+    },
+    {
+      "id": "77",
+      "Reg": "2020NITSGR0798",
+      "enroll": "2020BITE083",
+      "name": "PHUNTSOG NAMGYAL",
+      "gender": "MALE"
+    },
+    {
+      "id": "78",
+      "Reg": "2020NITSGR1088",
+      "enroll": "2020BITE084",
+      "name": "MUZAFFAR ALI",
+      "gender": "MALE"
+    },
+    {
+      "id": "79",
+      "Reg": "2020NITSGR1130",
+      "enroll": "2020BITE085",
+      "name": "MOIN BASHIR ZARGAR",
+      "gender": "MALE"
+    },
+    {
+      "id": "80",
+      "Reg": "2020NITSGR1131",
+      "enroll": "2020BITE086",
+      "name": "KAJAL KUMARI",
+      "gender": "FEMALE"
+    },
+    {
+      "id": "81",
+      "Reg": "2020NITSGR0905",
+      "enroll": "2020BITE087",
+      "name": "AYUSH KUMAR DUBEY",
+      "gender": "MALE"
+    },
+    {
+      "id": "82",
+      "Reg": "2020NITSGR0933",
+      "enroll": "2020BITE088",
+      "name": "ANURAG YADAV",
+      "gender": "MALE"
+    },
+    {
+      "id": "83",
+      "Reg": "2020NITSGR0909",
+      "enroll": "2020BITE089",
+      "name": "SHUBHAM KUMAR",
+      "gender": "MALE"
+    },
+    {
+      "id": "84",
+      "Reg": "2020NITSGR0615",
+      "enroll": "2020BITE090",
+      "name": "ABHISHEK RAJPUT",
+      "gender": "MALE"
+    },
+    {
+      "id": "85",
+      "Reg": "2020NITSGR0518",
+      "enroll": "2020BITE091",
+      "name": "JAMEE BASHIR",
+      "gender": "MALE"
+    },
+    {
+      "id": "86",
+      "Reg": "2020NITSGR0245",
+      "enroll": "2020BITE092",
+      "name": "ASRAR UL HAQ",
+      "gender": "MALE"
+    }
+  ],
+  "2019": [],
+  "2018": [],
+  "2017": [],
+  "2016": [],
+  "2015": []
+}

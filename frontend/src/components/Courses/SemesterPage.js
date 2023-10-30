@@ -70,7 +70,7 @@ const SemesterPage = () => {
   async function fetchCourses() {
     try {
       const response = await axios.get(
-        `https://it-departmat-website-nit-srinagar-rnu1.vercel.app/api/semester/?semesterId=${semesterId}`
+        `http://localhost:8000/api/semester/?semesterId=${semesterId}`
       );
       const data = response.data;
       setCourses(data);
@@ -84,7 +84,7 @@ const SemesterPage = () => {
   async function fetchAssignments() {
     try {
       const assignment = await axios.get(
-        `/api/showassignment/?cid=${selectedCourse}`
+        `http://localhost:8000/api/showassignment/?cid=${selectedCourse}`
       );
       setAssignments(assignment.data);
     } catch (error) {
@@ -95,7 +95,9 @@ const SemesterPage = () => {
   async function fetchNotes() {
     setLoading(true);
     try {
-      const notes = await axios.get(`/api/shownotes/?cid=${selectedCourse}`);
+      const notes = await axios.get(
+        `http://localhost:8000/api/shownotes/?cid=${selectedCourse}`
+      );
       setNotes(notes.data);
       if (notes.status === 200) {
         setTimeout(() => {
@@ -136,7 +138,7 @@ const SemesterPage = () => {
     console.log(assignment_id);
     try {
       const response = await axios.post(
-        "/api/assignmentdownload/",
+        "http://localhost:8000/api/assignmentdownload/",
         { aid: assignment_id },
         { responseType: "blob" } // Make sure to set responseType to 'blob'
       );

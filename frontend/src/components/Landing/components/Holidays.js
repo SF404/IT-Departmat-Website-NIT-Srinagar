@@ -1,11 +1,12 @@
 import { Box, CircularProgress, Flex, Text, VStack } from '@chakra-ui/react'
 import React from 'react'
+import { BsCalendar2Event } from 'react-icons/bs'
 
 function Holidays({ holidays }) {
     return (
         <Box>
             <div className="h-title" style={{ marginBottom: "0.5em" }}>
-                <h1>HOLIDAYS {"(" + ")"}</h1>
+                <h1  className='h-title-icon'>HOLIDAYS</h1>
             </div>
             <VStack margin={"1em"} >
                 {holidays ? (holidays.map((item, index) => (

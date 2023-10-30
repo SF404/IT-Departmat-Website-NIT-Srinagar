@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./Home.css";
 import video_from_hod from "./../../assets/videos/from-hod.mp4";
-
 import UpcomingEvents from "./components/UpcomingEvents";
 import LatestNews from "./components/LatestNews";
 import AnnouncementRibbon from "./components/AnnouncementRibbon";
@@ -72,9 +71,9 @@ function Home() {
           <Center>
             <Box width={{ base: "100%", md: "80%" }}>
               <Announcements />
-              <SimpleGrid columns={[1, 2, 3]}>
+              <SimpleGrid columns={[1, 1, 3]}>
                 <LatestNews news={news} />
-                {/* <UpcomingEvents events={events} holidays={holidays} /> */}
+                <UpcomingEvents events={events} holidays={holidays} />
                 <Box gridColumn={"span 2"}></Box>
               </SimpleGrid>
             </Box>

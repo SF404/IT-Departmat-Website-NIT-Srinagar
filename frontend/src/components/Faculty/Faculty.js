@@ -1,8 +1,33 @@
 import { EmailIcon, PhoneIcon } from "@chakra-ui/icons";
-import janibulbashirImage from "./JanibSir.jpg";
 import axios from "axios";
+import bannerImage from "./../../assets/images/image.webp";
 import { AiOutlineMail } from "react-icons/ai";
-import { Avatar, Badge, Button, Card, CardBody, CardFooter, CardHeader, Center, Divider, Flex, Heading, IconButton, Popover, PopoverArrow, PopoverBody, PopoverCloseButton, PopoverContent, PopoverHeader, PopoverTrigger, Tag, Text, Tooltip, VStack, WrapItem, } from "@chakra-ui/react";
+import {
+  Avatar,
+  Badge,
+  Button,
+  Card,
+  CardBody,
+  CardFooter,
+  CardHeader,
+  Center,
+  Divider,
+  Flex,
+  Heading,
+  IconButton,
+  Popover,
+  PopoverArrow,
+  PopoverBody,
+  PopoverCloseButton,
+  PopoverContent,
+  PopoverHeader,
+  PopoverTrigger,
+  Tag,
+  Text,
+  Tooltip,
+  VStack,
+  WrapItem,
+} from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { useToast } from "@chakra-ui/react";
 import Typewriter from "typewriter-effect";
@@ -64,10 +89,24 @@ function Faculty() {
 
   return (
     <>
-      <VStack p={4} bg={"whitesmoke"}>
-        <Text fontWeight={"bold"} color={"blue.900"} fontSize={"xl"}>
-          Faculty Members, Department of Information Technology
-        </Text>
+      <VStack bg={"whitesmoke"}>
+        <VStack
+          w={"full"}
+          h={"200px"}
+          bg={"brown"}
+          color={"white"}
+          p={6}
+          backgroundImage={bannerImage}
+          backgroundSize="cover"
+          backgroundPosition="center"
+          backgroundRepeat="no-repeat"
+          justifyContent="center"
+          textShadow={"0 0 24px black"}
+        >
+          <Heading as="h2" size="xl" mb={2}>
+            Faculty Members, Department of Information Technology
+          </Heading>
+        </VStack>
         <VStack w={"80%"} spacing={6}>
           <Divider borderColor={"gray.400"}></Divider>
           {faculty.map((item) => (
@@ -83,7 +122,19 @@ function Faculty() {
               <WrapItem ml={2}>
                 <Popover placement="top-end">
                   <PopoverTrigger>
-                    <Avatar size="2xl" name={item.name} src={item.profile_photo} onMouseEnter={(e) => { setShowText(true); e.target.click(); }} onMouseLeave={(e) => { setShowText(false); e.target.click(); }} />
+                    <Avatar
+                      size={"2xl"}
+                      name={item.name}
+                      src={item.profile_photo}
+                      onMouseEnter={(e) => {
+                        setShowText(true);
+                        e.target.click();
+                      }}
+                      onMouseLeave={(e) => {
+                        setShowText(false);
+                        e.target.click();
+                      }}
+                    />
                   </PopoverTrigger>
                   <PopoverContent
                     boxShadow="0px 7px 29px 0px rgba(100, 100, 111, 0.2)"

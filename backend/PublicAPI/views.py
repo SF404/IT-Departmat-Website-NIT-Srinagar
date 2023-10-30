@@ -1,5 +1,6 @@
 from .serializers import *
 from IT_DEPARTMENT.models import *
+from PublicAPI.models import *
 from rest_framework import viewsets
 from rest_framework.views import APIView
 from rest_framework import status,viewsets
@@ -14,10 +15,31 @@ from django.http import JsonResponse
 class TeacherView(viewsets.ModelViewSet):
     serializer_class = TeacherSerializer
     def get_queryset(self):
+        id = self.request.query_params.get('Id')
+        if id :
+            teacher = Teacher.objects.filter(id=id)
+            return teacher
         queryset = Teacher.objects.all()
         print("Number of items in queryset:", queryset.count())
         return queryset
+
+
+class PhdStudentView(viewsets.ModelViewSet):
+    serializer_class = PhdStudentSerializer
+    def get_queryset(self):
+        queryset = Phd_Student.objects.all()
+        print("Number of items in queryset:", queryset.count())
+        return queryset
     
+
+class allCourseGet(viewsets.ModelViewSet):
+    serializer_class = CourseSerializer
+    def get_queryset(self):
+        queryset = Course.objects.all()
+        print("Number of items in queryset:", queryset.count())
+        return queryset
+    
+
 class SemesterCourseView(viewsets.ModelViewSet):
     serializer_class = CourseSerializer
     def get_queryset(self):

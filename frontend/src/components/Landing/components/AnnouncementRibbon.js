@@ -8,7 +8,7 @@ function AnnouncementRibbon() {
                 <div className='m-title'>
                     Announcements
                 </div>
-                <marquee behavior="scroll" direction="left" className='alerts' >
+                <marquee behavior="scroll" scrollamount="5" loop="-1" direction="left" className='alerts' >
                     <div>
                         <p><FcAdvertising style={{ marginTop: '3px' }} /> Lorem ipsum doloribus ab laboriosam ea reprehenderit delectus ipsa. Facilis, quo!</p>
                         <p><FcAdvertising style={{ marginTop: '3px' }} /> Lorem ipsum doloribus ab laboriosam ea reprehenderit delectus ipsa. Facilis, quo!</p>

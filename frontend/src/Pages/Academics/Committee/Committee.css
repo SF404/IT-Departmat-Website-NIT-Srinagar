@@ -1,0 +1,56 @@
+/* Add some general styling for your page */
+body {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+.table-row:hover {
+  color: blue;
+  cursor: pointer; /* Optional: Change the cursor to a pointer on hover */
+}
+
+.committe_class h1 {
+  text-align: center;
+  margin: 20px 0;
+  font-size: large;
+  font-weight: 500;
+  color: #000000fc;
+}
+
+/* Add responsive styling for the table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 auto;
+  color: #000;
+}
+
+table,
+th,
+td {
+  border: 1px solid #000;
+  border-color: blue;
+}
+
+th,
+td {
+  padding: 10px;
+  text-align: left;
+}
+
+/* Define a media query for small screens */
+@media (max-width: 768px) {
+  table {
+    border: 0; /* Remove table borders on small screens */
+    width: 100%;
+  }
+
+  th,
+  td {
+    display: block;
+  }
+
+  th {
+    text-align: center;
+  }
+}

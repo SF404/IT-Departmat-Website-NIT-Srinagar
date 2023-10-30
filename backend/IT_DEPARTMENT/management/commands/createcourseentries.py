@@ -1,5 +1,6 @@
 from django.core.management.base import BaseCommand
 from IT_DEPARTMENT.models import Course,Teacher
+from PublicAPI.models import Phd_Student
 from django.core.management.base import BaseCommand
 
 class Command(BaseCommand):
@@ -79,7 +80,37 @@ class Command(BaseCommand):
                 profile_photo="teacher_profile/AroojMam.jpeg",
                 research_field="Tech Team"
             )
-            
+
+            Phd_Student.objects.create(
+                phd_student_id ="kalimullahlone@gmail.com",
+                enroll="2018PHAITE003",
+                name = "Kalimullah Lone",
+                description = " ",
+                email = "kalimullahlone@gmail.com",
+                phone=123451,
+                profile_photo="phd_student/kalimullah.jpg",
+                research_field="Big Data, Cloud Computing"
+            )
+            Phd_Student.objects.create(
+                phd_student_id ="jehangirnit@gmail.com",
+                enroll=" 2018PHAITE004",
+                name = "Jehangir Ali",
+                description = " ",
+                email = "jehangirnit@gmail.com",
+                phone=123452,
+                profile_photo="phd_student/jahangir.jpg",
+                research_field="Blockchain and Internet of Things"
+            )
+            Phd_Student.objects.create(
+                phd_student_id ="njkhan91@gmail.com",
+                enroll="2018PHAITE001",
+                name = "Nadeem Yousuf",
+                description = " ",
+                email = "njkhan91@gmail.com",
+                phone=123453,
+                profile_photo="phd_student/nadeem.jpg",
+                research_field="Machine Learning"
+            )
             Course.objects.create(
                 course_id ="IT_701",
                 name = "Wireless & Mobile Communication",

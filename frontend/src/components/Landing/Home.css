@@ -54,8 +54,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    /* backdrop-filter: blur(7px); */
-
 }
 
 .bannerContent h1 {
@@ -80,7 +78,6 @@
     justify-content: center;
     grid-gap: 1.5em;
     margin: 2em 1em;
-
 }
 
 
@@ -145,7 +142,6 @@
 
 .hod-video {
     border-radius: 1em;
-    /* box-shadow: 0 0 12px #b2b9e1; */
     border: 2px solid #b2b9e1;;
 }
 
@@ -169,7 +165,6 @@
     gap: 1em;
     flex-direction: column;
     align-items: center;
-    /* border: 1px solid #d8dcf0; */
     background-color: transparent;
     min-height: fit-content;
 }
@@ -182,7 +177,6 @@
     align-items: center;
     justify-content: flex-start;
     background-color: white;
-    /* border: 1px solid #d8dcf0; */
     box-shadow: 0 0 4px rgba(0,0,0,0.1);
 
 }

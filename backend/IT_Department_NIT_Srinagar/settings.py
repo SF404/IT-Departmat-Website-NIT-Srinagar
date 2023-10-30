@@ -15,7 +15,7 @@ SECRET_KEY = 'django-insecure-xw7z@-$k#9)$nco33_ks3!(s(w6avv0-_58ve(5@04rf6mq#*@
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['.vercel.app', '.now.sh', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -78,7 +78,7 @@ DATABASES = {
         'NAME': 'it_department_db',
         'USERNAME':'rajesmanna',
         'PASSWORD':'admin',
-        'HOST':'it-departmat-website-nit-srinagar-rnu1.vercel.app',
+        'HOST':'localhost',
         'POST':'5432',
     }
 }
@@ -124,8 +124,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'frontend/build/static')]
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build')
 
 # Default primary key field type

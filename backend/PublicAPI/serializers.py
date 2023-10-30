@@ -3,6 +3,7 @@ from rest_framework import serializers
  
 # import the todo data model
 from IT_DEPARTMENT.models import *
+from PublicAPI.models import *
  
 # create a serializer class
 class TeacherSerializer(serializers.ModelSerializer):
@@ -31,3 +32,9 @@ class TeacherMails(serializers.ModelSerializer):
     class Meta:
         model = Teacher
         fields = ('email','user')
+
+
+class PhdStudentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Phd_Student
+        fields = '__all__'

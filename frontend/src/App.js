@@ -19,6 +19,11 @@ import Coordinators from "./Pages/Academics/Coordinators/Coordinators";
 import Committee from "./Pages/Academics/Committee/Committee";
 import DepartmentNewsletter from "./Pages/Academics/Department Newsletter/DepartmentNewsletter";
 import ImageDisplay from "./components/DisplayImage";
+import BTechStudents from "./components/Faculty/btechstudent";
+import PhdStudents from "./components/Faculty/phdstudent";
+import Areas from "./Pages/Research/Areas";
+import Papers from "./Pages/Research/Papers";
+import Labs from "./Pages/Research/Labs";
 
 function App() {
   return (
@@ -34,6 +39,8 @@ function App() {
           <Route path="request" element={<Request_page />}></Route>
           <Route path="semester/:semesterId" element={<SemesterPage />} />
           <Route path="degree-program" element={<DegreePrograms />}></Route>
+          <Route path="phd-students" element={<PhdStudents />}></Route>
+          <Route path="btech-students" element={<BTechStudents />}></Route>
           <Route path="vision-mission" element={<VissionMission />}></Route>
           <Route path="outcomes" element={<Outcomes />}></Route>
           <Route path="courses" element={<Courses />}></Route>
@@ -41,6 +48,10 @@ function App() {
           <Route path="committee" element={<Committee />}></Route>
           <Route path="newsletter" element={<DepartmentNewsletter />}></Route>
           <Route path="image" element={<ImageDisplay />}></Route>
+          <Route path="image" element={<ImageDisplay />}></Route>
+          <Route path="areas" element={<Areas />}></Route>
+          <Route path="papers" element={<Papers />}></Route>
+          <Route path="labs" element={<Labs />}></Route>
           <Route path="*" element={<NotFound />}></Route>
         </Route>
         <Route path="dashboard" element={<Dashboard />}></Route>

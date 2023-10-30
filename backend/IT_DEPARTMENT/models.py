@@ -14,7 +14,6 @@ class Teacher(models.Model):
     profile_photo = models.ImageField(upload_to='teacher_profile/')
     user = models.ForeignKey(User, on_delete=models.CASCADE,null=True,blank=True)
 
-
 class Course(models.Model):
     course_id = models.CharField(max_length=255, unique=True)
     name = models.CharField(max_length=255)
