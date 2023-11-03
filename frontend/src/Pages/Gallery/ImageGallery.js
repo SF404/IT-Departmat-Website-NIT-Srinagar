@@ -157,7 +157,6 @@ function ImageGallery() {
                                         onClick={()=>expandImage(item.src, index)}
                                     />
                                 </Box>
-
                             ))
                         }
                     </Masonry>

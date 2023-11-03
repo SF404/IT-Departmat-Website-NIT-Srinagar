@@ -1,37 +1,12 @@
-import { EmailIcon, PhoneIcon } from "@chakra-ui/icons";
+import { EmailIcon, ExternalLinkIcon, LinkIcon, PhoneIcon } from "@chakra-ui/icons";
 import axios from "axios";
 import bannerImage from "./../../assets/images/image.webp";
-import { AiOutlineMail } from "react-icons/ai";
-import {
-  Avatar,
-  Badge,
-  Button,
-  Card,
-  CardBody,
-  CardFooter,
-  CardHeader,
-  Center,
-  Divider,
-  Flex,
-  Heading,
-  IconButton,
-  Popover,
-  PopoverArrow,
-  PopoverBody,
-  PopoverCloseButton,
-  PopoverContent,
-  PopoverHeader,
-  PopoverTrigger,
-  Tag,
-  Text,
-  Tooltip,
-  VStack,
-  WrapItem,
-} from "@chakra-ui/react";
+import { Avatar, Badge, Box, Button, Card, CardBody, CardFooter, CardHeader, Center, Divider, Flex, HStack, Heading, Icon, IconButton, Popover, PopoverArrow, PopoverBody, PopoverCloseButton, PopoverContent, PopoverHeader, PopoverTrigger, Stack, Tag, Text, Tooltip, VStack, WrapItem } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { useToast } from "@chakra-ui/react";
 import Typewriter from "typewriter-effect";
-import Footer from "../Layout/Footer";
+import { FaGlobe } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 
 function Faculty() {
   const [faculty, setFaculty] = useState([
@@ -49,11 +24,10 @@ function Faculty() {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(
-        "http://localhost:8000/api/public/getteacher/"
-      );
-      const teachers = response.data; // Assuming the API returns an array of teachers
-      setFaculty(teachers); // Update the state with the fetched data
+      const response = await axios.get("/api/public/getteacher/");
+      const teachers = response.data;
+      console.log(response.data)
+      setFaculty(teachers);
       console.log(teachers[0]);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -89,126 +63,43 @@ function Faculty() {
 
   return (
     <>
-      <VStack bg={"whitesmoke"}>
-        <VStack
-          w={"full"}
-          h={"200px"}
-          bg={"brown"}
-          color={"white"}
-          p={6}
-          backgroundImage={bannerImage}
-          backgroundSize="cover"
-          backgroundPosition="center"
-          backgroundRepeat="no-repeat"
-          justifyContent="center"
-          textShadow={"0 0 24px black"}
-        >
-          <Heading as="h2" size="xl" mb={2}>
-            Faculty Members, Department of Information Technology
-          </Heading>
+      <VStack>
+        <VStack w={"full"} h={"200px"} bg={"brown"} color={"white"} p={6} backgroundImage={bannerImage} backgroundSize="cover" backgroundPosition="center" backgroundRepeat="no-repeat" justifyContent="center" textShadow={"0 0 24px black"} >
+          <Heading as="h2" size="xl" mb={2}>Faculty Members, Department of Information Technology</Heading>
         </VStack>
-        <VStack w={"80%"} spacing={6}>
+        <VStack w={{ base: "100%", md: '80%' }} spacing={6} p={4}>
           <Divider borderColor={"gray.400"}></Divider>
-          {faculty.map((item) => (
-            <Flex
-              w={"full"}
-              p={2}
-              boxShadow="0px 4px 16px rgba(149, 157, 165, 0.2)"
-              borderRadius={4}
-              key={item.id}
-              bg={"white"}
-              userSelect={"none"}
-            >
-              <WrapItem ml={2}>
-                <Popover placement="top-end">
-                  <PopoverTrigger>
-                    <Avatar
-                      size={"2xl"}
-                      name={item.name}
-                      src={item.profile_photo}
-                      onMouseEnter={(e) => {
-                        setShowText(true);
-                        e.target.click();
-                      }}
-                      onMouseLeave={(e) => {
-                        setShowText(false);
-                        e.target.click();
-                      }}
-                    />
-                  </PopoverTrigger>
-                  <PopoverContent
-                    boxShadow="0px 7px 29px 0px rgba(100, 100, 111, 0.2)"
-                    _focus={{ outline: "none", boxShadow: "none" }}
-                    borderColor={"#9fa8da"}
-                    bg={"#c5cae8"}
-                    fontFamily={"monospace"}
-                    borderRadius={10}
-                    color="darkblue"
-                  >
-                    <PopoverArrow bg={"#c5cae8"} />
-                    <PopoverBody _focus={{ outline: "none" }}>
-                      {showText && (
-                        <Typewriter
-                          options={{
-                            strings: [
-                              `Hi, I'm ${item.name}`,
-                              item.speciality,
-                              "Thank You",
-                            ],
-                            autoStart: true,
-                            loop: true,
-                            delay: 50,
-                            deleteSpeed: 10,
-                          }}
-                        />
-                      )}
-                    </PopoverBody>
-                  </PopoverContent>
-                </Popover>
-              </WrapItem>
 
-              <Card shadow={"none"}>
-                <CardHeader py={2}>
-                  <Heading size="md">{item.name}</Heading>
-                  <Badge colorScheme="purple">{item.description}</Badge>
-                </CardHeader>
-                <CardBody py={0}>
-                  <Badge>Phd</Badge>
-                  <Text px={1}>{item.research_field}</Text>
-                </CardBody>
-                <CardFooter>
-                  <Tooltip
-                    hasArrow
-                    label={item.phone}
-                    bg="gray.300"
-                    color="black"
-                  >
-                    <IconButton
-                      colorScheme="green"
-                      aria-label="Call Segun"
-                      size="sm"
-                      mr={2}
-                      onClick={() => handleClick(`${item.phone}`)}
-                      icon={<PhoneIcon />}
-                    />
-                  </Tooltip>
-                  <Tooltip
-                    hasArrow
-                    label={item.email}
-                    bg="gray.300"
-                    color="black"
-                  >
-                    <IconButton
-                      colorScheme="linkedin"
-                      aria-label="Call Segun"
-                      size="sm"
-                      onClick={() => handleClick(`${item.email}`)}
-                      icon={<EmailIcon />}
-                    />
-                  </Tooltip>
-                </CardFooter>
-              </Card>
-            </Flex>
+          {faculty.map((item, index) => (
+            <Stack key={index} direction={{ base: "column", md: "row" }} w={"full"} bg={"white"} p={4} borderRadius={'1em'} boxShadow={'rgba(0, 0, 0, 0.05) 0px 1px 12px;'}>
+              <Avatar name={item.name} src={item.profile_photo} size={'2xl'} mr={4}></Avatar>
+              <Box h={"full"}  >
+                <Heading as={Link} to={`/faculty/details/${item.id}`} size={"md"} color={"darkblue"} _hover={{ textDecoration: 'underline' }}>{item.name}</Heading>
+                <br />
+                <Badge colorScheme="purple">{item.description}</Badge>
+                <br />
+                <Badge>{item.education || 'PHD'}</Badge>
+                <Text px={1} my={2}>{item.research_field}</Text>
+
+                <Divider maxW={'300px'} my={2}></Divider>
+                <Tooltip hasArrow label='copy' bg='gray.300' color='black' placement="right-end">
+                  <Text cursor={"pointer"} width={"fit-content"} onClick={() => handleClick(`${item.phone}`)}>
+                    <Icon as={PhoneIcon} mr={2} color="gray.600" />{item.phone}
+                  </Text>
+                </Tooltip>
+
+                <Tooltip hasArrow label='copy' bg='gray.300' color='black' placement="right-end">
+                  <Text cursor={"pointer"} width={"fit-content"} onClick={() => handleClick(`${item.email}`)}>
+                    <Icon as={EmailIcon} mr={2} color="gray.600" />{item.email}
+                  </Text>
+                </Tooltip>
+
+                <Text as={Link} cursor={"pointer"} _hover={{ color: 'darkblue', textDecoration: 'underline' }} to={item.website || '/faculty/details/' + item.id} target="_blank">
+                  <Icon as={ExternalLinkIcon} mr={2} color="gray.600" />{item.website || "website"}
+                </Text>
+
+              </Box>
+            </Stack>
           ))}
         </VStack>
       </VStack>

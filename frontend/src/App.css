@@ -1,3 +1,7 @@
 .active{
   background: green;
 }
+
+.family-1{
+  font-family: 'Varela Round', sans-serif !important;
+}

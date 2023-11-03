@@ -25,6 +25,7 @@ import Areas from "./Pages/Research/Areas";
 import Papers from "./Pages/Research/Papers";
 import Labs from "./Pages/Research/Labs";
 import ImageGallery from "./Pages/Gallery/ImageGallery";
+import FacultyDetails from "./components/Faculty/FacultyDetails";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
           <Route index element={<Home />} />
           <Route path="semester/all" element={<CoursesAll />}></Route>
           <Route path="faculty" element={<Faculty />}></Route>
+          <Route path="faculty/details/:id" element={<FacultyDetails/>}/>
           <Route path="login" element={<Login />}></Route>
           <Route path="signup" element={<Signup />}></Route>
           <Route path="reset" element={<Reset_pass />}></Route>

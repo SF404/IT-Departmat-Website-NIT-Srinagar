@@ -1,40 +1,8 @@
 // SemesterPage.js
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import {
-  Box,
-  Heading,
-  Text,
-  Button,
-  HStack,
-  Divider,
-  Flex,
-  Badge,
-  Spinner,
-  VStack,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalCloseButton,
-  ModalBody,
-  ModalFooter,
-  useDisclosure,
-  useColorMode,
-  Center,
-  StatGroup,
-  Stat,
-  StatLabel,
-  StatNumber,
-  IconButton,
-} from "@chakra-ui/react";
-import {
-  Accordion,
-  AccordionItem,
-  AccordionButton,
-  AccordionPanel,
-  AccordionIcon,
-} from "@chakra-ui/react";
+import { Box, Heading, Text, Button, HStack, Divider, Flex, Badge, Spinner, VStack, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, useDisclosure, useColorMode, Center, StatGroup, Stat, StatLabel, StatNumber, IconButton, } from "@chakra-ui/react";
+import {  Accordion,  AccordionItem,  AccordionButton,  AccordionPanel,  AccordionIcon,} from "@chakra-ui/react";
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 import axios from "axios";
 import CountUp from "react-countup";

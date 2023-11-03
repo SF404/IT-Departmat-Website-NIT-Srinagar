@@ -1,4 +1,4 @@
-/* Add some general styling for your page */
+/* 
 body {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   margin: 0;
@@ -6,7 +6,7 @@ body {
 }
 .table-row:hover {
   color: blue;
-  cursor: pointer; /* Optional: Change the cursor to a pointer on hover */
+  cursor: pointer; 
 }
 
 .coordinator_class h1 {
@@ -17,7 +17,6 @@ body {
   color: #000000fc;
 }
 
-/* Add responsive styling for the table */
 table {
   width: 100%;
   border-collapse: collapse;
@@ -38,10 +37,9 @@ td {
   text-align: left;
 }
 
-/* Define a media query for small screens */
 @media (max-width: 768px) {
   table {
-    border: 0; /* Remove table borders on small screens */
+    border: 0; 
     width: 100%;
   }
 
@@ -53,4 +51,4 @@ td {
   th {
     text-align: center;
   }
-}
+} */
