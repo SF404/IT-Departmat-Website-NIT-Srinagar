@@ -149,8 +149,8 @@ class HolidayView(viewsets.ModelViewSet):
         return queryset
     
 class GetUserFromTokenView(APIView):
-    authentication_classes=[JWTAuthentication]
-    permission_classes = (IsAuthenticated,)
+    # authentication_classes=[JWTAuthentication]
+    # permission_classes = (IsAuthenticated,)
     def get(self, request):
         refresh_token = request.query_params.get('refresh_token')
         access_token = request.query_params.get('access_token')

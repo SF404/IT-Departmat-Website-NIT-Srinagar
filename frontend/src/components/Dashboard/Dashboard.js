@@ -7,10 +7,15 @@ import Navbar from "../Layout/Navbar";
 import SideBar from "./components/SideBar";
 import CoursePanel from "./components/CoursePanel";
 import MyProfile from "./components/MyProfile";
+import AnnouncementsPanel from "./components/Announcements";
+import PlaceHolder from "./components/PlaceHolder";
 
 function Dashboard1() {
     const navigate = useNavigate();
     // states
+
+    const [currentComponent, setCurrentComponent] = useState('placeholder');
+
     const [user, setUser] = useState([]);
     const [courses, setCourses] = useState([]);
     const [selectedCourse, setSelectedCourse] = useState(null);
@@ -18,6 +23,19 @@ function Dashboard1() {
     const [notes, setNotes] = useState(null);
     const [calenderShow, setCalenderShow] = useState(false);
     const { isOpen: openMyProfile, onOpen: showMyProfile, onClose: closeMyProfile, } = useDisclosure();
+
+    const renderComponent = () => {
+        switch (currentComponent) {
+            case 'placeholder':
+                return <PlaceHolder />;
+            case 'coursePanel':
+                return <CoursePanel selectedCourse={selectedCourse} notes={notes} assignments={assignments} fetchAssignmnets={fetchAssignments} fetchNotes={fetchNotes} />;
+            case 'AnnouncementsPanel':
+                return <AnnouncementsPanel />;
+            default:
+                return null;
+        }
+    };
 
     // Variables
     let TokenA, TokenR;
@@ -34,6 +52,7 @@ function Dashboard1() {
     const fetchUser = async () => {
         TokenA = localStorage.getItem("TokenA");
         TokenR = localStorage.getItem("TokenR");
+        console.log(TokenA, TokenR)
         if (!TokenA || !TokenR) {
             navigate("/login");
             return;
@@ -108,9 +127,9 @@ function Dashboard1() {
     return (
         <>
             <Navbar />
-            <Flex position={"fixed"} bottom={0} w={{base:'200', md: 'full'}} top={'110px'} >
-                <SideBar user={user} courses={courses} selectedCourse={selectedCourse} calenderShow={calenderShow} setCalenderShow={setCalenderShow} setSelectedCourse={setSelectedCourse} handleMyProfile={handleMyProfile} />
-                <CoursePanel selectedCourse={selectedCourse} notes={notes} assignments={assignments} fetchAssignmnets={fetchAssignments} fetchNotes={fetchNotes} />
+            <Flex position={"fixed"} bottom={0} w={{ base: '200', md: 'full' }} top={'110px'} >
+                <SideBar user={user} courses={courses} selectedCourse={selectedCourse} calenderShow={calenderShow} setCalenderShow={setCalenderShow} setSelectedCourse={setSelectedCourse} handleMyProfile={handleMyProfile} currentComponent={currentComponent} setCurrentComponent={setCurrentComponent} />
+                {renderComponent()}
                 <Box m={3} ml={0} display={calenderShow ? 'block' : 'none'}>
                     <Calendar />
                 </Box>

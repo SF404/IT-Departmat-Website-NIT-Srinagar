@@ -189,7 +189,7 @@ function CoursePanel({ selectedCourse, notes, assignments, fetchNotes, fetchAssi
                                     (notes && notes.length !== 0) ? (
                                         notes.map((item, index) => (
                                             <>
-                                                <HStack justifyContent={'space-between'} w={'full'} overflow={'hidden'}>
+                                                <HStack justifyContent={'space-between'} w={'full'} overflow={'hidden'} key={index}>
                                                     <Text>{item.name}</Text>
                                                     <Box display={'flex'} gap={2} >
                                                         <IconButton isRound={true} variant="outline" aria-label="Done" size={"xs"} color={"blackAlpha.800"} icon={<FaDownload />}
@@ -217,12 +217,12 @@ function CoursePanel({ selectedCourse, notes, assignments, fetchNotes, fetchAssi
                         </Box>
                         <Box width={'full'} bg={'white'} height={'fit-content'} borderRadius={8} boxShadow={'0 2px 8px rgba(0,0,0,0.05)'}>
                             <Box bg={'#d8dcf0'} p={4} borderTopRadius={8} fontWeight={'semibold'} color={'darkblue'}>Assignmets</Box>
-                            <VStack p={4} overflowX={'scroll'}>
+                            <VStack p={4} >
                                 {
                                     (assignments && assignments.length !== 0) ? (
                                         assignments.map((item, index) => (
                                             <>
-                                                <HStack justifyContent={'space-between'} w={'full'} >
+                                                <HStack justifyContent={'space-between'} w={'full'} key={index}>
                                                     <Text>{item.name} </Text>
                                                     <Box display={'flex'} gap={2} >
                                                         <Badge px={2} colorScheme='yellow' display={'flex'} alignItems={'center'}>Due: {item.validity}</Badge>

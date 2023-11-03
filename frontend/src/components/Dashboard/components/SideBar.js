@@ -1,13 +1,13 @@
 import { Avatar, Box, Button, Divider, HStack, IconButton, Menu, MenuButton, MenuItem, MenuList, Text, VStack } from '@chakra-ui/react'
-import { transform } from 'framer-motion'
 import React from 'react'
 import { RiMenuFoldFill, RiMenuUnfoldFill } from "react-icons/ri";
 import { SlCalender } from "react-icons/sl";
 import { useDisclosure } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
 import { useState } from 'react'
+import Announcements from './Announcements';
 
-const SideBar = ({ user, courses, selectedCourse, calenderShow, setCalenderShow, setSelectedCourse, handleMyProfile }) => {
+const SideBar = ({ user, courses, selectedCourse, calenderShow, setCalenderShow, setSelectedCourse, handleMyProfile, currentComponent, setCurrentComponent }) => {
     const { getButtonProps, getDisclosureProps, isOpen } = useDisclosure()
     const [hidden, setHidden] = useState(!isOpen)
     const isMediumDevice = window.innerWidth <= 768;
@@ -28,9 +28,11 @@ const SideBar = ({ user, courses, selectedCourse, calenderShow, setCalenderShow,
                     onAnimationStart={() => setHidden(false)}
                     onAnimationComplete={() => setHidden(!isOpen)}
                     animate={{ width: isOpen ? 250 : 0 }}
-                    style={{ background: 'white', overflow: 'hidden', whiteSpace: 'nowrap', left: '64px', height: '100%', maxWidth: '250px', top: '0', boxShadow: '2px 0px 8px rgba(0, 0, 0, 0.05)',
-                    ...(isMediumDevice && { position: 'absolute' }),}}
-                    
+                    style={{
+                        background: 'white', overflow: 'hidden', whiteSpace: 'nowrap', left: '64px', height: '100%', maxWidth: '250px', top: '0', boxShadow: '2px 0px 8px rgba(0, 0, 0, 0.05)',
+                        ...(isMediumDevice && { position: 'absolute' }),
+                    }}
+
                 >
 
                     <VStack w={'full'} h={'full'} p={4} >
@@ -40,7 +42,7 @@ const SideBar = ({ user, courses, selectedCourse, calenderShow, setCalenderShow,
                                     as={Avatar}
                                 />
                                 <MenuList p={4} >
-                                    <MenuItem borderRadius={4} onClick={() =>handleMyProfile()}>My Profile</MenuItem>
+                                    <MenuItem borderRadius={4} onClick={() => handleMyProfile()}>My Profile</MenuItem>
                                     <MenuItem borderRadius={4}>Logout</MenuItem>
                                 </MenuList>
                             </Menu>
@@ -51,7 +53,10 @@ const SideBar = ({ user, courses, selectedCourse, calenderShow, setCalenderShow,
                         {courses.map((item) => (
 
                             <Button w={"full"} justifyContent={"flex-start"} flexWrap={"wrap"} h={30} overflow={"hidden"} bg={"transparent"} borderRadius={"full"} fontSize={13} key={item.id}
-                                onClick={() => setSelectedCourse(item.course_id)}
+                                onClick={() => {
+                                    setSelectedCourse(item.course_id);
+                                    setCurrentComponent('coursePanel')
+                                }}
                                 {...(selectedCourse === item.course_id
                                     ? {
                                         backgroundColor: "#d8dcf0",
@@ -69,8 +74,25 @@ const SideBar = ({ user, courses, selectedCourse, calenderShow, setCalenderShow,
                         ))}
                         <Divider borderColor={"blackAlpha.300"} my={1} />
                         <VStack w={"full"}>
-                            <Button w={"full"} justifyContent={"flex-start"} borderRadius={"full"} fontSize={13} h={30} overflow={"hidden"} bg={"transparent"} onClick={() => setSelectedCourse(null)}>Announcements</Button>
-                            <Button w={"full"} justifyContent={"flex-start"} borderRadius={"full"} fontSize={13} h={30} overflow={"hidden"} bg={"transparent"}>Alert Messages</Button>
+                            <Button w={"full"} justifyContent={"flex-start"} borderRadius={"full"} fontSize={13} h={30} overflow={"hidden"} bg={"transparent"}
+                                onClick={() => {
+                                    setCurrentComponent('AnnouncementsPanel');
+                                    setSelectedCourse(null)
+                                }}
+                                {...(currentComponent === 'AnnouncementsPanel'
+                                    ? {
+                                        backgroundColor: "#d8dcf0",
+                                        color: "darkblue",
+                                        _hover: { backgroundColor: "#d8dcf0" },
+                                    }
+                                    : {})}
+                                {...(currentComponent !== 'AnnouncementsPanel'
+                                    ? { _hover: { backgroundColor: "#e5e5e5" } }
+                                    : {})}
+                                _active={{ color: "darkblue" }}
+                            >
+                                Announcements
+                            </Button>
                             <Button w={"full"} justifyContent={"flex-start"} borderRadius={"full"} fontSize={13} h={30} overflow={"hidden"} bg={"transparent"}>Manage Events</Button>
                             <Button w={"full"} justifyContent={"flex-start"} borderRadius={"full"} fontSize={13} h={30} overflow={"hidden"} bg={"transparent"}>List Students</Button>
                             <Button w={"full"} justifyContent={"flex-start"} borderRadius={"full"} fontSize={13} h={30} overflow={"hidden"} bg={"transparent"}>Manage Tutorials</Button>

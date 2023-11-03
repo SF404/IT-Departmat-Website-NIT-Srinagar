@@ -24,6 +24,7 @@ import PhdStudents from "./components/Faculty/phdstudent";
 import Areas from "./Pages/Research/Areas";
 import Papers from "./Pages/Research/Papers";
 import Labs from "./Pages/Research/Labs";
+import ImageGallery from "./Pages/Gallery/ImageGallery";
 
 function App() {
   return (
@@ -48,10 +49,12 @@ function App() {
           <Route path="committee" element={<Committee />}></Route>
           <Route path="newsletter" element={<DepartmentNewsletter />}></Route>
           <Route path="image" element={<ImageDisplay />}></Route>
-          <Route path="image" element={<ImageDisplay />}></Route>
           <Route path="areas" element={<Areas />}></Route>
           <Route path="papers" element={<Papers />}></Route>
           <Route path="labs" element={<Labs />}></Route>
+          <Route path="gallery" element={<ImageGallery />}></Route>
+
+
           <Route path="*" element={<NotFound />}></Route>
         </Route>
         <Route path="dashboard" element={<Dashboard />}></Route>

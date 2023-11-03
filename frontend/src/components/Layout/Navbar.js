@@ -1,38 +1,9 @@
-import {
-  Drawer,
-  DrawerBody,
-  DrawerCloseButton,
-  DrawerContent,
-  DrawerHeader,
-  DrawerOverlay,
-  Image,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
-  Portal,
-  Stack,
-  useDisclosure,
-} from "@chakra-ui/react";
-import {
-  Box,
-  Flex,
-  Text,
-  Button,
-  VStack,
-  IconButton,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuList,
-} from "@chakra-ui/react";
-import React from "react";
+import { Box, Flex, Text, Button, VStack, IconButton, Menu, MenuButton, MenuItem, MenuList, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerHeader, DrawerOverlay, Image, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Portal, Stack, useDisclosure, } from "@chakra-ui/react";
+import React, { useState } from "react";
 import mainLogo from "../../assets/images/download.webp";
 import { Link } from "react-router-dom";
-import { FaBarsStaggered } from "react-icons/fa6";
+import { FaBarsStaggered, FaX, FaXmark } from "react-icons/fa6";
+import { motion } from 'framer-motion'
 
 function NavLinks({ color }) {
   return (
@@ -229,11 +200,9 @@ function NavLinks({ color }) {
 }
 
 function Navbar() {
-  const {
-    isOpen: isNavOpen,
-    onOpen: openNav,
-    onClose: closeNav,
-  } = useDisclosure();
+
+  const { getButtonProps, getDisclosureProps, isOpen } = useDisclosure()
+  const [hidden, setHidden] = useState(!isOpen)
   return (
     <>
       <Box
@@ -280,44 +249,36 @@ function Navbar() {
         {/* Mobile Navigation Icon */}
 
         <IconButton
-          isActive={isNavOpen}
-          aria-label="Open Menue"
-          size={"lg"}
-          icon={<FaBarsStaggered />}
-          variant="ghost"
+          isActive={isOpen}
+          variant={'ghost'}
+          textAlign={"center"}
+          justifyContent={"center"}
           color={"white"}
           colorScheme="whiteAlpha"
-          display={{ md: "none" }}
-          onClick={isNavOpen ? closeNav : openNav}
+          display={{ base: 'flex', md: "none" }}
+          alignItems={"center"}
+          icon={isOpen ? <FaX /> : <FaBarsStaggered />}
+          {...getButtonProps()}
         />
+        <motion.div
+          {...getDisclosureProps()}
+          hidden={hidden}
+          initial={false}
+          onAnimationStart={() => setHidden(false)}
+          onAnimationComplete={() => setHidden(!isOpen)}
+          animate={{ width: isOpen ? 250 : 0 }}
+          style={{ background: 'white', padding: '1em', whiteSpace: 'nowrap', height: '100vh', maxWidth: '300px', boxShadow: '2px 0px 8px rgba(0, 0, 0, 0.05)', position: 'absolute', left: '0', top: '46px' }}
 
-        {/* <Modal m={4} onClose={closeNav} isOpen={isNavOpen} motionPreset='slideInRight' >
-                    <ModalOverlay />
-                    <ModalContent w={'100%'} minH={'96%'} m={3} bg={'white'} color={'black'}
-                        initial={{ transform: 'translateX(100%)' }}
-                        animate={{ transform: 'translateX(40%)' }}
-                        transition={{ duration: 0.1, ease: 'ease-in' }}
-                    >
-                        <ModalHeader></ModalHeader>
-                        <ModalBody>
-                            <ModalCloseButton position="absolute" top="10px" left="10px" border={'1px solid gray'} borderRadius={'full'} />
-                        </ModalBody>
-                    </ModalContent>
-                </Modal> */}
-      </Flex>
-      <Drawer placement={"right"} onClose={closeNav} isOpen={isNavOpen}>
-        <DrawerOverlay />
-        <DrawerContent>
-          <DrawerHeader>
-            <DrawerCloseButton />
-          </DrawerHeader>
-          <DrawerBody>
+        >
+          {
+            isOpen &&
             <VStack alignItems={"flex-start"}>
               <NavLinks color={"black"} colorScheme={"blackAlpha"} />
             </VStack>
-          </DrawerBody>
-        </DrawerContent>
-      </Drawer>
+          }
+        </motion.div>
+      </Flex>
+
     </>
   );
 }

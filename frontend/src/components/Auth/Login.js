@@ -25,7 +25,7 @@ function Login() {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://127.0.0.1:8000/api/auth/login/",
+        "/api/auth/login/",
         formData
       );
       console.log("Response Status Code:", response.status);
@@ -34,8 +34,8 @@ function Login() {
         case 200:
           const accessToken = response.data.access_token;
           const refreshToken = response.data.refresh_token;
-          localStorage.setItem("TokenA", accessToken);
-          localStorage.setItem("TokenR", refreshToken);
+          await localStorage.setItem("TokenA", accessToken);
+          await localStorage.setItem("TokenR", refreshToken);
           navigate("/dashboard");
           break;
         default:
