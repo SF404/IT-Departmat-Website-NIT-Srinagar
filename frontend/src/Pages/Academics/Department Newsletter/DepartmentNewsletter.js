@@ -1,35 +1,50 @@
-import React from 'react';
-
+import React from "react";
+import { Grid, Center } from "@chakra-ui/react";
 function DepartmentNewsletter() {
   return (
-    <div className="department-newsletter">
-      <h2>Department Newsletter</h2>
-      <p>Welcome to the latest edition of the NIT Srinagar Department Newsletter. In this issue, we have exciting updates and news to share with you.</p>
-      
-      <h3>Featured Articles</h3>
-      <div className="featured-articles">
-        <div className="article">
-          <h4>Article 1 Title</h4>
-          <p>Article 1 content goes here...</p>
+    <Center>
+      <Grid
+        templateColumns="repeat(3, 1fr)"
+        gap={8}
+        height="100vh"
+        p={4}
+        bg="gray.100"
+      >
+        <iframe
+          src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fnitsriofficial&tabs=timeline&width=500&height=500&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=true&appId=1377094472886402"
+          width="500"
+          height="500"
+          // style={"border:none;overflow:hidden"}
+          scrolling="no"
+          frameborder="0"
+          allowfullscreen="true"
+          allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+        ></iframe>
+        <iframe
+          src="https://www.instagram.com/p/CzJN-CSSQLt/embed/"
+          width="500"
+          height="500"
+          // style={"border:none;overflow:hidden"}
+          frameborder="0"
+          allowfullscreen="true"
+          allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+        ></iframe>
+        <div>
+          <a
+            class="twitter-timeline"
+            data-theme="light"
+            href="https://twitter.com/nitsriofficial?ref_src=twsrc%5Etfw"
+          >
+            Tweets by nitsriofficial
+          </a>{" "}
+          <script
+            async
+            src="https://platform.twitter.com/widgets.js"
+            charset="utf-8"
+          ></script>
         </div>
-        <div className="article">
-          <h4>Article 2 Title</h4>
-          <p>Article 2 content goes here...</p>
-        </div>
-      </div>
-
-      <h3>Upcoming Events</h3>
-      <div className="upcoming-events">
-        <div className="event">
-          <h4>Event 1</h4>
-          <p>Event 1 details and date...</p>
-        </div>
-        <div className="event">
-          <h4>Event 2</h4>
-          <p>Event 2 details and date...</p>
-        </div>
-      </div>
-    </div>
+      </Grid>
+    </Center>
   );
 }
 

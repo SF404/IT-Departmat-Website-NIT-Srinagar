@@ -128,14 +128,14 @@ function NavLinks({ color }) {
           <MenuItem as={Link} to="/awards">
             Awards
           </MenuItem>
-          <MenuItem as={Link} to="/">
+          <MenuItem as={Link} to="/facilities">
             Facilities
           </MenuItem>
-          <MenuItem as={Link} to="/">
+          <MenuItem as={Link} to="/placement-brochure">
             Placement Brochure
           </MenuItem>
-          <MenuItem as={Link} to="/">
-            Graduate Batch Photos
+          <MenuItem as={Link} to="/gallary">
+            Gallary
           </MenuItem>
         </MenuList>
       </Menu>
@@ -191,9 +191,9 @@ function NavLinks({ color }) {
         colorScheme="whiteAlpha"
         color={color}
         as={Link}
-        to="/about"
+        to="/contact-us"
       >
-        About
+        Contact Us
       </Button>
     </>
   );

@@ -24,8 +24,12 @@ import PhdStudents from "./components/Faculty/phdstudent";
 import Areas from "./Pages/Research/Areas";
 import Papers from "./Pages/Research/Papers";
 import Labs from "./Pages/Research/Labs";
-import ImageGallery from "./Pages/Gallery/ImageGallery";
+import ContactUs from "./Pages/contact_us/contact";
+import AwardsPage from "./Pages/Student_Activities/Awards";
+import FacilitiesPage from "./Pages/Student_Activities/Facilities";
+import PlacementBrochure from "./Pages/Student_Activities/PlacementBrochure";
 import FacultyDetails from "./components/Faculty/FacultyDetails";
+import ImageGallery from "./Pages/Gallery/ImageGallery";
 
 function App() {
   return (
@@ -57,6 +61,13 @@ function App() {
           <Route path="gallery" element={<ImageGallery />}></Route>
 
 
+          <Route path="awards" element={<AwardsPage />}></Route>
+          <Route path="contact-us" element={<ContactUs />}></Route>
+          <Route path="facilities" element={<FacilitiesPage />}></Route>
+          <Route
+            path="placement-brochure"
+            element={<PlacementBrochure />}
+          ></Route>
           <Route path="*" element={<NotFound />}></Route>
         </Route>
         <Route path="dashboard" element={<Dashboard />}></Route>
