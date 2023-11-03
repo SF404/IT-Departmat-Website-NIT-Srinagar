@@ -26,6 +26,8 @@ import Papers from "./Pages/Research/Papers";
 import Labs from "./Pages/Research/Labs";
 import ContactUs from "./Pages/contact_us/contact";
 import AwardsPage from "./Pages/Student_Activities/Awards";
+import FacilitiesPage from "./Pages/Student_Activities/Facilities";
+import PlacementBrochure from "./Pages/Student_Activities/PlacementBrochure";
 
 function App() {
   return (
@@ -56,6 +58,11 @@ function App() {
           <Route path="labs" element={<Labs />}></Route>
           <Route path="awards" element={<AwardsPage />}></Route>
           <Route path="contact-us" element={<ContactUs />}></Route>
+          <Route path="facilities" element={<FacilitiesPage />}></Route>
+          <Route
+            path="placement-brochure"
+            element={<PlacementBrochure />}
+          ></Route>
           <Route path="*" element={<NotFound />}></Route>
         </Route>
         <Route path="dashboard" element={<Dashboard />}></Route>

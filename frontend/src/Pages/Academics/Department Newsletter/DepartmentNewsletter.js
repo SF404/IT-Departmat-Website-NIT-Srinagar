@@ -21,7 +21,7 @@ function DepartmentNewsletter() {
           allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
         ></iframe>
         <iframe
-          src="https://www.instagram.com/nitsriofficial/embed/"
+          src="https://www.instagram.com/p/CzJN-CSSQLt/embed/"
           width="500"
           height="500"
           // style={"border:none;overflow:hidden"}
