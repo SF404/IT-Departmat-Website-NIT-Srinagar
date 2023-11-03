@@ -28,6 +28,19 @@ import Typewriter from "typewriter-effect";
 //import Footer from "../Layout/Footer";
 
 function Course() {
+  let teacherName = async (id) => {
+    console.log(id);
+    try {
+      const response = await axios.get(
+        `http://localhost:8000/api/public/getteacher/?Id=${id}`
+      );
+      console.log(response.data);
+      return "hello";
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
   const [courses, setCourses] = useState([
     {
       course_id: "ITT250",
@@ -95,22 +108,6 @@ function Course() {
             >
               <WrapItem ml={2}>
                 <Popover placement="top-end">
-                  <PopoverTrigger>
-                    <Avatar
-                      size="2xl"
-                      name={item.name}
-                      src={item.profile_photo}
-                      onMouseEnter={(e) => {
-                        setShowText(true);
-                        e.target.click();
-                      }}
-                      onMouseLeave={(e) => {
-                        setShowText(false);
-                        e.target.click();
-                      }}
-                      // Add any other props you need for the Avatar
-                    />
-                  </PopoverTrigger>
                   <PopoverContent
                     boxShadow="0px 7px 29px 0px rgba(100, 100, 111, 0.2)"
                     _focus={{ outline: "none", boxShadow: "none" }}
@@ -141,7 +138,6 @@ function Course() {
                   </PopoverContent>
                 </Popover>
               </WrapItem>
-
               <Card shadow={"none"}>
                 <CardHeader py={2}>
                   <Heading size="md">
