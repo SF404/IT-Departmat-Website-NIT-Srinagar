@@ -24,6 +24,8 @@ import PhdStudents from "./components/Faculty/phdstudent";
 import Areas from "./Pages/Research/Areas";
 import Papers from "./Pages/Research/Papers";
 import Labs from "./Pages/Research/Labs";
+import ContactUs from "./Pages/contact_us/contact";
+import AwardsPage from "./Pages/Student_Activities/Awards";
 
 function App() {
   return (
@@ -52,6 +54,8 @@ function App() {
           <Route path="areas" element={<Areas />}></Route>
           <Route path="papers" element={<Papers />}></Route>
           <Route path="labs" element={<Labs />}></Route>
+          <Route path="awards" element={<AwardsPage />}></Route>
+          <Route path="contact-us" element={<ContactUs />}></Route>
           <Route path="*" element={<NotFound />}></Route>
         </Route>
         <Route path="dashboard" element={<Dashboard />}></Route>

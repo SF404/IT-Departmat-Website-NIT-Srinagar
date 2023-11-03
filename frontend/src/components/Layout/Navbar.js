@@ -220,9 +220,9 @@ function NavLinks({ color }) {
         colorScheme="whiteAlpha"
         color={color}
         as={Link}
-        to="/about"
+        to="/contact-us"
       >
-        About
+        Contact Us
       </Button>
     </>
   );
