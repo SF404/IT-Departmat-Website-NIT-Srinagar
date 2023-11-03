@@ -1,5 +1,5 @@
 from django.core.management.base import BaseCommand
-from IT_DEPARTMENT.models import Course,Teacher
+from IT_DEPARTMENT.models import *
 from PublicAPI.models import Phd_Student
 from django.core.management.base import BaseCommand
 
@@ -110,6 +110,16 @@ class Command(BaseCommand):
                 phone=123453,
                 profile_photo="phd_student/nadeem.jpg",
                 research_field="Machine Learning"
+            )
+            Phd_Student.objects.create(
+                phd_student_id ="ksdbhat99@gmail.com",
+                enroll="2019PHAITE002",
+                name = "Khurshid Bhat",
+                description = " ",
+                email = "ksdbhat99@gmail.com",
+                phone=123454,
+                profile_photo="phd_student/khurshid.jpg",
+                research_field="Artificial Intelligence,Data Science"
             )
             Course.objects.create(
                 course_id ="IT_701",
@@ -516,4 +526,73 @@ class Command(BaseCommand):
                 description ="Test 5 is created to test the website",
                 teacher=arman
                 )
+            Holiday.objects.create(
+                    date="2023-01-26T15:44:42Z",
+                    description="Republic Day"
+            )
+            Holiday.objects.create(
+                date="2023-03-08T15:45:05Z",
+                description="Holi"
+            )
+            Holiday.objects.create(
+                date="2023-03-30T15:45:33Z",
+                description="Ram Navami"
+            )
+            Holiday.objects.create(
+                date="2023-04-04T15:46:15Z",
+                description="Mahavir Jayanti"
+            )
+            Holiday.objects.create(
+                date="2023-04-07T15:46:44Z",
+                description="Good Friday"
+            )
+            Holiday.objects.create(
+                date="2023-04-22T15:49:42Z",
+                description="Eid-Ul-Fitr"
+            )
+            Holiday.objects.create(
+                date="2023-05-05T15:49:58Z",
+                description="Budha Prunima"
+            )
+            Holiday.objects.create(
+                date="2023-06-29T15:50:27Z",
+                description="Eid-Ul-Adha"
+            )
+            Holiday.objects.create(
+                date="2023-07-29T15:51:07Z",
+                description="Muharram"
+            )
+            Holiday.objects.create(
+                date="2023-08-15T15:51:28Z",
+                description="Independence Day"
+            )
+            Holiday.objects.create(
+                date="2023-09-07T15:52:11Z",
+                description="Janmashtani"
+            )
+            Holiday.objects.create(
+                date="2023-09-28T15:52:52Z",
+                description="Milad-un-Nabi"
+            )
+            Holiday.objects.create(
+                date="2023-10-02T15:53:35Z",
+                description="Mahatma Gandhi's Birthday"
+            )
+            Holiday.objects.create(
+                date="2023-10-24T15:54:27Z",
+                description="Dussehra"
+            )
+            Holiday.objects.create(
+                date="2023-11-12T15:54:40Z",
+                description="Diwali"
+            )
+            Holiday.objects.create(
+                date="2023-11-27T15:55:05Z",
+                description="Guru Nanak's Birthday"
+            )
+            Holiday.objects.create(
+                date="2023-12-25T15:55:32Z",
+                description="Christmas Day"
+            )
+
             self.stdout.write(self.style.SUCCESS('ALL Course entries created.'))
