@@ -21,7 +21,13 @@ import seminar from "./../../assets/images/seminar2.png";
 import { FaNetworkWired } from "react-icons/fa";
 
 const FacilitiesSectionRight = ({ img, title, description }) => (
-  <VStack bg="white" spacing={8} p={4} boxShadow="lg" rounded="lg">
+  <VStack
+    bg="white"
+    spacing={8}
+    p={4}
+    borderBottom={"2px solid teal"}
+    rounded="lg"
+  >
     <Grid templateColumns={{ base: "1fr", md: "1fr 2fr" }} gap={4}>
       <GridItem colSpan={{ base: 1, md: 1 }}>
         <Image
@@ -52,7 +58,13 @@ const FacilitiesSectionRight = ({ img, title, description }) => (
   </VStack>
 );
 const FacilitiesSectionLeft = ({ img, title, description }) => (
-  <VStack bg="white" spacing={8} p={4} boxShadow="lg" rounded="lg">
+  <VStack
+    bg="white"
+    spacing={8}
+    p={4}
+    borderBottom={"2px solid teal"}
+    rounded="lg"
+  >
     <Grid templateColumns={{ base: "1fr", md: "2fr 1fr" }} gap={4}>
       <GridItem colSpan={{ base: 1, md: 1 }}>
         <Box

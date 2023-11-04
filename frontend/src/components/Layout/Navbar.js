@@ -1,9 +1,37 @@
-import { Box, Flex, Text, Button, VStack, IconButton, Menu, MenuButton, MenuItem, MenuList, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerHeader, DrawerOverlay, Image, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Portal, Stack, useDisclosure, } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  Text,
+  Button,
+  VStack,
+  IconButton,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+  Drawer,
+  DrawerBody,
+  DrawerCloseButton,
+  DrawerContent,
+  DrawerHeader,
+  DrawerOverlay,
+  Image,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  Portal,
+  Stack,
+  useDisclosure,
+} from "@chakra-ui/react";
 import React, { useState } from "react";
 import mainLogo from "../../assets/images/download.webp";
 import { Link } from "react-router-dom";
 import { FaBarsStaggered, FaX, FaXmark } from "react-icons/fa6";
-import { motion } from 'framer-motion'
+import { motion } from "framer-motion";
 
 function NavLinks({ color }) {
   return (
@@ -137,8 +165,8 @@ function NavLinks({ color }) {
           <MenuItem as={Link} to="/placement-brochure">
             Placement Brochure
           </MenuItem>
-          <MenuItem as={Link} to="/gallary">
-            Gallary
+          <MenuItem as={Link} to="/gallery">
+            Gallery
           </MenuItem>
         </MenuList>
       </Menu>
@@ -203,9 +231,8 @@ function NavLinks({ color }) {
 }
 
 function Navbar() {
-
-  const { getButtonProps, getDisclosureProps, isOpen } = useDisclosure()
-  const [hidden, setHidden] = useState(!isOpen)
+  const { getButtonProps, getDisclosureProps, isOpen } = useDisclosure();
+  const [hidden, setHidden] = useState(!isOpen);
   return (
     <>
       <Box
@@ -253,12 +280,12 @@ function Navbar() {
 
         <IconButton
           isActive={isOpen}
-          variant={'ghost'}
+          variant={"ghost"}
           textAlign={"center"}
           justifyContent={"center"}
           color={"white"}
           colorScheme="whiteAlpha"
-          display={{ base: 'flex', md: "none" }}
+          display={{ base: "flex", md: "none" }}
           alignItems={"center"}
           icon={isOpen ? <FaX /> : <FaBarsStaggered />}
           {...getButtonProps()}
@@ -270,18 +297,25 @@ function Navbar() {
           onAnimationStart={() => setHidden(false)}
           onAnimationComplete={() => setHidden(!isOpen)}
           animate={{ width: isOpen ? 250 : 0 }}
-          style={{ background: 'white', padding: '1em', whiteSpace: 'nowrap', height: '100vh', maxWidth: '300px', boxShadow: '2px 0px 8px rgba(0, 0, 0, 0.05)', position: 'absolute', left: '0', top: '46px' }}
-
+          style={{
+            background: "white",
+            padding: "1em",
+            whiteSpace: "nowrap",
+            height: "100vh",
+            maxWidth: "300px",
+            boxShadow: "2px 0px 8px rgba(0, 0, 0, 0.05)",
+            position: "absolute",
+            left: "0",
+            top: "46px",
+          }}
         >
-          {
-            isOpen &&
+          {isOpen && (
             <VStack alignItems={"flex-start"}>
               <NavLinks color={"black"} colorScheme={"blackAlpha"} />
             </VStack>
-          }
+          )}
         </motion.div>
       </Flex>
-
     </>
   );
 }
