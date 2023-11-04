@@ -25,25 +25,24 @@ function Calender() {
         console.log(Holidays)
     }, []);
     return (
-        <>
-            <VStack width={'300px'} bg={'white'} border={'1px solid rgba(0,0,0,0.2)'} boxShadow={'0 0 12px rgba(0,0,0,0.05)'} borderRadius={6}>
-                <Calendar onActiveStartDateChange={handleViewChange} showNeighboringMonth={false} />
-                <Divider/>
-                {Holidays != null && (
-                    <Box w={"full"} borderRadius={"0.5em"} p={2} bg={"white"}>
-                        <List p={2} fontSize={'0.9em'}>
-                            {Holidays.map((item) => (
-                                <ListItem key={item.id}>
-                                    <ListIcon as={FcExport} color="green.500" />
-                                    {new Date(item.date).getDate().toString().padStart(2, "0")}{" "}
-                                    {item.description}
-                                </ListItem>
-                            ))}
-                        </List>
-                    </Box>
-                )}
-            </VStack>
-        </>
+        <Box w={'full'} height={'full'} bg={'white'} textAlign={'center'} borderRadius={'0.5em'} position={'relative'} boxShadow={'0 2px 8px rgba(0,0,0,0.05)'}>
+            <Box bg={'#d8dcf0'} p={4} borderTopRadius={8} fontWeight={'semibold'} color={'darkblue'}>Calendar</Box>
+            <Calendar onActiveStartDateChange={handleViewChange} showNeighboringMonth={false} />
+            <Divider />
+            {Holidays != null && (
+                <Box w={"full"} p={2} bg={"white"}>
+                    <List p={2} fontSize={'0.9em'}>
+                        {Holidays.map((item) => (
+                            <ListItem key={item.id}>
+                                <ListIcon as={FcExport} color="green.500" />
+                                {new Date(item.date).getDate().toString().padStart(2, "0")}{" "}
+                                {item.description}
+                            </ListItem>
+                        ))}
+                    </List>
+                </Box>
+            )}
+        </Box>
     )
 }
 

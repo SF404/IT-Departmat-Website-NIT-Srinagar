@@ -1,4 +1,4 @@
-import { AlertDialog, AlertDialogBody, AlertDialogCloseButton, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogOverlay, Badge, Box, Button, DarkMode, Divider, FormControl, FormLabel, HStack, IconButton, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, SimpleGrid, Text, Textarea, VStack, flexbox, useDisclosure, useToast } from '@chakra-ui/react'
+import { AlertDialog, AlertDialogBody, AlertDialogCloseButton, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogOverlay, Badge, Box, Button, DarkMode, Divider, Flex, FormControl, FormLabel, HStack, IconButton, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, SimpleGrid, Text, Textarea, VStack, flexbox, useDisclosure, useToast } from '@chakra-ui/react'
 import React, { useRef, useState } from 'react'
 import PlaceHolder from './PlaceHolder'
 import { FaCircleInfo, FaDownload, FaTrash } from 'react-icons/fa6'
@@ -178,11 +178,11 @@ function CoursePanel({ selectedCourse, notes, assignments, fetchNotes, fetchAssi
         }
     };
     return (
-        <>
+        <Box flexGrow={1}>
             {
                 selectedCourse ? (
-                    <SimpleGrid columns={[1, 1, 1, 2]} width={'full'} p={3} gap={4}>
-                        <Box width={'full'} bg={'white'} height={'fit-content'} borderRadius={8} boxShadow={'0 2px 8px rgba(0,0,0,0.05)'}>
+                    <Flex p={3} gap={3} flexFlow={1} flexWrap={'wrap'}>
+                        <Box  minW={'300px'} flexGrow={1} bg={'white'} height={'fit-content'} borderRadius={8} boxShadow={'0 2px 8px rgba(0,0,0,0.05)'}>
                             <Box bg={'#d8dcf0'} p={4} borderTopRadius={8} fontWeight={'semibold'} color={'darkblue'}>Notes Material </Box>
                             <VStack p={4}>
                                 {
@@ -215,7 +215,7 @@ function CoursePanel({ selectedCourse, notes, assignments, fetchNotes, fetchAssi
                                 <Button m={4} colorScheme='teal' onClick={addNotes}> Add </Button>
                             </Box>
                         </Box>
-                        <Box width={'full'} bg={'white'} height={'fit-content'} borderRadius={8} boxShadow={'0 2px 8px rgba(0,0,0,0.05)'}>
+                        <Box minW={'300px'} flexGrow={1} bg={'white'} height={'fit-content'} borderRadius={8} boxShadow={'0 2px 8px rgba(0,0,0,0.05)'}>
                             <Box bg={'#d8dcf0'} p={4} borderTopRadius={8} fontWeight={'semibold'} color={'darkblue'}>Assignmets</Box>
                             <VStack p={4} >
                                 {
@@ -259,7 +259,7 @@ function CoursePanel({ selectedCourse, notes, assignments, fetchNotes, fetchAssi
                             </Box>
                         </Box>
 
-                    </SimpleGrid>
+                    </Flex>
                 ) : (<PlaceHolder />)
             }
 
@@ -367,7 +367,7 @@ function CoursePanel({ selectedCourse, notes, assignments, fetchNotes, fetchAssi
 
 
 
-        </>
+        </Box>
     )
 }
 

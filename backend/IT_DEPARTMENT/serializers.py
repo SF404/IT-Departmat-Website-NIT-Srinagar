@@ -36,3 +36,8 @@ class TeacherMails(serializers.ModelSerializer):
     class Meta:
         model = Teacher
         fields = ('email','user')
+
+class ResearchSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Research
+        fields = '__all__'

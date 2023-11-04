@@ -12,6 +12,9 @@ class Teacher(models.Model):
     research_field = models.TextField(max_length=255,blank=True)
     date=models.DateTimeField(auto_now_add=True)
     profile_photo = models.ImageField(upload_to='teacher_profile/')
+    education = models.JSONField(blank=True, null=True)
+    about = models.JSONField(blank=True, null=True)
+    researchs = models.JSONField(blank=True, null=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE,null=True,blank=True)
 
 class Course(models.Model):
@@ -76,4 +79,13 @@ class Holiday(models.Model):
     
     def _str_(self):
         return self.name
+    
+class Research(models.Model):
+    date = models.CharField(max_length=20)
+    authors = models.TextField()
+    url = models.URLField(blank=True)
+    title = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.title
 

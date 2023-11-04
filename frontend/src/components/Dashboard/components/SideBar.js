@@ -1,26 +1,36 @@
 import { Avatar, Box, Button, Divider, HStack, IconButton, Menu, MenuButton, MenuItem, MenuList, Text, VStack } from '@chakra-ui/react'
 import React from 'react'
-import { RiMenuFoldFill, RiMenuUnfoldFill } from "react-icons/ri";
-import { SlCalender } from "react-icons/sl";
+import { PiCalendarDuotone, PiChatsDuotone, PiGearSixDuotone, PiMegaphoneDuotone, PiNotePencilDuotone, PiStudentDuotone, PiTextIndentDuotone, PiTextOutdentDuotone, PiVideoDuotone } from "react-icons/pi";
 import { useDisclosure } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
 import { useState } from 'react'
-import Announcements from './Announcements';
 
-const SideBar = ({ user, courses, selectedCourse, calenderShow, setCalenderShow, setSelectedCourse, handleMyProfile, currentComponent, setCurrentComponent }) => {
+const SideBar = ({ user, courses, selectedCourse, setSelectedCourse, handleMyProfile, currentView, setCurrentView }) => {
     const { getButtonProps, getDisclosureProps, isOpen } = useDisclosure()
     const [hidden, setHidden] = useState(!isOpen)
     const isMediumDevice = window.innerWidth <= 768;
 
+    function handleSelect(component_name) {
+        (component_name !== currentView) ? setCurrentView(component_name) : setCurrentView(null);
+    }
+
     return (
         <>
             <Box display={'flex'} width={'fit-content'} height={'full'} bg={'white'} position={'relative'}>
-                <VStack width={'64px'} bg={'#c5cae8'} py={2}
-                >
-                    <IconButton bg={'transparent'}  {...getButtonProps()} icon={hidden ? <RiMenuUnfoldFill /> : <RiMenuFoldFill />}></IconButton>
-                    <IconButton bg={'transparent'} icon={<SlCalender />} onClick={() => setCalenderShow(!calenderShow)}></IconButton>
-
-                </VStack>
+                <Box width={'64px'} bg={'#c5cae8'} py={2} display={'flex'} justifyContent={'space-between'} flexDirection={'column'} color={'white'} gap={2}>
+                    <VStack>
+                        <IconButton bg={'transparent'} color={'#3848a2'}  {...getButtonProps()} icon={hidden ? <PiTextIndentDuotone size={'1.5em'} /> : <PiTextOutdentDuotone size={'1.5em'} />}></IconButton>
+                        <IconButton bg={'transparent'} color={'#3848a2'} icon={<PiCalendarDuotone size={'1.5em'} />} onClick={() => handleSelect('calendar')}></IconButton>
+                        <IconButton bg={'transparent'} color={'#3848a2'} icon={<PiChatsDuotone size={'1.5em'} />} onClick={() => handleSelect('chat')}></IconButton>
+                        <IconButton bg={'transparent'} color={'#3848a2'} icon={<PiStudentDuotone size={'1.5em'} />} onClick={() => handleSelect('student')}></IconButton>
+                        <IconButton bg={'transparent'} color={'#3848a2'} icon={<PiMegaphoneDuotone size={'1.5em'} />} onClick={() => handleSelect('announcement')}></IconButton>
+                        <IconButton bg={'transparent'} color={'#3848a2'} icon={<PiNotePencilDuotone size={'1.5em'} />} onClick={() => handleSelect('event')}></IconButton>
+                        <IconButton bg={'transparent'} color={'#3848a2'} icon={<PiVideoDuotone size={'1.5em'} />} onClick={() => handleSelect('tutorial')}></IconButton>
+                    </VStack>
+                    <VStack >
+                        <IconButton bg={'transparent'} color={'#3848a2'} icon={<PiGearSixDuotone size={'1.5em'} />} onClick={() => handleSelect('settings')}></IconButton>
+                    </VStack>
+                </Box>
                 <motion.div
                     {...getDisclosureProps()}
                     hidden={hidden}
@@ -55,7 +65,6 @@ const SideBar = ({ user, courses, selectedCourse, calenderShow, setCalenderShow,
                             <Button w={"full"} justifyContent={"flex-start"} flexWrap={"wrap"} h={30} overflow={"hidden"} bg={"transparent"} borderRadius={"full"} fontSize={13} key={item.id}
                                 onClick={() => {
                                     setSelectedCourse(item.course_id);
-                                    setCurrentComponent('coursePanel')
                                 }}
                                 {...(selectedCourse === item.course_id
                                     ? {
@@ -73,30 +82,6 @@ const SideBar = ({ user, courses, selectedCourse, calenderShow, setCalenderShow,
                             </Button>
                         ))}
                         <Divider borderColor={"blackAlpha.300"} my={1} />
-                        <VStack w={"full"}>
-                            <Button w={"full"} justifyContent={"flex-start"} borderRadius={"full"} fontSize={13} h={30} overflow={"hidden"} bg={"transparent"}
-                                onClick={() => {
-                                    setCurrentComponent('AnnouncementsPanel');
-                                    setSelectedCourse(null)
-                                }}
-                                {...(currentComponent === 'AnnouncementsPanel'
-                                    ? {
-                                        backgroundColor: "#d8dcf0",
-                                        color: "darkblue",
-                                        _hover: { backgroundColor: "#d8dcf0" },
-                                    }
-                                    : {})}
-                                {...(currentComponent !== 'AnnouncementsPanel'
-                                    ? { _hover: { backgroundColor: "#e5e5e5" } }
-                                    : {})}
-                                _active={{ color: "darkblue" }}
-                            >
-                                Announcements
-                            </Button>
-                            <Button w={"full"} justifyContent={"flex-start"} borderRadius={"full"} fontSize={13} h={30} overflow={"hidden"} bg={"transparent"}>Manage Events</Button>
-                            <Button w={"full"} justifyContent={"flex-start"} borderRadius={"full"} fontSize={13} h={30} overflow={"hidden"} bg={"transparent"}>List Students</Button>
-                            <Button w={"full"} justifyContent={"flex-start"} borderRadius={"full"} fontSize={13} h={30} overflow={"hidden"} bg={"transparent"}>Manage Tutorials</Button>
-                        </VStack>
                     </VStack>
 
                 </motion.div>

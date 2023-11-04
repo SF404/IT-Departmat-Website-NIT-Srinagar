@@ -25,7 +25,8 @@
     "react-silk": "^0.0.1",
     "react-slick": "^0.29.0",
     "typewriter-effect": "^2.21.0",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "xlsx": "^0.18.5"
   },
   "scripts": {
     "start": "react-scripts start",

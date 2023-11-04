@@ -3,33 +3,7 @@ import React, { useEffect, useState } from "react";
 import bannerImage from "./../../assets/images/image.webp";
 import data from "./b-tech_data.json";
 import { useParams } from "react-router-dom";
-import {
-  Box,
-  Heading,
-  Text,
-  Button,
-  HStack,
-  Divider,
-  Flex,
-  Badge,
-  Spinner,
-  VStack,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalCloseButton,
-  ModalBody,
-  ModalFooter,
-  useDisclosure,
-  useColorMode,
-  Center,
-  StatGroup,
-  Stat,
-  StatLabel,
-  StatNumber,
-  IconButton,
-} from "@chakra-ui/react";
+import { Box, Heading, Text, Button, HStack, Divider, Flex, Badge, Spinner, VStack, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, useDisclosure, useColorMode, Center, StatGroup, Stat, StatLabel, StatNumber, IconButton, } from "@chakra-ui/react";
 import {
   Accordion,
   AccordionItem,
@@ -40,7 +14,9 @@ import {
 import CountUp from "react-countup";
 import { Table, Thead, Tbody, Tr, Th, Td } from "@chakra-ui/react";
 import axios from "axios";
+import * as XLSX from 'xlsx';
 function BTechStudents() {
+
   const [student, setstudent] = useState([
     { degree: "B-Tech", name: "2022 Batch", batch: 2022 },
     { degree: "B-Tech", name: "2021 Batch", batch: 2021 },
@@ -52,7 +28,7 @@ function BTechStudents() {
     { degree: "B-Tech", name: "2015 Batch", batch: 2015 },
   ]);
 
-  function DataTabs(batch) {
+  function DataTabs(batch, id) {
     const selectedData = (() => {
       switch (batch) {
         case 2022:
@@ -76,7 +52,7 @@ function BTechStudents() {
       }
     })();
     return (
-      <Table variant="striped" colorScheme="teal">
+      <Table variant="striped" colorScheme="teal" size={"lg"} id={id}>
         <Thead>
           <Tr>
             <Th>ID</Th>
@@ -99,35 +75,26 @@ function BTechStudents() {
     );
   }
 
+  const downloadExcel = (id) => {
+    const table = document.getElementById(id); // Get the HTML table
+
+    const ws = XLSX.utils.table_to_sheet(table); // Convert the table to a worksheet
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1'); // Add the worksheet to a workbook
+
+    XLSX.writeFile(wb, 'download.xlsx'); // Trigger the download
+  };
+
   return (
     <>
-      <VStack
-        w={"full"}
-        h={"200px"}
-        bg={"brown"}
-        color={"white"}
-        p={6}
-        backgroundImage={bannerImage}
-        backgroundSize="cover"
-        backgroundPosition="center"
-        backgroundRepeat="no-repeat"
-        justifyContent="center"
-        textShadow={"0 0 24px black"}
-      >
-        <Heading as="h2" size="xl" mb={2}>
-          IT-Students
-        </Heading>
+      <VStack w={"full"} h={"200px"} bg={"brown"} color={"white"} p={6} backgroundImage={bannerImage} backgroundSize="cover" backgroundPosition="center" backgroundRepeat="no-repeat" justifyContent="center" textShadow={"0 0 24px black"} >
+        <Heading as="h2" size="xl" mb={2}>IT-Students</Heading>
         <Text color={"white"}></Text>
       </VStack>
-      <Box
-        p={6}
-        borderRadius="lg"
-        overflow="hidden"
-        fontSize={{ base: "sm", md: "md" }}
-      >
-        <Accordion allowToggle userSelect={"none"} gap={6}>
+      <Box p={6} borderRadius="lg" overflow="hidden" fontSize={{ base: "sm", md: "md" }} >
+        <Accordion allowToggle gap={6}>
           {student &&
-            student.map((course) => (
+            student.map((course, index) => (
               <AccordionItem
                 key={course.degree}
                 mt={2}
@@ -160,19 +127,19 @@ function BTechStudents() {
                     <AccordionIcon />
                   </AccordionButton>
                 </h2>
-                <AccordionPanel pb={4}>
+                <AccordionPanel pb={4} >
                   <Box display={"flex"} justifyContent={"space-between"}>
                     <Box>
                       <Badge colorScheme="blue">{course.name}</Badge>
                     </Box>
                     <Text>
-                      {course.name} PDF <Button size={"sm"}>Download</Button>
+                      <Button size={"sm"} colorScheme="teal" onClick={() => downloadExcel(("table" + index))}>Download .xlsx</Button>
                     </Text>
                   </Box>
 
                   <Divider my={2} />
 
-                  {DataTabs(course.batch)}
+                  {DataTabs(course.batch, ("table" + index))}
                 </AccordionPanel>
               </AccordionItem>
             ))}

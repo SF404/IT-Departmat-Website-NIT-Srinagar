@@ -71,6 +71,9 @@ function NavLinks({ color }) {
           <MenuItem as={Link} to="/btech-students">
             B-Tech Student
           </MenuItem>
+          <MenuItem as={Link} to="/Alumni">
+            Alumni
+          </MenuItem>
           <MenuItem as={Link} to="/staff">
             Staff
           </MenuItem>
