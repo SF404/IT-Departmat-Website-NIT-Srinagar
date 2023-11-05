@@ -1,15 +1,12 @@
-import { Box, CircularProgress, Flex, Text, VStack } from '@chakra-ui/react'
+import { Box, CircularProgress, Flex, Heading, Text, VStack } from '@chakra-ui/react'
 import React from 'react'
-import { BsCalendar2Event } from 'react-icons/bs'
 
 function Holidays({ holidays }) {
     return (
-        <Box>
-            <div className="h-title" style={{ marginBottom: "0.5em" }}>
-                <h1  className='h-title-icon'>HOLIDAYS</h1>
-            </div>
-            <VStack margin={"1em"} >
-                {holidays ? (holidays.map((item, index) => (
+        <Box w={'full'}>
+            <Heading fontSize={'1.5em'} my={'0.5em'} textAlign={'center'} color={'darkblue'}>UPCOMING HOLIDAYS</Heading>
+            <VStack spacing={2} bg={'white'} p={4} borderRadius={'1em'} boxShadow={'0 0 12px rgba(0,0,0,0.05)'} w={'full'}>
+                {holidays && holidays.length > 0 ? (holidays.map((item, index) => (
 
                     <Flex key={index} fontSize={'0.8em'} gap={4} borderRadius={'0.5em'} p={2} w={'full'} bg={'white'} color={'black'} boxShadow={'0 0 5px rgba(0,0,0,0.1)'}>
                         <Flex flexDir={'column'} alignItems={'center'} minW={'60px'} minH='60px' maxH='60px' borderBottom={'4px solid #5cc181'} >
@@ -30,7 +27,7 @@ function Holidays({ holidays }) {
                         </Flex>
                         <Text fontWeight={'bold'} fontSize={'lg'} color={'#232c64'}>{item.description}</Text>
                     </Flex>
-                ))) : (<CircularProgress isIndeterminate color='#5cc181' />)
+                ))) : (<Text>No Holidays this month</Text>)
                 }
             </VStack>
         </Box>

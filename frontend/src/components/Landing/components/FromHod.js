@@ -1,22 +1,29 @@
+import { AspectRatio, Box, Button, Center, Flex, Heading, SimpleGrid, Stack, Text } from '@chakra-ui/react'
 import React from 'react'
 
-function FromHod({video_from_hod}) {
+function FromHod({ video_from_hod }) {
     return (
-        <>
-            <div className="h-title">
-                <h1>FROM HOD</h1>
-            </div>
-            <div className='container'>
-                <div className='hod-message'>
-                    <h1>ABOUT IT Department</h1>
-                    <p className='text-content'>
-                        The Department of Information Technology was established in 2007, offering a four-year undergraduate program (B.Tech) in Information Technology. This undergraduate program is of 4 years' duration with the first year spread over two semesters, which is common to all the branches. The intake capacity of the department was 40 in 2007 and then subsequently increased to 55 in 2009. The Department offers a broad curriculum including: Database Management, Software Engineering, Management of Information Systems, Data mining, Computer Graphics, Advanced Internet Technology, Computer Networks, Operating System, Data Structures and Algorithms as the main courses and other courses in collaboration with the other departments of the institute at the undergraduate level. The Department of Information Technology embodies the Institute's tradition of excellence as a world-class leader in IT education and research. The IT sector is in a period of bloom in terms of growth and opportunity. In the current ever-evolving industrial scenario, contents delivered to the students are regularly updated by the faculty members who have themselves well acquainted with path-breaking research and innovations in the present technology-oriented world. In addition to academic courses, the department also has IT research programs supported through government funding and industry sponsorship. Faculty research helps expand the current and future use of new and existing technologies.
-                    </p>
-                </div>
+        <Box w={'full'}>
+            <Heading fontSize={'1.5em'} my={'0.5em'} textAlign={'center'} color={'darkblue'}>FROM HOD</Heading>
+            <SimpleGrid columns={[1, 1, 2]} w={'full'} p={'1em'} gap={'1.5em'} bg={'#d8dcf0'} borderRadius={'1em'}>
+                <Box w={'full'}>
+                    <Heading size={'sm'} mb={2}>ABOUT IT DEPARTMENT</Heading>
+                    <Text textAlign={'justify'}>
+                        The Department of Information Technology, established in 2007, offers a 4-year undergraduate program (B.Tech) in Information Technology. The program includes core courses like Database Management, Software Engineering, Computer Networks, and more. The department initially had an intake capacity of 40, which later increased to 55 in 2009. The Department of Information Technology is known for its excellence in IT education and research. It continually updates its curriculum to keep pace with the fast-changing tech industry. Faculty members engage in cutting-edge research, and the department is involved in IT research programs supported by both the government and industry.
+                    </Text>
+<Box textAlign={'right'}>
 
+                    <Button colorScheme={'facebook'} borderRadius={'0.5em'} fontWeight={'normal'} mt={3}>Read More</Button>
+</Box>
+
+
+                </Box>
+                {/* <Center w={'full'} h={'full'}> */}
                 <video className='hod-video' src={video_from_hod} controls></video>
-            </div>
-        </>
+                {/* </Center> */}
+
+            </SimpleGrid>
+        </Box>
     )
 }
 

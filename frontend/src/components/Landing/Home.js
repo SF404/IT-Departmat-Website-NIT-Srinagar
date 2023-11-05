@@ -10,7 +10,9 @@ import QuickButtons from "./components/QuickButtons";
 import Holidays from "./components/Holidays";
 import FromHod from "./components/FromHod";
 import axios from "axios";
-import { Box, Center, SimpleGrid, Spinner } from "@chakra-ui/react";
+import { Box, Center, Divider, Highlight, SimpleGrid, Spinner, VStack } from "@chakra-ui/react";
+import FeaturedVideos from "./components/FeaturedVideos";
+import Highlights from "./components/Highlights";
 
 function Home() {
   const [news, setNews] = useState(null);
@@ -67,16 +69,21 @@ function Home() {
           <AnnouncementRibbon />
           <Banner />
           <QuickButtons />
-          <FromHod video_from_hod={video_from_hod} />
-          <Center>
-            <Box width={{ base: "100%", md: "80%" }}>
-              <Announcements />
-              <SimpleGrid columns={[1, 1, 3]}>
-                <LatestNews news={news} />
-                <UpcomingEvents events={events} holidays={holidays} />
-                <Box gridColumn={"span 2"}></Box>
+          <Center w={"full"}>
+            <VStack width={{ base: "100%", md: "80%" }} spacing={'2em'} px={4} mb={8}>
+              <FromHod video_from_hod={video_from_hod} />
+              <Divider />
+              <SimpleGrid columns={[1, 1, 1, 2]} gap={4} rowGap={'2em'} >
+                <Announcements />
+                <UpcomingEvents events={events} />
+                <Holidays holidays={holidays} />
               </SimpleGrid>
-            </Box>
+              <Divider />
+              {/* <LatestNews news={news} /> */}
+              <FeaturedVideos />
+              <Divider/>
+              <Highlights />
+            </VStack>
           </Center>
         </>
       )}

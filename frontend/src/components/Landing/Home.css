@@ -73,11 +73,12 @@
 }
 
 .tileContainer {
-    display: grid;
+    display: flex;
     grid-template-columns: repeat(3, 300px);
     justify-content: center;
     grid-gap: 1.5em;
     margin: 2em 1em;
+    flex-wrap: wrap;
 }
 
 
@@ -86,6 +87,10 @@
     height: 100px !important;
     border: 1px solid rgba(0, 0, 0, 0.4);
     color: darkblue !important;
+    max-width:  250px !important;
+    min-width: 250px !important;
+    background-color: white !important;
+    border-radius: 1em !important;
 
     display: flex;
     gap: 0.5em;
@@ -111,7 +116,7 @@
     grid-gap: 2em;
     padding: 1.5em;
     background-color: #d8dcf0;
-    border-radius: 0.5em;
+    border-radius: 1em;
 }
 
 .hod-message h1 {
@@ -135,14 +140,12 @@
 
 .text-content::-webkit-scrollbar {
     display: none;
-
 }
 
 
 
 .hod-video {
-    border-radius: 1em;
-    border: 2px solid #b2b9e1;;
+    border-radius: 0.5em;
 }
 
 .h-title {

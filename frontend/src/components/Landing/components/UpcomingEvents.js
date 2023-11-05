@@ -1,33 +1,33 @@
 import React, { useEffect, useState } from 'react';
 import './z_style.css'
-import { Box, Center, CircularProgress, Flex, HStack, Link, SimpleGrid, Text, VStack, baseTheme } from '@chakra-ui/react';
+import { Box, Center, CircularProgress, Divider, Flex, HStack, Heading, Link, SimpleGrid, Text, VStack, baseTheme } from '@chakra-ui/react';
 import { FaFreeCodeCamp } from "react-icons/fa6";
 import Holidays from './Holidays';
 import { BsCalendar2Event, BsCalendar4Event } from 'react-icons/bs';
 
-function UpcomingEvents({ events, holidays }) {
+function UpcomingEvents({ events }) {
     return (
-        <Box>
-            <div className="h-title" style={{ marginBottom: "0.5em" }}>
-                <h1 className='h-title-icon'>UPCOMING EVENTS <BsCalendar2Event/></h1>
-            </div>
-            <VStack margin={"1em"}>
-                {events ? (events.slice().reverse().map((event, index) => (
-
-                    <Flex key={index} fontSize={'0.8em'} gap={4} borderRadius={'0.5em'} p={2} w={'full'} bg={'white'} color={'black'} boxShadow={'0 0 5px rgba(0,0,0,0.1)'}>
-                        <Flex flexDir={'column'} alignItems={'center'} minW={'60px'} minH='60px' maxH='60px' borderBottom={'4px solid #5cc181'} >
-                            <Text fontWeight={'extrabold'} fontSize={'2xl'} color={'#5cc181'}>{event.date}</Text>
-                            <Text fontWeight={'bold'} color={'#232c64'}>{event.month}</Text>
+        <Box w={'full'}>
+            <Heading fontSize={'1.5em'} my={'0.5em'} textAlign={'center'} color={'darkblue'}>UPCOMING EVENTS</Heading>
+            <VStack borderRadius={'1em'} spacing={'1em'} bg={'white'} p={'1em'} boxShadow={'0 0 12px rgba(0,0,0,0.05)'} w={'full'}>
+                {events ? (events.map((event, index) => (
+                    <>
+                        <Flex key={index} w={'full'} gap={4}>
+                            <Box aspectRatio={1 / 1} maxH={'80px'} minW={'80px'} textAlign={'center'} p={1} bg={'#d8dcf0'} borderRadius={'0.2em'} color={'darkblue'} borderBottom={'5px solid darkblue'} >
+                                <Heading>{event.date}</Heading>
+                                <Text>{event.month}</Text>
+                            </Box>
+                            <Flex flexDirection={'column'} justifyContent={'space-between'}>
+                                <Text as={Link} href={"https://nitsri.ac.in/" + event.url} fontWeight={'semibold'} fontSize={'lg'} className='family-1'>{event.title}</Text>
+                                <Text color={'darkblue'} >{event.time}  &nbsp; | &nbsp;  {event.location}</Text>
+                            </Flex>
                         </Flex>
-                        <Box fontWeight={'semibold'}>
-                            <Text as={Link} href={"https://nitsri.ac.in/" + event.url} color={'#232c64'} fontSize={'lg'} fontWeight={'bold'}>{event.title}</Text>
-                            <Text color={'#5cc181'} >{event.time}  &nbsp; | &nbsp;  {event.location}</Text>
-                        </Box>
-                    </Flex>
+                        <Divider />
+                    </>
                 ))) : (<CircularProgress isIndeterminate color='#5cc181' />)
                 }
             </VStack>
-            <Holidays holidays={holidays}/>
+
         </Box>
     );
 }
