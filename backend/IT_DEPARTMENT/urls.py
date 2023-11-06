@@ -8,10 +8,7 @@ from django.views.generic import TemplateView
 from rest_framework import routers
 from django.conf import settings
 
-# from rest_framework_simplejwt.views import (
-#     TokenObtainPairView,
-#     TokenRefreshView,
-# )
+
 
 # create a router object
 router = routers.DefaultRouter()
@@ -26,6 +23,10 @@ router.register(r'public/getteacher', TeacherView, basename='Semester Data')
 router.register(r'public/getteacherbymail', TeacherViewByMail, basename='Semester Data')
 router.register(r'public/getphdstudent', PhdStudentView, basename='Semester Data')
 router.register(r'public/courseget', allCourseGet, basename='Semester Data')
+router.register(r'public/researchget', ResearchView, basename='Semester Data')
+router.register(r'public/patentget', PatentView, basename='Semester Data')
+router.register(r'public/projectget', ProjectView, basename='Semester Data')
+router.register(r'public/teachereducationget', TeacherEducationView, basename='Semester Data')
 
 
 

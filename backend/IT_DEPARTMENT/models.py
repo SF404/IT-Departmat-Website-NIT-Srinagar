@@ -10,14 +10,44 @@ class Teacher(models.Model):
     name = models.CharField(max_length=255)
     email = models.EmailField(unique=True)
     description = models.CharField(max_length=255,blank=True)
-    phone =models.BigIntegerField(unique=True)
+    phone =models.BigIntegerField()
     research_field = models.TextField(max_length=255,blank=True)
     date=models.DateTimeField(auto_now_add=True)
     profile_photo = models.ImageField(upload_to='teacher_profile/')
-    education = models.JSONField(blank=True, null=True)
     about = models.JSONField(blank=True, null=True)
-    researchs = models.JSONField(blank=True, null=True)
+    # researchs = models.JSONField(blank=True, null=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE,null=True,blank=True)
+
+
+class Research(models.Model):
+    title = models.CharField(max_length=255)
+    authors = models.TextField()
+    url = models.URLField(blank=True,null=True)
+    date = models.CharField(max_length=255)
+    auto_date=models.DateTimeField(auto_now_add=True)
+    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE,null=True,blank=True)
+
+
+
+class Patent(models.Model):
+    patent=models.CharField(max_length=255)
+    date=models.CharField(max_length=255)
+    number=models.BigIntegerField(unique=True)
+    auto_date=models.DateTimeField(auto_now_add=True)
+    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
+
+class Project(models.Model):
+    title=models.CharField(max_length=255)
+    link=models.URLField( blank=True)
+    auto_date=models.DateTimeField(auto_now_add=True)
+    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
+    
+
+class TeacherEducation(models.Model):
+    degree=models.CharField(max_length=255)
+    college=models.CharField(max_length=255)
+    Year= models.BigIntegerField()
+    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
 
 class Course(models.Model):
     course_id = models.CharField(max_length=255, unique=True)
@@ -82,12 +112,4 @@ class Holiday(models.Model):
     def _str_(self):
         return self.name
     
-class Research(models.Model):
-    date = models.CharField(max_length=20)
-    authors = models.TextField()
-    url = models.URLField(blank=True)
-    title = models.CharField(max_length=255)
-
-    def __str__(self):
-        return self.title
 

@@ -11,6 +11,75 @@ from django.http import JsonResponse
 
 # Create your views here.
 
+class BaseFilteredViewSet(viewsets.ModelViewSet):
+    def list(self, request, *args, **kwargs):
+        email = self.request.query_params.get('email')
+        
+        if email:
+            teacher = Teacher.objects.filter(email=email).first()
+            
+            if teacher:
+                queryset = self.get_queryset().filter(teacher=teacher)
+            else:
+                queryset = self.get_queryset().none()
+        else:
+            queryset = self.get_queryset()
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data)
+
+
+class ProjectView(BaseFilteredViewSet):
+    serializer_class = ProjectSerializer
+    queryset = Project.objects.all()
+
+class PatentView(BaseFilteredViewSet):
+    serializer_class = PatentSerializer
+    queryset = Patent.objects.all()
+
+class TeacherEducationView(BaseFilteredViewSet):
+    serializer_class = TeacherEducationSerializer
+    queryset = TeacherEducation.objects.all()
+
+class ResearchView(BaseFilteredViewSet):
+    serializer_class=ResearchSerializer
+    queryset = Research.objects.all()
+
+class ProjectView(viewsets.ModelViewSet):
+    serializer_class=ProjectSerializer
+    def get_queryset(self):
+        email=self.request.query_params.get('email')
+        if email:
+            teacher=Teacher.objects.filter(email=email).first()
+            if teacher:
+                queryset=Project.objects.filter(teacher=teacher)
+                return queryset
+        queryset = Project.objects.all()
+        return queryset
+    
+class PatentView(viewsets.ModelViewSet):
+    serializer_class=PatentSerializer
+    def get_queryset(self):
+        email=self.request.query_params.get('email')
+        if email:
+            teacher=Teacher.objects.filter(email=email).first()
+            if teacher:
+                queryset=Patent.objects.filter(teacher=teacher)
+                return queryset
+        queryset = Patent.objects.all()
+        return queryset
+    
+class TeacherEducationView(viewsets.ModelViewSet):
+    serializer_class=TeacherEducationSerializer
+    def get_queryset(self):
+        email=self.request.query_params.get('email')
+        if email:
+            teacher=Teacher.objects.filter(email=email).first()
+            if teacher:
+                queryset=TeacherEducation.objects.filter(teacher=teacher)
+                return queryset
+        queryset = TeacherEducation.objects.all()
+        return queryset
+
 
 class TeacherView(viewsets.ModelViewSet):
     serializer_class = TeacherSerializer
