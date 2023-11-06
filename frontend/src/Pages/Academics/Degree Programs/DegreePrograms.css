@@ -57,12 +57,8 @@
   column-span: 2;
 }
 
-#credit tr:nth-child(even) {
-  background-color: #eae6e6;
-}
-
-#credit tr:hover {
-  background-color: #ddd;
+#credit tr:nth-child(odd) {
+  background-color: #ebedf7;
 }
 
 #credit th {
@@ -92,8 +88,8 @@
   transition: background-color 0.3s ease;
 }
 .my-div {
-  margin: 10px;
-  width: 8; /* Adjust margin for smaller screens */
+  
+  text-align: justify;
 }
 
 .paradg {
@@ -107,10 +103,10 @@
 
 
 .dghead {
-  margin-top: 5px;
+  font-size: 1.2em;
+  margin: 1em 0 !important;
   display: flex;
   font-weight: bold;
-  font-size: large;
   text-decoration: underline;
   color: darkblue;
   justify-content: center;
