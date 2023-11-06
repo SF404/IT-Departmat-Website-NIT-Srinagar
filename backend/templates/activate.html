@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Activate Account</title>
+    <!-- Include Axios library -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div
+        class="d-flex flex-column justify-content-center align-items-center"
+        style="margin-top: 200px"
+      >
+        <h1>Verify your Account:</h1>
+        <button
+          onclick="verify_account()"
+          style="margin-top: 50px"
+          type="button"
+          class="btn btn-primary"
+        >
+          Verify
+        </button>
+      </div>
+    </div>
+
+    <script>
+      async function verify_account() {
+        const path = window.location.pathname;
+        const pathParts = path.split("/");
+        const uid = pathParts[2];
+        const token = pathParts[3];
+        console.log(uid);
+        console.log(token);
+        try {
+          const response = await axios.post(
+            "http://127.0.0.1:8000/api/auth/users/activation/",
+            {
+              uid: uid,
+              token: token,
+            },
+            {
+              headers: {
+                "Content-Type": "application/json",
+              },
+            }
+          );
+          console.log(response);
+          if (response.data.success) {
+            navigate("http://localhost:3000/");
+          } else {
+            showAlert("Account verification failed.");
+          }
+        } catch (error) {
+          showAlert(
+            "Account has been verified but there is problem of sending email"
+          );
+        }
+      }
+      function showAlert(message) {
+        window.alert(message);
+      }
+      function navigate(url) {
+        window.location.href = url;
+      }
+    </script>
+  </body>
+</html>

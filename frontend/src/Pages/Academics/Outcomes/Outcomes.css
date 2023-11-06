@@ -1,41 +1,77 @@
-/* VisionMission.css */
-
-/* Container styles */
-.container-style {
-    padding: 10px;
-    border-radius: 4px;
-    background-size: cover;
-    background-position: center;
-    background-color: white;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-}
-
-/* Text style for changing text color and cursor on hover */
-.arm {
-    color: blue;
-    cursor: pointer;
-}
-
-/* Section heading styles with reduced font size */
-.section-heading-style {
-    font-size: 18px;
-    font-weight: normal; /* Reset font-weight to normal */
-    font-family: 'Your-Bold-Font', sans-serif; /* Use a bold-looking font */
-    color: rgba(0, 0, 0, 0.7); /* Lower contrast color (adjust as needed) */
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Add text shadow (adjust as needed) */
-    margin: 16px 0;
-}
-
-/* List item styles */
-.list-item-style {
-    font-size: 18px;
+.outback {
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  
+  @media (max-width: 768px) {
+    .paradg {
+      font-size: 16px; /* Reduce font size for small screens */
+    }
+    #outbutton1 {
+      font-size: medium; /* Adjust font size for smaller screens */
+      padding: 8px 20px; /* Adjust padding for smaller screens */
+    }
+    .my-div {
+      margin: 10px; /* Adjust margin for smaller screens */
+    }
+    .list {
+      margin-left: 10px; /* Adjust left margin for smaller screens */
+    }
+  }
+  
+  #outbutton {
+    text-align: center;
+    background-color: transparent;
     color: black;
-    line-height: 1.5;
-    animation: bounce 2s infinite;
+  }
+  
+  #outbutton1 {
+    font-size: large;
+    font-weight: bold;
+    border-radius: 8px;
+    background-color: white;
+    color: black;
+    border: 2px solid #16a4d3;
+    padding: 12px 28px;
+    margin: 10px;
+    transition: background-color 0.2s, color 0.2s; /* Smooth hover effect */
+  }
+  #outbutton1:hover {
+    background-color: #1a8f87;
+    color: white;
+  }
 
-}
-
-/* List item hover styles */
-.list-item-style:hover {
-    color: blue;
-}
+  .outlist{margin-left: 1em;}
+  .my-link
+  { font-weight: bold;
+    color: black;
+    text-decoration: underline;
+    transition: background-color 0.3s ease;
+  }
+  .my-link:hover
+  {
+    color: #1a8f87;
+  }
+  .my-link2
+  { font-weight: bold;
+    text-align: center;
+    color: black;
+    text-decoration: underline;
+    transition: background-color 0.3s ease;
+  }
+  .outli {
+    font-weight: bold;
+  }
+  .outdg2 {
+    margin-top: .5px;
+    
+  }
+  .outhead {
+    margin-top: 5px;
+    display: flex;
+    font-weight: bold;
+    font-size: large;
+    text-decoration: underline;
+    color: darkblue;
+    justify-content: center;
+    align-items: center;
+  }

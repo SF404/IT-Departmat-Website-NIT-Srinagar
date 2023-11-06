@@ -3,15 +3,15 @@ from django.contrib.auth.decorators import login_required
 from django.urls import path,include, re_path
 from PublicAPI.views import *
 from .views import *
-from . import views
+# from . import views
 from django.views.generic import TemplateView
 from rest_framework import routers
 from django.conf import settings
 
-from rest_framework_simplejwt.views import (
-    TokenObtainPairView,
-    TokenRefreshView,
-)
+# from rest_framework_simplejwt.views import (
+#     TokenObtainPairView,
+#     TokenRefreshView,
+# )
 
 # create a router object
 router = routers.DefaultRouter()
@@ -23,8 +23,10 @@ router.register(r'showassignment', AssignmentShow, basename='login')
 router.register(r'semester', SemesterCourseView, basename='Semester Data')
 router.register(r'listholidays', HolidayView, basename='Holiday Data')
 router.register(r'public/getteacher', TeacherView, basename='Semester Data')
+router.register(r'public/getteacherbymail', TeacherViewByMail, basename='Semester Data')
 router.register(r'public/getphdstudent', PhdStudentView, basename='Semester Data')
 router.register(r'public/courseget', allCourseGet, basename='Semester Data')
+
 
 
 urlpatterns = [
@@ -33,14 +35,17 @@ urlpatterns = [
     path('api/notesdownload/', DownloadNotes.as_view(),name='registration'),
     path('api/getmails/', MailTeacherList.as_view(),name='registration'),
     path('api/filesdelete/', DeleteFilesAPIView.as_view(),name='registration'),
-    path('api/auth/register/', RegistrationView.as_view(), name='registration'),
-    path('api/auth/login/', CustomObtainTokenView.as_view(), name='login'),
-    path('api/auth/refresh-token/', CustomRefreshTokenView.as_view(), name='refresh-token'),
-    path('api/auth/logout/', LogoutView.as_view(), name='logout'),
-    path('api/auth/getuser/', GetUserFromTokenView.as_view(), name='logout'),
+    # path('api/auth/register/', RegistrationView.as_view(), name='registration'),
+    # path('api/auth/login/', CustomObtainTokenView.as_view(), name='login'),
+    # path('api/auth/refresh-token/', CustomRefreshTokenView.as_view(), name='refresh-token'),
+    # path('api/auth/logout/', LogoutView.as_view(), name='logout'),
+    # path('api/auth/getuser/', GetUserFromTokenView.as_view(), name='logout'),
+    path('api/auth/', include('djoser.urls')),
+    path('api/auth/', include('djoser.urls.jwt')),
     path('api/events_data/', GetEvents.as_view(),name='registration'),
     path('api/news_data/', GetNews.as_view(),name='registration'),
     re_path(r'^$', TemplateView.as_view(template_name='index.html')),
+    path('activate/<str:uid>/<str:token>/', TemplateView.as_view(template_name='activate.html'), name='activate'),
 ]
 
 

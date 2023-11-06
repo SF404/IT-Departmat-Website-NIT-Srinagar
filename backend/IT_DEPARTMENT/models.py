@@ -1,8 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.utils import timezone
+from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
 
 # Create your models here.
+
+
 class Teacher(models.Model):
     teacher_id = models.CharField(max_length=255, unique=True)
     name = models.CharField(max_length=255)

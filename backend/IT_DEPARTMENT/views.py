@@ -6,6 +6,8 @@ from rest_framework.response import Response
 from .serializers import *
 from django.contrib.auth import authenticate
 import random
+from django.core.mail import send_mail
+from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from rest_framework.permissions import IsAuthenticated
@@ -18,6 +20,17 @@ from django.conf import settings
 import os
 from django.views.generic import TemplateView
 import json
+
+
+
+def send_activation_email(user, request):
+    token = RefreshToken.for_user(user)
+    uid = user.id
+    activation_url = request.build_absolute_uri(reverse('activate', kwargs={'uid': uid, 'token': str(token.access_token)}))
+    subject = 'Activate Your Account'
+    message = f'Please click the following link to activate your account: {activation_url}'
+    send_mail(subject, message, 'techteam.it.nitsri@gmail.com', [user.email])
+
 
 
 class MailTeacherList(APIView):
@@ -93,8 +106,8 @@ class DeleteFilesAPIView(APIView):
     
 class RegistrationView(APIView):
     def post(self, request):
-        username = request.data.get('username')
         password = request.data.get('password')
+        username=request.data.get('username')
         name = request.data.get('name')
         email = request.data.get('email')
         print(password)
@@ -103,9 +116,9 @@ class RegistrationView(APIView):
         if User.objects.filter(username=username).exists():
             return Response({'message': 'Username already exists.'}, status=status.HTTP_400_BAD_REQUEST)
         user = User.objects.create_user(username=username, password=password,is_active=True)
-        user.first_name = name
-        user.email = email
+        user.name = name
         user.save()
+        # send_activation_email(user, request)
         return Response({'message': 'User created but not Verified.'}, status=status.HTTP_201_CREATED)
 
 class CustomObtainTokenView(APIView):
@@ -114,16 +127,16 @@ class CustomObtainTokenView(APIView):
         password = request.data.get('password')
         print(password)
         if not username or not password:
-            return Response({'message': 'Username and password are required.'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'message': 'Email and password are required.'}, status=status.HTTP_400_BAD_REQUEST)
         user = authenticate(username=username, password=password)
         if user is None:
             return Response({'message': 'Invalid credentials.'}, status=status.HTTP_401_UNAUTHORIZED)
-        # if not user.is_active:
-        #     return Response({'message': 'User is not Verified.'}, status=status.HTTP_403_FORBIDDEN)
         login(request, user)
         refresh = RefreshToken.for_user(user)
-        access_token = str(refresh.access_token)
-        return Response({'access_token': access_token,'refresh_token': str(refresh),'message': 'Logging in'}, status=status.HTTP_200_OK)
+        access = str(refresh.access_token)
+        return Response({'access_token': access,'refresh_token': str(refresh),'message': 'Logging in'}, status=status.HTTP_200_OK)
+    
+
 class CustomRefreshTokenView(APIView):
     authentication_classes=[JWTAuthentication]
     permission_classes = (IsAuthenticated,)

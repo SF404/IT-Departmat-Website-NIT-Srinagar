@@ -26,7 +26,7 @@ const FacilitiesSectionRight = ({ img, title, description }) => (
     spacing={8}
     p={4}
     borderBottom={"2px solid teal"}
-    rounded="lg"
+    // rounded="lg"
   >
     <Grid templateColumns={{ base: "1fr", md: "1fr 2fr" }} gap={4}>
       <GridItem colSpan={{ base: 1, md: 1 }}>
@@ -63,7 +63,7 @@ const FacilitiesSectionLeft = ({ img, title, description }) => (
     spacing={8}
     p={4}
     borderBottom={"2px solid teal"}
-    rounded="lg"
+    // rounded="lg"
   >
     <Grid templateColumns={{ base: "1fr", md: "2fr 1fr" }} gap={4}>
       <GridItem colSpan={{ base: 1, md: 1 }}>

@@ -2,13 +2,6 @@
 import React from "react";
 import { Box, Heading, SimpleGrid, Text } from "@chakra-ui/react";
 
-const awardBoxStyles = {
-  p: 4,
-  borderWidth: "1px",
-  borderRadius: "lg",
-  boxShadow: "md",
-};
-
 const AwardsPage = () => {
   const awardsData = [
     {
