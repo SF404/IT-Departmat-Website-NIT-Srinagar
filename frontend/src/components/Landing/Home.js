@@ -10,7 +10,15 @@ import QuickButtons from "./components/QuickButtons";
 import Holidays from "./components/Holidays";
 import FromHod from "./components/FromHod";
 import axios from "axios";
-import { Box, Center, Divider, Highlight, SimpleGrid, Spinner, VStack } from "@chakra-ui/react";
+import {
+  Box,
+  Center,
+  Divider,
+  Highlight,
+  SimpleGrid,
+  Spinner,
+  VStack,
+} from "@chakra-ui/react";
 import FeaturedVideos from "./components/FeaturedVideos";
 import Highlights from "./components/Highlights";
 
@@ -41,14 +49,14 @@ function Home() {
 
   async function fetchHolidays() {
     const date = new Date();
-    try {
-      const response = await axios.get(
-        `/api/listholidays/?activeMonth=${date.getMonth() + 1}`
-      );
-      setHolidays(response.data);
-    } catch (error) {
-      console.error("Failed to fetch Holidays", error);
-    }
+    // try {
+    //   const response = await axios.get(
+    //     `/api/listholidays/?activeMonth=${date.getMonth() + 1}`
+    //   );
+    //   setHolidays(response.data);
+    // } catch (error) {
+    //   console.error("Failed to fetch Holidays", error);
+    // }
   }
   useEffect(() => {
     async function fetchData() {
@@ -70,18 +78,23 @@ function Home() {
           <Banner />
           <QuickButtons />
           <Center w={"full"}>
-            <VStack width={{ base: "100%", md: "80%" }} spacing={'2em'} px={4} mb={8}>
+            <VStack
+              width={{ base: "100%", md: "80%" }}
+              spacing={"2em"}
+              px={4}
+              mb={8}
+            >
               <FromHod video_from_hod={video_from_hod} />
               <Divider />
-              <SimpleGrid columns={[1, 1, 1, 2]} gap={4} rowGap={'2em'} >
+              <SimpleGrid columns={[1, 1, 1, 2]} gap={4} rowGap={"2em"}>
                 <Announcements />
                 <UpcomingEvents events={events} />
                 <Holidays holidays={holidays} />
               </SimpleGrid>
               <Divider />
-              {/* <LatestNews news={news} /> */}
+              <LatestNews news={news} />
               <FeaturedVideos />
-              <Divider/>
+              <Divider />
               <Highlights />
             </VStack>
           </Center>
