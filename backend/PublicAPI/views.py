@@ -22,6 +22,15 @@ class TeacherView(viewsets.ModelViewSet):
         queryset = Teacher.objects.all()
         print("Number of items in queryset:", queryset.count())
         return queryset
+    
+class TeacherViewByMail(viewsets.ModelViewSet):
+    serializer_class = TeacherSerializer
+    def get_queryset(self):
+        email=self.request.query_params.get('email')
+        print(email)
+        if email :
+            teacher = Teacher.objects.filter(email=email)
+            return teacher
 
 
 class PhdStudentView(viewsets.ModelViewSet):
@@ -49,14 +58,19 @@ class SemesterCourseView(viewsets.ModelViewSet):
         queryset = Course.objects.filter(semester=semester)
         print("Number of items in queryset:", queryset.count())
         return queryset
+    
+
 class CourseView(viewsets.ModelViewSet):
     serializer_class = CourseSerializer
     def get_queryset(self):
         sid = self.request.query_params.get('sid')
+        print(sid)
         teacher = Teacher.objects.get(teacher_id=sid)
         print("sid", teacher.name)
         queryset = Course.objects.filter(teacher=teacher)
         return queryset
+    
+
 class NotesShow(viewsets.ModelViewSet):
     serializer_class = NotesSerializer
     def get_queryset(self):

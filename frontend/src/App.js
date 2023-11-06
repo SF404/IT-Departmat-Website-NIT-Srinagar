@@ -32,6 +32,7 @@ import FacultyDetails from "./components/Faculty/FacultyDetails";
 import ImageGallery from "./Pages/Gallery/ImageGallery";
 import CreditsPage from "./Pages/contact_us/Credits1";
 import StaffTable from "./Pages/Academics/Staff";
+import Activate from "./components/Auth/Activate";
 
 function App() {
   return (
@@ -42,10 +43,15 @@ function App() {
           <Route path="semester/all" element={<CoursesAll />}></Route>
           <Route path="faculty" element={<Faculty />}></Route>
           <Route path="faculty/details/:id" element={<FacultyDetails />} />
-          <Route path="login" element={<Login />}></Route>
-          <Route path="signup" element={<Signup />}></Route>
-          <Route path="reset" element={<Reset_pass />}></Route>
-          <Route path="request" element={<Request_page />}></Route>
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          {/* <Route exact path="/reset-password" component={ResetPassword} /> */}
+          {/* <Route
+            exact
+            path="/password/reset/confirm/:uid/:token"
+            component={ResetPasswordConfirm}
+          /> */}
+          <Route exact path="/activate/:uid/:token" component={Activate} />
           <Route path="semester/:semesterId" element={<SemesterPage />} />
           <Route path="degree-program" element={<DegreePrograms />}></Route>
           <Route path="phd-students" element={<PhdStudents />}></Route>
@@ -62,7 +68,6 @@ function App() {
           <Route path="papers" element={<Papers />}></Route>
           <Route path="labs" element={<Labs />}></Route>
           <Route path="gallery" element={<ImageGallery />}></Route>
-
           <Route path="awards" element={<AwardsPage />}></Route>
           <Route path="contact-us" element={<ContactUs />}></Route>
           <Route path="facilities" element={<FacilitiesPage />}></Route>

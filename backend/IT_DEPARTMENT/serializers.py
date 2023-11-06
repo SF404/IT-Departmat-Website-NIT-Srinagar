@@ -1,10 +1,19 @@
 # import serializers from the REST framework
 from rest_framework import serializers
+from djoser.serializers import UserCreateSerializer
  
 # import the todo data model
 from .models import *
  
 # create a serializer class
+
+class UserCreateSerializer(UserCreateSerializer):
+    
+    class Meta(UserCreateSerializer.Meta):
+        model=User
+        fields=('id', 'name', 'password')
+
+
 class TeacherSerializer(serializers.ModelSerializer):
  
     # create a meta class

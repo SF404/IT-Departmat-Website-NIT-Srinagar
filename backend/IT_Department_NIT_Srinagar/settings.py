@@ -88,8 +88,12 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'techteam.it.nitsri@gmail.com'
-EMAIL_HOST_PASSWORD = 'bfytxtsqcrtyrzse'
+DEFAULT_FROM_EMAIL = 'techteam.it.nitsri@gmail.com'
+SERVER_EMAIL = 'techteam.it.nitsri@gmail.com'
+EMAIL_HOST_PASSWORD = 'tzkg xmcb brny dglb'
 EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -108,6 +112,7 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
 
 
 # Internationalization
@@ -136,23 +141,29 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 REST_FRAMEWORK = {
+    # 'DEFAULT_PERMISSION_CLASSES': (
+    #     'rest_framework.permissions.IsAuthenticated',
+    # ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
 }
 
 SIMPLE_JWT = {
+    # 'AUTH_HEADER_TYPES': ('JWT',),
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
     'SLIDING_TOKEN_LIFETIME': timedelta(days=30),
     'SLIDING_TOKEN_REFRESH_DELTA': timedelta(days=15),
     'SLIDING_TOKEN_REFRESH_DELTA_FOR_USER': timedelta(days=30),
+    "ROTATE_REFRESH_TOKENS": True,
+    "UPDATE_LAST_LOGIN": True,
 }
 
 DJOSER = {
-    'LOGIN_FIELD': 'email',
+    'LOGIN_FIELD': 'username',
     'USER_CREATE_PASSWORD_RETYPE':True,
-    'ACTIVATION_URL':'/activate/{uid}/{token}',
+    'ACTIVATION_URL':'activate/{uid}/{token}',
     'SEND_ACTIVATION_EMAIL':True,
     'SEND_CONFIRMATION_EMAIL':True,
     'PASSWORD_CHANGED_EMAIL_CONFIRMATION':True,
@@ -160,11 +171,17 @@ DJOSER = {
     'SET_PASSWORD_RETYPE': True,
     'PASSWORD_RESET_SHOW_EMAIL_NOT_FOUND': True,
     'TOKEN_MODEL': None,
-    'SERIALIZERS': {
-        'user_create': 'User.serializers.UserCreateSerializer',
-        'user': 'User.serializers.UserCreateSerializer',
+    'SERIALIZERS':{
+        'user_create': 'IT_DEPARTMENT.serializers.UserCreateSerializer',
+        'user': 'IT_DEPARTMENT.serializers.UserCreateSerializer',
         'user_delete': 'djoser.serializers.UserDeleteSerializer',
-    }
+    },
+    'EMAIL': {
+        'activation': 'IT_DEPARTMENT.email.ActivationEmail',
+        'confirmation': 'IT_DEPARTMENT.email.ConfirmationEmail',
+        'password_reset': 'IT_DEPARTMENT.email.PasswordResetEmail',
+        'password_changed_confirmation': 'IT_DEPARTMENT.email.PasswordChangedConfirmationEmail',
+    },
 
 }
 CORS_ALLOWED_ORIGINS = [
