@@ -22,7 +22,7 @@ class Command(BaseCommand):
                 name = "Dr. Shabir Ahmad Sofi",
                 description = "HOD and Assistant Professor",
                 email = "shabir@nitsri.net",
-                phone=9419009971,
+                phone=94190099711,
                 profile_photo="teacher_profile/ShabirSir.jpeg",
                 research_field="Wireless Sensor Networks, Internet of Things, Artificial Intelligence, Machine Learning, and Big Data"
             )
@@ -31,7 +31,7 @@ class Command(BaseCommand):
                 name = "Dr. Iqra Altaf Gillani",
                 description = "Assistant Professor",
                 email = "iqraaltaf@nitsri.ac.in",
-                phone=94194539971,
+                phone=941945399712,
                 profile_photo="teacher_profile/IqraMam.jpeg",
                 research_field="Data Algorithmics, Probabilistic Analysis of Networks, Distributed Computation, Network and Data Science."
             )
@@ -471,7 +471,6 @@ class Command(BaseCommand):
                         
                 )
             
-
             Course.objects.create(
                 course_id = "WSP100",
                 name = " Work shop Practice",
@@ -595,4 +594,38 @@ class Command(BaseCommand):
                 description="Christmas Day"
             )
 
+            Patent.objects.create(
+                patent="Temporary",
+                date="NOV 2023",
+                number="12345",
+                teacher = rajes
+            )
+            Research.objects.create(
+                title="Temporary",
+                authors="rajes",
+                date="NOV 2023",
+                teacher = rajes
+            )
+            Patent.objects.create(
+                patent="Temporary",
+                date="NOV 2023",
+                number="12346",
+                teacher = suhaib
+            )
+            Research.objects.create(
+                title="Temporary",
+                authors="suhaib",
+                date="NOV 2023",
+                teacher = suhaib
+            )
+            Project.objects.create(
+                title="Temporary",
+                teacher = suhaib
+            )
+            TeacherEducation.objects.create(
+                degree="12th",
+                college="MPML",
+                Year= "2021",
+                teacher = rajes
+            )
             self.stdout.write(self.style.SUCCESS('ALL Course entries created.'))

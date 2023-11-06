@@ -6,8 +6,30 @@ from IT_DEPARTMENT.models import *
 from PublicAPI.models import *
  
 # create a serializer class
+
+class ResearchSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Research
+        fields = '__all__'
+
+class PatentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Patent
+        fields = '__all__'
+
+class ProjectSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Project
+        fields = '__all__'
+
+class TeacherEducationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TeacherEducation
+        fields = '__all__'
+
+
+
 class TeacherSerializer(serializers.ModelSerializer):
- 
     # create a meta class
     class Meta:
         model = Teacher
