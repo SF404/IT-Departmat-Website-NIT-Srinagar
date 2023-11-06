@@ -30,7 +30,7 @@ import FacilitiesPage from "./Pages/Student_Activities/Facilities";
 import PlacementBrochure from "./Pages/Student_Activities/PlacementBrochure";
 import FacultyDetails from "./components/Faculty/FacultyDetails";
 import ImageGallery from "./Pages/Gallery/ImageGallery";
-import CreditsPage from "./Pages/contact_us/Credits";
+import CreditsPage from "./Pages/contact_us/Credits1";
 import StaffTable from "./Pages/Academics/Staff";
 
 function App() {
