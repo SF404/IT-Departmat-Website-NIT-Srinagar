@@ -271,7 +271,7 @@ function Navbar() {
           direction={{ base: "column", md: "row" }}
           spacing="2"
           align="stretch"
-          display={{ base: "none", md: "flex" }}
+          display={{ base: "none", lg: "flex" }}
         >
           <NavLinks color={"white"} />
         </Stack>
@@ -285,7 +285,7 @@ function Navbar() {
           justifyContent={"center"}
           color={"white"}
           colorScheme="whiteAlpha"
-          display={{ base: "flex", md: "none" }}
+          display={{ base: "flex", lg: "none" }}
           alignItems={"center"}
           icon={isOpen ? <FaX /> : <FaBarsStaggered />}
           {...getButtonProps()}
