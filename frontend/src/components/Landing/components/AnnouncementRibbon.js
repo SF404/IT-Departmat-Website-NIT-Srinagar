@@ -1,7 +1,10 @@
+import { Text } from '@chakra-ui/react'
 import React from 'react'
 import { FcAdvertising } from 'react-icons/fc'
 
-function AnnouncementRibbon() {
+function AnnouncementRibbon({ announcements }) {
+    console.log(announcements)
+
     return (
         <>
             <div className='m-header'>
@@ -10,10 +13,11 @@ function AnnouncementRibbon() {
                 </div>
                 <marquee behavior="scroll" scrollamount="5" loop="-1" direction="left" className='alerts' >
                     <div>
-                        <p><FcAdvertising style={{ marginTop: '3px' }} /> Lorem ipsum doloribus ab laboriosam ea reprehenderit delectus ipsa. Facilis, quo!</p>
-                        <p><FcAdvertising style={{ marginTop: '3px' }} /> Lorem ipsum doloribus ab laboriosam ea reprehenderit delectus ipsa. Facilis, quo!</p>
-                        <p><FcAdvertising style={{ marginTop: '3px' }} /> Lorem ipsum doloribus ab laboriosam ea reprehenderit delectus ipsa. Facilis, quo!</p>
-                        <p><FcAdvertising style={{ marginTop: '3px' }} /> Lorem ipsum doloribus ab laboriosam ea reprehenderit delectus ipsa. Facilis, quo!</p>
+                        {
+                            announcements ? announcements.map((item, index) => {
+                                <p><FcAdvertising style={{ marginTop: '3px' }} /> <a href={item.link}>{item.description}</a></p>
+                            }) : (<Text>No Announcements</Text>)
+                        }
                     </div>
                 </marquee>
             </div>

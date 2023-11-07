@@ -26,6 +26,10 @@ class TeacherEducationSerializer(serializers.ModelSerializer):
     class Meta:
         model = TeacherEducation
         fields = '__all__'
+class AnnouncementSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Announcement
+        fields = '__all__'
 
 
 

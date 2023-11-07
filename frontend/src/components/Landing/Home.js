@@ -27,6 +27,7 @@ function Home() {
   const [events, setEvents] = useState(null);
   const [holidays, setHolidays] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [announcements, setAnnouncement] = useState(null);
 
   async function fetchNews() {
     try {
@@ -58,11 +59,24 @@ function Home() {
     //   console.error("Failed to fetch Holidays", error);
     // }
   }
+  async function fetchAnnouncements() {
+    
+    try {
+      const response = await axios.get(
+        `api/public/announcementget`
+      );
+      setAnnouncement(response.data);
+      console.log(response.data)
+    } catch (error) {
+      console.error("Failed to fetch Holidays", error);
+    }
+  }
   useEffect(() => {
     async function fetchData() {
       await fetchNews();
       await fetchEvents();
       await fetchHolidays();
+      await fetchAnnouncements();
       setLoading(false);
     }
     fetchData();
@@ -74,7 +88,7 @@ function Home() {
         <Spinner />
       ) : (
         <>
-          <AnnouncementRibbon />
+          <AnnouncementRibbon announcements={announcements} />
           <Banner />
           <QuickButtons />
           <Center w={"full"}>
@@ -87,7 +101,7 @@ function Home() {
               <FromHod video_from_hod={video_from_hod} />
               <Divider />
               <SimpleGrid columns={[1, 1, 1, 2]} gap={4} rowGap={"2em"}>
-                <Announcements />
+                <Announcements announcements={announcements} />
                 <UpcomingEvents events={events} />
                 <Holidays holidays={holidays} />
               </SimpleGrid>
