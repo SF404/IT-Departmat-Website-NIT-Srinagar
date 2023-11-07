@@ -1,19 +1,63 @@
 import { EmailIcon, ExternalLinkIcon, PhoneIcon } from '@chakra-ui/icons'
-import { Avatar, Badge, Box, Center, DarkMode, Divider, Heading, Icon, Image, ListItem, Stack, Table, TableCaption, TableContainer, Tbody, Td, Text, Th, Thead, Tooltip, Tr, UnorderedList, VStack, useToast } from '@chakra-ui/react'
+import { Avatar, Badge, Box, Center, DarkMode, Divider, Heading, Icon, Image, ListItem, Spinner, Stack, Table, TableCaption, TableContainer, Tbody, Td, Text, Th, Thead, Tooltip, Tr, UnorderedList, VStack, useToast } from '@chakra-ui/react'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
+import Faculty from './Faculty'
 
 function FacultyDetails() {
     const { id } = useParams()
-    console.log(id)
     const [FacultyDetails, setFacultyDetails] = useState(null)
+    const [currentTeachingCourses, setCurrentTeachingCourses] = useState(null)
+    const [projects, setProjects] = useState(null)
+
     async function fetchfacultyDetails() {
-        const response = await axios.get(`/api/public/getteacher/?Id=${id}`)
-        console.log(response.data[0])
-        setFacultyDetails(response.data[0])
+
+        try {
+            // teacher 
+            const teacher = await axios.get(`/api/public/getteacher/?Id=${id}`)
+            // couses
+            const courses = await axios.get(`/api/courses?sid=${teacher.data[0].email}`)
+            setCurrentTeachingCourses(courses.data)
+            const education = await axios.get(`/api/public/teachereducationget`, {
+                params: {
+                    email: teacher.data[0].email,
+                },
+            },)
+            setEducation(education.data)
+            // research
+            const research = await axios.get(`/api/public/researchget`, {
+                params: {
+                    email: teacher.data[0].email,
+                },
+            },)
+            setResearchs(research.data)
+            //patents
+            const patents = await axios.get(`/api/public/patentget`, {
+                params: {
+                    email: teacher.data[0].email,
+                },
+            },)
+            setPatents(patents.data)
+            //projects
+            const projects = await axios.get(`/api/public/projectget`, {
+                params: {
+                    email: teacher.data[0].email,
+                },
+            },)
+            setProjects(projects.data)
+            // set faculty details at last
+            setFacultyDetails(teacher.data[0])
+        }
+        catch (err) {
+            console.log(err)
+        }
+
     }
+
+
     useEffect(() => {
+        window.scrollTo(0, 0);
         fetchfacultyDetails();
     }, [])
 
@@ -42,90 +86,91 @@ function FacultyDetails() {
 
 
     // data 
-    const [education, setEducation] = useState([
-        {
-            "degree": "Bachelor of Science in Computer Science",
-            "school": "Example University",
-            "location": "Cityville, State",
-            "graduation_year": 2020
-        },
-        {
-            "degree": "Master of Science in Data Science",
-            "school": "Data Science Institute",
-            "location": "Techtown, State",
-            "graduation_year": 2022
-        }
-    ])
+    const [education, setEducation] = useState( null
+        // [
+        //     {
+        //         "degree": "Bachelor of Science in Computer Science",
+        //         "school": "Example University",
+        //         "location": "Cityville, State",
+        //         "graduation_year": 2020
+        //     },
+        //     {
+        //         "degree": "Master of Science in Data Science",
+        //         "school": "Data Science Institute",
+        //         "location": "Techtown, State",
+        //         "graduation_year": 2022
+        //     }
+        // ]
+    )
 
-    const [researchs, setResearchs] = useState(
-        [
-            {
-                "date": "FEB 2019",
-                "authors": "Rajib Ghosh, Janibul Bashir, Smruti R. Sarangi, and Anuj Dhawan",
-                "url": '',
-                "title": "SpliESR: Tunable Power Splitter Based on an Electro-Optic Slotted Ring Resonator"
-            },
-            {
-                "date": "JUL 2017",
-                "authors": "Eldhose Peter, Janibul Bashir, Akriti Bagaria, and Smruti R. Sarangi",
-                "url": '',
-                "title": "Optical Overlay NUCA : A high-speed substrate for shared L2 caches"
-            },
-            {
-                "date": "JUL 2020",
-                "authors": "Janibul Bashir and Smruti R. Sarangi",
-                "url": '',
-                "title": "GPUOPT: Power Efficient Photonic Network-on-Chip for a Scalable GPU"
-            },
-            {
-                "date": "JUL 2021",
-                "authors": "Omais Shafi and Janibul Bashir",
-                "url": '',
-                "title": "FreqCounter: Efficient cacheability of encryption and integrity tree counters in secure processors"
-            },
-            {
-                "date": "JUN 2021",
-                "authors": "Ishfaq Hussain and Janibul Bashir",
-                "url": '',
-                "title": "Dynamic MTU: A smaller path MTU size technique to reduce packet drops in IPv6"
-            },
-            {
-                "date": "NOV 2018",
-                "authors": "Janibul Bashir, Eldhose Peter, and Smruti R. Sarangi",
-                "url": '',
-                "title": "A Survey of On-chip Optical Interconnects"
-            },
-            {
-                "date": "NOV 2018",
-                "authors": "Janibul Bashir, Eldhose Peter, and Smruti R. Sarangi",
-                "url": '',
-                "title": "BigBus: A Scalable Optical Interconnect"
-            },
-            {
-                "date": "OCT 2019",
-                "authors": "Janibul Bashir, Smruti R. Sarangi",
-                "url": '',
-                "title": "Predict, Share, and Recycle your Way to Low Power Nanophotonic Networks"
-            }
-        ]
+    const [researchs, setResearchs] = useState(null
+        // [
+        //     {
+        //         "date": "FEB 2019",
+        //         "authors": "Rajib Ghosh, Janibul Bashir, Smruti R. Sarangi, and Anuj Dhawan",
+        //         "url": '',
+        //         "title": "SpliESR: Tunable Power Splitter Based on an Electro-Optic Slotted Ring Resonator"
+        //     },
+        //     {
+        //         "date": "JUL 2017",
+        //         "authors": "Eldhose Peter, Janibul Bashir, Akriti Bagaria, and Smruti R. Sarangi",
+        //         "url": '',
+        //         "title": "Optical Overlay NUCA : A high-speed substrate for shared L2 caches"
+        //     },
+        //     {
+        //         "date": "JUL 2020",
+        //         "authors": "Janibul Bashir and Smruti R. Sarangi",
+        //         "url": '',
+        //         "title": "GPUOPT: Power Efficient Photonic Network-on-Chip for a Scalable GPU"
+        //     },
+        //     {
+        //         "date": "JUL 2021",
+        //         "authors": "Omais Shafi and Janibul Bashir",
+        //         "url": '',
+        //         "title": "FreqCounter: Efficient cacheability of encryption and integrity tree counters in secure processors"
+        //     },
+        //     {
+        //         "date": "JUN 2021",
+        //         "authors": "Ishfaq Hussain and Janibul Bashir",
+        //         "url": '',
+        //         "title": "Dynamic MTU: A smaller path MTU size technique to reduce packet drops in IPv6"
+        //     },
+        //     {
+        //         "date": "NOV 2018",
+        //         "authors": "Janibul Bashir, Eldhose Peter, and Smruti R. Sarangi",
+        //         "url": '',
+        //         "title": "A Survey of On-chip Optical Interconnects"
+        //     },
+        //     {
+        //         "date": "NOV 2018",
+        //         "authors": "Janibul Bashir, Eldhose Peter, and Smruti R. Sarangi",
+        //         "url": '',
+        //         "title": "BigBus: A Scalable Optical Interconnect"
+        //     },
+        //     {
+        //         "date": "OCT 2019",
+        //         "authors": "Janibul Bashir, Smruti R. Sarangi",
+        //         "url": '',
+        //         "title": "Predict, Share, and Recycle your Way to Low Power Nanophotonic Networks"
+        //     }
+        // ]
     )
 
 
-    const [patents, setPatents] = useState(
-        [
-            {
-                "patent": "Process and System for Using Unused Optical Power in Photonic On-Chip Networks",
-                "date": "18/02/2020",
-                "number": "202011006878"
-            },
-            {
-                "patent": "A Graphics Processor Unit (GPU) System with Photonics based On-chip Network",
-                "date": "November 19th, 2019",
-                "number": "201911047168"
-            }
-        ]
+    const [patents, setPatents] = useState(null
+        // [
+        //     {
+        //         "patent": "Process and System for Using Unused Optical Power in Photonic On-Chip Networks",
+        //         "date": "18/02/2020",
+        //         "number": "202011006878"
+        //     },
+        //     {
+        //         "patent": "A Graphics Processor Unit (GPU) System with Photonics based On-chip Network",
+        //         "date": "November 19th, 2019",
+        //         "number": "201911047168"
+        //     }
+        // ]
     )
-
 
     return (
         <>
@@ -173,7 +218,7 @@ function FacultyDetails() {
                                                 <ListItem>Machine Learning </ListItem>
                                             </UnorderedList>
                                             <Text>
-                                            Currently I direct the GAASH research group at NIT Srinagar which primary focuses on system and architecture research. Our research group investigates the effect of new architectural features on the performance of the system. We focus on reducing the power consumption without effecting the performance of the system.  Additionally, the group works on enhancing the security of current complex hardware structures. We also work in the field of emerging on-chip technologies such as photonic on-chip networks, and wireless on-chip networks.
+                                                Currently I direct the GAASH research group at NIT Srinagar which primary focuses on system and architecture research. Our research group investigates the effect of new architectural features on the performance of the system. We focus on reducing the power consumption without effecting the performance of the system.  Additionally, the group works on enhancing the security of current complex hardware structures. We also work in the field of emerging on-chip technologies such as photonic on-chip networks, and wireless on-chip networks.
                                             </Text>
                                         </Box>
                                     </Box>
@@ -181,7 +226,7 @@ function FacultyDetails() {
                                 </Box>
                             </Stack>
 
-                            {education && <Stack direction={'column'} w={"full"} bg={"white"} p={4} borderRadius={'1em'} boxShadow={'rgba(0, 0, 0, 0.05) 0px 1px 12px;'}>
+                            {education && education.length > 0 && <Stack direction={'column'} w={"full"} bg={"white"} p={4} borderRadius={'1em'} boxShadow={'rgba(0, 0, 0, 0.05) 0px 1px 12px;'}>
                                 <Heading size={'md'} color={'darkblue'}>Education</Heading>
                                 <Box>
                                     <TableContainer >
@@ -189,9 +234,9 @@ function FacultyDetails() {
                                             <Thead bg={'#d8dcf0'}>
                                                 <Tr>
                                                     <Th>Degree</Th>
-                                                    <Th>School</Th>
+                                                    <Th>College</Th>
                                                     <Th>Location</Th>
-                                                    <Th>Graduation</Th>
+                                                    <Th textAlign={'center'}>Graduation</Th>
                                                 </Tr>
                                             </Thead>
                                             <Tbody fontSize={'sm'}>
@@ -199,9 +244,9 @@ function FacultyDetails() {
                                                     education.map((item, index) => (
                                                         <Tr>
                                                             <Td>{item.degree}</Td>
-                                                            <Td>{item.school}</Td>
+                                                            <Td>{item.college}</Td>
                                                             <Td>{item.location}</Td>
-                                                            <Td>{item.graduation_year}</Td>
+                                                            <Td textAlign={'center'}>{item.Year}</Td>
                                                         </Tr>
                                                     ))
                                                 }
@@ -212,11 +257,42 @@ function FacultyDetails() {
 
                             </Stack>}
 
-                            {researchs && <Stack direction={'column'} w={"full"} bg={"white"} p={4} borderRadius={'1em'} boxShadow={'rgba(0, 0, 0, 0.05) 0px 1px 12px;'}>
+                            {currentTeachingCourses && currentTeachingCourses.length > 0 && <Stack direction={'column'} w={"full"} bg={"white"} p={4} borderRadius={'1em'} boxShadow={'rgba(0, 0, 0, 0.05) 0px 1px 12px;'}>
+                                <Heading size={'md'} color={'darkblue'}>Teaching</Heading>
+                                <Box>
+                                    <TableContainer >
+                                        <Table variant='simple' colorScheme='facebook'>
+                                            <Thead bg={'#d8dcf0'}>
+                                                <Tr>
+                                                    <Th>Course ID</Th>
+                                                    <Th>Name</Th>
+                                                    <Th textAlign={'center'}>Semester</Th>
+                                                    <Th textAlign={'center'}>Credit</Th>
+                                                </Tr>
+                                            </Thead>
+                                            <Tbody fontSize={'sm'}>
+                                                {
+                                                    currentTeachingCourses.map((item, index) => (
+                                                        <Tr>
+                                                            <Td>{item.course_id}</Td>
+                                                            <Td>{item.name}</Td>
+                                                            <Td textAlign={'center'}>{item.semester}{(item.semester > 2) ? "th" : (item.semester == 1) ? "st" : (item.semester == 2) ? "nd" : "rd"}</Td>
+                                                            <Td textAlign={'center'}>{item.credit}</Td>
+                                                        </Tr>
+                                                    ))
+                                                }
+                                            </Tbody>
+                                        </Table>
+                                    </TableContainer>
+                                </Box>
+
+                            </Stack>}
+
+                            {researchs && researchs.length > 0 && <Stack direction={'column'} w={"full"} bg={"white"} p={4} borderRadius={'1em'} boxShadow={'rgba(0, 0, 0, 0.05) 0px 1px 12px;'}>
                                 <Heading size={'md'} color={'darkblue'}>Researchs</Heading>
                                 <Box>
                                     <TableContainer>
-                                        <Table variant={'simple'}>
+                                        <Table variant={'simple'} colorScheme='facebook'>
                                             <Thead bg={'#d8dcf0'}>
                                                 <Tr>
                                                     <Th>SNO.</Th>
@@ -248,7 +324,7 @@ function FacultyDetails() {
 
                             </Stack>}
 
-                            <Stack direction={'column'} w={"full"} bg={"white"} p={4} borderRadius={'1em'} boxShadow={'rgba(0, 0, 0, 0.05) 0px 1px 12px;'}>
+                            {patents && patents.length > 0 && <Stack direction={'column'} w={"full"} bg={"white"} p={4} borderRadius={'1em'} boxShadow={'rgba(0, 0, 0, 0.05) 0px 1px 12px;'}>
                                 <Heading size={'md'} color={'darkblue'}>Patents</Heading>
                                 <Box>
                                     <TableContainer>
@@ -276,17 +352,39 @@ function FacultyDetails() {
                                     </TableContainer>
                                 </Box>
 
-                            </Stack>
+                            </Stack>}
 
-                            <Stack direction={'column'} w={"full"} bg={"white"} p={4} borderRadius={'1em'} boxShadow={'rgba(0, 0, 0, 0.05) 0px 1px 12px;'}>
-                                <Heading size={'md'} color={'darkblue'}>Projects</Heading> 
-                                                
+                            {projects && projects.length > 0 && <Stack direction={'column'} w={"full"} bg={"white"} p={4} borderRadius={'1em'} boxShadow={'rgba(0, 0, 0, 0.05) 0px 1px 12px;'}>
+                                <Heading size={'md'} color={'darkblue'}>Projects</Heading>
+                                <Box>
+                                    <TableContainer>
+                                        <Table colorScheme="facebook">
+                                            <Thead bg={'#d8dcf0'}>
+                                                <Tr>
+                                                    <Th>Title</Th>
+                                                    <Th>Link</Th>
+                                                </Tr>
+                                            </Thead>
+                                            <Tbody fontSize={'sm'}>
+                                                {
+                                                    projects.map((item, index) => (
+                                                        <Tr key={index}>
+                                                            <Td>{item.title}</Td>
+                                                            <Td><a href={item.link}>Learn more</a></Td>
+                                                        </Tr>
 
-                            </Stack>
+                                                    ))
+                                                }
+                                            </Tbody>
+                                        </Table>
+                                    </TableContainer>
+                                </Box>
+
+                            </Stack>}
 
                         </VStack>
                     </Center>
-                ) : (<Text>Not Found ...</Text>)
+                ) : (<Center mt={5}><Spinner /></Center>)
             }
         </>
     )

@@ -43,6 +43,14 @@
   background-attachment: fixed;
 }
 
+.carousel-container>*{
+  margin: 0 !important;
+  width: 100%;
+  background-attachment: fixed;
+
+
+}
+
 .bannerContent {
   position: absolute;
   width: 100%;
