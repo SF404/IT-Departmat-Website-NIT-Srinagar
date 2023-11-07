@@ -48,6 +48,15 @@ class AnnouncementView(BaseFilteredViewSet):
     serializer_class=AnnouncementSerializer
     queryset = Announcement.objects.all()
 
+
+class TutorialsView(BaseFilteredViewSet):
+    serializer_class=TutorialsSerializer
+    queryset = Tutorials.objects.all()
+
+class EventsView(BaseFilteredViewSet):
+    serializer_class=EventsSerializer
+    queryset = Events.objects.all()
+
 class ProjectView(viewsets.ModelViewSet):
     serializer_class=ProjectSerializer
     def get_queryset(self):

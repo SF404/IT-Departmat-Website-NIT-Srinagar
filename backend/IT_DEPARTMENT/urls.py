@@ -28,6 +28,10 @@ router.register(r'public/patentget', PatentView, basename='Semester Data')
 router.register(r'public/projectget', ProjectView, basename='Semester Data')
 router.register(r'public/teachereducationget', TeacherEducationView, basename='Semester Data')
 router.register(r'public/announcementget', AnnouncementView, basename='Semester Data')
+router.register(r'public/tutorialsget', TutorialsView, basename='Semester Data')
+router.register(r'public/eventsget', EventsView, basename='Semester Data')
+router.register(r'postpublicdata', PostPublicData, basename='Semester Data')
+router.register(r'profileupdate', ProfileUpdate, basename='Semester Data')
 
 
 

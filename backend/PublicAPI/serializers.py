@@ -7,6 +7,18 @@ from PublicAPI.models import *
  
 # create a serializer class
 
+
+class TutorialsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Tutorials
+        fields = '__all__'
+
+class EventsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Events
+        fields = '__all__'
+
+
 class ResearchSerializer(serializers.ModelSerializer):
     class Meta:
         model = Research
