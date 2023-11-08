@@ -1,9 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import './z_style.css'
-import { Box, Center, CircularProgress, Divider, Flex, HStack, Heading, Link, SimpleGrid, Text, VStack, baseTheme } from '@chakra-ui/react';
-import { FaFreeCodeCamp } from "react-icons/fa6";
-import Holidays from './Holidays';
-import { BsCalendar2Event, BsCalendar4Event } from 'react-icons/bs';
+import { Box, Center, CircularProgress, Divider, Flex, HStack, Heading, Link, SimpleGrid, Spinner, Text, VStack, baseTheme } from '@chakra-ui/react';
 
 function UpcomingEvents({ events }) {
     return (
@@ -24,7 +20,7 @@ function UpcomingEvents({ events }) {
                         </Flex>
                         <Divider />
                     </>
-                ))) : (<CircularProgress isIndeterminate color='#5cc181' />)
+                ))) : (<Spinner/>)
                 }
             </VStack>
 

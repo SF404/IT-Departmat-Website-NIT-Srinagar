@@ -1,7 +1,7 @@
 import { EmailIcon, ExternalLinkIcon, LinkIcon, PhoneIcon } from "@chakra-ui/icons";
 import axios from "axios";
 import bannerImage from "./../../assets/images/image.webp";
-import { Avatar, Badge, Box, Button, Card, CardBody, CardFooter, CardHeader, Center, Divider, Flex, HStack, Heading, Icon, IconButton, Popover, PopoverArrow, PopoverBody, PopoverCloseButton, PopoverContent, PopoverHeader, PopoverTrigger, Stack, Tag, Text, Tooltip, VStack, WrapItem } from "@chakra-ui/react";
+import { Avatar, Badge, Box, Button, Card, CardBody, CardFooter, CardHeader, Center, Divider, Flex, HStack, Heading, Icon, IconButton, Popover, PopoverArrow, PopoverBody, PopoverCloseButton, PopoverContent, PopoverHeader, PopoverTrigger, Spinner, Stack, Tag, Text, Tooltip, VStack, WrapItem } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { useToast } from "@chakra-ui/react";
 import Typewriter from "typewriter-effect";
@@ -9,18 +9,7 @@ import { FaGlobe } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 
 function Faculty() {
-  const [faculty, setFaculty] = useState([
-    {
-      teacher_id: 0,
-      name: "Dr. Shabir Ahmad Sofi",
-      description: "HOD and Assistant Professsor",
-      research_field:
-        "Wireless Sensor Networks, Internet of Things, Artificial Intelligence, Machine Learning, and Big Data",
-      email: "shabir@nitsri.ac.in",
-      phone: "0000000000",
-      profile_photo: "/folder/profile.jpeg",
-    },
-  ]);
+  const [faculty, setFaculty] = useState();
 
   const fetchData = async () => {
     try {
@@ -64,11 +53,13 @@ function Faculty() {
 
   return (
     <>
-      <VStack className="family-1">
+      {
+        faculty ?(
+        <VStack className="family-1">
         <VStack w={"full"} h={"200px"} bg={"brown"} color={"white"} p={6} backgroundImage={bannerImage} backgroundSize="cover" backgroundPosition="center" backgroundRepeat="no-repeat" justifyContent="center" textShadow={"0 0 24px black"} >
           <Heading as="h2" size="xl" mb={2}>Faculty Members, Department of Information Technology</Heading>
         </VStack>
-        <VStack w={{ base: "100%", md: '80%' }} spacing={6} p={4}> 
+        <VStack w={{ base: "100%", md: '80%' }} spacing={6} p={4}>
           <Divider borderColor={"gray.400"}></Divider>
 
           {faculty.map((item, index) => (
@@ -104,7 +95,8 @@ function Faculty() {
             </Stack>
           ))}
         </VStack>
-      </VStack>
+      </VStack>):(<Center mt={5}><Spinner /></Center>)
+      }
     </>
   );
 }

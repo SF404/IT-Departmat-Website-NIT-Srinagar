@@ -2,6 +2,7 @@
   display: flex;
   gap: 2em;
 }
+
 .alerts p {
   display: flex;
   flex-direction: row;
@@ -37,13 +38,22 @@
 .banner {
   width: 100%;
   height: calc(100vh - 300px);
-  background: url("./../../assets/images/image.webp") no-repeat center
-    center/cover;
+  /* background: url("./../../assets/images/image.webp") no-repeat center
+    center/cover; */
   position: relative;
   background-attachment: fixed;
 }
 
-.carousel-container>*{
+/* src/GridCarousel.css */
+.carousel-item {
+  text-align: center;
+  padding: 20px;
+  border: 1px solid #ddd;
+  background-color: #f7f7f7;
+}
+
+
+.carousel-container>* {
   margin: 0 !important;
   width: 100%;
   background-attachment: fixed;
@@ -187,6 +197,7 @@
   background-color: white;
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
 }
+
 .a-icon {
   min-width: 40px;
   min-height: 40px;
@@ -194,7 +205,8 @@
   max-height: 40px;
   margin: 0.3em;
 }
-.a-icon > * {
+
+.a-icon>* {
   background-color: #ebedf7;
   border-radius: 50%;
   padding: 0.5em;
@@ -203,6 +215,7 @@
 .a-text-content {
   margin: 0.3em;
 }
+
 
 @media only screen and (max-width: 768px) {
   body {
@@ -226,6 +239,7 @@
   .m-title {
     min-width: fit-content;
   }
+
   .a-tile {
     width: 100%;
   }

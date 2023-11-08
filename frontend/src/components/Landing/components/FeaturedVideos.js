@@ -1,14 +1,19 @@
-import { Box, Heading, Link, Text } from '@chakra-ui/react'
+import { Box, Heading, IconButton, Link, Text } from '@chakra-ui/react'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import Carousel from 'react-grid-carousel'
+import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons'
 
 function FeaturedVideos() {
     const [urls, setUrls] = useState([
         'https://www.youtube.com/watch?v=HsN7vF7M7rA',
+        'https://www.youtube.com/watch?v=4lcKj0xnXkg&list=PLUbapHgKkROnP9It2FQiDfR1DBoSpIshT',
         'https://www.youtube.com/watch?v=xEkUrqU3yCs&t',
+        'https://www.youtube.com/shorts/Z3yAN7Y2LH4',
         'https://www.youtube.com/watch?v=vJk_8DFp3Yo&t=578s&pp=ygUjbml0IHNyaW5hZ2FyIGluZm9ybWF0aW9uIGRlcGFydG1lbnQ%3D',
-        'https://www.youtube.com/watch?v=LSIrG0QnEJ8'
+        'https://www.youtube.com/watch?v=LSIrG0QnEJ8',
+        'https://www.youtube.com/watch?v=5aMIM-qGLK0&list=PLUbapHgKkROk_CAo6OJEmQuzQKfraDFKM',
+
 
 
     ])
@@ -66,16 +71,39 @@ function FeaturedVideos() {
     return (
         <Box w={'full'}>
             <Heading fontSize={'1.5em'} my={'0.5em'} textAlign={'center'} color={'darkblue'}>FEATURED VIDEOS</Heading>
-            <Box>
-                <Carousel cols={3} rows={1} gap={16} loop showDots={true} dotColorActive={'darkblue'}>
+            <Box w={'full'} >
+                <Carousel cols={4} rows={1} gap={16} loop={true} showDots={false} dotColorActive={'darkblue'}
+                    arrowLeft={
+                        <IconButton icon={<ChevronRightIcon />}
+                            variant={'outline'}
+                            bg={'white'}
+                            position={'absolute'}
+                            top={'10px'}
+                            right={'20px'}
+                            color={'black'}
+                            size={'sm'}
+                            boxShadow={'md'}
+                        ></IconButton>}
+                    arrowRight={
+                        <IconButton icon={<ChevronLeftIcon />}
+                            variant={'outline'}
+                            bg={'white'}
+                            position={'absolute'}
+                            top={'10px'}
+                            right={'65px'}
+                            color={'black'}
+                            size={'sm'}
+                            boxShadow={'md'}
+                        ></IconButton>}
+                    containerStyle={{ padding: '40px 0 0 0', margin: '0em', boxShadow: '0 0 12px rgba(0,0,0,0.05)', background: 'white' }}>
 
                     {
                         uniqueVideos.map((item, index) => (
                             <Carousel.Item key={index}>
-                                <Box w={'full'}  my={4} border={'1px solid gray'} borderRadius={'0.54em'}>
-                                    <Box aspectRatio={16 / 9} width={'100%'} borderTopRadius={'0.5em'} background={`url(${item.thumbnail_url}) no-repeat center center/cover`}></Box>
-                                    <Box bg={'white'} h={'200px'} p={4} borderBottomRadius={'0.5em'}>
-                                        <Text fontWeight={'semibold'} as={Link} href={getLink(item.html)}>
+                                <Box w={'full'} as={Link} href={getLink(item.html)}>
+                                    <Box aspectRatio={16 / 9} mt={4} width={'100%'} borderRadius={'0.75em'} background={`url(${item.thumbnail_url}) no-repeat center center/cover`}></Box>
+                                    <Box bg={'white'} pt={2} pb={4} borderBottomRadius={'0.5em'}>
+                                        <Text fontSize={'12px'} fontWeight={'semibold'} as={Link} href={getLink(item.html)}>
                                             {item.title}
                                         </Text>
                                         <Text fontSize={'12px'}>{item.author_name}</Text>
