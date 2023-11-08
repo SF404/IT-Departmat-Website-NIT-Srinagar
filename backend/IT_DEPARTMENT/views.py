@@ -1,7 +1,7 @@
 from IT_DEPARTMENT.models import *
-from rest_framework import viewsets
 from rest_framework.views import APIView
 from rest_framework import status,viewsets
+from rest_framework.generics import RetrieveUpdateAPIView
 from rest_framework.response import Response
 from .serializers import *
 from django.contrib.auth import authenticate
@@ -23,14 +23,127 @@ import json
 
 
 
-def send_activation_email(user, request):
-    token = RefreshToken.for_user(user)
-    uid = user.id
-    activation_url = request.build_absolute_uri(reverse('activate', kwargs={'uid': uid, 'token': str(token.access_token)}))
-    subject = 'Activate Your Account'
-    message = f'Please click the following link to activate your account: {activation_url}'
-    send_mail(subject, message, 'techteam.it.nitsri@gmail.com', [user.email])
+class PostPublicData(viewsets.ModelViewSet):
+    authentication_classes=[JWTAuthentication]
+    permission_classes = (IsAuthenticated,)
+    def create(self, request, *args, **kwargs):
+        email = request.query_params.get('email', None)
+        object_type = request.query_params.get('type', None)
+        if not email :
+            return Response({"message": "email cannot be null"}, status=status.HTTP_400_BAD_REQUEST)
+        if not object_type:
+            return Response({"message": "type cannot be null"}, status=status.HTTP_400_BAD_REQUEST)
+        teacher =Teacher.objects.filter(email=email).first()
+        if not teacher:
+            return Response({"message":"teacher cannot found"},status=status.HTTP_400_BAD_REQUEST)
+        
+        description=request.data.get("description")
+        link=request.data.get('link')
+        id = random.randint(1, 10000)
+        if object_type == 'announcement':
+            announcement=Announcement(announcement_id=id,description=description,link=link,teacher=teacher)
+            announcement.save()
+            return Response({"message": "Announcement Created Successfully"}, status=status.HTTP_201_CREATED)
+        elif object_type == 'event':
+            title=request.data.get("title")
+            location=request.data.get("location")
+            date =  request.data.get("date")
+            event=Events(title=title,location=location,date=date ,description=description,link=link,teacher=teacher)
+            event.save()
+            return Response({"message": "Event Created Successfully"}, status=status.HTTP_201_CREATED)
+        elif object_type == 'tutorial':
+            title=request.data.get("title")
+            image=request.data.get("images")
+            tags=request.data.get("tags")
+            tutorial=Tutorials(title=title,image=image,tags=tags ,description=description,link=link,teacher=teacher)
+            tutorial.save()
+            return Response({"message": "Event Created Successfully"}, status=status.HTTP_201_CREATED)
+        else:
+            return Response({"message": "cannot find the type"}, status=status.HTTP_400_BAD_REQUEST)
+        
 
+class ProfileUpdate(viewsets.ModelViewSet):
+    serializer_class = TeacherUpdateSerializer
+
+    def update(self, request, pk):
+        email = request.query_params.get('email', None)
+        if not email:
+            return Response({"message": "Email cannot be null"}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Try to get the teacher by email
+        try:
+            teacher = Teacher.objects.get(pk=pk,email=email)
+        except Teacher.DoesNotExist:
+            return Response({"message": "Teacher not found"}, status=status.HTTP_404_NOT_FOUND)
+
+        # Update the teacher object
+        phone = request.data.get('phone')
+        research_field = request.data.get('research_field')
+        profile_photo = request.data.get('profile_photo')
+        about = request.data.get('about')
+
+        if phone is not None:
+            teacher.phone = phone
+
+        if research_field is not None:
+            teacher.research_field = research_field
+
+        if profile_photo is not None:
+            teacher.profile_photo = profile_photo
+
+        if about is not None:
+            teacher.about = about
+
+        teacher.save()
+        research_title = request.data.get('research_title', None)
+        research_date = request.data.get('research_date', None)
+        if research_title and research_date:
+            research, created = Research.objects.get_or_create(
+                teacher=teacher,
+                title=research_title,
+                defaults={'authors': request.data.get('research_authors', None), 'url': request.data.get('research_url', None)}
+            )
+            if not created:
+                research.date = research_date
+                research.save()
+        patent_patent = request.data.get('patent_patent', None)
+        patent_date = request.data.get('patent_date', None)
+        patent_number = request.data.get('patent_number', None)
+        if patent_patent and patent_date and patent_number:
+            patent, created = Patent.objects.get_or_create(
+                teacher=teacher,
+                patent=patent_patent,
+                defaults={'date': patent_date, 'number': patent_number}
+            )
+            if not created:
+                patent.date = patent_date
+                patent.number = patent_number
+                patent.save()
+        project_title = request.data.get('project_title', None)
+        project_link = request.data.get('project_link', None)
+        if project_title and project_link:
+            project, created = Project.objects.get_or_create(
+                teacher=teacher,
+                title=project_title,
+                defaults={'link': project_link}
+            )
+            if not created:
+                project.link = project_link
+                project.save()
+        education_degree = request.data.get('education_degree', None)
+        education_college = request.data.get('education_college', None)
+        education_year = request.data.get('education_year', None)
+        if education_degree and education_college and education_year:
+            education, created = TeacherEducation.objects.get_or_create(
+                teacher=teacher,
+                degree=education_degree,
+                college=education_college,
+                year=education_year
+            )
+            if not created:
+                education.year = education_year
+                education.save()
+        return Response({"message": "All necessary Teacher data has been updated or created"}, status=status.HTTP_200_OK)
 
 
 class MailTeacherList(APIView):
@@ -118,7 +231,6 @@ class RegistrationView(APIView):
         user = User.objects.create_user(username=username, password=password,is_active=True)
         user.name = name
         user.save()
-        # send_activation_email(user, request)
         return Response({'message': 'User created but not Verified.'}, status=status.HTTP_201_CREATED)
 
 class CustomObtainTokenView(APIView):
@@ -196,21 +308,16 @@ class GetEvents(APIView):
         print("hello")
         if request.method == "GET":
             url = 'https://nitsri.ac.in/'
-
             user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.1000.0 Safari/537.36'
-
             headers = {
                 'User-Agent': user_agent,
                 'Accept-Language': 'en-US,en;q=0.5',
             }
-
             req = requests.get(url=url)
             web_s = req.text
             soup = BeautifulSoup(web_s, "html.parser")
             event_container = soup.find(class_="gdlr-core-event-item-holder clearfix")
-
             events_data = []
-
             event_items = event_container.find_all(class_="gdlr-core-event-item-list gdlr-core-style-widget gdlr-core-item-pdlr clearfix")
             for event_item in event_items:
                 event_data = {
@@ -233,9 +340,7 @@ class GetEvents(APIView):
 
 
 class GetNews(APIView):
-
      def get(self, request, *args, **kwargs):
-        print("hello")
         if request.method == "GET":
             url = 'https://www.instagram.com/nitsriofficial/?__a=1&__d=dis'
             user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.1000.0 Safari/537.36'

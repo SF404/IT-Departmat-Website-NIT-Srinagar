@@ -10,12 +10,11 @@ class Teacher(models.Model):
     name = models.CharField(max_length=255)
     email = models.EmailField(unique=True)
     description = models.CharField(max_length=255,blank=True)
-    phone =models.BigIntegerField()
+    phone =models.BigIntegerField(  blank=True, null=True)
     research_field = models.TextField(max_length=255,blank=True)
     date=models.DateTimeField(auto_now_add=True)
     profile_photo = models.ImageField(upload_to='teacher_profile/')
     about = models.JSONField(blank=True, null=True)
-    # researchs = models.JSONField(blank=True, null=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE,null=True,blank=True)
 
 
@@ -38,7 +37,7 @@ class Patent(models.Model):
 
 class Project(models.Model):
     title=models.CharField(max_length=255)
-    link=models.URLField( blank=True)
+    link=models.URLField( blank=True,null=True)
     auto_date=models.DateTimeField(auto_now_add=True)
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
     
@@ -63,17 +62,40 @@ class Course(models.Model):
 class Announcement(models.Model):
     announcement_id = models.CharField(max_length=255,unique=True)
     description = models.CharField(max_length=255)
-    link = models.URLField(max_length=255)
+    link = models.URLField(max_length=255,blank=True,null=True)
     date =  models.DateTimeField(auto_now=True)
-    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE,null=True,blank=True)
+    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
     
 
-class Alert(models.Model):
-    alert_id = models.CharField(max_length=255,unique=True,default="default_id")
-    description = models.CharField(max_length=255)
-    link = models.URLField(max_length=255,default="https://it.nitsri.ac.in/")
-    date =  models.DateTimeField(auto_now=True)
-    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE,null=True,blank=True)
+class Events(models.Model):
+    title=models.CharField(max_length=255)
+    description = models.CharField(max_length=255,blank=True,null=True)
+    link = models.URLField(max_length=255,blank=True,null=True)
+    location=models.CharField(max_length=255,blank=True,null=True)
+    date =  models.DateField()
+    auto_date =  models.DateTimeField(auto_now=True)
+    # image = models.ImageField(upload_to='tutorials/', null=True, blank=True)
+    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
+
+class Tutorials(models.Model):
+    title=models.CharField(max_length=255)
+    description = models.CharField(max_length=255,blank=True,null=True)
+    link = models.URLField(max_length=255,blank=True,null=True)
+    image = models.ImageField(upload_to='tutorials/')
+    SELECTION_CHOICES = (
+        ('option1', 'Video'),
+        ('option2', 'Blog'),
+        ('option3', 'Other'),
+    )
+    selection = models.CharField(
+        max_length=10,
+        choices=SELECTION_CHOICES,blank=True
+    )
+    tags=models.CharField(max_length=255,blank=True,null=True)
+    auto_date =  models.DateTimeField(auto_now=True)
+    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
+
+
 
 
 
