@@ -11,13 +11,14 @@ function Stats() {
     return (
         <Box
             w={'full'}
+            h={[200, 300, 350]}
             style={{
                 position: 'relative',
                 background: `url(${image}) no-repeat center center/cover`,
-                minHeight: '350px',
                 backgroundAttachment: 'fixed',
                 
             }}
+
             className='family-1'
         >
             <Box
@@ -29,9 +30,9 @@ function Stats() {
                     width: '100%',
                     height: '100%',
                     padding: '1em',
-                    backgroundColor: 'rgba(0,0,0, 0.1)',
+                    backgroundColor: 'rgba(0,0,0, 0.2)',
                     color: 'white',
-                    backdropFilter:'blur(1px)'
+                    backdropFilter:'blur(4px)'
                 }}
 
             >

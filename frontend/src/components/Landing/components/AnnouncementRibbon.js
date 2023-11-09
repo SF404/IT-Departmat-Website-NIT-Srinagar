@@ -11,7 +11,7 @@ function AnnouncementRibbon({ announcements }) {
                 <div className='m-title'>
                     Announcements
                 </div>
-                <marquee onmouseover="this.stop();" onmouseout="this.start();" behavior="scroll" scrollamount="5" loop="-1" direction="left" className='alerts' >
+                <marquee  behavior="scroll" scrollamount="5" loop="-1" direction="left" className='alerts' >
                     <div>
                         {
                             announcements && announcements.length > 0 ? announcements.map((item, index) => (

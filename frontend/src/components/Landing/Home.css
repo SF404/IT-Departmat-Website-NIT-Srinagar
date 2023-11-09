@@ -18,7 +18,8 @@
   display: flex;
   align-items: center;
   padding-right: 2em;
-  height: 26px;
+  height: 30px;
+  width: 100%;
 }
 
 .m-header marquee {
@@ -26,18 +27,23 @@
 }
 
 .m-title {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
   text-align: right;
   min-width: 250px;
-  font-weight: 400;
   padding: 0 1em;
   height: 100%;
-  background-color: #d8dcf0;
-  box-shadow: 4px 0 8px -2px rgba(0, 0, 0, 0.2);
+  background-color: #ebedf7;
+  color: darkblue;
+  box-shadow: 4px 0 4px -1px rgba(0, 0, 0, 0.1);
 }
 
 .banner {
   width: 100%;
   height: calc(100vh - 300px);
+  max-height: 500px;
+  /* transform: scale(1.5); */
   /* background: url("./../../assets/images/image.webp") no-repeat center
     center/cover; */
   position: relative;

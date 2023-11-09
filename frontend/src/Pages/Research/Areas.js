@@ -33,7 +33,8 @@ function Areas() {
                 "Dr. Shabir Ahmad Sofi",
                 "Dr. Iqra Altaf",
                 "Dr. Janibul Bashir",
-                "Dr. Shrabanti Mandal"
+                "Dr. Shrabanti Mandal",
+                
             ],
             "image": da
         },

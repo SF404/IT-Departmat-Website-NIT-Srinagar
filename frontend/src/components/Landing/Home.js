@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Box, Center, Divider, Highlight, SimpleGrid, Spinner, VStack, } from "@chakra-ui/react";
+import { Box, Center, Divider, Highlight, SimpleGrid, Spinner, Text, VStack, } from "@chakra-ui/react";
 import "./Home.css";
 import video_from_hod from "./../../assets/videos/from-hod.mp4";
 import UpcomingEvents from "./components/UpcomingEvents";
@@ -14,12 +14,15 @@ import axios from "axios";
 import FeaturedVideos from "./components/FeaturedVideos";
 import Highlights from "./components/Highlights";
 import Stats from "./components/Stats";
+import Images from "./components/Images";
+import Faqs from "./components/Faqs";
 
 function Home() {
   const [news, setNews] = useState(null);
   const [events, setEvents] = useState(null);
   const [holidays, setHolidays] = useState(null);
   const [announcements, setAnnouncement] = useState(null);
+  const [isLoading, setLoading] = useState(true);
 
   async function fetchNews() {
     try {
@@ -65,16 +68,18 @@ function Home() {
   }
   useEffect(() => {
     async function fetchData() {
+      setLoading(true);
       await fetchNews();
       await fetchHolidays();
       await fetchAnnouncements();
       await fetchEvents();
+      setLoading(false);
     }
     fetchData();
   }, []);
 
   return (
-    <>
+    isLoading ? (<Box textAlign={'center'} mt={6}><Spinner /> <Text>Loading...</Text></Box>) : (<VStack w={"full"} spacing={0}>
       <AnnouncementRibbon announcements={announcements} />
       <Banner />
       <QuickButtons />
@@ -93,23 +98,20 @@ function Home() {
             <div></div>
             <Holidays holidays={holidays} />
           </SimpleGrid>
-          <LatestNews news={news} />
+          {/* <LatestNews news={news} /> */}
           <FeaturedVideos />
           <Highlights />
           <Divider />
         </VStack>
       </Center>
       <Stats />
-      <Center w={"full"}>
-        <VStack
-          width={{ base: "100%", md: "80%" }}
-          spacing={"2em"}
-          px={4}
-          mb={8}
-        >
-        </VStack>
+      <Center>
+        <SimpleGrid columns={[1, 1, 1, 2]} gap={4} rowGap={"2em"} w={{ base: '100%', lg: '80%' }} p={4}>
+          <Faqs />
+          <Images />
+        </SimpleGrid>
       </Center>
-    </>
+    </VStack>)
   );
 }
 

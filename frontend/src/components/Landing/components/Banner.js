@@ -40,7 +40,7 @@ const Banner = () => {
     };
 
     return (
-        <Box className="banner" w="full"  position="relative" bg={"black"}>
+        <Box className="banner" w="full"  position="relative" bg={"gray"}>
             {images.map((image, index) => (
                 <Box
                     key={index}
@@ -49,8 +49,8 @@ const Banner = () => {
                     height="100%"
                     background={`url(${image}) no-repeat center center/cover`}
                     opacity={index === currentImageIndex ? 1 : 0}
-                    transition="opacity 0.5s"
-                    backgroundAttachment={"fixed"}
+                    transition="opacity 1s"
+                    backgroundAttachment={{base:"scroll", lg:'fixed'}}
 
                 />
             ))}

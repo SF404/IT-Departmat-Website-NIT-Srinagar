@@ -264,7 +264,7 @@ function Navbar() {
         color="#192e59"
         position={"sticky"}
         top={0}
-        boxShadow={"0 2px 12px rgba(0,0,0,0.5)"}
+        boxShadow={"0 4px 12px rgba(0,0,0,0.2)"}
       >
         <Stack
           as={"nav"}

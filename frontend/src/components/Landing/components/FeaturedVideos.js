@@ -78,31 +78,31 @@ function FeaturedVideos() {
                             variant={'outline'}
                             bg={'white'}
                             position={'absolute'}
-                            top={'10px'}
+                            top={'-30px'}
                             right={'20px'}
                             color={'black'}
                             size={'sm'}
-                            boxShadow={'md'}
+                            boxShadow={'sm'}
                         ></IconButton>}
                     arrowRight={
                         <IconButton icon={<ChevronLeftIcon />}
                             variant={'outline'}
                             bg={'white'}
                             position={'absolute'}
-                            top={'10px'}
+                            top={'-30px'}
                             right={'65px'}
                             color={'black'}
                             size={'sm'}
-                            boxShadow={'md'}
+                            boxShadow={'sm'}
                         ></IconButton>}
-                    containerStyle={{ padding: '40px 0 0 0', margin: '0em', boxShadow: '0 0 12px rgba(0,0,0,0.05)', background: 'white' }}>
+                    containerStyle={{ margin: '0em',}}>
 
                     {
                         uniqueVideos.map((item, index) => (
                             <Carousel.Item key={index}>
                                 <Box w={'full'} as={Link} href={getLink(item.html)}>
                                     <Box aspectRatio={16 / 9} mt={4} width={'100%'} borderRadius={'0.75em'} background={`url(${item.thumbnail_url}) no-repeat center center/cover`}></Box>
-                                    <Box bg={'white'} pt={2} pb={4} borderBottomRadius={'0.5em'}>
+                                    <Box pt={2} pb={4} borderBottomRadius={'0.5em'}>
                                         <Text fontSize={'12px'} fontWeight={'semibold'} as={Link} href={getLink(item.html)}>
                                             {item.title}
                                         </Text>

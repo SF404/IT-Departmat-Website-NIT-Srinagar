@@ -7,8 +7,8 @@ function UpcomingEvents({ events }) {
             <Heading fontSize={'1.5em'} my={'0.5em'} textAlign={'center'} color={'darkblue'}>UPCOMING EVENTS</Heading>
             <VStack borderRadius={'1em'} spacing={'1em'} bg={'white'} p={'1em'} boxShadow={'0 0 12px rgba(0,0,0,0.05)'} w={'full'}>
                 {events ? (events.map((event, index) => (
-                    <>
-                        <Flex key={index} w={'full'} gap={4}>
+                    <VStack w={'full'} key={index}>
+                        <Flex  w={'full'} gap={4}>
                             <Box aspectRatio={1 / 1} maxH={'80px'} minW={'80px'} textAlign={'center'} p={1} bg={'#d8dcf0'} borderRadius={'0.2em'} color={'darkblue'} borderBottom={'5px solid darkblue'} >
                                 <Heading>{event.date}</Heading>
                                 <Text>{event.month}</Text>
@@ -19,7 +19,7 @@ function UpcomingEvents({ events }) {
                             </Flex>
                         </Flex>
                         <Divider />
-                    </>
+                    </VStack>
                 ))) : (<Spinner/>)
                 }
             </VStack>
