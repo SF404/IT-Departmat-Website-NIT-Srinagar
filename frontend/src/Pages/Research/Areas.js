@@ -1,6 +1,5 @@
-import { Box, Center, DarkMode, HStack, Image, List, ListItem, Text, VStack } from '@chakra-ui/react'
+import { Box, Center, HStack, Image, Text, VStack } from '@chakra-ui/react'
 import React, { useState } from 'react'
-import { FaGears } from "react-icons/fa6";
 import ai from './../../assets/icons/artifical-intelligence.png'
 import ar from './../../assets/icons/cpu.png'
 import cn from './../../assets/icons/networking.png'
@@ -9,6 +8,7 @@ import ds from './../../assets/icons/data-center.png'
 import gv from './../../assets/icons/chart.png'
 import sn from './../../assets/icons/motion-sensor.png'
 import cc from './../../assets/icons/big-data.png'
+import SmallBanner from '../../Layout/SmallBanner'
 
 function Areas() {
     const [areas, setAreas] = useState([
@@ -64,7 +64,7 @@ function Areas() {
     ])
     return (
         <>
-
+            <SmallBanner heading={'RESEARCH AREAS'}/>
 
             <Center m={4}>
                 <Box width={{ base: '100%', md: '80%'}}>
@@ -72,10 +72,10 @@ function Areas() {
                         areas.map((area, index) => (
                             <Box key={index} my={4}>
                                 <HStack pl={4} mb={'-20px'}>
-                                    <Box bg={'white'} mb={'-15px'} padding={4} borderRadius={'full'} border={'6px solid #f1f2f6'}><Image width={'3em'} height={'3em'} minW={'3em'} src={area.image}></Image></Box>
-                                    <Box fontWeight={'bold'} color={'darkblue'} fontSize={'1em'} lineHeight={1.2}>{area.area}</Box>
+                                    <Box bg={'white'} mb={'-10px'} padding={4} borderRadius={'full'} border={'6px solid #f1f2f6'}><Image width={'2.5em'} height={'2.5em'} minW={'2.5em'} src={area.image} p={1}></Image></Box>
+                                    <Box fontWeight={'bold'} color={'darkblue'} fontSize={'1em'} lineHeight={1.2} className='family-1'>{area.area}</Box>
                                 </HStack>
-                                <VStack w={'full'} alignItems={'flex-start'} bg={'white'}  boxShadow={'0 0px 6px rgba(0,0,0,0.1)'} pt={10} pb={4} pl={8} spacing={2} borderRadius={'0.5em'} fontSize={'0.9em'}>
+                                <VStack w={'full'} alignItems={'flex-start'} bg={'white'}  boxShadow={'0 0px 6px rgba(0,0,0,0.05)'} pt={10} pb={4} pl={8} spacing={2} borderRadius={'0.5em'} className='family-1'>
                                     {Array.isArray(area.faculty) ? (
                                         <Text ml={4}>
                                             {area.faculty.map((faculty, facultyIndex) => (

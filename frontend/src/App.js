@@ -1,15 +1,15 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Layout from "./components/Layout/Layout";
-import Dashboard from "./components/Dashboard/Dashboard";
-import Login from "./components/Auth/Login";
-import Signup from "./components/Auth/Signup";
-import Faculty from "./components/Faculty/Faculty";
-import CoursesAll from "./components/Courses/CoursesAll";
-import SemesterPage from "./components/Courses/SemesterPage";
-import Reset_pass from "./components/Auth/forgot_password";
-import Request_page from "./components/Auth/Request";
-import Home from "./components/Landing/Home";
+import Layout from "./Layout/Layout";
+import Dashboard from "./Dashboard/Dashboard";
+import Login from "./Auth/Login";
+import Signup from "./Auth/Signup";
+import Faculty from "./Pages/People/Faculty";
+import CoursesAll from "./Pages/Courses/CoursesAll";
+import SemesterPage from "./Pages/Courses/SemesterPage";
+import Reset_pass from "./Auth/forgot_password";
+import Request_page from "./Auth/Request";
+import Home from "./Pages/Landing/Home";
 import DegreePrograms from "./Pages/Academics/Degree Programs/DegreePrograms";
 import NotFound from "./Pages/Error Pages/NotFound";
 import VissionMission from "./Pages/Academics/Vision Mission/VissionMission";
@@ -19,8 +19,8 @@ import Coordinators from "./Pages/Academics/Coordinators/Coordinators";
 import Committee from "./Pages/Academics/Committee/Committee";
 import DepartmentNewsletter from "./Pages/Academics/Department Newsletter/DepartmentNewsletter";
 import ImageDisplay from "./components/DisplayImage";
-import BTechStudents from "./components/Faculty/btechstudent";
-import PhdStudents from "./components/Faculty/phdstudent";
+import BTechStudents from "./Pages/People/BtechStudent";
+import PhdStudents from "./Pages/People/PhdStudent";
 import Areas from "./Pages/Research/Areas";
 import Papers from "./Pages/Research/Papers";
 import Labs from "./Pages/Research/Labs";
@@ -28,11 +28,12 @@ import ContactUs from "./Pages/contact_us/contact";
 import AwardsPage from "./Pages/Student_Activities/Awards";
 import FacilitiesPage from "./Pages/Student_Activities/Facilities";
 import PlacementBrochure from "./Pages/Student_Activities/PlacementBrochure";
-import FacultyDetails from "./components/Faculty/FacultyDetails";
+import FacultyDetails from "./Pages/People/FacultyDetails";
 import ImageGallery from "./Pages/Gallery/ImageGallery";
 import CreditsPage from "./Pages/contact_us/Credits1";
-import StaffTable from "./Pages/Academics/Staff";
-import Activate from "./components/Auth/Activate";
+import StaffTable from "./Pages/People/Staff";
+import Activate from "./Auth/Activate";
+import Alumni from "./Pages/People/Alumni";
 
 function App() {
   return (
@@ -71,6 +72,7 @@ function App() {
           <Route path="awards" element={<AwardsPage />}></Route>
           <Route path="contact-us" element={<ContactUs />}></Route>
           <Route path="facilities" element={<FacilitiesPage />}></Route>
+          <Route path="alumni" element={<Alumni />}></Route>
           <Route
             path="placement-brochure"
             element={<PlacementBrochure />}

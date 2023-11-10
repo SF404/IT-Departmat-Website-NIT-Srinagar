@@ -1,9 +1,7 @@
 import { AddIcon, MinusIcon } from '@chakra-ui/icons'
-import { Box, Heading, Icon, IconButton } from '@chakra-ui/react'
-import { Accordion, AccordionItem, AccordionButton, AccordionPanel, AccordionIcon, } from '@chakra-ui/react'
+import { Box, Heading, IconButton } from '@chakra-ui/react'
+import { Accordion, AccordionItem, AccordionButton, AccordionPanel,} from '@chakra-ui/react'
 import React, { useState } from 'react'
-import { IconBase } from 'react-icons/lib'
-import { PiPlusBold, PiPlusSquareDuotone } from 'react-icons/pi'
 
 function Faqs() {
     const [Faqs, setFaqs] = useState([

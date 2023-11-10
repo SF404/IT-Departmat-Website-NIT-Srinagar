@@ -1,6 +1,5 @@
-import { Box, Heading, IconButton, Image, Link, Text } from '@chakra-ui/react'
-import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import { Box, Heading, IconButton, Image,} from '@chakra-ui/react'
+import React from 'react'
 import Carousel from 'react-grid-carousel'
 import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons'
 

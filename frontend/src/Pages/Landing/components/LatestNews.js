@@ -1,18 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
   Box,
-  Grid,
-  Text,
-  Image,
   SimpleGrid,
-  Button,
-  Center,
-  CircularProgress,
   Heading,
 } from "@chakra-ui/react";
-import { BsNewspaper } from "react-icons/bs";
-import axios from "axios";
-import "./z_style.css";
+
 
 function LatestNews({ news }) {
   return (
@@ -32,32 +24,8 @@ function LatestNews({ news }) {
           borderRadius={"1em"}
           position={"relative"}
         >
-          {/* <iframe
-            name="f6ff525d05eee4"
-            width="1000px"
-            height="500px"
-            data-testid="fb:page Facebook Social Plugin"
-            title="fb:page Facebook Social Plugin"
-            frameborder="0"
-            allowtransparency="true"
-            allowfullscreen="true"
-            scrolling="no"
-            allow="encrypted-media"
-            src="https://www.facebook.com/v14.0/plugins/page.php?adapt_container_width=true&amp;app_id=&amp;channel=https%3A%2F%2Fstaticxx.facebook.com%2Fx%2Fconnect%2Fxd_arbiter%2F%3Fversion%3D46%23cb%3Df3be8c5001f4f28%26domain%3Dnitsri.ac.in%26is_canvas%3Dfalse%26origin%3Dhttps%253A%252F%252Fnitsri.ac.in%252Ff28720b7cdb3f7c%26relation%3Dparent.parent&amp;container_width=1000&amp;hide_cover=false&amp;href=https%3A%2F%2Fwww.facebook.com%2Fnitsriofficial&amp;locale=en_GB&amp;sdk=joey&amp;show_facepile=true&amp;small_header=false&amp;tabs=timeline%2Cevents&amp;width="
-            style={{
-              border: " none",
-              visibility: "visible",
-              width: "100%",
-              height: "500px",
-            }}
-
-            class=""
-          ></iframe> */}
-
           <iframe
             src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fnitsriofficial&tabs=timeline&width=500&height=1000&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId=1377094472886402"
-            // width="500"
-            // height="1000"
             style={{
               height: "100%",
               width: "100%",

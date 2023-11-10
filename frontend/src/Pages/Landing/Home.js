@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Box, Center, Divider, Highlight, SimpleGrid, Spinner, Text, VStack, } from "@chakra-ui/react";
+import { Box, Center, Divider, SimpleGrid, Spinner, Text, VStack, } from "@chakra-ui/react";
 import "./Home.css";
 import video_from_hod from "./../../assets/videos/from-hod.mp4";
 import UpcomingEvents from "./components/UpcomingEvents";

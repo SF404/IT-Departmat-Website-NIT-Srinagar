@@ -1,11 +1,14 @@
-import bannerImage from "./../../../assets/images/image.webp";
-import { VStack,Heading, Box,
+import SmallBanner from "./../../../Layout/SmallBanner";
+import {
   Table,
   Thead,
   Tbody,
   Tr,
   Th,
-  Td,} from '@chakra-ui/react';
+  Td,
+  Center,
+  TableContainer,
+} from '@chakra-ui/react';
 const data = [
   {
     name: "Dr. G. R. Baig",
@@ -20,54 +23,23 @@ const data = [
   { name: "Dr. Shaima Qureshi", Role: "Member", email: "shaima@nitsri.net" },
 ];
 
-const cmhead = {
-  marginTop: "5px",
-  display: "flex",
-  fontWeight: "bold",
-  fontSize: "large",
-  textDecoration: "underline",
-  color: "darkblue",
-  justifyContent: "center",
-  alignItems: "center",
-};
 function Page() {
   return (
     <div className="committeehead">
-    <VStack
-        w={"full"}
-        h={"200px"}
-        color={"white"}
-        backgroundImage={bannerImage}
-        backgroundSize="cover"
-        backgroundPosition="center"
-        backgroundRepeat="no-repeat"
-        justifyContent="center"
-        textShadow={"0 0 24px black"}
-      > <Heading as="h2" size="xl" mb={2}>
-          {" "}
-        </Heading>
-      </VStack>
-      <h1 style={cmhead}>Departmental Purchasing Committee</h1>
-      <Box
-          boxShadow="md"
-          rounded="lg"
-          p={4}
-          bg="white"
-          overflowX="auto"
-          maxW="80%"
-          mx="auto"
-          marginTop={2}
-        > <Table variant="simple">
+      <SmallBanner heading={'DEPARTMENTAL PURCHASING COMMITTEE'} />
+      <Center>
+        <TableContainer width={{ base: '100%', md: '80%' }} m={4} bg={"white"} boxShadow={'0 0 6px rgba(0,0,0,0.05)'}>
+          <Table variant="striped">
             <Thead bg={"#d8dcf0"}>
               <Tr >
-              <Th>Name</Th>
+                <Th>Name</Th>
                 <Th>Role</Th>
                 <Th>Email</Th>
               </Tr>
             </Thead>
-            <Tbody>
+            <Tbody fontSize={'14px'} className="family-3">
               {data.map((item, index) => (
-                <Tr key={index} bg={index % 2 === 1 ? "gray.100" : "white"} _hover={{ bg: 'blue.100' }}>
+                <Tr key={index}>
                   <Td>{item.name}</Td>
                   <Td>{item.Role}</Td>
                   <Td>{item.email}</Td>
@@ -75,7 +47,8 @@ function Page() {
               ))}
             </Tbody>
           </Table>
-        </Box>
+        </TableContainer>
+      </Center>
     </div>
   );
 }

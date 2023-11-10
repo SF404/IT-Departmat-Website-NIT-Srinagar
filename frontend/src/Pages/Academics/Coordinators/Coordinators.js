@@ -1,4 +1,3 @@
-import bannerImage from "./../../../assets/images/image.webp";
 import {
   Box,
   Table,
@@ -9,7 +8,11 @@ import {
   Td,
   VStack,
   Heading,
+  Center,
+  TableContainer,
 } from "@chakra-ui/react";
+import React from "react";
+import SmallBanner from  "./../../../Layout/SmallBanner";
 
 const data = [
   {
@@ -34,66 +37,33 @@ const data = [
   },
 ];
 
-const coheadStyle = {
-  marginTop: "5px",
-  display: "flex",
-  fontWeight: "bold",
-  fontSize: "large",
-  textDecoration: "underline",
-  color: "darkblue",
-  justifyContent: "center",
-  alignItems: "center",
-};
-
 const Page = () => {
   return (
-    <div>
-      <VStack
-        w="full"
-        h="200px"
-        color="white"
-        backgroundImage={`url(${bannerImage})`}
-        backgroundSize="cover"
-        backgroundPosition="center"
-        backgroundRepeat="no-repeat"
-        justifyContent="center"
-        textShadow="0 0 24px black"
-      >
-        <Heading as="h2" size="xl" mb={2}>
-          
-        </Heading>
-      </VStack>
-      <h1 style={coheadStyle}>Faculty Coordinator</h1>
-      <Box
-        boxShadow="md"
-        rounded="lg"
-        p={4}
-        bg="white"
-        overflowX="auto"
-        maxW="80%"
-        mx="auto"
-        marginTop="2"
-      >
-        <Table variant="normal">
-          <Thead bg="#d8dcf0">
-            <Tr >
-              <Th>Name</Th>
-              <Th>Responsibility</Th>
-              <Th>Email</Th>
-            </Tr>
-          </Thead>
-          <Tbody >
-            {data.map((item, index) => (
-              <Tr  key={index} bg={index % 2 === 1 ? "gray.100" : "white"} _hover={{ bg: 'blue.100' }}>
-                <Td>{item.name}</Td>
-                <Td>{item.responsibility}</Td>
-                <Td>{item.email}</Td>
+    <>
+      <SmallBanner image={null} heading={'FACULTY COORDINATORS'} />
+      <Center>
+        <TableContainer width={{ base: '100%', md: '80%' }} m={4} bg={"white"}>
+          <Table variant="striped">
+            <Thead bg="#d8dcf0">
+              <Tr >
+                <Th>Name</Th>
+                <Th>Responsibility</Th>
+                <Th>Email</Th>
               </Tr>
-            ))}
-          </Tbody>
-        </Table>
-      </Box>
-    </div>
+            </Thead>
+            <Tbody fontSize={'14px'} className="family-3">
+              {data.map((item, index) => (
+                <Tr key={index}>
+                  <Td>{item.name}</Td>
+                  <Td>{item.responsibility}</Td>
+                  <Td>{item.email}</Td>
+                </Tr>
+              ))}
+            </Tbody>
+          </Table>
+        </TableContainer>
+      </Center>
+    </>
   );
 }
 

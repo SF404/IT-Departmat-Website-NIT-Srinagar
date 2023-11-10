@@ -3,10 +3,10 @@ import React from 'react';
 import image from './../../../assets/images/autumn1.jpg';
 
 function Stats() {
-    const facultyCount = 10; // Replace with the actual faculty count
-    const phdCount = 23; // Replace with the actual PhD count
-    const btechCount = 650; // Replace with the actual BTech count
-    const mtechCount = 30; // Replace with the actual MTech count
+    const facultyCount = 10; 
+    const phdCount = 23; 
+    const btechCount = 650;
+    const mtechCount = 30; 
 
     return (
         <Box

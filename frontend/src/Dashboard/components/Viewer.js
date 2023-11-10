@@ -18,11 +18,11 @@ function Viewer({ currentView, user }) {
             case 'announcement':
                 return <Announcements email={user.email} />
             case 'chat':
-                return <ChatRoom email={user.email}/>
+                return <ChatRoom email={user.email} />
             case 'tutorial':
-                return <Tutorial email={user.email}/>
+                return <Tutorial email={user.email} />
             case 'event':
-                return <Events email={user.email}/>
+                return <Events email={user.email} />
             default:
                 return null;
         }
@@ -47,11 +47,12 @@ function Viewer({ currentView, user }) {
                     height: '100%',
                     maxWidth: '360px',
                     top: '0',
-                    padding:'14px',
-                    paddingLeft:'0',
                 }}
             >
-                {renderComponent()}
+                <Box padding={'14px'} w={'full'} h={'full'} pl={0}>
+                    {renderComponent()}
+
+                </Box>
             </motion.div>
 
 

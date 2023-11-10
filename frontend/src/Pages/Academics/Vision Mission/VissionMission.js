@@ -1,122 +1,26 @@
 import React from "react";
 import {
   Box,
-  Text,
   Heading,
   Center,
-  Grid,
   GridItem,
-  VStack,
-  Image,
   ListItem,
   SimpleGrid,
   ListIcon,
   List,
 } from "@chakra-ui/react";
-import bannerImage from "./../../../assets/images/image.webp";
 import { PiShootingStarDuotone } from "react-icons/pi";
-
-const Visionright = ({ img, title, description }) => (
-  <VStack bg="white" p={2} borderBottom={"2px solid teal"}>
-    <Grid templateColumns={{ base: "1fr", md: "1fr 2fr" }} gap={4}>
-      <GridItem colSpan={{ base: 1, md: 1 }}>
-        <Image
-          src={img}
-          alt={title}
-          maxH="300px"
-          w="100%"
-          objectFit="contain"
-        />
-      </GridItem>
-      <GridItem colSpan={{ base: 1, md: 1 }}>
-        <Box
-          display="flex"
-          flexDirection="column"
-          justifyContent="center"
-          alignItems="center"
-          height="100%"
-          minW={"800px"}
-        >
-          <Heading as="h2" size="lg" borderBottom="2px solid teal">
-            {title}
-          </Heading>
-          <Text mt={2} fontSize="lg">
-            {description}
-          </Text>
-        </Box>
-      </GridItem>
-    </Grid>
-  </VStack>
-);
-const Missionleft = ({ img, title, description }) => (
-  <VStack bg="white" p={2} borderBottom={"2px solid teal"}>
-    <Grid templateColumns={{ base: "1fr", md: "2fr 1fr" }} gap={4}>
-      <GridItem colSpan={{ base: 1, md: 1 }}>
-        <Box
-          display="flex"
-          flexDirection="column"
-          justifyContent="center"
-          alignItems="center"
-          height="100%"
-          minW={"800px"}
-        >
-          <Heading as="h2" size="lg" borderBottom="2px solid teal">
-            {title}
-          </Heading>
-          <Text mt={2} fontSize="lg">
-            {description}
-          </Text>
-        </Box>
-      </GridItem>
-      <GridItem colSpan={{ base: 1, md: 1 }}>
-        <Image
-          src={img}
-          alt={title}
-          maxH="300px"
-          w="100%"
-          objectFit="contain"
-        />
-      </GridItem>
-    </Grid>
-  </VStack>
-);
+import SmallBanner from  "./../../../Layout/SmallBanner";
 
 const FacilitiesPage = () => {
   return (
     <>
-      <Box
-        w={'full'}
-        style={{
-          position: 'relative',
-          background: `url(${bannerImage}) no-repeat center center/cover`,
-          height: '250px',
-
-        }}
-        className='family-1'
-      >
-        <Box
-          style={{
-            position: 'absolute',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            width: '100%',
-            height: '100%',
-            padding: '1em',
-            backgroundColor: 'rgba(0,0,0, 0.2)',
-            color: 'white',
-          }}
-
-        >
-          <Heading size={{ base: "lg", sm: "xl", md: "xl", lg: "xl" }} textShadow="2px 2px 4px rgba(0, 0, 0, 0.5)" >CRAFTING A BETTER TOMMOROW</Heading>
-        </Box>
-      </Box>
-
+      <SmallBanner image={null} heading={'CRAFTING A BETTER TOMMOROW'} />
       <Center w={"full"} p={4}>
         <SimpleGrid columns={[1, 1, 3, 3]} w={{ base: '100%', lg: '80%' }} my={4} gap={4} rowGap={4} >
           <GridItem textAlign={"center"}>
-            <Heading size={"md"} p={4} bg={"white"} boxShadow={'0 0 6px rgba(0,0,0,0.05)'} borderRadius={'8px'} className="family-1" color={"darkblue"} >Vision</Heading>
-            <Box p={4} bg={"white"} borderRadius={'8px'} my={1} boxShadow={'0 0 6px rgba(0,0,0,0.05)'} textAlign={"justify"} className="family-1">
+            <Heading size={"md"} p={4} bg={"white"} boxShadow={'0 0 6px rgba(0,0,0,0.05)'} borderRadius={'8px'} className="family-2" letterSpacing={'1px'} color={"darkblue"} >Vision</Heading>
+            <Box p={4} bg={"white"} borderRadius={'8px'} my={1} boxShadow={'0 0 6px rgba(0,0,0,0.05)'} textAlign={"justify"} className="family-2" minH={'300px'}>
               <List>
                 <ListItem>
                   <ListIcon as={PiShootingStarDuotone} mt={'-5px'} size={'lg'} color={'darkblue'} />
@@ -128,8 +32,8 @@ const FacilitiesPage = () => {
             </Box>
           </GridItem>
           <GridItem textAlign={"center"}>
-            <Heading size={"md"} p={4} bg={"white"} boxShadow={'0 0 6px rgba(0,0,0,0.05)'} borderRadius={'8px'} className="family-1" color={"darkblue"}>Mission</Heading>
-            <Box p={4} bg={"white"} borderRadius={'8px'} my={1} boxShadow={'0 0 6px rgba(0,0,0,0.05)'} textAlign={"justify"} className="family-1">
+            <Heading size={"md"} p={4} bg={"white"} boxShadow={'0 0 6px rgba(0,0,0,0.05)'} borderRadius={'8px'} className="family-2" letterSpacing={'1px'} color={"darkblue"}>Mission</Heading>
+            <Box p={4} bg={"white"} borderRadius={'8px'} my={1} boxShadow={'0 0 6px rgba(0,0,0,0.05)'} textAlign={"justify"} className="family-2" minH={'300px'}>
               <List>
                 <ListItem>
                   <ListIcon as={PiShootingStarDuotone} mt={'-5px'} size={'lg'} color={'darkblue'} />
@@ -156,8 +60,8 @@ const FacilitiesPage = () => {
             </Box>
           </GridItem>
           <GridItem textAlign={"center"}>
-            <Heading size={"md"} p={4} bg={"white"} boxShadow={'0 0 6px rgba(0,0,0,0.05)'} borderRadius={'8px'} className="family-1" color={"darkblue"}>Values</Heading>
-            <Box p={4} bg={"white"} borderRadius={'8px'} my={1} boxShadow={'0 0 6px rgba(0,0,0,0.05)'} textAlign={"justify"} className="family-1">
+            <Heading size={"md"} p={4} bg={"white"} boxShadow={'0 0 6px rgba(0,0,0,0.05)'} borderRadius={'8px'} className="family-2" letterSpacing={'1px'} color={"darkblue"}>Values</Heading>
+            <Box p={4} bg={"white"} borderRadius={'8px'} my={1} boxShadow={'0 0 6px rgba(0,0,0,0.05)'} textAlign={"justify"} className="family-2" minH={'300px'}>
               <List>
                 <ListItem>
                   <ListIcon as={PiShootingStarDuotone} mt={'-5px'} size={'lg'} color={'darkblue'} />

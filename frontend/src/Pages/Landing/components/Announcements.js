@@ -1,4 +1,4 @@
-import { Box, Center, HStack, Heading, Link, List, ListIcon, ListItem, Stack, Text, VStack } from '@chakra-ui/react'
+import { Box, Heading, Link, List, ListIcon, ListItem, Text,  } from '@chakra-ui/react'
 import React from 'react'
 import { PiCubeDuotone } from 'react-icons/pi';
 

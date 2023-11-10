@@ -1,54 +1,24 @@
-import { EmailIcon, PhoneIcon } from "@chakra-ui/icons";
-import janibulbashirImage from "./JanibSir.jpg";
-import bannerImage from "./../../assets/images/image.webp";
+import { EmailIcon, Icon, PhoneIcon } from "@chakra-ui/icons";
 import axios from "axios";
-import { AiOutlineMail } from "react-icons/ai";
 import {
   Avatar,
-  Badge,
-  Button,
+  Box,
   Card,
-  CardBody,
-  CardFooter,
-  CardHeader,
   Center,
   Divider,
   Flex,
-  Heading,
-  IconButton,
   Popover,
-  PopoverArrow,
-  PopoverBody,
-  PopoverCloseButton,
-  PopoverContent,
-  PopoverHeader,
   PopoverTrigger,
-  Tag,
+  Spinner,
   Text,
-  Tooltip,
   VStack,
   WrapItem,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
-import { useToast, Box, Icon } from "@chakra-ui/react";
-import Typewriter from "typewriter-effect";
-import Footer from "../Layout/Footer";
+import SmallBanner from "../../Layout/SmallBanner";
 
 function PhdStudents() {
-  const [phdStudent, setphdStudent] = useState([
-    {
-      phd_student_id: 0,
-      name: "temp",
-      enroll: "1234678",
-      description: "",
-      research_field:
-        "Wireless Sensor Networks, Internet of Things, Artificial Intelligence, Machine Learning, and Big Data",
-      email: "example@example.com",
-      phone: "0000000000",
-      profile_photo: "",
-    },
-  ]);
-
+  const [phdStudent, setphdStudent] = useState(null);
   const fetchData = async () => {
     try {
       const response = await axios.get(
@@ -68,33 +38,16 @@ function PhdStudents() {
 
   return (
     <>
-      <VStack bg={"whitesmoke"}>
-        <VStack
-          w={"full"}
-          h={"200px"}
-          bg={"brown"}
-          color={"white"}
-          p={6}
-          backgroundImage={bannerImage}
-          backgroundSize="cover"
-          backgroundPosition="center"
-          backgroundRepeat="no-repeat"
-          justifyContent="center"
-          textShadow={"0 0 24px black"}
-        >
-          <Heading as="h2" size="xl" mb={2}>
-            PHD Students, Department of Information Technology
-          </Heading>
-        </VStack>
-        <VStack w={"80%"} spacing={6}>
-          <Divider borderColor={"gray.400"}></Divider>
-          {phdStudent.map((item) => (
+      <SmallBanner heading={'PHD'} />
+      <Center>
+        <VStack w={{ base: '100%', md: '80%' }} spacing={6} my={4}>
+          {phdStudent ? (phdStudent.map((item, index) => (
             <Flex
               w={"full"}
-              p={2}
+              p={4}
               boxShadow="0px 4px 16px rgba(149, 157, 165, 0.2)"
-              borderRadius={4}
-              key={item.id}
+              borderRadius={'0.5em'}
+              key={index}
               bg={"white"}
               userSelect={"none"}
             >
@@ -110,8 +63,8 @@ function PhdStudents() {
                 </Popover>
               </WrapItem>
 
-              <Card marginLeft={4} style={{ boxShadow: "none" }}>
-                <Box p={4}>
+              <Card marginLeft={8} style={{ boxShadow: "none" }}>
+                <Box>
                   <Text fontSize="xl" fontWeight="bold">
                     {item.name}
                   </Text>
@@ -122,8 +75,8 @@ function PhdStudents() {
                     Enrollment: {item.enroll}
                   </Text>
                 </Box>
-                <Divider borderWidth="0.5px" borderColor="teal.500" mt={0} />
-                <Box p={4}>
+                <Divider borderWidth="0.5px" my={2} borderColor="teal.500"/>
+                <Box>
                   <Flex alignItems="center">
                     <Icon as={PhoneIcon} color="gray.600" />
                     <Text ml={2}>{item.phone}</Text>
@@ -135,9 +88,9 @@ function PhdStudents() {
                 </Box>
               </Card>
             </Flex>
-          ))}
+          ))) : (<Spinner />)}
         </VStack>
-      </VStack>
+      </Center>
     </>
   );
 }

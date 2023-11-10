@@ -1,13 +1,11 @@
-import { Box, Flex, useDisclosure } from "@chakra-ui/react";
+import { Flex, useDisclosure } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import Calendar from "./components/Calender";
 import Navbar from "../Layout/Navbar";
 import SideBar from "./components/SideBar";
 import CoursePanel from "./components/CoursePanel";
 import MyProfile from "./components/MyProfile";
-import AnnouncementsPanel from "./components/Announcements";
 import PlaceHolder from "./components/PlaceHolder";
 import Viewer from "./components/Viewer";
 
@@ -27,9 +25,8 @@ function Dashboard1() {
     onClose: closeMyProfile,
   } = useDisclosure();
 
-  // Variables
 
-  // function
+  // functions
   function get_token() {
     return {
       headers: {

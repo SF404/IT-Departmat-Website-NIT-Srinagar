@@ -1,5 +1,6 @@
 import { Box, Button, Center, DarkMode, Heading, ListItem, OrderedList, SimpleGrid, Text, VStack } from '@chakra-ui/react'
 import React, { useState } from 'react'
+import SmallBanner from '../../Layout/SmallBanner';
 
 function Papers() {
     const [papers, setPapers] = useState(
@@ -173,7 +174,7 @@ function Papers() {
 
     return (
         <>
-            <Heading size={'lg'} color={'darkblue'} mt={4} textAlign={'center'}>Research Papers</Heading>
+        <SmallBanner heading={"RESEARCH PAPERS"}/>
             <Box display={'flex'} justifyContent={'flex-start'} position={'relative'}>
                 <Box display={{ base: 'none', md: 'block' }}>
                     <VStack maxW={'250px'} id='selector' minW={'250px'} position={'sticky'} top={'54px'} padding={'1em'} ml={2} mt={4} borderRadius={4} boxShadow={'0 0 4px rgba(0, 0, 0, 0.1)'} minH={'fit-content'} bg={'white'}>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Box, Button, Center, Heading, IconButton, Text, flexbox } from "@chakra-ui/react";
+import { Box, Heading, IconButton, Text, } from "@chakra-ui/react";
 import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons'
 import image1 from './../../../assets/images/image.webp'
 import image2 from './../../../assets/images/spring.webp'

@@ -1,18 +1,13 @@
 import {
-  AspectRatio,
   Box,
   Button,
   Center,
-  DarkMode,
   Divider,
-  Heading,
-  Image,
   SimpleGrid,
   Text,
   VStack,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
-import b from "./../../assets/images/lab1.jpg";
 import a from "./../../assets/images/computer.jpg";
 import hardware from "./../../assets/images/hardware.jpg";
 import ai from "./../../assets/images/ai.jpg";
@@ -20,6 +15,7 @@ import analysis from "./../../assets/images/analysis.jpg";
 import iot from "./../../assets/images/iot.jpg";
 import security from "./../../assets/images/security.jpg";
 import programming from "./../../assets/images/programming.jpg";
+import SmallBanner from "../../Layout/SmallBanner";
 
 function Labs() {
   const [labs, setLabs] = useState([
@@ -75,10 +71,8 @@ function Labs() {
   ]);
   return (
     <>
+      <SmallBanner heading={'LABS'} />
       <Box p={4}>
-        <Heading size={"lg"} color={"darkblue"} textAlign={"center"}>
-          Labs
-        </Heading>
         <Center>
           <VStack
             w={"full"}
