@@ -2,8 +2,16 @@
 import React, { useEffect, useState } from "react";
 import bannerImage from "./../../assets/images/image.webp";
 import data from "./b-tech_data.json";
-import { useParams } from "react-router-dom";
-import { Box, Heading, Text, Button, HStack, Divider, Flex, Badge, Spinner, VStack, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, useDisclosure, useColorMode, Center, StatGroup, Stat, StatLabel, StatNumber, IconButton, } from "@chakra-ui/react";
+import {
+  Box,
+  Heading,
+  Text,
+  Button,
+  Divider,
+  Flex,
+  Badge,
+  VStack,
+} from "@chakra-ui/react";
 import {
   Accordion,
   AccordionItem,
@@ -11,12 +19,9 @@ import {
   AccordionPanel,
   AccordionIcon,
 } from "@chakra-ui/react";
-import CountUp from "react-countup";
 import { Table, Thead, Tbody, Tr, Th, Td } from "@chakra-ui/react";
-import axios from "axios";
-import * as XLSX from 'xlsx';
+import * as XLSX from "xlsx";
 function BTechStudents() {
-
   const [student, setstudent] = useState([
     { degree: "B-Tech", name: "2022 Batch", batch: 2022 },
     { degree: "B-Tech", name: "2021 Batch", batch: 2021 },
@@ -52,61 +57,76 @@ function BTechStudents() {
       }
     })();
     return (
-      <Table variant="striped" colorScheme="teal" size={"lg"} id={id}>
-        <Thead>
-          <Tr>
-            <Th>ID</Th>
-            <Th>Registration number</Th>
-            <Th>Name</Th>
-            <Th>Enrollment number</Th>
-          </Tr>
-        </Thead>
-        <Tbody>
-          {selectedData.map((item) => (
-            <Tr key={item.id}>
-              <Td>{item.id}</Td>
-              <Td>{item.Reg}</Td>
-              <Td>{item.name}</Td>
-              <Td>{item.enroll}</Td>
+      <div style={{ overflowX: "auto" }}>
+        <Table variant="simple" colorScheme="telegram" id={id}>
+          <Thead>
+            <Tr fontSize={{ base: "sm", md: "md" }} bg={"#d8dcf0"}>
+              <Th>ID</Th>
+              <Th>Registration number</Th>
+              <Th>Name</Th>
+              <Th>Enrollment number</Th>
             </Tr>
-          ))}
-        </Tbody>
-      </Table>
+          </Thead>
+          <Tbody>
+            {selectedData.map((item) => (
+              <Tr key={item.id} fontSize={{ base: "0.8em", md: "md" }}>
+                <Td>{item.id}</Td>
+                <Td>{item.Reg}</Td>
+                <Td>{item.name}</Td>
+                <Td>{item.enroll}</Td>
+              </Tr>
+            ))}
+          </Tbody>
+        </Table>
+      </div>
     );
   }
 
   const downloadExcel = (id) => {
-    const table = document.getElementById(id); // Get the HTML table
-
-    const ws = XLSX.utils.table_to_sheet(table); // Convert the table to a worksheet
+    const table = document.getElementById(id);
+    const ws = XLSX.utils.table_to_sheet(table);
     const wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1'); // Add the worksheet to a workbook
+    XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
 
-    XLSX.writeFile(wb, 'download.xlsx'); // Trigger the download
+    XLSX.writeFile(wb, "download.xlsx");
   };
 
   return (
     <>
-      <VStack w={"full"} h={"200px"} bg={"brown"} color={"white"} p={6} backgroundImage={bannerImage} backgroundSize="cover" backgroundPosition="center" backgroundRepeat="no-repeat" justifyContent="center" textShadow={"0 0 24px black"} >
-        <Heading as="h2" size="xl" mb={2}>IT-Students</Heading>
+      <VStack
+        w={"full"}
+        h={"200px"}
+        bg={"brown"}
+        color={"white"}
+        p={6}
+        backgroundImage={bannerImage}
+        backgroundSize="cover"
+        backgroundPosition="center"
+        backgroundRepeat="no-repeat"
+        justifyContent="center"
+        textShadow={"0 0 24px black"}
+      >
+        <Heading as="h2" size="xl" mb={2}>
+          IT-Students
+        </Heading>
         <Text color={"white"}></Text>
       </VStack>
-      <Box p={6} borderRadius="lg" overflow="hidden" fontSize={{ base: "sm", md: "md" }} >
-        <Accordion allowToggle gap={6}>
+      <Box
+        p={6}
+        borderRadius="lg"
+        overflow="hidden"
+        fontSize={{ base: "sm", md: "md" }}
+      >
+        <Accordion allowToggle gap={2}>
           {student &&
             student.map((course, index) => (
-              <AccordionItem
-                key={course.degree}
-                mt={2}
-                border={"1px solid #e5e5e5"}
-                borderRadius={8}
-              >
+              <AccordionItem key={course.degree} mt={2} borderRadius={8}>
                 <h2>
                   <AccordionButton
                     as={Badge}
                     colorScheme="blackAlpha"
                     cursor={"pointer"}
-                    borderRadius={"8px 8px 0 0"}
+                    borderRadius={"md"}
                     h={"64px"}
                     _expanded={{ bg: "teal", color: "white" }}
                   >
@@ -116,6 +136,7 @@ function BTechStudents() {
                       textAlign="left"
                       fontWeight={"bold"}
                       overflow={"hidden"}
+                      borderRadius={8}
                     >
                       <Flex justifyContent={"space-between"}>
                         <Text>
@@ -127,19 +148,23 @@ function BTechStudents() {
                     <AccordionIcon />
                   </AccordionButton>
                 </h2>
-                <AccordionPanel pb={4} >
+                <AccordionPanel pb={4}>
                   <Box display={"flex"} justifyContent={"space-between"}>
                     <Box>
                       <Badge colorScheme="blue">{course.name}</Badge>
                     </Box>
                     <Text>
-                      <Button size={"sm"} colorScheme="teal" onClick={() => downloadExcel(("table" + index))}>Download .xlsx</Button>
+                      <Button
+                        size={"sm"}
+                        colorScheme="teal"
+                        onClick={() => downloadExcel("table" + index)}
+                      >
+                        Download .xlsx
+                      </Button>
                     </Text>
                   </Box>
-
                   <Divider my={2} />
-
-                  {DataTabs(course.batch, ("table" + index))}
+                  {DataTabs(course.batch, "table" + index)}
                 </AccordionPanel>
               </AccordionItem>
             ))}
