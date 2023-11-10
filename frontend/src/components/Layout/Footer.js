@@ -1,12 +1,17 @@
 import React from "react";
 import {
   Box,
+  Center,
+  Divider,
   Flex,
   Grid,
   GridItem,
   HStack,
+  Heading,
   IconButton,
+  SimpleGrid,
   Text,
+  VStack,
   textDecoration,
 } from "@chakra-ui/react";
 import {
@@ -19,106 +24,50 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <Box as="footer" pt={8} bg="#181818" color="white">
-      <Grid
-        templateColumns={{ base: "1fr", md: "repeat(5, 1fr)" }}
-        gap={6}
-        maxW="1200px"
-        mx="auto"
-        px={4}
-      >
-        <GridItem colSpan={{ base: 1, md: 2 }}>
-          <Text fontSize="lg" fontWeight="bold">
-            DEPARTMENT OF INFORMATION TECHNOLOGY{" "}
-          </Text>
-          <Text mt={2} fontSize={"sm"}>
-            National Institute Of Technology, Srinagar
-          </Text>
-        </GridItem>
-        <GridItem colSpan={{ base: 1, md: 1 }}>
-          <Text
-            fontSize="lg"
-            fontWeight="bold"
-            borderBottom={"3px solid #3db166"}
-            pb={2}
-          >
-            Quick Links
-          </Text>
-          <Flex direction="column" mt={2}>
-            <Text as={Link} to="/" _hover={{ opacity: 1 }} opacity={0.8}>
-              Home
-            </Text>
-            <Text as={Link} to="about" _hover={{ opacity: 1 }} opacity={0.8}>
-              About
-            </Text>
-            <Text
-              as={Link}
-              to="https://nitsri.ac.in/"
-              target="_blank"
-              _hover={{ opacity: 1 }}
-              opacity={0.8}
-            >
-              NIT Srinagar
-            </Text>
-            <Text as={Link} to="#" _hover={{ opacity: 1 }} opacity={0.8}>
-              Contact
-            </Text>
-          </Flex>
-        </GridItem>
-        <GridItem colSpan={{ base: 1, md: 1 }}>
-          <Text
-            fontSize="lg"
-            fontWeight="bold"
-            borderBottom={"3px solid #3db166"}
-            pb={2}
-          >
-            Student
-          </Text>
-          <Flex direction="column" mt={2}>
-            <Text
-              as={Link}
-              to="digital-library"
-              _hover={{ opacity: 1 }}
-              opacity={0.8}
-            >
-              Digital Library
-            </Text>
-            <Text
-              as={Link}
-              to="semester/all"
-              _hover={{ opacity: 1 }}
-              opacity={0.8}
-            >
-              Semester
-            </Text>
-            <Text
-              as={Link}
-              to="mentorship"
-              _hover={{ opacity: 1 }}
-              opacity={0.8}
-            >
-              Mentorship
-            </Text>
-            <Text as={Link} to="courses" _hover={{ opacity: 1 }} opacity={0.8}>
-              Courses
-            </Text>
-          </Flex>
-        </GridItem>
-        <GridItem colSpan={{ base: 1, md: 1 }}>
-          <Text
-            fontSize="lg"
-            fontWeight="bold"
-            borderBottom={"3px solid #3db166"}
-            pb={2}
-          >
-            Contact Us
-          </Text>
-          <Text mt={2}></Text>
-          <Text></Text>
-          <Text mt={2}>Phone: +123 456 789</Text>
-          <Text>Email: info@example.com</Text>
-        </GridItem>
-      </Grid>
+    <Box as="footer" pt={8} bg="#181818" color="white" className="family-2">
+      <Center>
+        <SimpleGrid columns={[1, 2, 3, 4, 5]} width={{ base: 'full', md: '90%' }} minH={'300px'} gap={8} p={4} >
+          <GridItem colSpan={2}>
+            <VStack w={"full"} pt={2} alignItems={'flex-start'} className="family-2">
+              <Heading size={"md"} className="family-2">Department Of Information Technology</Heading>
+              <Heading size={"sm"} fontWeight={"normal"} className="family-2">National Institute Of Technology, Srinagar</Heading>
+
+            </VStack>
+          </GridItem>
+          <GridItem >
+            <Heading size={'sm'} letterSpacing={'1px'} fontSize={'1.1em'} className="family-2" fontWeight={900}>Useful Links</Heading>
+            <Divider my={3} border={'2px solid lightgreen'} />
+            <VStack w={"full"} pt={2} alignItems={'flex-start'} className="family-2">
+              <Text as={Link} to={'/'} color={"whiteAlpha.700"} _hover={{color:'white'}}>NIT SRINAGAR</Text>
+              <Text as={Link} to={'/'} color={"whiteAlpha.700"} _hover={{color:'white'}}>Training amd Placement</Text>
+              <Text as={Link} to={'/'} color={"whiteAlpha.700"} _hover={{color:'white'}}>Departmental Commitees</Text>
+              <Text as={Link} to={'/'} color={"whiteAlpha.700"} _hover={{color:'white'}}>Co-curricular Activities</Text>
+            </VStack>
+          </GridItem>
+          <GridItem >
+            <Heading size={'sm'} letterSpacing={'1px'} fontSize={'1.1em'} className="family-2" fontWeight={900}>Learn an Upskill</Heading>
+            <Divider my={3} border={'2px solid lightgreen'} />
+            <VStack w={"full"} pt={2} alignItems={'flex-start'} className="family-2">
+              <Text as={Link} to={'/'} color={"whiteAlpha.700"} _hover={{color:'white'}}>Course</Text>
+              <Text as={Link} to={'/'} color={"whiteAlpha.700"} _hover={{color:'white'}}>Digital Library</Text>
+              <Text as={Link} to={'/'} color={"whiteAlpha.700"} _hover={{color:'white'}}>Syllabus</Text>
+              <Text as={Link} to={'/'} color={"whiteAlpha.700"} _hover={{color:'white'}}>Laboratries</Text>
+              <Text as={Link} to={'/'} color={"whiteAlpha.700"} _hover={{color:'white'}}>Artificial Intelegence</Text>
+              <Text as={Link} to={'/'} color={"whiteAlpha.700"} _hover={{color:'white'}}>Research</Text>
+            </VStack>
+          </GridItem>
+          <GridItem >
+            <Heading size={'sm'} letterSpacing={'1px'} fontSize={'1.1em'} className="family-2" fontWeight={900}>Contact Us</Heading>
+            <Divider my={3} border={'2px solid lightgreen'} />
+            <VStack w={"full"} pt={2} alignItems={'flex-start'} className="family-2">
+              <Text as={Link} to={'/'} color={"whiteAlpha.700"} _hover={{color:'white'}}>Faculties</Text>
+              <Text as={Link} to={'/'} color={"whiteAlpha.700"} _hover={{color:'white'}}>Report and Feedback</Text>
+              <Text as={Link} to={'/'} color={"whiteAlpha.700"} _hover={{color:'white'}}>Mentor</Text>
+              <Text as={Link} to={'/'} color={"whiteAlpha.700"} _hover={{color:'white'}}></Text>
+            </VStack>
+          </GridItem>
+        </SimpleGrid>
+      </Center>
       <HStack justify={"center"} bg={"#202020"} p={6} mt={6}>
         <Box w={"full"}>
           Copyright All Right Reserved 2023,{" "}
@@ -159,7 +108,7 @@ const Footer = () => {
           />
         </HStack>
       </HStack>
-    </Box>
+    </Box >
   );
 };
 

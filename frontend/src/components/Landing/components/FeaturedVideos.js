@@ -100,10 +100,10 @@ function FeaturedVideos() {
                     {
                         uniqueVideos.map((item, index) => (
                             <Carousel.Item key={index}>
-                                <Box w={'full'} as={Link} href={getLink(item.html)}>
+                                <Box w={'full'} as={Link} href={getLink(item.html)} _hover={{textDecoration:'none'}}>
                                     <Box aspectRatio={16 / 9} mt={4} width={'100%'} borderRadius={'0.75em'} background={`url(${item.thumbnail_url}) no-repeat center center/cover`}></Box>
                                     <Box pt={2} pb={4} borderBottomRadius={'0.5em'}>
-                                        <Text fontSize={'12px'} fontWeight={'semibold'} as={Link} href={getLink(item.html)}>
+                                        <Text fontSize={'12px'} fontWeight={'semibold'}>
                                             {item.title}
                                         </Text>
                                         <Text fontSize={'12px'}>{item.author_name}</Text>

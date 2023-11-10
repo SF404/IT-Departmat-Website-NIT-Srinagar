@@ -134,7 +134,7 @@ function Dashboard1() {
       <Flex
         position={"fixed"}
         bottom={0}
-        w={{ base: "200px", md: "full" }}
+        w={"full"}
         top={"110px"}
       >
         <SideBar
@@ -159,7 +159,7 @@ function Dashboard1() {
         ) : (
           <PlaceHolder />
         )}
-        <Viewer currentView={currentView} />
+        <Viewer currentView={currentView} user={user} />
       </Flex>
       {user && Object.keys(user).length > 0 && (
         <MyProfile

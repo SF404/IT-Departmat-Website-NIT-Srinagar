@@ -27,13 +27,17 @@ import {
   Stack,
   useDisclosure,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import mainLogo from "../../assets/images/download.webp";
 import { Link } from "react-router-dom";
 import { FaBarsStaggered, FaX, FaXmark } from "react-icons/fa6";
 import { motion } from "framer-motion";
+import { PiDotsNineBold } from "react-icons/pi";
 
-function NavLinks({ color }) {
+
+
+
+function NavLinks({ color}) {
   return (
     <>
       <Button
@@ -108,7 +112,7 @@ function NavLinks({ color }) {
         </MenuList>
       </Menu>
 
-      <Menu>
+      {/* <Menu>
         <MenuButton
           as={Button}
           variant="ghost"
@@ -122,7 +126,7 @@ function NavLinks({ color }) {
             Dashboard
           </MenuItem>
         </MenuList>
-      </Menu>
+      </Menu> */}
 
       <Menu>
         <MenuButton
@@ -226,6 +230,23 @@ function NavLinks({ color }) {
       >
         Contact Us
       </Button>
+      <Button
+        variant="ghost"
+        colorScheme="whiteAlpha"
+        color={color}
+        as={Link}
+        to={localStorage.getItem("TokenA")?"/dashboard":'/login'}
+        borderRadius={"full"}
+        position={"absolute"}
+        right={'10px'}
+        size={"sm"}
+        // fontWeight={400}
+        lineHeight={0}
+        px={'1.5em'}
+        my={"auto"}
+      >
+        {localStorage.getItem("TokenA") ? (<Box fontSize={'1.5em'}><PiDotsNineBold /></Box>) : "Login"}
+      </Button>
     </>
   );
 }
@@ -272,8 +293,10 @@ function Navbar() {
           spacing="2"
           align="stretch"
           display={{ base: "none", lg: "flex" }}
+          alignItems={"center"}
+          className="family-2"
         >
-          <NavLinks color={"white"} />
+          <NavLinks color={"white"}  />
         </Stack>
 
         {/* Mobile Navigation Icon */}
@@ -311,7 +334,7 @@ function Navbar() {
         >
           {isOpen && (
             <VStack alignItems={"flex-start"}>
-              <NavLinks color={"black"} colorScheme={"blackAlpha"} />
+              <NavLinks color={"black"} colorScheme={"blackAlpha"}  />
             </VStack>
           )}
         </motion.div>

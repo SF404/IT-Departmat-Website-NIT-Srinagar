@@ -7,7 +7,7 @@ import ChatRoom from './ChatRoom'
 import Tutorial from './Tutorial'
 import Events from './Events'
 
-function Viewer({ currentView }) {
+function Viewer({ currentView, user }) {
     const { getButtonProps, getDisclosureProps, isOpen, onOpen, onClose } = useDisclosure()
     const [hidden, setHidden] = useState(!isOpen)
     const triggerCurrentView = useRef()
@@ -16,13 +16,13 @@ function Viewer({ currentView }) {
             case 'calendar':
                 return <Calender />
             case 'announcement':
-                return <Announcements />
+                return <Announcements email={user.email} />
             case 'chat':
-                return <ChatRoom />
+                return <ChatRoom email={user.email}/>
             case 'tutorial':
-                return <Tutorial/>
+                return <Tutorial email={user.email}/>
             case 'event':
-                return <Events/>
+                return <Events email={user.email}/>
             default:
                 return null;
         }
