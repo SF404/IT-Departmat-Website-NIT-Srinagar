@@ -1,9 +1,11 @@
 from IT_DEPARTMENT.models import *
+from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.views import APIView
 from rest_framework import status,viewsets
 from rest_framework.generics import RetrieveUpdateAPIView
 from rest_framework.response import Response
 from .serializers import *
+from PublicAPI.serializers import *
 from django.contrib.auth import authenticate
 import random
 from django.core.mail import send_mail
@@ -22,6 +24,16 @@ from django.views.generic import TemplateView
 import json
 
 
+class GalleryUpload(APIView):
+    authentication_classes=[JWTAuthentication]
+    permission_classes = (IsAuthenticated,)
+    parser_classes = (MultiPartParser, FormParser)
+    def post(self, request, format=None):
+        gallery = GallerySerializer(data=request.data,many=True)
+        if gallery.is_valid():
+            gallery.save()
+            return Response(gallery.data, status=status.HTTP_201_CREATED)
+        return Response(gallery.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class PostPublicData(viewsets.ModelViewSet):
     authentication_classes=[JWTAuthentication]
@@ -53,9 +65,9 @@ class PostPublicData(viewsets.ModelViewSet):
             return Response({"message": "Event Created Successfully"}, status=status.HTTP_201_CREATED)
         elif object_type == 'tutorial':
             title=request.data.get("title")
-            image=request.data.get("images")
+            Gallery=request.data.get("Gallerys")
             tags=request.data.get("tags")
-            tutorial=Tutorials(title=title,image=image,tags=tags ,description=description,link=link,teacher=teacher)
+            tutorial=Tutorials(title=title,Gallery=Gallery,tags=tags ,description=description,link=link,teacher=teacher)
             tutorial.save()
             return Response({"message": "Event Created Successfully"}, status=status.HTTP_201_CREATED)
         else:
@@ -63,25 +75,23 @@ class PostPublicData(viewsets.ModelViewSet):
         
 
 class ProfileUpdate(viewsets.ModelViewSet):
+    authentication_classes=[JWTAuthentication]
+    permission_classes = (IsAuthenticated,)
     serializer_class = TeacherUpdateSerializer
-
     def update(self, request, pk):
         email = request.query_params.get('email', None)
         if not email:
             return Response({"message": "Email cannot be null"}, status=status.HTTP_400_BAD_REQUEST)
-
         # Try to get the teacher by email
         try:
             teacher = Teacher.objects.get(pk=pk,email=email)
         except Teacher.DoesNotExist:
             return Response({"message": "Teacher not found"}, status=status.HTTP_404_NOT_FOUND)
-
         # Update the teacher object
         phone = request.data.get('phone')
         research_field = request.data.get('research_field')
         profile_photo = request.data.get('profile_photo')
         about = request.data.get('about')
-
         if phone is not None:
             teacher.phone = phone
 
@@ -193,6 +203,23 @@ class AssignmentUpload (viewsets.ModelViewSet):
         except Exception as e:
             return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
         
+
+class FileUpload (viewsets.ModelViewSet):
+    authentication_classes=[JWTAuthentication]
+    permission_classes = (IsAuthenticated,)
+    serializer_class = FileSerializer
+    def create(self, request, *args, **kwargs):
+        title = request.data.get("title")
+        file = request.FILES.get("file")
+        type = request.data.get("type")
+        try:
+            file = File(name=title, file=file, type=type)
+            file.save()
+            return Response({"message": "Assignment created successfully"}, status=status.HTTP_201_CREATED)
+        except Exception as e:
+            return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+        
+
 class DeleteFilesAPIView(APIView):
     def post(self, request, *args, **kwargs):
         aid = request.data.get("assignment_id")
@@ -334,10 +361,8 @@ class GetEvents(APIView):
                 events_data.append(event_data)
             if(events_data):
                 return Response(events_data)
-
             return Response({"data":"not found"})
-
-
+        
 
 class GetNews(APIView):
      def get(self, request, *args, **kwargs):

@@ -15,7 +15,9 @@ class Teacher(models.Model):
     date=models.DateTimeField(auto_now_add=True)
     profile_photo = models.ImageField(upload_to='teacher_profile/')
     about = models.JSONField(blank=True, null=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE,null=True,blank=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE,null=True,blank=True) 
+    def __str__(self):
+        return f"{self.name}"
 
 
 class Research(models.Model):
@@ -24,7 +26,9 @@ class Research(models.Model):
     url = models.URLField(blank=True,null=True)
     date = models.CharField(max_length=255)
     auto_date=models.DateTimeField(auto_now_add=True)
-    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE,null=True,blank=True)
+    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE,null=True,blank=True) 
+    def __str__(self):
+        return f"{self.title}"
 
 
 
@@ -57,14 +61,34 @@ class Course(models.Model):
     description = models.TextField(blank=True)
     date=models.DateTimeField(auto_now_add=True)
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE,null=True,blank=True)
+
+    class Meta:
+        ordering = ['semester']   
+    def __str__(self):
+        return f"{self.name}"
     
+
+class Phd_Student(models.Model):
+    name = models.CharField(max_length=255)
+    email = models.EmailField(unique=True)
+    enroll= models.TextField(max_length=255,blank=True)
+    description = models.CharField(max_length=255,blank=True)
+    research_field = models.TextField(max_length=255,blank=True)
+    date=models.DateTimeField(auto_now_add=True)
+    alumni=models.BooleanField(default=False)
+    profile_photo = models.ImageField(upload_to='phd_student/')
+    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE,blank=True,null=True)
+
+     
+    def __str__(self):
+        return f"{self.name}"
 
 class Announcement(models.Model):
     announcement_id = models.CharField(max_length=255,unique=True)
     description = models.CharField(max_length=255)
     link = models.URLField(max_length=255,blank=True,null=True)
     date =  models.DateTimeField(auto_now=True)
-    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
+    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE,null=True,blank=True)
     
 
 class Events(models.Model):
@@ -74,18 +98,18 @@ class Events(models.Model):
     location=models.CharField(max_length=255,blank=True,null=True)
     date =  models.DateField()
     auto_date =  models.DateTimeField(auto_now=True)
-    # image = models.ImageField(upload_to='tutorials/', null=True, blank=True)
-    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='tutorials/', blank=True)
+    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE,null=True,blank=True)
 
 class Tutorials(models.Model):
     title=models.CharField(max_length=255)
     description = models.CharField(max_length=255,blank=True,null=True)
     link = models.URLField(max_length=255,blank=True,null=True)
-    image = models.ImageField(upload_to='tutorials/')
+    image = models.ImageField(upload_to='tutorials/',blank=True,default="temp")
     SELECTION_CHOICES = (
-        ('option1', 'Video'),
-        ('option2', 'Blog'),
-        ('option3', 'Other'),
+        ('video', 'Video'),
+        ('blog', 'Blog'),
+        ('other', 'Other'),
     )
     selection = models.CharField(
         max_length=10,
@@ -93,10 +117,7 @@ class Tutorials(models.Model):
     )
     tags=models.CharField(max_length=255,blank=True,null=True)
     auto_date =  models.DateTimeField(auto_now=True)
-    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
-
-
-
+    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE,null=True,blank=True)
 
 
 class Assignment(models.Model):
@@ -108,8 +129,7 @@ class Assignment(models.Model):
     date=models.DateTimeField(auto_now_add=True)
     course=models.ForeignKey(Course,on_delete=models.CASCADE,null=True,blank=True)
     class Meta:
-        ordering = ['name']
-     
+        ordering = ['name']   
     def __str__(self):
         return f"{self.name}"
     

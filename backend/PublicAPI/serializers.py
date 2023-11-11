@@ -4,6 +4,7 @@ from rest_framework import serializers
 # import the todo data model
 from IT_DEPARTMENT.models import *
 from PublicAPI.models import *
+
  
 # create a serializer class
 
@@ -43,8 +44,6 @@ class AnnouncementSerializer(serializers.ModelSerializer):
         model = Announcement
         fields = '__all__'
 
-
-
 class TeacherSerializer(serializers.ModelSerializer):
     # create a meta class
     class Meta:
@@ -52,9 +51,10 @@ class TeacherSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class CourseSerializer(serializers.ModelSerializer):
+    teacher_name = serializers.CharField(source='teacher.name', read_only=True)
     class Meta:
         model = Course
-        fields = '__all__'
+        fields = ['id', 'course_id', 'name', 'credit', 'semester', 'syllabus', 'description', 'date', 'teacher', 'teacher_name']
 
 class AssignmentSerializer(serializers.ModelSerializer):
     class Meta:
@@ -75,4 +75,9 @@ class TeacherMails(serializers.ModelSerializer):
 class PhdStudentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Phd_Student
+        fields = '__all__'
+
+class FileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = File
         fields = '__all__'

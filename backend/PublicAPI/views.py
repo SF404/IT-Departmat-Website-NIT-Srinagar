@@ -1,4 +1,5 @@
 from .serializers import *
+from IT_DEPARTMENT.serializers import *
 from IT_DEPARTMENT.models import *
 from PublicAPI.models import *
 from rest_framework import viewsets
@@ -47,7 +48,6 @@ class ResearchView(BaseFilteredViewSet):
 class AnnouncementView(BaseFilteredViewSet):
     serializer_class=AnnouncementSerializer
     queryset = Announcement.objects.all()
-
 
 class TutorialsView(BaseFilteredViewSet):
     serializer_class=TutorialsSerializer
@@ -151,7 +151,6 @@ class CourseView(viewsets.ModelViewSet):
         print("sid", teacher.name)
         queryset = Course.objects.filter(teacher=teacher)
         return queryset
-    
 
 class NotesShow(viewsets.ModelViewSet):
     serializer_class = NotesSerializer
@@ -187,4 +186,15 @@ class DownloadNotes(APIView):
         file_path = my_model_instance.pdf.path
         return FileResponse(open(file_path, 'rb'), as_attachment=True) 
 
+class GalleryView(APIView):
+    serializer_class = GallerySerializer
+    def get(self, request):
+        queryset = Gallery.objects.all()
+        serializer = self.serializer_class(queryset, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
+class FileShow(viewsets.ModelViewSet):
+    serializer_class = FileSerializer
+    def get_queryset(self):       
+        queryset = Assignment.objects.all()
+        return queryset

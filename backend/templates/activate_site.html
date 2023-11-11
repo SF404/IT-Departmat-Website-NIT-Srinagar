@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <title>Activate Account</title>
+
     <!-- Include Axios library -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   </head>
@@ -46,15 +47,14 @@
             }
           );
           console.log(response);
-          if (response.data.success) {
+          console.log(response.status);
+          if (response.status === 204) {
             navigate("http://localhost:3000/");
           } else {
             showAlert("Account verification failed.");
           }
         } catch (error) {
-          showAlert(
-            "Account has been verified but there is problem of sending email"
-          );
+          showAlert("Account verification failed.");
         }
       }
       function showAlert(message) {

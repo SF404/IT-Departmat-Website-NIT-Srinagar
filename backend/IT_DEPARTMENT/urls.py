@@ -35,8 +35,11 @@ router.register(r'profileupdate', ProfileUpdate, basename='Semester Data')
 
 
 
+
 urlpatterns = [
     path('api/', include(router.urls)),
+    path('api/public/galleryget/',GalleryView.as_view()),
+    path('api/updategallery/',GalleryUpload.as_view()),
     path('api/assignmentdownload/', DownloadAssignment.as_view(),name='registration'),
     path('api/notesdownload/', DownloadNotes.as_view(),name='registration'),
     path('api/getmails/', MailTeacherList.as_view(),name='registration'),
@@ -51,8 +54,7 @@ urlpatterns = [
     path('api/events_data/', GetEvents.as_view(),name='registration'),
     path('api/news_data/', GetNews.as_view(),name='registration'),
     re_path(r'^$', TemplateView.as_view(template_name='index.html')),
-    path('activate/<str:uid>/<str:token>/', TemplateView.as_view(template_name='activate.html'), name='activate'),
+    path('activate/<str:uid>/<str:token>/', TemplateView.as_view(template_name='activate_site.html'), name='activate'),
 ]
-
 
 

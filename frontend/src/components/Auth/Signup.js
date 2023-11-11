@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useToast } from "@chakra-ui/react";
 import {
   Box,
   Button,
@@ -33,9 +34,16 @@ function isPasswordSecure(password) {
 }
 
 function Signup() {
-  const [message, setMessage] = useState({
-    message: "",
-  });
+  const toast = useToast();
+  function callToast(msj, status) {
+    return toast({
+      position: "bottom",
+      title: msj,
+      status: status,
+      duration: 2000,
+      isClosable: true,
+    });
+  }
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -74,9 +82,7 @@ function Signup() {
           re_password: "",
           description: "",
         });
-        setMessage({
-          message: "Cannot find the data related to this email",
-        });
+        callToast("Cannot find the data related to this email", "error");
       } else {
         if (data.length > 0) {
           const { name, email, description } = data[0];
@@ -87,9 +93,7 @@ function Signup() {
             description,
           });
         }
-        setMessage({
-          message: "Data fetch successfully",
-        });
+        callToast("data fetch successfully", "success");
       }
     } catch (error) {
       console.error("Error:", error);
@@ -99,34 +103,26 @@ function Signup() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!isPasswordSecure(formData.password)) {
-      setMessage({
-        message:
-          "Password must contains at least one alphabet, one number, one symbol and minimum 8 characters",
-      });
+      callToast(
+        "Password must contains at least one alphabet, one number, one symbol and minimum 8 characters",
+        "error"
+      );
       return;
     }
     if (formData.password == formData.re_password) {
-      setMessage({
-        message: "Submitting...",
-      });
+      callToast("submetting...", "success");
       try {
         const response = await axios.post(
           "http://127.0.0.1:8000/api/auth/users/",
           formData
         );
-        setMessage({
-          message: "Successful!!! mail has been send to this email",
-        });
+        callToast("Successful!!! mail has been send to this email", "success");
       } catch (error) {
-        setMessage({
-          message: "Signup Failed",
-        });
+        callToast("Signup Failed", "error");
         console.error("Error:", error);
       }
     } else {
-      setMessage({
-        message: "Password not match re_enter the password",
-      });
+      callToast("Password not match re_enter the password", "error");
     }
   };
   return (
@@ -140,7 +136,7 @@ function Signup() {
         boxShadow="md"
         mt="4rem"
       >
-        <Heading as="h2" size="xl" mb={4}>
+        <Heading as="h3" size="lg" mb={4} textAlign={"Center"}>
           Sign Up
         </Heading>
         <Box display="flex" alignItems="center">
@@ -253,7 +249,6 @@ function Signup() {
             </Stack>
           </form>
         )}
-        <Text m={2}>*{message.message}</Text>
       </Box>
     </ChakraProvider>
   );
