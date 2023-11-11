@@ -1,0 +1,132 @@
+import React, { useState } from "react";
+import * as XLSX from 'xlsx'
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
+import {
+    Box,
+    Button,
+    Center,
+    VStack,
+    TableContainer,
+    Table,
+    Thead,
+    Tr,
+    Th,
+    Tbody,
+    Td,
+    Input,
+    HStack,
+    IconButton,
+    Menu,
+    MenuButton,
+    MenuList,
+    MenuItem,
+    Spinner,
+} from "@chakra-ui/react";
+import { PiDownloadDuotone } from "react-icons/pi";
+
+const SearchTable = ({excelData}) => {
+    const [searchQuery, setSearchQuery] = useState('');
+    const [filteredData, setFilteredData] = useState([]);
+    const [isDownloading, setIsDownloading] = useState(false);
+
+    const handleSearch = (e) => {
+        const query = e.target.value.toLowerCase();
+        setSearchQuery(query);
+
+        const filtered = excelData.filter((row) =>
+            row.some((cell) =>
+                cell && cell.toString().toLowerCase().includes(query)
+            )
+        );
+
+        setFilteredData(filtered);
+    };
+
+    const downloadTableAsExcel = async () => {
+        setIsDownloading(true);
+        const table = document.getElementById("myTable");
+        const ws = XLSX.utils.table_to_sheet(table);
+        const wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
+        const fileName = "download.xlsx";
+        await XLSX.writeFile(wb, fileName);
+        setIsDownloading(false);
+    };
+
+    const downloadTableAsPDF = async () => {
+        setIsDownloading(true)
+        const table = document.getElementById("myTable");
+        const pdf = new jsPDF({
+            orientation: 'portrait',
+            unit: 'mm',
+            format: 'a4',
+            marginLeft: 10,
+            marginRight: 10,
+            marginTop: 10,
+            marginBottom: 10,
+        });
+
+        const canvas = await html2canvas(table, { scale: 2 })
+        const imgWidth = 190; // Adjust as needed
+        const imgHeight = (((canvas.height - 10) * imgWidth) / canvas.width);
+        const totalPages = Math.ceil(imgHeight / pdf.internal.pageSize.height);
+
+        for (let i = 0; i < totalPages; i++) {
+            if (i > 0) {
+                pdf.addPage();
+            }
+            const positionY = -i * (pdf.internal.pageSize.height - 20);
+            pdf.text('', 190, 285 + positionY);
+            pdf.addImage(canvas, 'PNG', 10, positionY + 10, imgWidth, imgHeight);
+        }
+
+        pdf.save('download.pdf');
+        setIsDownloading(false);
+
+    };
+
+
+    return (
+        <>
+            <TableContainer w={"full"}>
+                <HStack justifyContent={"space-between"} my={4}>
+                    <Box></Box>
+                    <HStack>
+                        <Input w={'200px'} mx={1} type="text" placeholder="Search..." value={searchQuery} onChange={(e) => handleSearch(e)} />
+                        <Menu>
+                            <MenuButton as={IconButton} variant={"outline"} color={'darkblue'} icon={isDownloading ? <Spinner /> : <PiDownloadDuotone />}></MenuButton>
+                            <MenuList borderRadius={"none"} className="family-4" minW={'100px'} fontSize={'14px'}>
+                                <MenuItem onClick={downloadTableAsExcel}>.xlsx</MenuItem>
+                                <MenuItem onClick={downloadTableAsPDF}>.pdf</MenuItem>
+                            </MenuList>
+                        </Menu>
+                    </HStack>
+                </HStack>
+                <Table variant="striped" w={"full"} id="myTable">
+                    <Thead w={"full"}>
+
+                        <Tr bg={'#c5cae8'} mb={4}>
+                            {excelData.length > 0 &&
+                                excelData[0].map((cell, index) => (
+                                    <Th key={index}>{cell}</Th>
+                                ))}
+                        </Tr>
+
+                    </Thead>
+                    <Tbody fontSize={'14px'} className="family-3">
+                        {(searchQuery ? filteredData : excelData.slice(1)).map((row, rowIndex) => (
+                            <Tr key={rowIndex} w={"full"}>
+                                {row.map((cell, cellIndex) => (
+                                    <Td key={cellIndex}>{cell}</Td>
+                                ))}
+                            </Tr>
+                        ))}
+                    </Tbody>
+                </Table>
+            </TableContainer>
+        </>
+    );
+};
+
+export default SearchTable;

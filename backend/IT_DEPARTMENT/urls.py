@@ -3,7 +3,6 @@ from django.contrib.auth.decorators import login_required
 from django.urls import path,include, re_path
 from PublicAPI.views import *
 from .views import *
-# from . import views
 from django.views.generic import TemplateView
 from rest_framework import routers
 from django.conf import settings

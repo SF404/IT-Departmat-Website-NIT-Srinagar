@@ -20,7 +20,7 @@ const Banner = () => {
             setCurrentImageIndex((prevIndex) =>
                 prevIndex === images.length - 1 ? 0 : prevIndex + 1
             );
-        }, 7000); // Change images every 3 seconds
+        }, 7000);
 
         return () => {
             clearInterval(interval);
@@ -40,7 +40,7 @@ const Banner = () => {
     };
 
     return (
-        <Box className="banner" w="full"  position="relative" bg={"gray"}>
+        <Box className="banner" w="full"  position="relative" bg={"black"}>
             {images.map((image, index) => (
                 <Box
                     key={index}

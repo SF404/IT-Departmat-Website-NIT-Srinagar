@@ -6,8 +6,6 @@ import {
   Tr,
   Th,
   Td,
-  VStack,
-  Heading,
   Center,
   TableContainer,
 } from "@chakra-ui/react";
