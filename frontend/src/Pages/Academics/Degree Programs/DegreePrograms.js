@@ -1,14 +1,15 @@
 import React from 'react'
-import SmallBanner from  "./../../../Layout/SmallBanner";
+import SmallBanner from "./../../../Layout/SmallBanner"; 
+import image from './../../../assets/images/default_event_image.jpg'
 import { Box, Center, Divider, Link, ListItem, Tab, TabList, TabPanel, TabPanels, Table, TableContainer, Tabs, Tbody, Td, Text, Th, Thead, Tr, UnorderedList } from '@chakra-ui/react'
 
 function DegreePrograms() {
   return (
     <>
-      <SmallBanner image={null} heading={'PROGRAMES'} />
+      <SmallBanner image={image} heading={'PROGRAMES'} />
       <Center p={[2, 4]}>
         <Box width={{ base: '100%', md: '80%' }} p={{ md: 2 }}>
-          <Tabs  align='center' variant='soft-rounded' colorScheme='facebook'>
+          <Tabs align='center' variant='soft-rounded' colorScheme='facebook'>
             <TabList textAlign={'left'} justifyContent={'flex-start'} my={'0.5em'} >
               <Tab>B-TECH</Tab>
               <Tab>PHD</Tab>
@@ -28,16 +29,26 @@ function DegreePrograms() {
                     The Department of Information Technology in NIT Srinagar was established in 2007, offering four year undergraduate programme (B.Tech) in Information Technology. This undergraduate programme is of 4 years duration with the first year spread over two semesters which is common to all the branches. The intake capacity of the department was 40 in 2007 and then subsequently increased to 90 in 2020. The Department offers a broad curriculum including :
                   </Text>
                   <UnorderedList>
+                    <ListItem>Artificial Intelligence</ListItem>
+                    <ListItem>Image Processing</ListItem>
+                    <ListItem>Cloud Computing</ListItem>
+                    <ListItem>Java Programming</ListItem>
+                    <ListItem>Big Data</ListItem>
+                    <ListItem>Operating Systems</ListItem>
+                    <ListItem>Data Structures and Algorithms</ListItem>
                     <ListItem>Database Management</ListItem>
                     <ListItem>Software Engineering</ListItem>
                     <ListItem>Management of Information Systems</ListItem>
-                    <ListItem>Data Mining</ListItem>
+                    <ListItem>Computer Networks</ListItem>
+                    <ListItem>Computer Organisation & Architecture</ListItem>
+                    <ListItem>Microprocessor</ListItem>
+                    <ListItem>Data Communication</ListItem>
+                    <ListItem>Object Oriented Programming</ListItem>
+                    <ListItem>Information Security</ListItem>
                     <ListItem>Computer Graphics</ListItem>
                     <ListItem>Advanced Internet Technology</ListItem>
-                    <ListItem>Computer Networks</ListItem>
-                    <ListItem>Operating Systems</ListItem>
-                    <ListItem>Data Structures and Algorithms</ListItem>
                   </UnorderedList>
+
                   <Text>
                     The Department of Information Technology embodies the Institute's tradition of excellence as a world-class leader in IT education and research. IT sector is in a period of bloom in terms of growth and opportunity. In the current ever evolving industrial scenario contents delivered to the students are regularly updated by the faculty members who have themselves are well acquainted with path breaking research and innovations in the present technology-oriented world.
                   </Text>
@@ -52,7 +63,7 @@ function DegreePrograms() {
                   <Text textAlign={'center'} fontSize={'lg'} fontWeight={'bold'} color={'darkblue'}>
                     Curriculum
                   </Text>
-                  <Divider my={2}/>
+                  <Divider my={2} />
                   <TableContainer>
                     <Table variant={'striped'} border={'1px solid #d8dcf0'}>
                       <Thead>
@@ -67,7 +78,7 @@ function DegreePrograms() {
                           <Th>Credits</Th>
                         </Tr>
                       </Thead>
-                      <Tbody fontSize={'12px'}>
+                      <Tbody fontSize={'14px'}>
                         <Tr>
                           <Td>Departmental Core(DC)</Td>
                           <Td>66</Td>
@@ -117,10 +128,10 @@ function DegreePrograms() {
                     , NIT Srinagar. We offer a range of courses and opportunities for students pursuing a Doctoral Program.
                   </Text>
                   <Text>
-                    The doctoral programme in Information Technology offers students the possibility of doing intensive research in an area of their choice. We have a vibrant research program consisting of about 60 PhD students, and it has been our constant endeavour to provide the best facilities and working environment to our research students.
+                    The doctoral programme in Information Technology offers students the possibility of doing intensive research in an area of their choice. We have a vibrant research program consisting of about 22 PhD students, and it has been our constant endeavour to provide the best facilities and working environment to our research students.
                   </Text>
                   <UnorderedList>
-                    <ListItem>All full-time PhD students provided financial assistance</ListItem>
+
                     <ListItem>Air-conditioned office space is provided to all PhD students, with a desktop PC. Research students have unrestricted access to all laboratories in the department</ListItem>
                     <ListItem>PhD students often collaborate with researchers within and outside the country. It is common, and regularly encouraged, for students to spend time at collaborating institutions in academia and industry</ListItem>
                     <ListItem>Our students regularly publish research results in leading international conferences and reputed journals</ListItem>
@@ -136,22 +147,17 @@ function DegreePrograms() {
                     Eligibility :
                   </Text>
                   <UnorderedList>
-                    <ListItem>M.Tech./M.E. Degree in Computer Science or other Engineering disciplines</ListItem>
-                    <ListItem>B.E.B.Tech./M.Sc. in Computer Science or other Engineering disciplines, or MCA with a valid GATE score in CS/IT/ECE</ListItem>
-                    <ListItem>M.Sc. in Maths Physics/Statistics with a valid GATE score in their subject</ListItem>
+                    <ListItem>M.Tech Degree in Computer Science or Information Technology</ListItem>
+                    <ListItem>B.Tech Degree in Computer Science or Information Technology</ListItem>
+
                   </UnorderedList>
-                  <Text as='h3' fontWeight='bold'>
-                    Interview :
-                  </Text>
-                  <Text>
-                    Following the application submission, candidates will be shortlisted for an interview. Shortlisting criteria for interview calls will be published on the Department web site. The interview will test your familiarity with basic concepts in Computer Science and Engineering and your ability to analyze and formulate a solution to a problem.
-                  </Text>
+
                   <Divider my={4} />
                   <Text as='h2' fontWeight={'bold'}>
                     Financial Assistance and Accommodation
                   </Text>
                   <Text>
-                    Institute Assistantships (Rs. 28,000 per month for students with an M.Tech or equivalent degree, and Rs. 25,000 per month for students with a B. Tech or equivalent degree) are available for PhD students. An additional top-up of Rs. 10,000 per month is also possible based on contribution to ongoing research projects.
+                    Institute Assistantships (Rs. 31,000 per month) are available for PhD students. An additional top-up of Rs. 10,000 per month is also possible based on contribution to ongoing research projects.
                   </Text>
                   <Text>
                     Attractive industry govt. fellowships are also available to PhD students. In recent semesters, PhD fellowships have been offered to our students by companies/agencies such as TCS, DEITY, PM Fellowship, Google, IBM. Lucent, and Microsoft.

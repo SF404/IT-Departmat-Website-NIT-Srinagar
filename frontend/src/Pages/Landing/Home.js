@@ -28,8 +28,8 @@ function Home() {
     try {
       const response = await axios.get(`/api/news_data/`);
       setNews(response.data);
-      console.log(response.data);
     } catch (error) {
+      setNews(null)
       console.error("Error fetching data:", error);
     }
   }
@@ -39,6 +39,7 @@ function Home() {
       const response = await axios.get(`/api/events_data/`);
       setEvents(response.data);
     } catch (error) {
+      setEvents(null)
       console.error("Error fetching data:", error);
     }
   }
@@ -51,6 +52,7 @@ function Home() {
       );
       setHolidays(response.data);
     } catch (error) {
+      setHolidays(null)
       console.error("Failed to fetch Holidays", error);
     }
   }
@@ -61,18 +63,18 @@ function Home() {
         `api/public/announcementget`
       );
       setAnnouncement(response.data);
-      console.log(response.data)
     } catch (error) {
+      setAnnouncement(null);
       console.error("Failed to fetch Holidays", error);
     }
   }
   useEffect(() => {
     async function fetchData() {
       setLoading(true);
-      await fetchNews();
       await fetchHolidays();
       await fetchAnnouncements();
       setLoading(false);
+      // await fetchNews(); 
       await fetchEvents();
     }
     fetchData();
@@ -94,9 +96,10 @@ function Home() {
           <Divider />
           <SimpleGrid columns={[1, 1, 1, 2]} gap={4} rowGap={"2em"} w={"full"}>
             <Announcements announcements={announcements} />
-            <UpcomingEvents events={events} />
-            <div></div>
-            <Holidays holidays={holidays} />
+            <VStack spacing={6}>
+              <UpcomingEvents events={events} setEvents={setEvents} />
+              <Holidays holidays={holidays} />
+            </VStack>
           </SimpleGrid>
           {/* <LatestNews news={news} /> */}
           <FeaturedVideos />

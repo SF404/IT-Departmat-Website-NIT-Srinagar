@@ -15,7 +15,6 @@ function Events({ email }) {
         }
     }
 
-
     const [formData, setFormData] = useState({
         image: '',
         title: '',

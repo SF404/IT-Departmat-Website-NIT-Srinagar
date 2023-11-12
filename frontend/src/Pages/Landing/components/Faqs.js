@@ -27,7 +27,7 @@ function Faqs() {
                     {
                         Faqs.map((item, index) => (
 
-                            <AccordionItem border={'none'}>
+                            <AccordionItem key={index} border={'none'}>
                                 {({ isExpanded }) => (
                                     <>
                                         <AccordionButton _hover={{ backgroundColor: 'transparent' }}>

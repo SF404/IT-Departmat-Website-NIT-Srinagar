@@ -118,10 +118,10 @@ const SemesterPage = () => {
   }, [selectedCourse, ]);
 
   useEffect(() => {
-    // window.scrollTo({
-    //   top: 0,
-    //   behavior: 'smooth',
-    // });
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
     fetchCourses();
   }, [, semesterId]);
 

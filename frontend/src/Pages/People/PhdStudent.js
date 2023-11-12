@@ -49,7 +49,6 @@ function PhdStudents() {
               borderRadius={'0.5em'}
               key={index}
               bg={"white"}
-              userSelect={"none"}
             >
               <WrapItem ml={2}>
                 <Popover placement="top-end">
@@ -77,10 +76,10 @@ function PhdStudents() {
                 </Box>
                 <Divider borderWidth="0.5px" my={2} borderColor="teal.500"/>
                 <Box>
-                  <Flex alignItems="center">
+                  {/* <Flex alignItems="center">
                     <Icon as={PhoneIcon} color="gray.600" />
                     <Text ml={2}>{item.phone}</Text>
-                  </Flex>
+                  </Flex> */}
                   <Flex alignItems="center" mt={2}>
                     <Icon as={EmailIcon} color="gray.600" />
                     <Text ml={2}>{item.email}</Text>

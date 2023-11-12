@@ -27,6 +27,10 @@ function ImageGallery() {
     }
 
     useEffect(() => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth',
+        });
         fetchImages();
     }, [])
 
