@@ -88,7 +88,7 @@ function FacultyDetails() {
   useEffect(() => {
     window.scrollTo(0, 0);
     fetchfacultyDetails();
-  }, []);
+  },);
 
   const toast = useToast();
   const handleClick = async (data) => {
@@ -291,9 +291,9 @@ function FacultyDetails() {
                             {item.semester}
                             {item.semester > 2
                               ? "th"
-                              : item.semester == 1
+                              : item.semester === 1
                               ? "st"
-                              : item.semester == 2
+                              : item.semester === 2
                               ? "nd"
                               : "rd"}
                           </Td>

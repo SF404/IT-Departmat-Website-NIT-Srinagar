@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, use } from "react-router-dom";
+import { Link,} from "react-router-dom";
 import {
   Box,
   Text,
@@ -88,13 +88,11 @@ const Tutorials = () => {
       link: "https://example.com/chakra-ui-tutorial",
       teacher_name: "dr.janib",
     },
-    // Add more video data objects as needed
   ]);
   return (
     <>
       <SmallBanner heading={"TUTORIALS"} />
       <Center p={{ base: "10px", md: "20px", lg: "40px" }}>
-        {/* <SearchTable /> */}
         <Tabs align="center" variant="soft-rounded" colorScheme="facebook">
           <TabList
             textAlign={"left"}

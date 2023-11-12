@@ -1,13 +1,10 @@
 import {
   Box,
   Button,
-  Center,
   Divider,
   FormControl,
   FormLabel,
-  HStack,
   IconButton,
-  Image,
   Input,
   Link,
   Select,
@@ -26,7 +23,6 @@ import {
 import axios from "axios";
 import { FaTrash } from "react-icons/fa6";
 import React, { useEffect, useRef, useState } from "react";
-import { PiTelegramLogoDuotone } from "react-icons/pi";
 
 function Tutorial({ email }) {
   const [deleteInfo, setDeleteInfo] = useState({ name: "", id: "" });
@@ -86,7 +82,7 @@ function Tutorial({ email }) {
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
-      if (formData.title == "" || formData.link == "") return;
+      if (formData.title === "" || formData.link === "") return;
       const response = await axios.post(
         `/api/postpublicdata/?email=${email}&type=tutorial`,
         formData,
@@ -102,7 +98,7 @@ function Tutorial({ email }) {
   const handleDelete = async (delete_id) => {
     console.log(delete_id);
     try {
-      if (formData.title == "" || formData.link == "") return;
+      if (formData.title === "" || formData.link === "") return;
       const response = await axios.delete(
         `/api/delete/${delete_id}/?type=tutorial`,
         get_token()

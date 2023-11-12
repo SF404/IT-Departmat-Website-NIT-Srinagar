@@ -35,9 +35,27 @@ import Activate from "./Auth/Activate";
 import Alumni from "./Pages/People/Alumni";
 import Tutorials from "./Pages/Courses/tutorials";
 
+import { useEffect } from "react";
+import { useLocation } from "react-router";
+
+const ScrollToTop = ({ children }) => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, [pathname]);
+
+  return null;
+};
+
+
 function App() {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
