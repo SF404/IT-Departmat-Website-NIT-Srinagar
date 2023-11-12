@@ -98,7 +98,7 @@ class Events(models.Model):
     location=models.CharField(max_length=255,blank=True,null=True)
     date =  models.DateField()
     auto_date =  models.DateTimeField(auto_now=True)
-    image = models.ImageField(upload_to='tutorials/', blank=True)
+    image = models.ImageField(upload_to='events/', blank=True)
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE,null=True,blank=True)
 
 class Tutorials(models.Model):
