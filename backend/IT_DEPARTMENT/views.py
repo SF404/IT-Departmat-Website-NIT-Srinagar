@@ -27,6 +27,8 @@ import json
 
 
 class DataDelete(viewsets.ModelViewSet):
+    authentication_classes=[JWTAuthentication]
+    permission_classes = (IsAuthenticated,)
     def destroy(self, request, *args, **kwargs):
         try:
             obj_type = request.query_params.get('type')
@@ -115,10 +117,10 @@ class PostPublicData(viewsets.ModelViewSet):
             event.save()
             return Response({"message": "Event Created Successfully"}, status=status.HTTP_201_CREATED)
         elif object_type == 'tutorial':
+            image=request.FILES.get("image")
             title=request.data.get("title")
-            Gallery=request.data.get("Gallerys")
             tags=request.data.get("tags")
-            tutorial=Tutorials(title=title,Gallery=Gallery,tags=tags ,description=description,link=link,teacher=teacher)
+            tutorial=Tutorials(title=title,image=image,tags=tags ,description=description,link=link,teacher=teacher)
             tutorial.save()
             return Response({"message": "Event Created Successfully"}, status=status.HTTP_201_CREATED)
         else:

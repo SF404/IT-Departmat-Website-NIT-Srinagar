@@ -166,6 +166,7 @@ class AssignmentShow(viewsets.ModelViewSet):
         course = Course.objects.get(course_id=cid)       
         assignment = Assignment.objects.filter(course=course)
         return assignment
+    
 class DownloadAssignment(APIView):
     def post(self, request, *args, **kwargs):
         file_id = request.data.get("aid")
@@ -196,5 +197,5 @@ class GalleryView(APIView):
 class FileShow(viewsets.ModelViewSet):
     serializer_class = FileSerializer
     def get_queryset(self):       
-        queryset = Assignment.objects.all()
+        queryset = File.objects.all()
         return queryset
