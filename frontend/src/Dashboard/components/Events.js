@@ -46,18 +46,18 @@ function Events({ email }) {
 
   // Function to handle image input change
   const handleFileChange = (e) => {
+    const { name, value } = e.target;
+    const updatedFormData = { ...formData };
     const file = e.target.files[0];
-    setFormData((prevData) => ({
-      ...prevData,
-      file,
-    }));
+    updatedFormData[name] = file;
+    setFormData(updatedFormData);
+    console.log(formData);
   };
   function get_token() {
     return {
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "multipart/form-data",
         Authorization: `Bearer ${localStorage.getItem("TokenA")}`,
-        Accept: "application/json",
       },
     };
   }

@@ -104,7 +104,7 @@ class Events(models.Model):
 class Tutorials(models.Model):
     title=models.CharField(max_length=255)
     description = models.CharField(max_length=255,blank=True,null=True)
-    link = models.URLField(max_length=255,blank=True,null=True)
+    link = models.URLField(max_length=255)
     image = models.ImageField(upload_to='tutorials/',blank=True,default="temp")
     SELECTION_CHOICES = (
         ('video', 'Video'),
@@ -113,7 +113,7 @@ class Tutorials(models.Model):
     )
     selection = models.CharField(
         max_length=10,
-        choices=SELECTION_CHOICES,blank=True
+        choices=SELECTION_CHOICES,blank=True,default='other'
     )
     tags=models.CharField(max_length=255,blank=True,null=True)
     auto_date =  models.DateTimeField(auto_now=True)

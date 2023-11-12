@@ -1,31 +1,67 @@
-import React from 'react'
-import SmallBanner from  "./../../../Layout/SmallBanner";
-import { Box, Center, Divider, Link, ListItem, Tab, TabList, TabPanel, TabPanels, Table, TableContainer, Tabs, Tbody, Td, Text, Th, Thead, Tr, UnorderedList } from '@chakra-ui/react'
+import React from "react";
+import SmallBanner from "./../../../Layout/SmallBanner";
+import {
+  Box,
+  Center,
+  Divider,
+  Link,
+  ListItem,
+  Tab,
+  TabList,
+  TabPanel,
+  TabPanels,
+  Table,
+  TableContainer,
+  Tabs,
+  Tbody,
+  Td,
+  Text,
+  Th,
+  Thead,
+  Tr,
+  UnorderedList,
+} from "@chakra-ui/react";
 
 function DegreePrograms() {
   return (
     <>
-      <SmallBanner image={null} heading={'PROGRAMES'} />
+      <SmallBanner image={null} heading={"PROGRAMES"} />
       <Center p={[2, 4]}>
-        <Box width={{ base: '100%', md: '80%' }} p={{ md: 2 }}>
-          <Tabs  align='center' variant='soft-rounded' colorScheme='facebook'>
-            <TabList textAlign={'left'} justifyContent={'flex-start'} my={'0.5em'} >
+        <Box width={{ base: "100%", md: "80%" }} p={{ md: 2 }}>
+          <Tabs align="center" variant="soft-rounded" colorScheme="facebook">
+            <TabList
+              textAlign={"left"}
+              justifyContent={"flex-start"}
+              my={"0.5em"}
+            >
               <Tab>B-TECH</Tab>
               <Tab>PHD</Tab>
             </TabList>
             <Divider />
-            <TabPanels className='family-3' bg={'white'} w={'full'} boxShadow={'0 0 6px rgba(0,0,0,0.05)'} borderRadius={'0.5em'}>
-              <TabPanel w={'full'} textAlign={'justify'}>
+            <TabPanels
+              className="family-3"
+              bg={"white"}
+              w={"full"}
+              boxShadow={"0 0 6px rgba(0,0,0,0.05)"}
+              borderRadius={"0.5em"}
+            >
+              <TabPanel w={"full"} textAlign={"justify"}>
                 <Box>
                   <Text>
                     Welcome to the BTech program at the Department of &nbsp;
-                    <Link href="/">
-                      Information Technology
-                    </Link>
-                    , NIT Srinagar. We offer a range of courses and opportunities for students pursuing a Bachelor of Technology degree.
+                    <Link href="/">Information Technology</Link>, NIT Srinagar.
+                    We offer a range of courses and opportunities for students
+                    pursuing a Bachelor of Technology degree.
                   </Text>
                   <Text>
-                    The Department of Information Technology in NIT Srinagar was established in 2007, offering four year undergraduate programme (B.Tech) in Information Technology. This undergraduate programme is of 4 years duration with the first year spread over two semesters which is common to all the branches. The intake capacity of the department was 40 in 2007 and then subsequently increased to 90 in 2020. The Department offers a broad curriculum including :
+                    The Department of Information Technology in NIT Srinagar was
+                    established in 2007, offering four year undergraduate
+                    programme (B.Tech) in Information Technology. This
+                    undergraduate programme is of 4 years duration with the
+                    first year spread over two semesters which is common to all
+                    the branches. The intake capacity of the department was 40
+                    in 2007 and then subsequently increased to 90 in 2020. The
+                    Department offers a broad curriculum including :
                   </Text>
                   <UnorderedList>
                     <ListItem>Database Management</ListItem>
@@ -39,26 +75,46 @@ function DegreePrograms() {
                     <ListItem>Data Structures and Algorithms</ListItem>
                   </UnorderedList>
                   <Text>
-                    The Department of Information Technology embodies the Institute's tradition of excellence as a world-class leader in IT education and research. IT sector is in a period of bloom in terms of growth and opportunity. In the current ever evolving industrial scenario contents delivered to the students are regularly updated by the faculty members who have themselves are well acquainted with path breaking research and innovations in the present technology-oriented world.
+                    The Department of Information Technology embodies the
+                    Institute's tradition of excellence as a world-class leader
+                    in IT education and research. IT sector is in a period of
+                    bloom in terms of growth and opportunity. In the current
+                    ever evolving industrial scenario contents delivered to the
+                    students are regularly updated by the faculty members who
+                    have themselves are well acquainted with path breaking
+                    research and innovations in the present technology-oriented
+                    world.
                   </Text>
                   <Text>
-                    In addition to academic courses, the department also has IT research programmes supported through government funding and industry sponsorship. Faculty research helps expand the current and future use of new and existing technologies.
+                    In addition to academic courses, the department also has IT
+                    research programmes supported through government funding and
+                    industry sponsorship. Faculty research helps expand the
+                    current and future use of new and existing technologies.
                   </Text>
                 </Box>
 
                 <Box>
                   <Divider my={4} />
 
-                  <Text textAlign={'center'} fontSize={'lg'} fontWeight={'bold'} color={'darkblue'}>
+                  <Text
+                    textAlign={"center"}
+                    fontSize={"lg"}
+                    fontWeight={"bold"}
+                    color={"darkblue"}
+                  >
                     Curriculum
                   </Text>
-                  <Divider my={2}/>
+                  <Divider my={2} />
                   <TableContainer>
-                    <Table variant={'striped'} border={'1px solid #d8dcf0'}>
+                    <Table variant={"striped"} border={"1px solid #d8dcf0"}>
                       <Thead>
-                        <Tr bg={'#d8dcf0'}>
-                          <Th colSpan={2} textAlign={'center'}>Undergraduate Core (UC)</Th>
-                          <Th colSpan={2} textAlign={'center'}>Undergraduate Elective (UE)</Th>
+                        <Tr bg={"#d8dcf0"}>
+                          <Th colSpan={2} textAlign={"center"}>
+                            Undergraduate Core (UC)
+                          </Th>
+                          <Th colSpan={2} textAlign={"center"}>
+                            Undergraduate Elective (UE)
+                          </Th>
                         </Tr>
                         <Tr>
                           <Th>Category</Th>
@@ -67,7 +123,7 @@ function DegreePrograms() {
                           <Th>Credits</Th>
                         </Tr>
                       </Thead>
-                      <Tbody fontSize={'12px'}>
+                      <Tbody fontSize={"12px"}>
                         <Tr>
                           <Td>Departmental Core(DC)</Td>
                           <Td>66</Td>
@@ -100,61 +156,100 @@ function DegreePrograms() {
                     </Table>
                   </TableContainer>
 
-                  <Text textAlign={'center'}>
-                    The Overall Credit Structure
-                  </Text>
+                  <Text textAlign={"center"}>The Overall Credit Structure</Text>
                 </Box>
               </TabPanel>
-
-
-              <TabPanel textAlign={'justify'}>
+              <TabPanel textAlign={"justify"}>
                 <Box>
                   <Text>
                     Welcome to the PhD program at the Department of &nbsp;
-                    <Link href="/">
-                      Information Technology
-                    </Link>
-                    , NIT Srinagar. We offer a range of courses and opportunities for students pursuing a Doctoral Program.
+                    <Link href="/">Information Technology</Link>, NIT Srinagar.
+                    We offer a range of courses and opportunities for students
+                    pursuing a Doctoral Program.
                   </Text>
                   <Text>
-                    The doctoral programme in Information Technology offers students the possibility of doing intensive research in an area of their choice. We have a vibrant research program consisting of about 60 PhD students, and it has been our constant endeavour to provide the best facilities and working environment to our research students.
+                    The doctoral programme in Information Technology offers
+                    students the possibility of doing intensive research in an
+                    area of their choice. We have a vibrant research program
+                    consisting of about 60 PhD students, and it has been our
+                    constant endeavour to provide the best facilities and
+                    working environment to our research students.
                   </Text>
                   <UnorderedList>
-                    <ListItem>All full-time PhD students provided financial assistance</ListItem>
-                    <ListItem>Air-conditioned office space is provided to all PhD students, with a desktop PC. Research students have unrestricted access to all laboratories in the department</ListItem>
-                    <ListItem>PhD students often collaborate with researchers within and outside the country. It is common, and regularly encouraged, for students to spend time at collaborating institutions in academia and industry</ListItem>
-                    <ListItem>Our students regularly publish research results in leading international conferences and reputed journals</ListItem>
+                    <ListItem>
+                      All full-time PhD students provided financial assistance
+                    </ListItem>
+                    <ListItem>
+                      Air-conditioned office space is provided to all PhD
+                      students, with a desktop PC. Research students have
+                      unrestricted access to all laboratories in the department
+                    </ListItem>
+                    <ListItem>
+                      PhD students often collaborate with researchers within and
+                      outside the country. It is common, and regularly
+                      encouraged, for students to spend time at collaborating
+                      institutions in academia and industry
+                    </ListItem>
+                    <ListItem>
+                      Our students regularly publish research results in leading
+                      international conferences and reputed journals
+                    </ListItem>
                   </UnorderedList>
                   <Divider my={4} />
-                  <Text as='h3' fontWeight='bold'>
+                  <Text as="h3" fontWeight="bold">
                     Applying for Phd Admission :
                   </Text>
                   <Text>
-                    Admissions to the PhD program are held twice a year, in May and December. Applications can be submitted online at the NIT SRINAGAR Admissions web site, starting March and October respectively.
+                    Admissions to the PhD program are held twice a year, in May
+                    and December. Applications can be submitted online at the
+                    NIT SRINAGAR Admissions web site, starting March and October
+                    respectively.
                   </Text>
-                  <Text as='h3' fontWeight='bold'>
+                  <Text as="h3" fontWeight="bold">
                     Eligibility :
                   </Text>
                   <UnorderedList>
-                    <ListItem>M.Tech./M.E. Degree in Computer Science or other Engineering disciplines</ListItem>
-                    <ListItem>B.E.B.Tech./M.Sc. in Computer Science or other Engineering disciplines, or MCA with a valid GATE score in CS/IT/ECE</ListItem>
-                    <ListItem>M.Sc. in Maths Physics/Statistics with a valid GATE score in their subject</ListItem>
+                    <ListItem>
+                      M.Tech./M.E. Degree in Computer Science or other
+                      Engineering disciplines
+                    </ListItem>
+                    <ListItem>
+                      B.E.B.Tech./M.Sc. in Computer Science or other Engineering
+                      disciplines, or MCA with a valid GATE score in CS/IT/ECE
+                    </ListItem>
+                    <ListItem>
+                      M.Sc. in Maths Physics/Statistics with a valid GATE score
+                      in their subject
+                    </ListItem>
                   </UnorderedList>
-                  <Text as='h3' fontWeight='bold'>
+                  <Text as="h3" fontWeight="bold">
                     Interview :
                   </Text>
                   <Text>
-                    Following the application submission, candidates will be shortlisted for an interview. Shortlisting criteria for interview calls will be published on the Department web site. The interview will test your familiarity with basic concepts in Computer Science and Engineering and your ability to analyze and formulate a solution to a problem.
+                    Following the application submission, candidates will be
+                    shortlisted for an interview. Shortlisting criteria for
+                    interview calls will be published on the Department web
+                    site. The interview will test your familiarity with basic
+                    concepts in Computer Science and Engineering and your
+                    ability to analyze and formulate a solution to a problem.
                   </Text>
                   <Divider my={4} />
-                  <Text as='h2' fontWeight={'bold'}>
+                  <Text as="h2" fontWeight={"bold"}>
                     Financial Assistance and Accommodation
                   </Text>
                   <Text>
-                    Institute Assistantships (Rs. 28,000 per month for students with an M.Tech or equivalent degree, and Rs. 25,000 per month for students with a B. Tech or equivalent degree) are available for PhD students. An additional top-up of Rs. 10,000 per month is also possible based on contribution to ongoing research projects.
+                    Institute Assistantships (Rs. 28,000 per month for students
+                    with an M.Tech or equivalent degree, and Rs. 25,000 per
+                    month for students with a B. Tech or equivalent degree) are
+                    available for PhD students. An additional top-up of Rs.
+                    10,000 per month is also possible based on contribution to
+                    ongoing research projects.
                   </Text>
                   <Text>
-                    Attractive industry govt. fellowships are also available to PhD students. In recent semesters, PhD fellowships have been offered to our students by companies/agencies such as TCS, DEITY, PM Fellowship, Google, IBM. Lucent, and Microsoft.
+                    Attractive industry govt. fellowships are also available to
+                    PhD students. In recent semesters, PhD fellowships have been
+                    offered to our students by companies/agencies such as TCS,
+                    DEITY, PM Fellowship, Google, IBM. Lucent, and Microsoft.
                   </Text>
                 </Box>
               </TabPanel>
@@ -163,7 +258,7 @@ function DegreePrograms() {
         </Box>
       </Center>
     </>
-  )
+  );
 }
 
-export default DegreePrograms
+export default DegreePrograms;

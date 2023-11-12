@@ -107,7 +107,7 @@ class PostPublicData(viewsets.ModelViewSet):
             announcement.save()
             return Response({"message": "Announcement Created Successfully"}, status=status.HTTP_201_CREATED)
         elif object_type == 'event':
-            image=request.data.get("image")
+            image=request.FILES.get("image")
             title=request.data.get("title")
             location=request.data.get("location")
             date =  request.data.get("date")
