@@ -196,5 +196,10 @@ class GalleryView(APIView):
 class FileShow(viewsets.ModelViewSet):
     serializer_class = FileSerializer
     def get_queryset(self):       
-        queryset = Assignment.objects.all()
-        return queryset
+        name = self.request.query_params.get('name')
+        type = self.request.query_params.get('type')
+
+        if type:
+            return File.objects.filter(type=type)
+        else:
+            return File.objects.filter(name=name)

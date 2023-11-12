@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import * as XLSX from 'xlsx'
+import React, { useState, useEffect } from "react";
+import * as XLSX from 'xlsx';
 import {
   Button,
   Center,
@@ -7,12 +7,13 @@ import {
 } from "@chakra-ui/react";
 import SmallBanner from "../../Layout/SmallBanner";
 import SearchTable from "../../components/Tables/SearchTable";
+import axios from "axios";
 
 const PlacementBrochure = () => {
   const [excelData, setExcelData] = useState([]);
 
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
+  const handleFileChange = (file) => {
+    console.log(file)
     if (file) {
       const reader = new FileReader();
       reader.onload = (e) => {
@@ -26,6 +27,34 @@ const PlacementBrochure = () => {
       reader.readAsBinaryString(file);
     }
   }
+
+  const fetchExcelFromDatabase = async () => {
+    try {
+      const response = await axios.get(`/api/public/fileget/?name=placement_record`);
+      console.log(response.data[0]);
+  
+      const fileURL = response.data[0].file;
+      console.log("File URL:", fileURL);
+  
+      // Fetch the blob data from the file URL
+      const fileResponse = await axios.get(fileURL, { responseType: 'blob' });
+      const blob = fileResponse.data;
+      console.log("Fetched Blob:", blob);
+  
+      // Create a File object
+      const file = new File([blob], 'table.xlsx', { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+      console.log(file);
+  
+      handleFileChange(file);
+    } catch (error) {
+      console.error('Error fetching Excel file:', error);
+    }
+  }
+  
+
+  useEffect(() => {
+    fetchExcelFromDatabase();
+  }, []);
 
   return (
     <>
@@ -42,12 +71,9 @@ const PlacementBrochure = () => {
           m={4}
         >
           <Button bg={'linear-gradient(45deg, #667eea 0%, #764ba2 100%)'} class="splash-button" role="button">Placement Brochure</Button>
-          <input type="file" accept=".xls, .xlsx" onChange={handleFileChange} />
-          <SearchTable excelData={excelData}/>
-
+          <SearchTable excelData={excelData} />
         </VStack>
-      </Center >
-
+      </Center>
     </>
   );
 };

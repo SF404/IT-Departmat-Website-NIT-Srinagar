@@ -114,7 +114,7 @@ const SearchTable = ({excelData}) => {
                         </Tr>
 
                     </Thead>
-                    <Tbody fontSize={'14px'} className="family-3">
+                    <Tbody fontSize={'14px'} className="family-5">
                         {(searchQuery ? filteredData : excelData.slice(1)).map((row, rowIndex) => (
                             <Tr key={rowIndex} w={"full"}>
                                 {row.map((cell, cellIndex) => (

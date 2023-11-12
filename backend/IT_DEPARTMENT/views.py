@@ -24,6 +24,56 @@ from django.views.generic import TemplateView
 import json
 
 
+
+
+class DataDelete(viewsets.ModelViewSet):
+    def destroy(self, request, *args, **kwargs):
+        try:
+            obj_type = request.query_params.get('type')
+            
+            if obj_type == 'announcement':
+                obj = Announcement.objects.get(pk=kwargs['pk'])
+                serializer = AnnouncementSerializer(obj)
+                obj.delete()
+                return Response({'message': 'Announcement Data deleted successfully'}, status=status.HTTP_204_NO_CONTENT)
+            elif obj_type == 'tutorial':
+                obj = Tutorials.objects.get(pk=kwargs['pk'])
+                serializer = TutorialsSerializer(obj)
+                obj.delete()
+                return Response({'message': 'Tutorial Data deleted successfully'}, status=status.HTTP_204_NO_CONTENT)
+            elif obj_type == 'event':
+                obj = Events.objects.get(pk=kwargs['pk'])
+                serializer = EventsSerializer(obj)
+                obj.delete()
+                return Response({'message': 'Event Data deleted successfully'}, status=status.HTTP_204_NO_CONTENT)
+            
+            elif obj_type == 'project':
+                obj = Project.objects.get(pk=kwargs['pk'])
+                serializer = ProjectSerializer(obj)
+                obj.delete()
+                return Response({'message': 'Project Data deleted successfully'}, status=status.HTTP_204_NO_CONTENT)
+            elif obj_type == 'research':
+                obj = Research.objects.get(pk=kwargs['pk'])
+                serializer = ResearchSerializer(obj)
+                obj.delete()
+                return Response({'message': 'Research Data deleted successfully'}, status=status.HTTP_204_NO_CONTENT)
+            elif obj_type == 'patent':
+                obj = Patent.objects.get(pk=kwargs['pk'])
+                serializer = PatentSerializer(obj)
+                obj.delete()
+                return Response({'message': 'Patent Data deleted successfully'}, status=status.HTTP_204_NO_CONTENT)
+            elif obj_type == 'teachereducation':
+                obj = TeacherEducation.objects.get(pk=kwargs['pk'])
+                serializer = TeacherEducationSerializer(obj)
+                obj.delete()
+                return Response({'message': 'TeacherEducation Data deleted successfully'}, status=status.HTTP_204_NO_CONTENT)
+            
+            else:
+                return Response({'message': 'Invalid type specified'}, status=status.HTTP_400_BAD_REQUEST)
+        except Exception:
+            return Response({'message': 'Object not found'}, status=status.HTTP_404_NOT_FOUND)
+
+
 class GalleryUpload(APIView):
     authentication_classes=[JWTAuthentication]
     permission_classes = (IsAuthenticated,)
@@ -57,10 +107,11 @@ class PostPublicData(viewsets.ModelViewSet):
             announcement.save()
             return Response({"message": "Announcement Created Successfully"}, status=status.HTTP_201_CREATED)
         elif object_type == 'event':
+            image=request.data.get("image")
             title=request.data.get("title")
             location=request.data.get("location")
             date =  request.data.get("date")
-            event=Events(title=title,location=location,date=date ,description=description,link=link,teacher=teacher)
+            event=Events(title=title,image=image,location=location,date=date ,description=description,link=link,teacher=teacher)
             event.save()
             return Response({"message": "Event Created Successfully"}, status=status.HTTP_201_CREATED)
         elif object_type == 'tutorial':

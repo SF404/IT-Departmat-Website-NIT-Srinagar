@@ -115,7 +115,7 @@ const SemesterPage = () => {
       fetchNotes();
       fetchAssignments();
     }
-  }, [selectedCourse, ]);
+  }, [selectedCourse,]);
 
   useEffect(() => {
     window.scrollTo({
@@ -203,13 +203,13 @@ const SemesterPage = () => {
             </TabPanel>
             <TabPanel>
               <VStack>
-              <TableContainer p={2}>
-                <Table variant={'simple'} >
-                  <Tbody>
-                   <Box>Empty...</Box>
-                  </Tbody>
-                </Table>
-              </TableContainer>
+                <TableContainer p={2}>
+                  <Table variant={'simple'} >
+                    <Tbody>
+                      <Box>Empty...</Box>
+                    </Tbody>
+                  </Table>
+                </TableContainer>
               </VStack>
             </TabPanel>
           </TabPanels >
@@ -239,6 +239,7 @@ const SemesterPage = () => {
                       my={2}
                       cursor={"pointer"}
                       h={"64px"}
+                      bg={"white"}
                       _expanded={{ bg: "blackAlpha.100", }}
                       onClick={() => {
                         setSelectedCourse(course.course_id);
