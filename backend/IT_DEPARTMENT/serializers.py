@@ -4,6 +4,7 @@ from djoser.serializers import UserCreateSerializer
  
 # import the todo data model
 from .models import *
+from PublicAPI.models import *
  
 # create a serializer class
 
@@ -74,3 +75,8 @@ class ResearchSerializer(serializers.ModelSerializer):
     class Meta:
         model = Research
         fields = '__all__'
+
+class GallerySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Gallery
+        fields = ('image',)

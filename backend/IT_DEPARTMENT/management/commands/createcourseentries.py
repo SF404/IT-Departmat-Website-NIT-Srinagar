@@ -1,30 +1,31 @@
 from django.core.management.base import BaseCommand
 from IT_DEPARTMENT.models import *
-from PublicAPI.models import Phd_Student
-from django.core.management.base import BaseCommand
+
+from assets.phd_student import *
 
 class Command(BaseCommand):
     help = 'Add default entries for Course model'
 
     def handle(self, *args, **kwargs):
             
-            janib=Teacher.objects.create(
-                teacher_id ="janibbashir@nitsri.ac.in",
-                name = "Dr. Janib ul Bashir",
-                description = "Assistant Professor ",
-                email = "janibbashir@nitsri.ac.in",
-                phone=8825099229,
-                profile_photo="teacher_profile/JanibSir.jpeg",
-                research_field="Computer Architecture, Parallel Programming, on-chip security, on-chip networks"
-            )
+            
             shabir=Teacher.objects.create(
                 teacher_id ="shabir@nitsri.net",
                 name = "Dr. Shabir Ahmad Sofi",
-                description = "HOD and Assistant Professor",
+                description = "Associate Professor",
                 email = "shabir@nitsri.net",
                 phone=94190099711,
                 profile_photo="teacher_profile/ShabirSir.jpeg",
                 research_field="Wireless Sensor Networks, Internet of Things, Artificial Intelligence, Machine Learning, and Big Data"
+            )
+            janib=Teacher.objects.create(
+                teacher_id ="janibbashir@nitsri.ac.in",
+                name = "Dr. Janib ul Bashir",
+                description = "HOD and Assistant Professor ",
+                email = "janibbashir@nitsri.ac.in",
+                phone=8825099229,
+                profile_photo="teacher_profile/JanibSir.jpeg",
+                research_field="Computer Architecture, Parallel Programming, on-chip security, on-chip networks"
             )
             iqra=Teacher.objects.create(
                 teacher_id ="iqraaltaf@nitsri.ac.in",
@@ -53,6 +54,61 @@ class Command(BaseCommand):
                 profile_photo="teacher_profile/AroojMam.jpeg",
                 research_field="Digital Image Processing, Network Security, Computer Vision, Medical Image Analysis."
             )
+            saniya=Teacher.objects.create(
+                teacher_id ="saniyazahoor@nitsri.ac.in",
+                name = "Dr. Saniya Zahoor",
+                description = "Assistant Professor (Contractual)",
+                email = "saniyazahoor@nitsri.ac.in",
+              
+                profile_photo="teacher_profile/AroojMam.jpeg",
+                research_field="Internet of Things, Theory of Computation, Web Programming, Management Information Systems. "
+            )
+            surbhi=Teacher.objects.create(
+                teacher_id ="dsharma@nitsri.ac.in",
+                name = "Dr. Surbhi Sharma",
+                description = "Assistant Professor (Contractual)",
+                email = "dsharma@nitsri.ac.in",
+                
+                profile_photo="teacher_profile/AroojMam.jpeg",
+                research_field="Cryptography & Network Security, Software Engineering, Computer Networks, DBMS "
+            )
+            vippon=Teacher.objects.create(
+                teacher_id ="preetvippon@gmail.com",
+                name = "Dr. Vippon Preet Kour",
+                description = "Assistant Professor (Contractual)",
+                email = "preetvippon@gmail.com",
+                profile_photo="teacher_profile/AroojMam.jpeg",
+                research_field="AI, IOT, Operating System, Image Processing, Design and Analysis of Algorithms, Machine Learning, Deep Learning."
+            )
+            
+            bazila=Teacher.objects.create(
+                teacher_id ="hashiabazila@gmail.com",
+                name = "Dr. Bazila",
+                description = "Guest Faculty",
+                email = "hashiabazila@gmail.com",
+                phone=9906126663,
+                profile_photo="teacher_profile/AroojMam.jpeg",
+                research_field="Image processing and analysis"
+            )
+            aksa=Teacher.objects.create(
+                teacher_id ="aksaurooj62@gmail.com",
+                name = "Ms. Aksa Urooj",
+                description = "Guest Faculty",
+                email = "aksaurooj62@gmail.com",
+                phone=7006335308,
+                profile_photo="teacher_profile/AroojMam.jpeg",
+                research_field="Programming, Data Structures and Algorithms, Operating Systems, Database Management Systems, Theory of Computation,Compiler Design"
+            )
+            kalimullah=Teacher.objects.create(
+                teacher_id ="kalimullahlone@gmail.com",
+                name = "Mr. Kalimullah Lone",
+                description = "Guest Faculty",
+                email = "kalimullahlone@gmail.com",
+                phone=7051300721,
+                profile_photo="teacher_profile/AroojMam.jpeg",
+                research_field="Internet of Things, Fog Computing, Cloud Computing, Data Science and Big Data"
+            )
+            
             rajes=Teacher.objects.create(
                 teacher_id ="rmrajesofficial.0@gmail.com",
                 name = "Rajes Manna",
@@ -81,48 +137,200 @@ class Command(BaseCommand):
                 research_field="Tech Team"
             )
 
+            # Phd_Student.objects.create(
+            #     enroll="2018PHAITE003",
+            #     name = "Kalimullah Lone",
+            #     description = " ",
+            #     email = "kalimullahlone@gmail.com",
+                
+            #     profile_photo="phd_student/kalimullah.jpg",
+            #     research_field="Big Data, Cloud Computing")
+            
             Phd_Student.objects.create(
-                phd_student_id ="kalimullahlone@gmail.com",
-                enroll="2018PHAITE003",
-                name = "Kalimullah Lone",
-                description = " ",
-                email = "kalimullahlone@gmail.com",
-                phone=123451,
-                profile_photo="phd_student/kalimullah.jpg",
-                research_field="Big Data, Cloud Computing"
-            )
-            Phd_Student.objects.create(
-                phd_student_id ="jehangirnit@gmail.com",
                 enroll=" 2018PHAITE004",
                 name = "Jehangir Ali",
-                description = " ",
+                description = "",
+                alumni=True,
                 email = "jehangirnit@gmail.com",
-                phone=123452,
                 profile_photo="phd_student/jahangir.jpg",
                 research_field="Blockchain and Internet of Things"
             )
             Phd_Student.objects.create(
-                phd_student_id ="njkhan91@gmail.com",
-                enroll="2018PHAITE001",
+            enroll="2018PHAITE001",
                 name = "Nadeem Yousuf",
-                description = " ",
+                description = "",
+                alumni=True,
                 email = "njkhan91@gmail.com",
-                phone=123453,
                 profile_photo="phd_student/nadeem.jpg",
                 research_field="Machine Learning"
             )
             Phd_Student.objects.create(
-                phd_student_id ="ksdbhat99@gmail.com",
                 enroll="2019PHAITE002",
                 name = "Khurshid Bhat",
-                description = " ",
+                description = "",
+                alumni=True,
                 email = "ksdbhat99@gmail.com",
-                phone=123454,
                 profile_photo="phd_student/khurshid.jpg",
                 research_field="Artificial Intelligence,Data Science"
             )
+
+            # Student 1: Umar Bashir
+            Phd_Student.objects.create(enroll="2022PHAITE005",
+                name="Umar Bashir",
+                description = "",
+                teacher=janib,
+                email="umarmir410@gmail.com",
+                profile_photo="Umarbashir.jpg",
+                research_field="Federated Learning"
+            )
+
+# Student 2: Aaqib Zahoor
+            Phd_Student.objects.create(
+                enroll="2022PHAITE003",
+                name="Aaqib Zahoor",
+                description = "",
+                teacher=iqra,
+                email="aaqib.zahoor.7865@gmail.com",
+                profile_photo="Aaqibzahoor.jpg",
+                research_field="Temporal Networks"
+            )
+
+# Student 3: Shamsul Haq
+            Phd_Student.objects.create(enroll="2022PHAITE002",
+                name="Shamsul Haq",
+                description = "",
+                teacher=prabal,
+                email="s.haq266@gmail.com",
+            profile_photo="Shamsulhaq.jpg",
+                research_field="Fog-Edge Data Analytics"
+            )
+
+# Student 4: Aamir Hilal
+            Phd_Student.objects.create(enroll="2022PHAITE004",
+                name="Aamir Hilal",
+                description = "",
+                teacher=shabir,
+                email="aamirhilal1@gmail.com",
+                profile_photo="Aamirhilal.jpg",
+                research_field="Deep Visual Learning"
+            )
+
+# Student 5: Mir Mohammad Yousuf
+            Phd_Student.objects.create(
+                enroll="2022PHAITE006",
+                name="Mir Mohammad Yousuf",
+                description = "",
+                teacher=shabir,
+                email="Yousuf_2022phaite006@nitsri.ac.in",
+                profile_photo="Mirmohammadyousuf.jpg",
+                research_field="Quantum Software Engineering"
+            )
+
+# Student 6: Rabia Latief
+            Phd_Student.objects.create(enroll="2023PHAITE002",
+                name="Rabia Latief",
+                description = "",
+                teacher=iqra,
+                email="bhatrabiakh@gmail.com",
+                profile_photo="Rabialatief.jpg",
+                research_field="Optimization Techniques"
+            )
+
+# Student 7: Anuradha Math
+            Phd_Student.objects.create(
+                enroll="2023PHAITE001",
+                name="Anuradha Math",
+                description = "",
+                teacher=prabal,
+                email="anuradha.math007@gmail.com",
+                profile_photo="Anuradhamath.jpg",
+                research_field="Edge-Fog Computing and Machine Learning"
+            )
+
+# Student 8: Rouf Ul Alam Bhat
+            Phd_Student.objects.create(enroll="2023PHAITE004",
+                name="Rouf Ul Alam Bhat",
+                description="",
+                teacher=shabir,
+                email="roufulalam@uok.edu.in",
+                profile_photo="RoufUlalamBhat.jpg",
+                research_field="Internet of Drones and Balloon Area Network"
+            )
+
+# Student 9: Syed Mudasar
+            Phd_Student.objects.create(
+                enroll="2023PHAITE003",
+                name="Syed Mudasar",
+                description="",
+                teacher=shabir,
+                email="Mudasirsyedkirmani@gmail.com",
+                profile_photo="Syedmudasar.jpg",
+                research_field="Deep Learning (HealthCare), Medical AI"
+            )
+
+# Student 10: Uzmat Ul Nisa
+            Phd_Student.objects.create(enroll="2021PHAITE004",
+                name="Uzmat Ul Nisa",
+                description="",
+                teacher=janib,
+                email="uzmatulnisa@gmail.com",
+                profile_photo="Uzmatulnisa.jpg",
+                research_field="Computer Architecture"
+            )
+
+# Student 11: Aqsa Ashraf Makhdomi
+            Phd_Student.objects.create(
+                enroll="2021PHAITE002",
+                name="Aqsa Ashraf Makhdomi",
+                description="",
+                teacher=iqra,
+                email="makhdoomiaqsa@gmail.com",
+                profile_photo="Aqsaashrafmakhdomi.jpg",
+                research_field="Optimization"
+            )
+
+# Student 12: Bisma Majid
+            Phd_Student.objects.create(
+                enroll="2021PHAITE006",
+                name="Bisma Majid",
+                description="",
+                teacher=shabir,
+                email="Bhatbisma3333@gmail.com",
+                profile_photo="Bismamajid.jpg",
+                research_field="Quantum Machine Learning"
+            )
+            
             Course.objects.create(
-                course_id ="IT_701",
+                course_id ="IT801",
+                name = "Project",
+                credit=12,
+                semester=8,
+                syllabus="developing a software application.",
+                description = "project course is an opportunity designed to immerse students in practical, project-based learning, allowing them to apply their academic knowledge to real-world situations.",       
+                )
+            
+            Course.objects.create(
+                course_id ="HSS801",
+                name = "Economics & Business Management",
+                credit=3,
+                semester=8,
+                syllabus="The Economics & Business Management (HSS 801) course is designed to provide students with practical training and hands-on experience in the realms of economics and business management.",
+                description = "Applying economic principles and theories to real-world business scenarios,Gaining a comprehensive understanding of business management practices.",       
+                )
+            
+            Course.objects.create(
+                course_id ="IT802",
+                name = "Practical Training",
+                credit=2,
+                semester=8,
+                syllabus="It aims to prepare individuals for real-world situations and equip them with the skills and experience needed to excel in their chosen field.",
+                description = "practical training is an educational approach that immerses individuals in real-world experiences, enabling them to apply theoretical knowledge and develop practical skills.",       
+                )
+
+
+
+            Course.objects.create(
+                course_id ="IT701",
                 name = "Wireless & Mobile Communication",
                 credit=4,
                 semester=7,
@@ -132,7 +340,7 @@ class Command(BaseCommand):
                 )
             
             Course.objects.create(
-                course_id = "IT_703",
+                course_id = "IT703",
                 name = "Information Security",
                 credit=3,
                 semester=7,
@@ -142,7 +350,7 @@ class Command(BaseCommand):
                 )
              
             Course.objects.create(
-                course_id = "IT_705",
+                course_id = "IT705",
                 name = "Image Processing",
                 credit=3,
                 semester=7,
@@ -152,7 +360,7 @@ class Command(BaseCommand):
                 )
             
             Course.objects.create(
-                course_id = "IT_707",
+                course_id = "IT707",
                 name = "Cloud Computing",
                 credit=4,
                 semester=7,
@@ -162,7 +370,7 @@ class Command(BaseCommand):
                 )
             
             Course.objects.create(
-                course_id = "IT_601",
+                course_id = "IT601",
                 name = "Java Programming",
                 credit=3,
                 semester=6,
@@ -172,7 +380,7 @@ class Command(BaseCommand):
                 )
             
             Course.objects.create(
-                course_id = "IT_603",
+                course_id = "IT603",
                 name = "Big Data",
                 credit=4,
                 semester=6,
@@ -352,17 +560,17 @@ class Command(BaseCommand):
                 ) 
             
             Course.objects.create(
-                course_id = "EEL100",
+                course_id = "EET101",
                 name = " Basic Electrical Engineering ",
-                credit=4,
-                semester=1,
+                credit=3,
+                semester=2,
                 syllabus=" Basic Electrical Engineering Concept",
                 description ="Introduction to   Basic Electrical Engineering ",
                         
                 )
             
             Course.objects.create(
-                course_id = "HUL100",
+                course_id = "HST101",
                 name = " Basic English and Communication Skills  ",
                 credit=3,
                 semester=1,
@@ -372,39 +580,39 @@ class Command(BaseCommand):
                 )  
             
             Course.objects.create(
-                course_id = "CYL100",
+                course_id = "CHT101",
                 name = " Engineering Chemistry ",
-                credit=4,
-                semester=1,
+                credit=3,
+                semester=2,
                 syllabus=" Engineering Chemistry  Concept",
                 description ="Introduction to  Engineering Chemistry "
                         
                 )
             
             Course.objects.create(
-                course_id = "ITL300",
+                course_id = "ITT101",
                 name = " Computer Programming  ",
                 credit=3,
-                semester=1,
+                semester=2,
                 syllabus=" Computer Programming   Concept",
                 description ="Introduction to  Computer Programming  ",
                         
                 )
             
             Course.objects.create(
-                course_id = "CIP100",
+                course_id = "CVT102",
                 name = " Engineering Drawing ",
-                credit=4,
-                semester=1,
+                credit=3,
+                semester=2,
                 syllabus=" Engineering Drawing Concept",
                 description ="Introduction to  Engineering Drawing ",
                         
                 )
             
             Course.objects.create(
-                course_id = "MAL100",
+                course_id = "MAT101",
                 name = " Mathematics I ",
-                credit=4,
+                credit=3,
                 semester=1,
                 syllabus=" Mathematics I Concept",
                 description ="Introduction to  Mathematics I ",
@@ -412,17 +620,17 @@ class Command(BaseCommand):
                 )
             
             Course.objects.create(
-                course_id = "PHL100",
+                course_id = "PHT101",
                 name = " Engineering Physics",
-                credit=4,
-                semester=2,
+                credit=3,
+                semester=1,
                 syllabus=" Engineering Physics Concept",
                 description ="Introduction to  Engineering Physics",
                         
                 )
             
             Course.objects.create(
-                course_id = "HUL101",
+                course_id = "HST102",
                 name = " Advanced English Comm.Skills & Organizational Behavior",
                 credit=3,
                 semester=2,
@@ -432,39 +640,39 @@ class Command(BaseCommand):
                 ) 
             
             Course.objects.create(
-                course_id = "CIL100",
+                course_id = "CVT101",
                 name = " Engineering Mechanics",
-                credit=4,
-                semester=2,
+                credit=3,
+                semester=1,
                 syllabus="Engineering Mechanics Concept",
                 description ="Introduction to  Engineering Mechanics",
                         
                 )
             
             Course.objects.create(
-                course_id = "MEL100",
+                course_id = "MET101",
                 name = " Elements of Mechanical Engg.",
                 credit=3,
-                semester=2,
+                semester=1,
                 syllabus="Elements of Mechanical Engg. Concept",
                 description ="Introduction to  Elements of Mechanical Engg.",
                         
                 )
             
             Course.objects.create(
-                course_id = "CYL101",
+                course_id = "CHT102",
                 name = " Environmental Studies ",
                 credit=3,
-                semester=2,
+                semester=1,
                 syllabus="Environmental Studies  Concept",
                 description ="Introduction to  Environmental Studies ",
                         
                 )
             
             Course.objects.create(
-                course_id = "MAL101",
+                course_id = "MAT102",
                 name = " Mathematics II",
-                credit=4,
+                credit=3,
                 semester=2,
                 syllabus="Mathematics II  Concept",
                 description ="Introduction to  Mathematics II ",
@@ -475,7 +683,7 @@ class Command(BaseCommand):
                 course_id = "WSP100",
                 name = " Work shop Practice",
                 credit=2,
-                semester=2,
+                semester=1,
                 syllabus="Work shop Practice  Technique",
                 description ="Introduction to  Work shop Practice ",
                         
@@ -593,7 +801,6 @@ class Command(BaseCommand):
                 date="2023-12-25T15:55:32Z",
                 description="Christmas Day"
             )
-
             Patent.objects.create(
                 patent="Temporary",
                 date="NOV 2023",

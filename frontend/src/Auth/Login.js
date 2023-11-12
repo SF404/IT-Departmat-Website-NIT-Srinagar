@@ -1,16 +1,44 @@
 import React, { useEffect, useState } from "react";
+import { Center, useToast } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import "./Login.css";
+import {
+  Box,
+  Button,
+  FormControl,
+  FormLabel,
+  Input,
+  Stack,
+  Heading,
+  ChakraProvider,
+  extendTheme,
+  Text,
+} from "@chakra-ui/react";
+const theme = extendTheme({
+  styles: {
+    global: {
+      body: {
+        bg: "gray.100",
+      },
+    },
+  },
+});
 
 function Login() {
+  const toast = useToast();
+  function callToast(msj, status) {
+    return toast({
+      position: "top",
+      title: msj,
+      status: status,
+      duration: 2000,
+      isClosable: true,
+    });
+  }
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     username: "",
     password: "",
-  });
-  const [message, setMessage] = useState({
-    message: "",
   });
 
   async function payload_check() {
@@ -34,9 +62,7 @@ function Login() {
       } catch (err) {
         localStorage.removeItem("TokenA");
         localStorage.removeItem("TokenR");
-        setMessage({
-          message: "Refresh Token unvalid",
-        });
+        callToast("Refresh Token unvalid", "error");
         console.error(err);
       }
       try {
@@ -47,15 +73,10 @@ function Login() {
       } catch (err) {
         localStorage.removeItem("TokenA");
         localStorage.removeItem("TokenR");
-        setMessage({
-          message: "Token expired try to login in again",
-        });
+        callToast("Token expired try to login in again", "error");
         console.error(err);
       }
     }
-    setMessage({
-      message: "",
-    });
     return;
   }
 
@@ -63,7 +84,7 @@ function Login() {
     payload_check();
   }, []);
 
-  const handleInputChange = (e) => {
+  const handleInputChange = async (e) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
@@ -81,37 +102,46 @@ function Login() {
         },
       });
       console.log("Response Status Code:", response);
-      setMessage({ message: response.data.message });
       switch (response.status) {
         case 200:
           const accessToken = response.data.access;
           const refreshToken = response.data.refresh;
           localStorage.setItem("TokenA", accessToken);
           localStorage.setItem("TokenR", refreshToken);
-          setMessage({
-            message: "Login successfull",
-          });
+
+          callToast("Login successfull", "success");
           break;
         default:
-          setMessage({
-            message: "Somthing went Wrong in Frontend! Please contact TechTeam",
-          });
+          callToast(
+            "Somthing went Wrong in Frontend! Please contact TechTeam",
+            "error"
+          );
           break;
       }
     } catch (error) {
-      setMessage({ message: "email and Password is Unauthorized" });
+      callToast("email and Password is Unauthorized", "error");
       console.log("post failed");
     }
     payload_check();
   };
 
   return (
-    <div className="login-container">
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit} className="login-form">
-        <div>
-          <label>Username:</label>
-          <input
+    <ChakraProvider theme={theme}>
+      <Box
+        p={4}
+        maxW="400px"
+        mx="auto"
+        bg="white"
+        borderRadius="lg"
+        boxShadow="md"
+        mt="4rem"
+      >
+        <Heading as="h3" size="lg" mb={4} textAlign={"Center"}>
+          Log In
+        </Heading>
+        <FormControl isRequired>
+          <FormLabel htmlFor="name">Username</FormLabel>
+          <Input
             type="text"
             name="username"
             value={formData.username}
@@ -119,24 +149,34 @@ function Login() {
             minLength="2"
             onChange={handleInputChange}
           />
-        </div>
-        <div>
-          <label>Password:</label>
-          <input
-            type="password"
-            name="password"
-            value={formData.password}
-            required
-            minLength="2"
-            onChange={handleInputChange}
-          />
-        </div>
-        <div>
-          <button type="submit">Login</button>
-        </div>
-        <p>*{message.message}</p>
-      </form>
-    </div>
+        </FormControl>
+
+        <form onSubmit={handleSubmit}>
+          <Stack spacing={4}>
+            <FormControl isRequired>
+              <FormLabel htmlFor="name">Password</FormLabel>
+              <Input
+                type="password"
+                name="password"
+                value={formData.password}
+                required
+                minLength="2"
+                onChange={handleInputChange}
+              />
+            </FormControl>
+            <Button
+              type="submit"
+              colorScheme="teal"
+              size="lg"
+              fontSize="md"
+              borderRadius="md"
+            >
+              Login
+            </Button>
+          </Stack>
+        </form>
+      </Box>
+    </ChakraProvider>
   );
 }
 
