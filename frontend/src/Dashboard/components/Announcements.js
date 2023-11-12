@@ -1,12 +1,20 @@
-import { Box, Button, Divider, FormControl, FormLabel, HStack, IconButton, Input, Link, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Spinner, Text, VStack, useDisclosure } from '@chakra-ui/react'
+import { AlertDialog, AlertDialogBody, AlertDialogCloseButton, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogOverlay, Box, Button, Divider, FormControl, FormLabel, HStack, IconButton, Input, Link, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Spinner, Text, VStack, useDisclosure } from '@chakra-ui/react'
 import axios from 'axios'
 import { wrap } from 'framer-motion'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { FaDownload, FaTrash } from 'react-icons/fa6'
 
 function Announcements({ email }) {
     const [announcements, setannouncements] = useState(null)
+    const [deleteInfo, setDeleteInfo] = useState({ name: "", id: "", });
+    const [formData, setFormData] = useState({
+        description: '',
+        link: '',
+    });
+    const cancelRef = useRef();
     const { isOpen: openAnnouncementModel, onOpen: addAnnouncement, onClose: closeAnnouncementModel, } = useDisclosure();
+    const { isOpen: openDeleteAlert, onOpen: showDeleteAlert, onClose: closeDeleteAlert, } = useDisclosure();
+
     const fetchAnnouncements = async () => {
         try {
             const response = await axios.get(`/api/public/announcementget/?email=${email}`);
@@ -16,10 +24,6 @@ function Announcements({ email }) {
             console.log(error)
         }
     }
-    const [formData, setFormData] = useState({
-        description: '',
-        link: '',
-    });
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -43,12 +47,26 @@ function Announcements({ email }) {
         try {
             e.preventDefault();
             const response = await axios.post(`/api/postpublicdata/?email=${email}&type=announcement`, formData, get_token())
-            if(response) fetchAnnouncements();
+            if (response) fetchAnnouncements();
             console.log(response);
             console.log('Form data submitted:', formData);
+            closeAnnouncementModel();
 
         } catch (error) {
             console.log(error)
+        }
+    };
+    const handleDelete = async (delete_id) => {
+        console.log(delete_id);
+        try {
+            const response = await axios.post("", delete_id, get_token());
+            closeDeleteAlert();
+            if (response.status === 204) {
+                await fetchAnnouncements()
+                console.log("Successfully deleted");
+            }
+        } catch (error) {
+            console.error("File Cannot be deleted", error);
         }
     };
 
@@ -71,7 +89,8 @@ function Announcements({ email }) {
                                         <Text as={Link} top={item.link} color={'blue'}>{item.description}</Text>
 
                                         <Box display={'flex'} gap={2} >
-                                            <IconButton isRound={true} variant="outline" aria-label="Done" icon={<FaTrash />} size={"xs"} color={"blackAlpha.800"} />
+                                            <IconButton isRound={true} variant="outline" aria-label="Done" icon={<FaTrash />} size={"xs"} color={"blackAlpha.800"}
+                                                onClick={(e) => { e.stopPropagation(); setDeleteInfo({ name: item.description, id: { notes_id: item.id }, }); showDeleteAlert(); }} />
                                         </Box>
                                     </HStack>
                                     <Divider borderColor={"blackAlpha.300"} />
@@ -96,7 +115,7 @@ function Announcements({ email }) {
                 </Box>
             </Box>
 
-            <Modal closeOnOverlayClick={false} isCentered isOpen={openAnnouncementModel} size={'4xl'} onClose={closeAnnouncementModel}>
+            <Modal closeOnOverlayClick={false} isCentered isOpen={openAnnouncementModel} size={'3xl'} onClose={closeAnnouncementModel}>
                 <ModalOverlay />
                 <ModalContent m={4}>
                     <ModalHeader>Add Announcement</ModalHeader>
@@ -105,7 +124,7 @@ function Announcements({ email }) {
                         <form onSubmit={handleSubmit} encType="multipart/form-data" method='POST' >
                             <FormControl>
                                 <FormLabel>Announcement</FormLabel>
-                                <Input type="text" name="description" onChange={handleInputChange} placeholder="Enter title" />
+                                <Input type="text" name="description" onChange={handleInputChange} placeholder="Enter Announcement" />
                             </FormControl>
 
                             <FormControl mt={4}>
@@ -118,6 +137,31 @@ function Announcements({ email }) {
                     </ModalBody>
                 </ModalContent>
             </Modal>
+
+
+
+            <AlertDialog motionPreset="slideInBottom" leastDestructiveRef={cancelRef} onClose={closeDeleteAlert} isOpen={openDeleteAlert} isCentered >
+                <AlertDialogOverlay />
+                <AlertDialogContent>
+                    <AlertDialogHeader>Confirm Delete?</AlertDialogHeader>
+                    <AlertDialogCloseButton />
+                    <AlertDialogBody>
+                        Are you sure you want to delete "{deleteInfo.name}" ?
+                    </AlertDialogBody>
+                    <AlertDialogFooter>
+                        <Button ref={cancelRef} onClick={closeDeleteAlert}>
+                            No
+                        </Button>
+                        <Button
+                            colorScheme="red"
+                            ml={3}
+                            onClick={() => handleDelete(deleteInfo.id)}
+                        >
+                            Yes
+                        </Button>
+                    </AlertDialogFooter>
+                </AlertDialogContent>
+            </AlertDialog>
         </>
     )
 }

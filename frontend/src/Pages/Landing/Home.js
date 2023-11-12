@@ -72,8 +72,8 @@ function Home() {
       await fetchNews();
       await fetchHolidays();
       await fetchAnnouncements();
-      await fetchEvents();
       setLoading(false);
+      await fetchEvents();
     }
     fetchData();
   }, []);

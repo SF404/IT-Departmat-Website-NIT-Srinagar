@@ -7,7 +7,7 @@ function AnnouncementRibbon({ announcements }) {
 
     return (
         <>
-            <div className='m-header'>
+            {announcements && <div className='m-header'>
                 <div className='m-title'>
                     Announcements
                 </div>
@@ -20,7 +20,7 @@ function AnnouncementRibbon({ announcements }) {
                         }
                     </div>
                 </marquee>
-            </div>
+            </div>}
         </>
     )
 }

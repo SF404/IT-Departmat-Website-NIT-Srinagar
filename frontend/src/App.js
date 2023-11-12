@@ -18,7 +18,6 @@ import Courses from "./Pages/Academics/Courses/Courses";
 import Coordinators from "./Pages/Academics/Coordinators/Coordinators";
 import Committee from "./Pages/Academics/Committee/Committee";
 import DepartmentNewsletter from "./Pages/Academics/Department Newsletter/DepartmentNewsletter";
-import ImageDisplay from "./components/DisplayImage";
 import BTechStudents from "./Pages/People/BtechStudent";
 import PhdStudents from "./Pages/People/PhdStudent";
 import Areas from "./Pages/Research/Areas";
@@ -64,7 +63,6 @@ function App() {
           <Route path="committee" element={<Committee />}></Route>
           <Route path="newsletter" element={<DepartmentNewsletter />}></Route>
           <Route path="staff" element={<StaffTable />}></Route>
-          <Route path="image" element={<ImageDisplay />}></Route>
           <Route path="areas" element={<Areas />}></Route>
           <Route path="papers" element={<Papers />}></Route>
           <Route path="labs" element={<Labs />}></Route>
