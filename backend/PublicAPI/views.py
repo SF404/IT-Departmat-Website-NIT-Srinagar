@@ -166,6 +166,7 @@ class AssignmentShow(viewsets.ModelViewSet):
         course = Course.objects.get(course_id=cid)       
         assignment = Assignment.objects.filter(course=course)
         return assignment
+    
 class DownloadAssignment(APIView):
     def post(self, request, *args, **kwargs):
         file_id = request.data.get("aid")

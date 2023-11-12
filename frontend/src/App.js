@@ -33,6 +33,7 @@ import CreditsPage from "./Pages/contact_us/Credits1";
 import StaffTable from "./Pages/People/Staff";
 import Activate from "./Auth/Activate";
 import Alumni from "./Pages/People/Alumni";
+import Tutorials from "./Pages/Courses/tutorials";
 
 function App() {
   return (
@@ -53,6 +54,7 @@ function App() {
           /> */}
           <Route exact path="/activate/:uid/:token" component={Activate} />
           <Route path="semester/:semesterId" element={<SemesterPage />} />
+          <Route path="tutorials/" element={<Tutorials />} />
           <Route path="degree-program" element={<DegreePrograms />}></Route>
           <Route path="phd-students" element={<PhdStudents />}></Route>
           <Route path="btech-students" element={<BTechStudents />}></Route>

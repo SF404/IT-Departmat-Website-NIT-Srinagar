@@ -18,7 +18,7 @@ const PlacementBrochure = () => {
       const reader = new FileReader();
       reader.onload = (e) => {
         const data = e.target.result;
-        const workbook = XLSX.read(data, { type: 'binary' });
+        const workbook = XLSX.read(data, { type: "binary" });
         const sheetName = workbook.SheetNames[0];
         const sheet = workbook.Sheets[sheetName];
         const jsonData = XLSX.utils.sheet_to_json(sheet, { header: 1 });
@@ -66,8 +66,8 @@ const PlacementBrochure = () => {
           bg={"white"}
           spacing={8}
           p={4}
-          boxShadow={'0 0 6px rgba(0,0,0,0.05)'}
-          borderRadius={'0.5em'}
+          boxShadow={"0 0 6px rgba(0,0,0,0.05)"}
+          borderRadius={"0.5em"}
           m={4}
         >
           <Button bg={'linear-gradient(45deg, #667eea 0%, #764ba2 100%)'} class="splash-button" role="button">Placement Brochure</Button>

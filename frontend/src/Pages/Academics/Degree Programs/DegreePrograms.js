@@ -15,18 +15,30 @@ function DegreePrograms() {
               <Tab>PHD</Tab>
             </TabList>
             <Divider />
-            <TabPanels className='family-3' bg={'white'} w={'full'} boxShadow={'0 0 6px rgba(0,0,0,0.05)'} borderRadius={'0.5em'}>
-              <TabPanel w={'full'} textAlign={'justify'}>
+            <TabPanels
+              className="family-3"
+              bg={"white"}
+              w={"full"}
+              boxShadow={"0 0 6px rgba(0,0,0,0.05)"}
+              borderRadius={"0.5em"}
+            >
+              <TabPanel w={"full"} textAlign={"justify"}>
                 <Box>
                   <Text>
                     Welcome to the BTech program at the Department of &nbsp;
-                    <Link href="/">
-                      Information Technology
-                    </Link>
-                    , NIT Srinagar. We offer a range of courses and opportunities for students pursuing a Bachelor of Technology degree.
+                    <Link href="/">Information Technology</Link>, NIT Srinagar.
+                    We offer a range of courses and opportunities for students
+                    pursuing a Bachelor of Technology degree.
                   </Text>
                   <Text>
-                    The Department of Information Technology in NIT Srinagar was established in 2007, offering four year undergraduate programme (B.Tech) in Information Technology. This undergraduate programme is of 4 years duration with the first year spread over two semesters which is common to all the branches. The intake capacity of the department was 40 in 2007 and then subsequently increased to 90 in 2020. The Department offers a broad curriculum including :
+                    The Department of Information Technology in NIT Srinagar was
+                    established in 2007, offering four year undergraduate
+                    programme (B.Tech) in Information Technology. This
+                    undergraduate programme is of 4 years duration with the
+                    first year spread over two semesters which is common to all
+                    the branches. The intake capacity of the department was 40
+                    in 2007 and then subsequently increased to 90 in 2020. The
+                    Department offers a broad curriculum including :
                   </Text>
                   <UnorderedList>
                     <ListItem>Artificial Intelligence</ListItem>
@@ -50,26 +62,46 @@ function DegreePrograms() {
                   </UnorderedList>
 
                   <Text>
-                    The Department of Information Technology embodies the Institute's tradition of excellence as a world-class leader in IT education and research. IT sector is in a period of bloom in terms of growth and opportunity. In the current ever evolving industrial scenario contents delivered to the students are regularly updated by the faculty members who have themselves are well acquainted with path breaking research and innovations in the present technology-oriented world.
+                    The Department of Information Technology embodies the
+                    Institute's tradition of excellence as a world-class leader
+                    in IT education and research. IT sector is in a period of
+                    bloom in terms of growth and opportunity. In the current
+                    ever evolving industrial scenario contents delivered to the
+                    students are regularly updated by the faculty members who
+                    have themselves are well acquainted with path breaking
+                    research and innovations in the present technology-oriented
+                    world.
                   </Text>
                   <Text>
-                    In addition to academic courses, the department also has IT research programmes supported through government funding and industry sponsorship. Faculty research helps expand the current and future use of new and existing technologies.
+                    In addition to academic courses, the department also has IT
+                    research programmes supported through government funding and
+                    industry sponsorship. Faculty research helps expand the
+                    current and future use of new and existing technologies.
                   </Text>
                 </Box>
 
                 <Box>
                   <Divider my={4} />
 
-                  <Text textAlign={'center'} fontSize={'lg'} fontWeight={'bold'} color={'darkblue'}>
+                  <Text
+                    textAlign={"center"}
+                    fontSize={"lg"}
+                    fontWeight={"bold"}
+                    color={"darkblue"}
+                  >
                     Curriculum
                   </Text>
                   <Divider my={2} />
                   <TableContainer>
-                    <Table variant={'striped'} border={'1px solid #d8dcf0'}>
+                    <Table variant={"striped"} border={"1px solid #d8dcf0"}>
                       <Thead>
-                        <Tr bg={'#d8dcf0'}>
-                          <Th colSpan={2} textAlign={'center'}>Undergraduate Core (UC)</Th>
-                          <Th colSpan={2} textAlign={'center'}>Undergraduate Elective (UE)</Th>
+                        <Tr bg={"#d8dcf0"}>
+                          <Th colSpan={2} textAlign={"center"}>
+                            Undergraduate Core (UC)
+                          </Th>
+                          <Th colSpan={2} textAlign={"center"}>
+                            Undergraduate Elective (UE)
+                          </Th>
                         </Tr>
                         <Tr>
                           <Th>Category</Th>
@@ -111,21 +143,16 @@ function DegreePrograms() {
                     </Table>
                   </TableContainer>
 
-                  <Text textAlign={'center'}>
-                    The Overall Credit Structure
-                  </Text>
+                  <Text textAlign={"center"}>The Overall Credit Structure</Text>
                 </Box>
               </TabPanel>
-
-
-              <TabPanel textAlign={'justify'}>
+              <TabPanel textAlign={"justify"}>
                 <Box>
                   <Text>
                     Welcome to the PhD program at the Department of &nbsp;
-                    <Link href="/">
-                      Information Technology
-                    </Link>
-                    , NIT Srinagar. We offer a range of courses and opportunities for students pursuing a Doctoral Program.
+                    <Link href="/">Information Technology</Link>, NIT Srinagar.
+                    We offer a range of courses and opportunities for students
+                    pursuing a Doctoral Program.
                   </Text>
                   <Text>
                     The doctoral programme in Information Technology offers students the possibility of doing intensive research in an area of their choice. We have a vibrant research program consisting of about 22 PhD students, and it has been our constant endeavour to provide the best facilities and working environment to our research students.
@@ -137,13 +164,16 @@ function DegreePrograms() {
                     <ListItem>Our students regularly publish research results in leading international conferences and reputed journals</ListItem>
                   </UnorderedList>
                   <Divider my={4} />
-                  <Text as='h3' fontWeight='bold'>
+                  <Text as="h3" fontWeight="bold">
                     Applying for Phd Admission :
                   </Text>
                   <Text>
-                    Admissions to the PhD program are held twice a year, in May and December. Applications can be submitted online at the NIT SRINAGAR Admissions web site, starting March and October respectively.
+                    Admissions to the PhD program are held twice a year, in May
+                    and December. Applications can be submitted online at the
+                    NIT SRINAGAR Admissions web site, starting March and October
+                    respectively.
                   </Text>
-                  <Text as='h3' fontWeight='bold'>
+                  <Text as="h3" fontWeight="bold">
                     Eligibility :
                   </Text>
                   <UnorderedList>
@@ -153,14 +183,17 @@ function DegreePrograms() {
                   </UnorderedList>
 
                   <Divider my={4} />
-                  <Text as='h2' fontWeight={'bold'}>
+                  <Text as="h2" fontWeight={"bold"}>
                     Financial Assistance and Accommodation
                   </Text>
                   <Text>
                     Institute Assistantships (Rs. 31,000 per month) are available for PhD students. An additional top-up of Rs. 10,000 per month is also possible based on contribution to ongoing research projects.
                   </Text>
                   <Text>
-                    Attractive industry govt. fellowships are also available to PhD students. In recent semesters, PhD fellowships have been offered to our students by companies/agencies such as TCS, DEITY, PM Fellowship, Google, IBM. Lucent, and Microsoft.
+                    Attractive industry govt. fellowships are also available to
+                    PhD students. In recent semesters, PhD fellowships have been
+                    offered to our students by companies/agencies such as TCS,
+                    DEITY, PM Fellowship, Google, IBM. Lucent, and Microsoft.
                   </Text>
                 </Box>
               </TabPanel>
@@ -169,7 +202,7 @@ function DegreePrograms() {
         </Box>
       </Center>
     </>
-  )
+  );
 }
 
-export default DegreePrograms
+export default DegreePrograms;

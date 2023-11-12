@@ -33,6 +33,7 @@ router.register(r'public/fileget', FileShow, basename='Semester Data')
 router.register(r'postpublicdata', PostPublicData, basename='Semester Data')
 router.register(r'profileupdate', ProfileUpdate, basename='Semester Data')
 router.register(r'delete', DataDelete, basename='Semester Data')
+router.register(r'public/fileget', FileShow, basename='Semester Data')
 
 
 
