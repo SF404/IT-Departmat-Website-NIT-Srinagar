@@ -467,7 +467,7 @@ class Command(BaseCommand):
                 description = "",
                 teacher=janib,
                 email="umarmir410@gmail.com",
-                profile_photo="Umarbashir.jpg",
+                profile_photo="phd_student/Umarbashir.jpg",
                 research_field="Federated Learning"
             )
 
@@ -478,7 +478,7 @@ class Command(BaseCommand):
                 description = "",
                 teacher=iqra,
                 email="aaqib.zahoor.7865@gmail.com",
-                profile_photo="Aaqibzahoor.jpg",
+                profile_photo="phd_student/Aaqibzahoor.jpg",
                 research_field="Temporal Networks"
             )
 
@@ -488,7 +488,7 @@ class Command(BaseCommand):
                 description = "",
                 teacher=prabal,
                 email="s.haq266@gmail.com",
-            profile_photo="Shamsulhaq.jpg",
+            profile_photo="phd_student/Shamsulhaq.jpg",
                 research_field="Fog-Edge Data Analytics"
             )
 
@@ -498,7 +498,7 @@ class Command(BaseCommand):
                 description = "",
                 teacher=shabir,
                 email="aamirhilal1@gmail.com",
-                profile_photo="Aamirhilal.jpg",
+                profile_photo="phd_student/Aamirhilal.jpg",
                 research_field="Deep Visual Learning"
             )
 
@@ -509,7 +509,7 @@ class Command(BaseCommand):
                 description = "",
                 teacher=shabir,
                 email="Yousuf_2022phaite006@nitsri.ac.in",
-                profile_photo="Mirmohammadyousuf.jpg",
+                profile_photo="phd_student/Mirmohammadyousuf.jpg",
                 research_field="Quantum Software Engineering"
             )
 
@@ -519,7 +519,7 @@ class Command(BaseCommand):
                 description = "",
                 teacher=iqra,
                 email="bhatrabiakh@gmail.com",
-                profile_photo="Rabialatief.jpg",
+                profile_photo="phd_student/Rabialatief.jpg",
                 research_field="Optimization Techniques"
             )
 
@@ -530,7 +530,7 @@ class Command(BaseCommand):
                 description = "",
                 teacher=prabal,
                 email="anuradha.math007@gmail.com",
-                profile_photo="Anuradhamath.jpg",
+                profile_photo="phd_student/Anuradhamath.jpg",
                 research_field="Edge-Fog Computing and Machine Learning"
             )
 
@@ -540,7 +540,7 @@ class Command(BaseCommand):
                 description="",
                 teacher=shabir,
                 email="roufulalam@uok.edu.in",
-                profile_photo="RoufUlalamBhat.jpg",
+                profile_photo="phd_student/RoufUlalamBhat.jpg",
                 research_field="Internet of Drones and Balloon Area Network"
             )
 
@@ -551,7 +551,7 @@ class Command(BaseCommand):
                 description="",
                 teacher=shabir,
                 email="Mudasirsyedkirmani@gmail.com",
-                profile_photo="Syedmudasar.jpg",
+                profile_photo="phd_student/Syedmudasar.jpg",
                 research_field="Deep Learning (HealthCare), Medical AI"
             )
 
@@ -561,7 +561,7 @@ class Command(BaseCommand):
                 description="",
                 teacher=janib,
                 email="uzmatulnisa@gmail.com",
-                profile_photo="Uzmatulnisa.jpg",
+                profile_photo="phd_student/Uzmatulnisa.jpg",
                 research_field="Computer Architecture"
             )
 
@@ -572,7 +572,7 @@ class Command(BaseCommand):
                 description="",
                 teacher=iqra,
                 email="makhdoomiaqsa@gmail.com",
-                profile_photo="Aqsaashrafmakhdomi.jpg",
+                profile_photo="phd_student/Aqsaashrafmakhdomi.jpg",
                 research_field="Optimization"
             )
 
@@ -583,7 +583,7 @@ class Command(BaseCommand):
                 description="",
                 teacher=shabir,
                 email="Bhatbisma3333@gmail.com",
-                profile_photo="Bismamajid.jpg",
+                profile_photo="phd_student/Bismamajid.jpg",
                 research_field="Quantum Machine Learning"
             )
             
