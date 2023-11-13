@@ -22,7 +22,7 @@ function PhdStudents() {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:8000/api/public/getphdstudent/"
+        "/api/public/getphdstudent/?alumni=False"
       );
       const phdstudent_data = response.data;
       setphdStudent(phdstudent_data);
@@ -76,10 +76,6 @@ function PhdStudents() {
                 </Box>
                 <Divider borderWidth="0.5px" my={2} borderColor="teal.500"/>
                 <Box>
-                  {/* <Flex alignItems="center">
-                    <Icon as={PhoneIcon} color="gray.600" />
-                    <Text ml={2}>{item.phone}</Text>
-                  </Flex> */}
                   <Flex alignItems="center" mt={2}>
                     <Icon as={EmailIcon} color="gray.600" />
                     <Text ml={2}>{item.email}</Text>

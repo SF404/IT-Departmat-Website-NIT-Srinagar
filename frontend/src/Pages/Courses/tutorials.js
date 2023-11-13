@@ -23,7 +23,6 @@ function VideoBox({ title, description, image, tags, link, teacher_name }) {
     <Link href={link} isExternal>
       <Box
         borderRadius="lg"
-        m={"4"}
         bg={"transparent"}
         _hover={{ cursor: "pointer" }}
       >
@@ -91,8 +90,8 @@ const Tutorials = () => {
   return (
     <>
       <SmallBanner heading={"TUTORIALS"} />
-      <Center p={{ base: "10px", md: "20px", lg: "40px" }}>
-        <Tabs align="center" variant="soft-rounded" colorScheme="facebook">
+      <Center>
+        <Tabs align="center" variant="soft-rounded" colorScheme="facebook" w={{base:"full", md:'90%'}} p={4}>
           <TabList
             textAlign={"left"}
             justifyContent={"flex-start"}
@@ -103,15 +102,15 @@ const Tutorials = () => {
             <Tab>Other</Tab>
           </TabList>
           <Divider />
-          <TabPanels>
-            <TabPanel>
+          <TabPanels p={0}>
+            <TabPanel p={0}>
               <Grid
                 templateColumns={{
                   base: "1fr",
                   md: "1fr 1fr",
                   lg: "1fr 1fr 1fr",
                 }}
-                gap={{ base: 2, md: 5, lg: 10 }}
+                gap={8}
               >
                 {data.map((video, index) => (
                   <GridItem key={index}>

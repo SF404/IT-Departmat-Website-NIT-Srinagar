@@ -74,7 +74,6 @@ function FacultyDetails() {
       setProjects(projects.data);
       // set faculty details at last
       setFacultyDetails(teacher.data[0]);
-      console.log(teacher.data[0]);
       setResearchFields(
         teacher.data[0].research_field
           .split(",")
@@ -86,9 +85,8 @@ function FacultyDetails() {
   }
 
   useEffect(() => {
-    window.scrollTo(0, 0);
     fetchfacultyDetails();
-  },);
+  },[]);
 
   const toast = useToast();
   const handleClick = async (data) => {
@@ -214,7 +212,7 @@ function FacultyDetails() {
                     </UnorderedList>
                   )}
 
-                  <Text></Text>
+                  <Text>{FacultyDetails.about}</Text>
                 </Box>
               </Box>
             </Box>
@@ -239,8 +237,7 @@ function FacultyDetails() {
                       <Tr>
                         <Th>Degree</Th>
                         <Th>College</Th>
-                        <Th>Location</Th>
-                        <Th textAlign={"center"}>Graduation</Th>
+                        <Th >Graduation</Th>
                       </Tr>
                     </Thead>
                     <Tbody fontSize={"sm"}>
@@ -248,8 +245,7 @@ function FacultyDetails() {
                         <Tr>
                           <Td>{item.degree}</Td>
                           <Td>{item.college}</Td>
-                          <Td>{item.location}</Td>
-                          <Td textAlign={"center"}>{item.Year}</Td>
+                          <Td >{item.year}</Td>
                         </Tr>
                       ))}
                     </Tbody>

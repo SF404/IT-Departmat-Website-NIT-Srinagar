@@ -14,8 +14,11 @@ class Teacher(models.Model):
     research_field = models.TextField(max_length=255,blank=True)
     date=models.DateTimeField(auto_now_add=True)
     profile_photo = models.ImageField(upload_to='teacher_profile/')
-    about = models.JSONField(blank=True, null=True)
+    about = models.TextField(max_length=1000,blank=True,null=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE,null=True,blank=True) 
+
+    class Meta:
+        ordering = ['id'] 
     def __str__(self):
         return f"{self.name}"
 
@@ -49,7 +52,7 @@ class Project(models.Model):
 class TeacherEducation(models.Model):
     degree=models.CharField(max_length=255)
     college=models.CharField(max_length=255)
-    Year= models.BigIntegerField()
+    year= models.CharField(max_length=255)
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
 
 class Course(models.Model):
@@ -104,7 +107,7 @@ class Events(models.Model):
 class Tutorials(models.Model):
     title=models.CharField(max_length=255)
     description = models.CharField(max_length=255,blank=True,null=True)
-    link = models.URLField(max_length=255)
+    link = models.URLField(max_length=255,default="https://nitsri.ac.in/")
     image = models.ImageField(upload_to='tutorials/',blank=True,default="temp")
     SELECTION_CHOICES = (
         ('video', 'Video'),

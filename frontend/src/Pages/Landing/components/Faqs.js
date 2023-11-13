@@ -20,7 +20,7 @@ function Faqs() {
         
     ])
     return (
-        <Box w={'100%'}>
+        <Box w={'full'}>
             <Heading fontSize={'1.5em'} my={'0.5em'} textAlign={'left'} p={4} color={'darkblue'}>FAQS</Heading>
             <Box w={'full'}>
                 <Accordion allowToggle>

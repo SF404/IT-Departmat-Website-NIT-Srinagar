@@ -136,6 +136,293 @@ class Command(BaseCommand):
                 profile_photo="teacher_profile/AroojMam.jpeg",
                 research_field="Tech Team"
             )
+            Patent.objects.create(
+                  patent="A Graphics Processor Unit (GPU) System with Photonics based On-chip Network, Janibul Bashir, Smruti R. Sarangi",
+                  date=" 19 Nov 2019",
+                  number=201911047168,
+                  teacher=janib
+            )
+            Patent.objects.create(
+                patent="Temporary",
+                date="NOV 2023",
+                number="12346",
+                teacher = suhaib
+            )
+            Patent.objects.create(
+                  patent="Process and System for Using Unused Optical Power in Photonic On-Chip Networks, Janibul Bashir, Smruti R. Sarangi",
+                  date=" 18 Feb 2020",
+                  number=202011006878,
+                  teacher=janib
+            )
+            Patent.objects.create(
+                patent="Temporary",
+                date="NOV 2023",
+                number="12345",
+                teacher = rajes
+            )
+            Research.objects.create(
+                  title="Towards a Greener and Fairer Transportation System: A Survey of Route Recommendation Techniques",
+                  authors="Aqsa Ashraf Makhdomi, Iqra Altaf Gillani",
+                  url="",
+                  date="2023",
+                  teacher=iqra   
+            )
+            Research.objects.create(
+                  title="Depression Prediction: A Clinical Questionnaire and Machine Learning Based Approach",
+                  authors="Sheikh Afaan Farooq, Wajid Ali, Iqra Altaf Gillani",
+                  url="https://doi.org/10.1109/INCOFT55651.2022.10094365",
+                  date="Nov 2022",
+                  teacher=iqra   
+            )
+            Research.objects.create(
+                  title="A Stochastic Process on a Network with Connections to Laplacian Systems of Equations",
+                  authors="Amitabha Bagchi, Iqra Altaf Gillani, Pooja Vyavahare",
+                  url="https://doi.org/10.1017/apr.2021.27",
+                  date="Jan 2022",
+                  teacher=iqra   
+            )
+            Research.objects.create(
+                  title="Crowd Sourcing and Blockchain-Based Incentive Mechanism to Combat Fake News",
+                  authors="Munaza Farooq, Aqsa Ashraf Makhdomi, Iqra Altaf Gillani",
+                  url="https://doi.org/10.1007/978-3-030-90087-8_15",
+                  date="Jan 2022",
+                  teacher=iqra   
+            )
+            Research.objects.create(
+                title="Blockchain-based Incentive Mechanism to Combat Fake News",
+                authors="Munaza Farooq, Aqsa Ashraf Makhdomi, Iqra Altaf Gillani",
+                url="https://doi.org/10.1007/978-981-16-8059-5_5",
+                date="August 2021",
+                teacher=iqra  # Replace 'iqra' with the actual teacher object
+            )
+            Research.objects.create(
+                title="A Queueing Network-Based Distributed Laplacian Solver",
+                authors="Iqra Altaf Gillani, Amitabha Bagchi",
+                url="https://link.springer.com/article/10.1007/s00453-021-00845-4",
+                date="June 2021",
+                teacher=iqra
+            )
+            Research.objects.create(
+                title="Lower bounds for in-network computation of arbitrary functions",
+                authors="Iqra Altaf Gillani, Pooja Vyavahare, Amitabha Bagchi",
+                date="April 2021",
+                url="https://doi.org/10.1007/s00446-021-00394-7",
+                teacher=iqra
+            )
+            Research.objects.create(
+                title="Balance Maximization in Signed Networks via Edge Deletions",
+                authors="Kartik Sharma, Iqra Altaf Gillani, Sourav Medya, Sayan Ranu, Amitabha Bagchi",
+                date="March 2021",
+                url="https://doi.org/10.1145/3437963.3441778",
+                teacher=iqra
+            )
+            Research.objects.create(
+                title="A Queueing Network-Based Distributed Laplacian Solver for Directed Graphs",
+                authors="Iqra Altaf Gillani, Amitabha Bagchi",
+                date="February 2021",
+                url="https://doi.org/10.1016/j.ipl.2020.106040",
+                teacher=iqra
+            )
+            Research.objects.create(
+                title="A Group-to-Group Version of Random Walk Betweenness Centrality",
+                authors="Iqra Altaf Gillani, Amitabha Bagchi, Sayan Ranu",
+                date="January 2021",
+                url="https://doi.org/10.1145/3430984.3431020",
+                teacher=iqra
+            )
+            Research.objects.create(
+                title="A Queueing Network-Based Distributed Laplacian Solver",
+                authors="Iqra Altaf Gillani, Amitabha Bagchi",
+                date="July 2020",
+                url="https://arxiv.org/abs/1905.04989",
+                teacher=iqra
+            )           
+            Research.objects.create(
+                title="Light-weight, Real-time Internet Traffic Classification",
+                authors="Zilmarij Iqbal, Rahila Rahim, Iqra Altaf Gillani",
+                date="December 2019",
+                url="https://doi.org/10.1109/ANTS47819.2019.9118059",
+                teacher=iqra
+            )
+            
+            Research.objects.create(
+                title="An Analysis of Various Design Pathways Towards Multi-Terabit Photonic On-Interposer Interconnects",
+                authors="VENKATA SAI PRANEETH KAREMPUDI , Janibul Bashir, ISHAN G THAKKAR",
+                date="2023",
+                url="",
+                teacher=janib
+            )
+            
+            Research.objects.create(
+                title="Enhancing Microarchitecture Performance through Synergistic Dynamic Branch Prediction and Cache Prefetchings",
+                authors="Janibul Bashir, Uzmat un Nisa, Kalimullah Lone",
+                date="2023",
+                url="",
+                teacher=janib
+            )    
+            Research.objects.create(
+                title="Climate Change Parameter Dataset (CCPD): A Benchmark Dataset for Climate Change parameters in Jammu and Kashmir",
+                authors="Tajamul Ashraf, Janibul Bashir",
+                date="2023",
+                url="",
+                teacher=janib
+            )
+            Research.objects.create(
+                title="An Integral Computer Vision System for Apple Detection, Classification, and Semantic Segmentation",
+                authors="Tajamul Ashraf, Naiyer Abbas, Mohammad Haseeb, Nadeem Yousuf, Janibul Bashir",
+                date="2022",
+                url="",
+                teacher=janib
+            ) 
+            Research.objects.create(
+                title="SecSched: Flexible Scheduling in Secure Processors",
+                authors="Shafi, Omais, and Janibul Bashir",
+                date="2020",
+                url="",
+                teacher=janib
+            )
+            Research.objects.create(
+                title="Power Efficient Photonic Network-on-Chip for a Scalable GPU",
+                authors="Janibul Bashir, Khushal Sethi, and Smruti R. Sarangi",
+                date="2019",
+                url="",
+                teacher=janib
+            )          
+            Research.objects.create(
+                title="Slotted Electro-Optic Ring Resonator as a Tunable Optical Power Splitter",
+                authors="Ghosh, Rajib R., Janib Bashir, Smruti R. Sarangi, Abhijit Das, and Anuj Dhawan",
+                date="2019",
+                url="",
+                teacher=janib
+            ) 
+            Research.objects.create(
+                title="NUPLet: A Photonic-Based Multi-Chip NUCA Architecture",
+                authors="Janibul Bashir and Smruti R. Sarangi",
+                date="2017",
+                url="",
+                teacher=janib
+            )
+            Research.objects.create(
+                title="BigBus: A Scalable Optical Interconnect",
+                authors="Peter, Eldhose, Janibul Bashir, and Smruti R. Sarangi",
+                date="2017",
+                url="",
+                teacher=janib
+            )
+            Research.objects.create(
+                title="Fog assisted-IoT enabled patient health monitoring in smart homes",
+                authors="P Verma, SK Sood",
+                date="2018",
+                url="https://ieeexplore.ieee.org/abstract/document/8283747",
+                teacher=prabal
+            )
+            Research.objects.create(
+                title="A comprehensive framework for student stress monitoring in fog-cloud IoT environment: m-health perspective",
+                authors="P Verma, SK Sood",
+                date="2019",
+                url="https://link.springer.com/article/10.1007/s11517-018-1877-1",
+                teacher=prabal
+            )
+            Research.objects.create(
+                title="A data-centric artificial intelligent and extended reality technology in smart healthcare systems",
+                authors="PShaikh T.A.,Dar T.R,Sofi S.",
+                date="2022",
+                url="https://link.springer.com/article/10.1007/s13278-022-00888-7",
+                teacher=shabir
+            )
+            Research.objects.create(
+                title="Machine Learning for Smart Agriculture and Precision Farming: Towards Making the Fields Talk",
+                authors="Shaikh T.A.,Mir W.A.,Rasool T.,Sofi S.",
+                date="2022",
+                url="https://link.springer.com/article/10.1007/s11831-022-09761-4",
+                teacher=shabir
+            )
+            Research.objects.create(
+                title="Classification of steganalysis techniques: A study",
+                authors="Nissar, Arooj, and A. H. Mir.",
+                date="2010",
+                url="",
+                teacher=arooj
+            )
+            Research.objects.create(
+                title="Texture based steganalysis of grayscale images using neural network",
+                authors="Nissar, Arooj, and A. H. Mir.",
+                date="2013",
+                url="",
+                teacher=arooj
+            )
+            
+            Research.objects.create(
+                title="Temporary",
+                authors="rajes",
+                date="NOV 2023",
+                teacher = rajes
+            )
+            
+            Research.objects.create(
+                title="Temporary",
+                authors="suhaib",
+                date="NOV 2023",
+                teacher = suhaib
+            )
+            Project.objects.create(
+                title="Temporary",
+                teacher = suhaib
+            )
+            TeacherEducation.objects.create(
+                degree="12th",
+                college="MPML",
+                year= "2021",
+                teacher = rajes
+            )
+            TeacherEducation.objects.create(
+                degree="B.Tech", 
+                college="NIT Srinagar",
+                year="2010-14",
+                teacher=janib
+            )
+            TeacherEducation.objects.create(
+                degree="Ph.D", 
+                college="IIT Delhi",
+                year="2016-20",
+                teacher=janib
+            )
+            TeacherEducation.objects.create(
+                degree="B.Tech", 
+                college="NIT Srinagar",
+                year="2011-15",
+                teacher=iqra
+            )
+            TeacherEducation.objects.create(
+                degree="Ph.D", 
+                college="IIT Delhi",
+                year="2016-21",
+                teacher=iqra
+            )
+            TeacherEducation.objects.create(
+                degree="B.E", 
+                college="REC Srinagar",
+                year="0",
+                teacher=shabir
+            )
+            TeacherEducation.objects.create(
+                degree="M.Tech", 
+                college="NIT Srinagar",
+                year="0",
+                teacher=shabir
+            )
+            TeacherEducation.objects.create(
+                degree="Ph.D", 
+                college="NIT Srinagar",
+                year="0",
+                teacher=shabir
+            )
+            TeacherEducation.objects.create(
+                degree="Ph.D", 
+                college="Guru Nanak Dev University, Amritsar",
+                year="2015-19",
+                teacher=prabal
+            )
 
             # Phd_Student.objects.create(
             #     enroll="2018PHAITE003",
@@ -180,7 +467,7 @@ class Command(BaseCommand):
                 description = "",
                 teacher=janib,
                 email="umarmir410@gmail.com",
-                profile_photo="Umarbashir.jpg",
+                profile_photo="phd_student/Umarbashir.jpg",
                 research_field="Federated Learning"
             )
 
@@ -191,7 +478,7 @@ class Command(BaseCommand):
                 description = "",
                 teacher=iqra,
                 email="aaqib.zahoor.7865@gmail.com",
-                profile_photo="Aaqibzahoor.jpg",
+                profile_photo="phd_student/Aaqibzahoor.jpg",
                 research_field="Temporal Networks"
             )
 
@@ -201,7 +488,7 @@ class Command(BaseCommand):
                 description = "",
                 teacher=prabal,
                 email="s.haq266@gmail.com",
-            profile_photo="Shamsulhaq.jpg",
+            profile_photo="phd_student/Shamsulhaq.jpg",
                 research_field="Fog-Edge Data Analytics"
             )
 
@@ -211,7 +498,7 @@ class Command(BaseCommand):
                 description = "",
                 teacher=shabir,
                 email="aamirhilal1@gmail.com",
-                profile_photo="Aamirhilal.jpg",
+                profile_photo="phd_student/Aamirhilal.jpg",
                 research_field="Deep Visual Learning"
             )
 
@@ -222,7 +509,7 @@ class Command(BaseCommand):
                 description = "",
                 teacher=shabir,
                 email="Yousuf_2022phaite006@nitsri.ac.in",
-                profile_photo="Mirmohammadyousuf.jpg",
+                profile_photo="phd_student/Mirmohammadyousuf.jpg",
                 research_field="Quantum Software Engineering"
             )
 
@@ -232,7 +519,7 @@ class Command(BaseCommand):
                 description = "",
                 teacher=iqra,
                 email="bhatrabiakh@gmail.com",
-                profile_photo="Rabialatief.jpg",
+                profile_photo="phd_student/Rabialatief.jpg",
                 research_field="Optimization Techniques"
             )
 
@@ -243,7 +530,7 @@ class Command(BaseCommand):
                 description = "",
                 teacher=prabal,
                 email="anuradha.math007@gmail.com",
-                profile_photo="Anuradhamath.jpg",
+                profile_photo="phd_student/Anuradhamath.jpg",
                 research_field="Edge-Fog Computing and Machine Learning"
             )
 
@@ -253,7 +540,7 @@ class Command(BaseCommand):
                 description="",
                 teacher=shabir,
                 email="roufulalam@uok.edu.in",
-                profile_photo="RoufUlalamBhat.jpg",
+                profile_photo="phd_student/RoufUlalamBhat.jpg",
                 research_field="Internet of Drones and Balloon Area Network"
             )
 
@@ -264,7 +551,7 @@ class Command(BaseCommand):
                 description="",
                 teacher=shabir,
                 email="Mudasirsyedkirmani@gmail.com",
-                profile_photo="Syedmudasar.jpg",
+                profile_photo="phd_student/Syedmudasar.jpg",
                 research_field="Deep Learning (HealthCare), Medical AI"
             )
 
@@ -274,7 +561,7 @@ class Command(BaseCommand):
                 description="",
                 teacher=janib,
                 email="uzmatulnisa@gmail.com",
-                profile_photo="Uzmatulnisa.jpg",
+                profile_photo="phd_student/Uzmatulnisa.jpg",
                 research_field="Computer Architecture"
             )
 
@@ -285,7 +572,7 @@ class Command(BaseCommand):
                 description="",
                 teacher=iqra,
                 email="makhdoomiaqsa@gmail.com",
-                profile_photo="Aqsaashrafmakhdomi.jpg",
+                profile_photo="phd_student/Aqsaashrafmakhdomi.jpg",
                 research_field="Optimization"
             )
 
@@ -296,7 +583,7 @@ class Command(BaseCommand):
                 description="",
                 teacher=shabir,
                 email="Bhatbisma3333@gmail.com",
-                profile_photo="Bismamajid.jpg",
+                profile_photo="phd_student/Bismamajid.jpg",
                 research_field="Quantum Machine Learning"
             )
             
@@ -336,7 +623,7 @@ class Command(BaseCommand):
                 semester=7,
                 syllabus="Introduction-Evolution of mobile radio communications",
                 description = "Networks- Integrated Services Digital Network (ISDN)",
-                teacher = janib        
+                       
                 )
             
             Course.objects.create(
@@ -346,7 +633,7 @@ class Command(BaseCommand):
                 semester=7,
                 syllabus="Balancing Information Security and Access",
                 description ="Introduction to the Concepts of Security",
-                teacher = janib        
+                       
                 )
              
             Course.objects.create(
@@ -355,8 +642,7 @@ class Command(BaseCommand):
                 credit=3,
                 semester=7,
                 syllabus="IMAGE ENHANCEMENT IN THE SPATIAL DOMAIN",
-                description ="COLOUR IMAGE PROCESSING",
-                teacher = janib        
+                        
                 )
             
             Course.objects.create(
@@ -366,7 +652,7 @@ class Command(BaseCommand):
                 semester=7,
                 syllabus="CLOUD COMPUTING SECURITY CHALLENGES:",
                 description ="INTRODUCTION TO CLOUD COMPUTING",
-                teacher = janib        
+                       
                 )
             
             Course.objects.create(
@@ -375,8 +661,7 @@ class Command(BaseCommand):
                 credit=3,
                 semester=6,
                 syllabus="Java Programming DETAILS",
-                description ="INTRODUCTION TO JAVA",
-                teacher = janib        
+                       
                 )
             
             Course.objects.create(
@@ -386,7 +671,7 @@ class Command(BaseCommand):
                 semester=6,
                 syllabus="Big Data DETAILS",
                 description ="INTRODUCTION TO Big Data",
-                teacher = janib        
+                teacher = prabal        
                 )
             
             Course.objects.create(
@@ -396,7 +681,7 @@ class Command(BaseCommand):
                 semester=6,
                 syllabus="Computer Networks Concept",
                 description ="Introduction to Computer Networks",
-                        
+                teacher = iqra        
                 )
             
             Course.objects.create(
@@ -416,58 +701,90 @@ class Command(BaseCommand):
                 semester=6,
                 syllabus="Artificial Intelligence  Concept",
                 description ="Introduction to Artificial Intelligence ",
-                        
+                teacher = shabir      
                 )
             
             Course.objects.create(
-                course_id = "ITT501",
-                name = "Computer Organisation & Architecture ",
+                course_id = "ITT303",
+                name = "Computer Organisation & Architecture",
                 credit=4,
                 semester=5,
                 syllabus="Computer Organisation & Architecture Concept",
-                description ="Introduction to Computer Organisation & Architecture  ",
-                        
+                description ="Introduction to Computer Organisation & Architecture",
+                teacher = janib        
                 )
             
             Course.objects.create(
-                course_id = "ITT507",
+                course_id = "ITT302",
                 name = "Microprocessor ",
-                credit=3,
+                credit=4,
                 semester=5,
                 syllabus="Microprocessor Concept",
                 description ="Introduction to Microprocessor",
-                        
+                 teacher = vippon       
                 )
             
 
             Course.objects.create(
-                course_id = "ITT509",
+                course_id = "ITT305",
                 name = "Data Communication",
-                credit=3,
+                credit=4,
                 semester=5,
                 syllabus="Data Communication Concept",
                 description ="Introduction to Data Communication",
+                  teacher = iqra      
+                )
+            Course.objects.create(
+                course_id = "ITT301",
+                name = "Design & Analysis of Algorithms",
+                credit=4,
+                semester=5,
+                syllabus="Design & Analysis of Algorithms Concept",
+                description ="Introduction to Design & Analysis of Algorithms",
+                teacher = prabal        
+                )
+            Course.objects.create(
+                course_id = "ITT304",
+                name = "Theory of Computation",
+                credit=4,
+                semester=5,
+                syllabus="Theory of Computation Concept",
+                description ="Introduction to Theory of Computation",
+                teacher = saniya        
+                )
+            Course.objects.create(
+                course_id = "MAT301",
+                name = "Introduction to Probability and Statistics",
+                credit=3,
+                semester=5,
+                syllabus="Theory of Probability and Statistics",
+                description ="Introduction to Probability and Statistics",
                         
                 )
-            
-
             Course.objects.create(
                 course_id = "ITT201",
-                name = "Data Structures ",
+                name = "Data Structures",
                 credit=4,
                 semester=3,
                 syllabus="Data Structures  Concept",
-                description ="Introduction to Data Structures ",
-                        
+                description ="Introduction to Data Structures",
+                 teacher = prabal       
                 )
-            
+            Course.objects.create(
+                course_id = "ECT207",
+                name = "Electronics",
+                credit=4,
+                semester=3,
+                syllabus="Electronics  Concept",
+                description ="Introduction to Electronics",      
+                )
             Course.objects.create(
                 course_id = "ITT202",
-                name = "Signal and Systems  ",
+                name = "Signal and Systems ",
                 credit=3,
                 semester=3,
                 syllabus="Signal and Systems   Concept",
-                description ="Introduction to Signal and Systems  ",
+                description ="Introduction to Signal and Systems ",
                         
                 ) 
             
@@ -477,7 +794,7 @@ class Command(BaseCommand):
                 credit=3,
                 semester=3,
                 syllabus="Software Engineering  Concept",
-                description ="Introduction to Software Engineering ",
+                description ="Introduction to Software Engineering",
                         
                 )
             
@@ -487,8 +804,8 @@ class Command(BaseCommand):
                 credit=4,
                 semester=3,
                 syllabus="Discrete Mathematics and Graph Theory  Concept",
-                description ="Introduction to Discrete Mathematics and Graph Theory ",
-                        
+                description ="Introduction to Discrete Mathematics and Graph Theory",
+                  teacher = iqra      
                 )
             
             Course.objects.create(
@@ -507,7 +824,7 @@ class Command(BaseCommand):
                 semester=4,
                 syllabus="Operating Systems  Concept",
                 description ="Introduction to  Operating Systems  ",
-                        
+                 teacher = janib       
                 )
             
             Course.objects.create(
@@ -517,11 +834,11 @@ class Command(BaseCommand):
                 semester=4,
                 syllabus=" Database Management System Concept",
                 description ="Introduction to   Database Management System",
-                        
+                  teacher = prabal      
                 ) 
             
             Course.objects.create(
-                course_id = "ECT251",
+                course_id = "ECT257",
                 name = " Digital Electronics & Logic Design",
                 credit=4,
                 semester=4,
@@ -556,7 +873,7 @@ class Command(BaseCommand):
                 semester=4,
                 syllabus=" Web Programming  Concept",
                 description ="Introduction to   Web Programming ",
-                        
+                   teacher = saniya     
                 ) 
             
             Course.objects.create(

@@ -2,30 +2,106 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Activate Account</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Account Activation</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin: 0;
+        padding: 0;
+        background-color: #f8f9fa;
+        color: #212529;
+      }
 
-    <!-- Include Axios library -->
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+      #verify {
+        margin: 20px;
+        background-color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        max-width: 400px;
+        margin: auto;
+        margin-top: 50px;
+      }
+
+      #verify h2 {
+        color: #007bff;
+      }
+
+      #verify a {
+        color: #007bff;
+        text-decoration: none;
+      }
+
+      #verify a:hover {
+        text-decoration: underline;
+      }
+
+      code {
+        background-color: #f8f9fa;
+        padding: 2px 4px;
+        border: 1px solid #d6d8db;
+        border-radius: 4px;
+      }
+
+      #verify p {
+        margin-bottom: 10px;
+      }
+
+      #result-message {
+        margin-top: 20px;
+        color: green;
+      }
+      .btn-primary {
+        width: 100%;
+        padding: 10px;
+        margin-top: 15px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+      .btn-primary:hover {
+        background-color: #005b8c;
+      }
+    </style>
   </head>
   <body>
-    <div class="container">
-      <div
-        class="d-flex flex-column justify-content-center align-items-center"
-        style="margin-top: 200px"
-      >
-        <h1>Verify your Account:</h1>
+    <div id="verify">
+      <h2>Account Verify</h2>
+      <p>
+        Thank you for signing up! To activate your account, please click the
+        Button:
+      </p>
+
+      <p>
         <button
           onclick="verify_account()"
-          style="margin-top: 50px"
           type="button"
           class="btn btn-primary"
+          style="width: 25%"
         >
           Verify
         </button>
-      </div>
+      </p>
+      <p>
+        If you didn't sign up for an account, you can safely ignore this email.
+      </p>
+      <p>
+        Best regards,<br />
+        IT Web Team
+      </p>
     </div>
-
     <script>
+      function showAlert(message) {
+        window.alert(message);
+      }
+      function navigate(url) {
+        window.location.href = url;
+      }
       async function verify_account() {
         const path = window.location.pathname;
         const pathParts = path.split("/");
@@ -33,35 +109,23 @@
         const token = pathParts[3];
         console.log(uid);
         console.log(token);
-        try {
-          const response = await axios.post(
-            "http://127.0.0.1:8000/api/auth/users/activation/",
-            {
-              uid: uid,
-              token: token,
+        const response = await axios.post(
+          "http://localhost:8000/api/auth/users/activation/",
+          {
+            uid: uid,
+            token: token,
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
             },
-            {
-              headers: {
-                "Content-Type": "application/json",
-              },
-            }
-          );
-          console.log(response);
-          console.log(response.status);
-          if (response.status === 204) {
-            navigate("http://localhost:3000/");
-          } else {
-            showAlert("Account verification failed.");
           }
-        } catch (error) {
+        );
+        if (response.status === 204) {
+          navigate("http://localhost:3000/");
+        } else {
           showAlert("Account verification failed.");
         }
-      }
-      function showAlert(message) {
-        window.alert(message);
-      }
-      function navigate(url) {
-        window.location.href = url;
       }
     </script>
   </body>

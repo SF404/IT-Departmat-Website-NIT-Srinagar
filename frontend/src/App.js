@@ -30,6 +30,7 @@ import PlacementBrochure from './Pages/Student_Activities/PlacementBrochure';
 import ImageGallery from './Pages/Gallery/ImageGallery';
 import CreditsPage from './Pages/contact_us/Credits1';
 import StaffTable from './Pages/People/Staff';
+import './App.css'
 import Alumni from './Pages/People/Alumni';
 
 const ScrollToTop = ({ children }) => {

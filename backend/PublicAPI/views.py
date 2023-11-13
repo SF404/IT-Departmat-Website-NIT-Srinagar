@@ -9,6 +9,7 @@ from rest_framework.response import Response
 from django.http import FileResponse
 import requests
 from django.http import JsonResponse
+from datetime import datetime, timedelta
 
 # Create your views here.
 
@@ -118,9 +119,12 @@ class TeacherViewByMail(viewsets.ModelViewSet):
 class PhdStudentView(viewsets.ModelViewSet):
     serializer_class = PhdStudentSerializer
     def get_queryset(self):
-        queryset = Phd_Student.objects.all()
-        print("Number of items in queryset:", queryset.count())
-        return queryset
+        alumni = self.request.query_params.get('alumni') 
+        print(alumni)
+        if alumni:
+            return Phd_Student.objects.filter(alumni=alumni)
+        else:
+            return Phd_Student.objects.filter(alumni=False)
     
 
 class allCourseGet(viewsets.ModelViewSet):
@@ -204,8 +208,9 @@ class FileShow(viewsets.ModelViewSet):
 
         if query:
             match (query):
-                case 'alumni':
-                    return File.objects.filter(type=type)
+                case 'alumni': 
+                    current_year = datetime.now().year
+                    return File.objects.filter(type=type,name__lte=str(current_year - 4))
                 case default:
                     return False
         elif type:
