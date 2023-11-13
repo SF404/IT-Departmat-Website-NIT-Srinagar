@@ -36,8 +36,6 @@ router.register(r'public/fileget', FileShow, basename='Semester Data')
 
 
 
-
-
 urlpatterns = [
     path('api/', include(router.urls)),
     path('api/public/galleryget/',GalleryView.as_view()),

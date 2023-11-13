@@ -74,7 +74,6 @@ function FacultyDetails() {
       setProjects(projects.data);
       // set faculty details at last
       setFacultyDetails(teacher.data[0]);
-      console.log(teacher.data[0]);
       setResearchFields(
         teacher.data[0].research_field
           .split(",")
@@ -214,7 +213,7 @@ function FacultyDetails() {
                     </UnorderedList>
                   )}
 
-                  <Text></Text>
+                  <Text>{FacultyDetails.about}</Text>
                 </Box>
               </Box>
             </Box>

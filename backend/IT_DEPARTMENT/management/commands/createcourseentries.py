@@ -136,6 +136,293 @@ class Command(BaseCommand):
                 profile_photo="teacher_profile/AroojMam.jpeg",
                 research_field="Tech Team"
             )
+            Patent.objects.create(
+                  patent="A Graphics Processor Unit (GPU) System with Photonics based On-chip Network, Janibul Bashir, Smruti R. Sarangi",
+                  date=" 19 Nov 2019",
+                  number=201911047168,
+                  teacher=janib
+            )
+            Patent.objects.create(
+                patent="Temporary",
+                date="NOV 2023",
+                number="12346",
+                teacher = suhaib
+            )
+            Patent.objects.create(
+                  patent="Process and System for Using Unused Optical Power in Photonic On-Chip Networks, Janibul Bashir, Smruti R. Sarangi",
+                  date=" 18 Feb 2020",
+                  number=202011006878,
+                  teacher=janib
+            )
+            Patent.objects.create(
+                patent="Temporary",
+                date="NOV 2023",
+                number="12345",
+                teacher = rajes
+            )
+            Research.objects.create(
+                  title="Towards a Greener and Fairer Transportation System: A Survey of Route Recommendation Techniques",
+                  authors="Aqsa Ashraf Makhdomi, Iqra Altaf Gillani",
+                  url="",
+                  date="2023",
+                  teacher=iqra   
+            )
+            Research.objects.create(
+                  title="Depression Prediction: A Clinical Questionnaire and Machine Learning Based Approach",
+                  authors="Sheikh Afaan Farooq, Wajid Ali, Iqra Altaf Gillani",
+                  url="https://doi.org/10.1109/INCOFT55651.2022.10094365",
+                  date="Nov 2022",
+                  teacher=iqra   
+            )
+            Research.objects.create(
+                  title="A Stochastic Process on a Network with Connections to Laplacian Systems of Equations",
+                  authors="Amitabha Bagchi, Iqra Altaf Gillani, Pooja Vyavahare",
+                  url="https://doi.org/10.1017/apr.2021.27",
+                  date="Jan 2022",
+                  teacher=iqra   
+            )
+            Research.objects.create(
+                  title="Crowd Sourcing and Blockchain-Based Incentive Mechanism to Combat Fake News",
+                  authors="Munaza Farooq, Aqsa Ashraf Makhdomi, Iqra Altaf Gillani",
+                  url="https://doi.org/10.1007/978-3-030-90087-8_15",
+                  date="Jan 2022",
+                  teacher=iqra   
+            )
+            Research.objects.create(
+                title="Blockchain-based Incentive Mechanism to Combat Fake News",
+                authors="Munaza Farooq, Aqsa Ashraf Makhdomi, Iqra Altaf Gillani",
+                url="https://doi.org/10.1007/978-981-16-8059-5_5",
+                date="August 2021",
+                teacher=iqra  # Replace 'iqra' with the actual teacher object
+            )
+            Research.objects.create(
+                title="A Queueing Network-Based Distributed Laplacian Solver",
+                authors="Iqra Altaf Gillani, Amitabha Bagchi",
+                url="https://link.springer.com/article/10.1007/s00453-021-00845-4",
+                date="June 2021",
+                teacher=iqra
+            )
+            Research.objects.create(
+                title="Lower bounds for in-network computation of arbitrary functions",
+                authors="Iqra Altaf Gillani, Pooja Vyavahare, Amitabha Bagchi",
+                date="April 2021",
+                url="https://doi.org/10.1007/s00446-021-00394-7",
+                teacher=iqra
+            )
+            Research.objects.create(
+                title="Balance Maximization in Signed Networks via Edge Deletions",
+                authors="Kartik Sharma, Iqra Altaf Gillani, Sourav Medya, Sayan Ranu, Amitabha Bagchi",
+                date="March 2021",
+                url="https://doi.org/10.1145/3437963.3441778",
+                teacher=iqra
+            )
+            Research.objects.create(
+                title="A Queueing Network-Based Distributed Laplacian Solver for Directed Graphs",
+                authors="Iqra Altaf Gillani, Amitabha Bagchi",
+                date="February 2021",
+                url="https://doi.org/10.1016/j.ipl.2020.106040",
+                teacher=iqra
+            )
+            Research.objects.create(
+                title="A Group-to-Group Version of Random Walk Betweenness Centrality",
+                authors="Iqra Altaf Gillani, Amitabha Bagchi, Sayan Ranu",
+                date="January 2021",
+                url="https://doi.org/10.1145/3430984.3431020",
+                teacher=iqra
+            )
+            Research.objects.create(
+                title="A Queueing Network-Based Distributed Laplacian Solver",
+                authors="Iqra Altaf Gillani, Amitabha Bagchi",
+                date="July 2020",
+                url="https://arxiv.org/abs/1905.04989",
+                teacher=iqra
+            )           
+            Research.objects.create(
+                title="Light-weight, Real-time Internet Traffic Classification",
+                authors="Zilmarij Iqbal, Rahila Rahim, Iqra Altaf Gillani",
+                date="December 2019",
+                url="https://doi.org/10.1109/ANTS47819.2019.9118059",
+                teacher=iqra
+            )
+            
+            Research.objects.create(
+                title="An Analysis of Various Design Pathways Towards Multi-Terabit Photonic On-Interposer Interconnects",
+                authors="VENKATA SAI PRANEETH KAREMPUDI , Janibul Bashir, ISHAN G THAKKAR",
+                date="2023",
+                url="",
+                teacher=janib
+            )
+            
+            Research.objects.create(
+                title="Enhancing Microarchitecture Performance through Synergistic Dynamic Branch Prediction and Cache Prefetchings",
+                authors="Janibul Bashir, Uzmat un Nisa, Kalimullah Lone",
+                date="2023",
+                url="",
+                teacher=janib
+            )    
+            Research.objects.create(
+                title="Climate Change Parameter Dataset (CCPD): A Benchmark Dataset for Climate Change parameters in Jammu and Kashmir",
+                authors="Tajamul Ashraf, Janibul Bashir",
+                date="2023",
+                url="",
+                teacher=janib
+            )
+            Research.objects.create(
+                title="An Integral Computer Vision System for Apple Detection, Classification, and Semantic Segmentation",
+                authors="Tajamul Ashraf, Naiyer Abbas, Mohammad Haseeb, Nadeem Yousuf, Janibul Bashir",
+                date="2022",
+                url="",
+                teacher=janib
+            ) 
+            Research.objects.create(
+                title="SecSched: Flexible Scheduling in Secure Processors",
+                authors="Shafi, Omais, and Janibul Bashir",
+                date="2020",
+                url="",
+                teacher=janib
+            )
+            Research.objects.create(
+                title="Power Efficient Photonic Network-on-Chip for a Scalable GPU",
+                authors="Janibul Bashir, Khushal Sethi, and Smruti R. Sarangi",
+                date="2019",
+                url="",
+                teacher=janib
+            )          
+            Research.objects.create(
+                title="Slotted Electro-Optic Ring Resonator as a Tunable Optical Power Splitter",
+                authors="Ghosh, Rajib R., Janib Bashir, Smruti R. Sarangi, Abhijit Das, and Anuj Dhawan",
+                date="2019",
+                url="",
+                teacher=janib
+            ) 
+            Research.objects.create(
+                title="NUPLet: A Photonic-Based Multi-Chip NUCA Architecture",
+                authors="Janibul Bashir and Smruti R. Sarangi",
+                date="2017",
+                url="",
+                teacher=janib
+            )
+            Research.objects.create(
+                title="BigBus: A Scalable Optical Interconnect",
+                authors="Peter, Eldhose, Janibul Bashir, and Smruti R. Sarangi",
+                date="2017",
+                url="",
+                teacher=janib
+            )
+            Research.objects.create(
+                title="Fog assisted-IoT enabled patient health monitoring in smart homes",
+                authors="P Verma, SK Sood",
+                date="2018",
+                url="https://ieeexplore.ieee.org/abstract/document/8283747",
+                teacher=prabal
+            )
+            Research.objects.create(
+                title="A comprehensive framework for student stress monitoring in fog-cloud IoT environment: m-health perspective",
+                authors="P Verma, SK Sood",
+                date="2019",
+                url="https://link.springer.com/article/10.1007/s11517-018-1877-1",
+                teacher=prabal
+            )
+            Research.objects.create(
+                title="A data-centric artificial intelligent and extended reality technology in smart healthcare systems",
+                authors="PShaikh T.A.,Dar T.R,Sofi S.",
+                date="2022",
+                url="https://link.springer.com/article/10.1007/s13278-022-00888-7",
+                teacher=shabir
+            )
+            Research.objects.create(
+                title="Machine Learning for Smart Agriculture and Precision Farming: Towards Making the Fields Talk",
+                authors="Shaikh T.A.,Mir W.A.,Rasool T.,Sofi S.",
+                date="2022",
+                url="https://link.springer.com/article/10.1007/s11831-022-09761-4",
+                teacher=shabir
+            )
+            Research.objects.create(
+                title="Classification of steganalysis techniques: A study",
+                authors="Nissar, Arooj, and A. H. Mir.",
+                date="2010",
+                url="",
+                teacher=arooj
+            )
+            Research.objects.create(
+                title="Texture based steganalysis of grayscale images using neural network",
+                authors="Nissar, Arooj, and A. H. Mir.",
+                date="2013",
+                url="",
+                teacher=arooj
+            )
+            
+            Research.objects.create(
+                title="Temporary",
+                authors="rajes",
+                date="NOV 2023",
+                teacher = rajes
+            )
+            
+            Research.objects.create(
+                title="Temporary",
+                authors="suhaib",
+                date="NOV 2023",
+                teacher = suhaib
+            )
+            Project.objects.create(
+                title="Temporary",
+                teacher = suhaib
+            )
+            TeacherEducation.objects.create(
+                degree="12th",
+                college="MPML",
+                year= "2021",
+                teacher = rajes
+            )
+            TeacherEducation.objects.create(
+                degree="B.Tech", 
+                college="NIT Srinagar",
+                year="2010-14",
+                teacher=janib
+            )
+            TeacherEducation.objects.create(
+                degree="Ph.D", 
+                college="IIT Delhi",
+                year="2016-20",
+                teacher=janib
+            )
+            TeacherEducation.objects.create(
+                degree="B.Tech", 
+                college="NIT Srinagar",
+                year="2011-15",
+                teacher=iqra
+            )
+            TeacherEducation.objects.create(
+                degree="Ph.D", 
+                college="IIT Delhi",
+                year="2016-21",
+                teacher=iqra
+            )
+            TeacherEducation.objects.create(
+                degree="B.E", 
+                college="REC Srinagar",
+                year="0",
+                teacher=shabir
+            )
+            TeacherEducation.objects.create(
+                degree="M.Tech", 
+                college="NIT Srinagar",
+                year="0",
+                teacher=shabir
+            )
+            TeacherEducation.objects.create(
+                degree="Ph.D", 
+                college="NIT Srinagar",
+                year="0",
+                teacher=shabir
+            )
+            TeacherEducation.objects.create(
+                degree="Ph.D", 
+                college="Guru Nanak Dev University, Amritsar",
+                year="2015-19",
+                teacher=prabal
+            )
 
             # Phd_Student.objects.create(
             #     enroll="2018PHAITE003",
