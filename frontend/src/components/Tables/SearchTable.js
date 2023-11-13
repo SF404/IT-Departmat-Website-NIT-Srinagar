@@ -1,12 +1,9 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import * as XLSX from 'xlsx'
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import {
     Box,
-    Button,
-    Center,
-    VStack,
     TableContainer,
     Table,
     Thead,
@@ -29,6 +26,7 @@ const SearchTable = ({excelData}) => {
     const [searchQuery, setSearchQuery] = useState('');
     const [filteredData, setFilteredData] = useState([]);
     const [isDownloading, setIsDownloading] = useState(false);
+    const tableRef = useRef();
 
     const handleSearch = (e) => {
         const query = e.target.value.toLowerCase();
@@ -56,33 +54,43 @@ const SearchTable = ({excelData}) => {
 
     const downloadTableAsPDF = async () => {
         setIsDownloading(true)
-        const table = document.getElementById("myTable");
-        const pdf = new jsPDF({
-            orientation: 'portrait',
-            unit: 'mm',
-            format: 'a4',
-            marginLeft: 10,
-            marginRight: 10,
-            marginTop: 10,
-            marginBottom: 10,
-        });
+        try{
 
-        const canvas = await html2canvas(table, { scale: 2 })
-        const imgWidth = 190; // Adjust as needed
-        const imgHeight = (((canvas.height - 10) * imgWidth) / canvas.width);
-        const totalPages = Math.ceil(imgHeight / pdf.internal.pageSize.height);
-
-        for (let i = 0; i < totalPages; i++) {
-            if (i > 0) {
-                pdf.addPage();
+            const table = tableRef.current;
+            console.log(table)
+            const pdf = new jsPDF({
+                orientation: 'portrait',
+                unit: 'mm',
+                format: 'a4',
+                marginLeft: 10,
+                marginRight: 10,
+                marginTop: 10,
+                marginBottom: 10,
+            });
+            
+            const canvas = await html2canvas(table, { scale: 1 })
+            const imgWidth = 190; // Adjust as needed
+            const imgHeight = ((canvas.height * imgWidth) / canvas.width);
+            console.log(canvas)
+            console.log(imgHeight)
+            const totalPages = Math.ceil(imgHeight / pdf.internal.pageSize.height);
+            console.log(totalPages)
+            
+            for (let i = 0; i < totalPages; i++) {
+                if (i > 0) {
+                    pdf.addPage();
+                }
+                const positionY = -i * (pdf.internal.pageSize.height - 20);
+                pdf.text('', 190, 285 + positionY);
+                pdf.addImage(canvas, 'PNG', 10, positionY + 10, imgWidth, imgHeight);
             }
-            const positionY = -i * (pdf.internal.pageSize.height - 20);
-            pdf.text('', 190, 285 + positionY);
-            pdf.addImage(canvas, 'PNG', 10, positionY + 10, imgWidth, imgHeight);
+            
+            pdf.save('download.pdf');
+            setIsDownloading(false);
         }
-
-        pdf.save('download.pdf');
-        setIsDownloading(false);
+        catch(error){
+            console.log(error)
+        }
 
     };
 
@@ -103,7 +111,7 @@ const SearchTable = ({excelData}) => {
                         </Menu>
                     </HStack>
                 </HStack>
-                <Table variant="striped" w={"full"} id="myTable">
+                <Table variant="striped" w={"full"} id="myTable" ref={tableRef}>
                     <Thead w={"full"}>
 
                         <Tr bg={'#c5cae8'} mb={4}>
@@ -114,7 +122,7 @@ const SearchTable = ({excelData}) => {
                         </Tr>
 
                     </Thead>
-                    <Tbody fontSize={'14px'} className="family-3">
+                    <Tbody fontSize={'14px'} className="family-5">
                         {(searchQuery ? filteredData : excelData.slice(1)).map((row, rowIndex) => (
                             <Tr key={rowIndex} w={"full"}>
                                 {row.map((cell, cellIndex) => (

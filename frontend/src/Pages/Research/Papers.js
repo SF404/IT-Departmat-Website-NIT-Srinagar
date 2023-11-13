@@ -1,4 +1,4 @@
-import { Box, Button, Center, DarkMode, Heading, ListItem, OrderedList, SimpleGrid, Text, VStack } from '@chakra-ui/react'
+import { Box, Button,  DarkMode,  ListItem, OrderedList,  Text, VStack } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import SmallBanner from '../../Layout/SmallBanner';
 

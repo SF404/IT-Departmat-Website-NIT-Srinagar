@@ -623,7 +623,7 @@ class Command(BaseCommand):
                 semester=7,
                 syllabus="Introduction-Evolution of mobile radio communications",
                 description = "Networks- Integrated Services Digital Network (ISDN)",
-                teacher = janib        
+                       
                 )
             
             Course.objects.create(
@@ -633,7 +633,7 @@ class Command(BaseCommand):
                 semester=7,
                 syllabus="Balancing Information Security and Access",
                 description ="Introduction to the Concepts of Security",
-                teacher = janib        
+                       
                 )
              
             Course.objects.create(
@@ -642,8 +642,7 @@ class Command(BaseCommand):
                 credit=3,
                 semester=7,
                 syllabus="IMAGE ENHANCEMENT IN THE SPATIAL DOMAIN",
-                description ="COLOUR IMAGE PROCESSING",
-                teacher = janib        
+                        
                 )
             
             Course.objects.create(
@@ -653,7 +652,7 @@ class Command(BaseCommand):
                 semester=7,
                 syllabus="CLOUD COMPUTING SECURITY CHALLENGES:",
                 description ="INTRODUCTION TO CLOUD COMPUTING",
-                teacher = janib        
+                       
                 )
             
             Course.objects.create(
@@ -662,8 +661,7 @@ class Command(BaseCommand):
                 credit=3,
                 semester=6,
                 syllabus="Java Programming DETAILS",
-                description ="INTRODUCTION TO JAVA",
-                teacher = janib        
+                       
                 )
             
             Course.objects.create(
@@ -673,7 +671,7 @@ class Command(BaseCommand):
                 semester=6,
                 syllabus="Big Data DETAILS",
                 description ="INTRODUCTION TO Big Data",
-                teacher = janib        
+                teacher = prabal        
                 )
             
             Course.objects.create(
@@ -683,7 +681,7 @@ class Command(BaseCommand):
                 semester=6,
                 syllabus="Computer Networks Concept",
                 description ="Introduction to Computer Networks",
-                        
+                teacher = iqra        
                 )
             
             Course.objects.create(
@@ -703,58 +701,90 @@ class Command(BaseCommand):
                 semester=6,
                 syllabus="Artificial Intelligence  Concept",
                 description ="Introduction to Artificial Intelligence ",
-                        
+                teacher = shabir      
                 )
             
             Course.objects.create(
-                course_id = "ITT501",
-                name = "Computer Organisation & Architecture ",
+                course_id = "ITT303",
+                name = "Computer Organisation & Architecture",
                 credit=4,
                 semester=5,
                 syllabus="Computer Organisation & Architecture Concept",
-                description ="Introduction to Computer Organisation & Architecture  ",
-                        
+                description ="Introduction to Computer Organisation & Architecture",
+                teacher = janib        
                 )
             
             Course.objects.create(
-                course_id = "ITT507",
+                course_id = "ITT302",
                 name = "Microprocessor ",
-                credit=3,
+                credit=4,
                 semester=5,
                 syllabus="Microprocessor Concept",
                 description ="Introduction to Microprocessor",
-                        
+                 teacher = vippon       
                 )
             
 
             Course.objects.create(
-                course_id = "ITT509",
+                course_id = "ITT305",
                 name = "Data Communication",
-                credit=3,
+                credit=4,
                 semester=5,
                 syllabus="Data Communication Concept",
                 description ="Introduction to Data Communication",
+                  teacher = iqra      
+                )
+            Course.objects.create(
+                course_id = "ITT301",
+                name = "Design & Analysis of Algorithms",
+                credit=4,
+                semester=5,
+                syllabus="Design & Analysis of Algorithms Concept",
+                description ="Introduction to Design & Analysis of Algorithms",
+                teacher = prabal        
+                )
+            Course.objects.create(
+                course_id = "ITT304",
+                name = "Theory of Computation",
+                credit=4,
+                semester=5,
+                syllabus="Theory of Computation Concept",
+                description ="Introduction to Theory of Computation",
+                teacher = saniya        
+                )
+            Course.objects.create(
+                course_id = "MAT301",
+                name = "Introduction to Probability and Statistics",
+                credit=3,
+                semester=5,
+                syllabus="Theory of Probability and Statistics",
+                description ="Introduction to Probability and Statistics",
                         
                 )
-            
-
             Course.objects.create(
                 course_id = "ITT201",
-                name = "Data Structures ",
+                name = "Data Structures",
                 credit=4,
                 semester=3,
                 syllabus="Data Structures  Concept",
-                description ="Introduction to Data Structures ",
-                        
+                description ="Introduction to Data Structures",
+                 teacher = prabal       
                 )
-            
+            Course.objects.create(
+                course_id = "ECT207",
+                name = "Electronics",
+                credit=4,
+                semester=3,
+                syllabus="Electronics  Concept",
+                description ="Introduction to Electronics",      
+                )
             Course.objects.create(
                 course_id = "ITT202",
-                name = "Signal and Systems  ",
+                name = "Signal and Systems ",
                 credit=3,
                 semester=3,
                 syllabus="Signal and Systems   Concept",
-                description ="Introduction to Signal and Systems  ",
+                description ="Introduction to Signal and Systems ",
                         
                 ) 
             
@@ -764,7 +794,7 @@ class Command(BaseCommand):
                 credit=3,
                 semester=3,
                 syllabus="Software Engineering  Concept",
-                description ="Introduction to Software Engineering ",
+                description ="Introduction to Software Engineering",
                         
                 )
             
@@ -774,8 +804,8 @@ class Command(BaseCommand):
                 credit=4,
                 semester=3,
                 syllabus="Discrete Mathematics and Graph Theory  Concept",
-                description ="Introduction to Discrete Mathematics and Graph Theory ",
-                        
+                description ="Introduction to Discrete Mathematics and Graph Theory",
+                  teacher = iqra      
                 )
             
             Course.objects.create(
@@ -794,7 +824,7 @@ class Command(BaseCommand):
                 semester=4,
                 syllabus="Operating Systems  Concept",
                 description ="Introduction to  Operating Systems  ",
-                        
+                 teacher = janib       
                 )
             
             Course.objects.create(
@@ -804,11 +834,11 @@ class Command(BaseCommand):
                 semester=4,
                 syllabus=" Database Management System Concept",
                 description ="Introduction to   Database Management System",
-                        
+                  teacher = prabal      
                 ) 
             
             Course.objects.create(
-                course_id = "ECT251",
+                course_id = "ECT257",
                 name = " Digital Electronics & Logic Design",
                 credit=4,
                 semester=4,
@@ -843,7 +873,7 @@ class Command(BaseCommand):
                 semester=4,
                 syllabus=" Web Programming  Concept",
                 description ="Introduction to   Web Programming ",
-                        
+                   teacher = saniya     
                 ) 
             
             Course.objects.create(

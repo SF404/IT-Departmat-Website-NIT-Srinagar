@@ -39,7 +39,6 @@ function FeaturedVideos() {
         const fetchPromises = urls.map((url) => fetchYouTubeData(url));
         Promise.all(fetchPromises)
             .then((data) => {
-                console.log('Video Data:', data);
                 setVideos((prevData) => [...prevData, ...data]);
             })
             .catch((error) => {
@@ -62,7 +61,6 @@ function FeaturedVideos() {
         // Extract the src attribute
         if (iframe) {
             const src = iframe.getAttribute("src").toString();
-            console.log(src)
             return src
         }
     }

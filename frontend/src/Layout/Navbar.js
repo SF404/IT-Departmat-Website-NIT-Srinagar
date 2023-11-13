@@ -11,9 +11,11 @@ import {
   MenuList,
   Image,
   Stack,
+  HStack,
   useDisclosure,
+  Tooltip,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import mainLogo from "./../assets/images/download.webp";
 import { Link } from "react-router-dom";
 import { FaBarsStaggered, FaX } from "react-icons/fa6";
@@ -22,13 +24,20 @@ import { PiDotsNineBold } from "react-icons/pi";
 
 function NavLinks({ color = "white", isOpen = null, onClose = null }) {
   const handleNavigation = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-
     if (isOpen) onClose();
   };
+
+
+  const [login, setLogin] = useState(false);
+  useEffect(() => {
+    if(localStorage.getItem('TokenA')) {
+      setLogin(true)
+    }
+    else{
+      setLogin(false)
+    }
+  }, [])
+
   return (
     <>
       <Button
@@ -362,31 +371,16 @@ function NavLinks({ color = "white", isOpen = null, onClose = null }) {
       >
         Contact Us
       </Button>
-      <Button
-        onClick={handleNavigation}
-        variant="ghost"
-        colorScheme="whiteAlpha"
-        color={color}
-        as={Link}
-        to={localStorage.getItem("TokenA") ? "/dashboard" : "/login"}
-        borderRadius={"full"}
-        position={"absolute"}
-        right={"10px"}
-        size={"sm"}
-        fontWeight={"normal"}
-        bg={"whiteAlpha.200"}
-        lineHeight={0}
-        px={"1.5em"}
-        my={"auto"}
-      >
-        {localStorage.getItem("TokenA") ? (
-          <Box fontSize={"1.5em"}>
-            <PiDotsNineBold />
-          </Box>
-        ) : (
-          "Login"
-        )}
-      </Button>
+      <HStack position={"absolute"} right={'20px'}>
+        {!login ?
+          (<Button variant={"ghost"} onClick={handleNavigation} as={Link} to={'/login'} px={4} bg={'whiteAlpha.200'} color={"whiteAlpha.900"} borderRadius={"full"} colorScheme="whiteAlpha" fontWeight={"normal"} size={'sm'} >Login</Button>) :
+          (
+            <Tooltip label={'Dashboard'} hasArrow>
+              <IconButton as={Link} to={'/dashboard'} variant={"ghost"} colorScheme="whiteAlpha" color={"white"} fontSize={'1.5em'} icon={<PiDotsNineBold />} />
+            </Tooltip>
+          )
+        }
+      </HStack>
     </>
   );
 }

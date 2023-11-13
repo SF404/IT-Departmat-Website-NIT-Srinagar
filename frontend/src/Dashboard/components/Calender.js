@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import Calendar from 'react-calendar'
-import { Box, Divider, List, ListIcon, ListItem, VStack } from '@chakra-ui/react';
+import { Box, Divider, List, ListIcon, ListItem, } from '@chakra-ui/react';
 import axios from 'axios';
-import { FcDownRight, FcExport, FcInfo } from 'react-icons/fc';
+import {  FcExport, } from 'react-icons/fc';
 import './calendar.css'
 
 

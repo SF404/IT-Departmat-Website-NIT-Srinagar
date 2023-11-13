@@ -1,6 +1,6 @@
 import { Box, Image } from '@chakra-ui/react'
 import React from 'react'
-import placeholder from './../../assets/images/panceholder.png'
+import placeholder from './../../assets/images/panceholder.webp'
 
 
 function PlaceHolder() {

@@ -44,23 +44,23 @@ function Events({ email }) {
     }
   };
 
-  const [formData, setFormData] = useState({
-    image: "",
-    title: "",
-    description: "",
-    date: "",
-    location: "",
-    link: "",
-  });
-
-  // Function to handle changes in form fields
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
+    const [formData, setFormData] = useState({
+        image: "",
+        title: "",
+        description: "",
+        date: "",
+        location: "",
+        link: "",
     });
-  };
+
+    // Function to handle changes in form fields
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({
+            ...formData,
+            [name]: value,
+        });
+    };
 
   // Function to handle image input change
   const handleFileChange = (e) => {
@@ -113,9 +113,9 @@ function Events({ email }) {
     }
   };
 
-  useEffect(() => {
-    fetchEvents();
-  }, []);
+    useEffect(() => {
+        fetchEvents();
+    }, []);
 
   return (
     <>

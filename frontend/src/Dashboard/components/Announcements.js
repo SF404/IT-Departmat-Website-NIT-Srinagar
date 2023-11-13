@@ -27,7 +27,6 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import axios from "axios";
-import { wrap } from "framer-motion";
 import React, { useEffect, useRef, useState } from "react";
 import { FaDownload, FaTrash } from "react-icons/fa6";
 

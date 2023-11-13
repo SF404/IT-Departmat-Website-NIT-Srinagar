@@ -6,17 +6,18 @@ import React, { useState } from 'react'
 function Faqs() {
     const [Faqs, setFaqs] = useState([
         {
-            title: "How can I reset my IT department account password?",
-            description: "To reset your password, click on the 'Forgot Password' link on the login page and follow the provided instructions."
+            title: "How Exams are conducted at the Institute?",
+            description: "NIT Srinagar follows a Credit based continuous Assessment System with one Midterm & one Major Examination in each Semester."
         },
         {
-            title: "What should I do if I'm experiencing network connectivity issues?",
-            description: "If you're facing network connectivity problems, please contact our IT support team at [Contact Email/Phone Number] for assistance."
+            title: "When does an Academic Session Begin at NIT Srinagar?",
+            description: "The Academic session is divided into two Semesters, an Autumn semester(August–December) &  a Spring semester(March–July)."
         },
         {
-            title: "How do I request access to specific software or systems?",
-            description: "To request access to particular software or systems, please submit a request through our IT Access Request Form."
+            title: "How many days in a Week are Classes Conducted?",
+            description: "NIT Srinagar follows 5 days week period with at least 90 Working days in each Semester."
         },
+        
     ])
     return (
         <Box w={'100%'}>
@@ -27,7 +28,7 @@ function Faqs() {
                     {
                         Faqs.map((item, index) => (
 
-                            <AccordionItem border={'none'}>
+                            <AccordionItem key={index} border={'none'}>
                                 {({ isExpanded }) => (
                                     <>
                                         <AccordionButton _hover={{ backgroundColor: 'transparent' }}>

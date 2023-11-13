@@ -1,10 +1,8 @@
 import axios from "axios";
 import {
-  Badge,
   Box,
   Divider,
   Flex,
-  HStack,
   Heading,
   Spinner,
   Tag,
@@ -19,7 +17,7 @@ function Course() {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:8000/api/public/courseget/"
+        "/api/public/courseget/"
       );
       const course = response.data;
       setCourses(course);

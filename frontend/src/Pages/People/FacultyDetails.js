@@ -85,9 +85,8 @@ function FacultyDetails() {
   }
 
   useEffect(() => {
-    window.scrollTo(0, 0);
     fetchfacultyDetails();
-  }, []);
+  },[]);
 
   const toast = useToast();
   const handleClick = async (data) => {
@@ -238,8 +237,7 @@ function FacultyDetails() {
                       <Tr>
                         <Th>Degree</Th>
                         <Th>College</Th>
-                        <Th>Location</Th>
-                        <Th textAlign={"center"}>Graduation</Th>
+                        <Th >Graduation</Th>
                       </Tr>
                     </Thead>
                     <Tbody fontSize={"sm"}>
@@ -247,8 +245,7 @@ function FacultyDetails() {
                         <Tr>
                           <Td>{item.degree}</Td>
                           <Td>{item.college}</Td>
-                          <Td>{item.location}</Td>
-                          <Td textAlign={"center"}>{item.Year}</Td>
+                          <Td >{item.year}</Td>
                         </Tr>
                       ))}
                     </Tbody>
@@ -290,9 +287,9 @@ function FacultyDetails() {
                             {item.semester}
                             {item.semester > 2
                               ? "th"
-                              : item.semester == 1
+                              : item.semester === 1
                               ? "st"
-                              : item.semester == 2
+                              : item.semester === 2
                               ? "nd"
                               : "rd"}
                           </Td>

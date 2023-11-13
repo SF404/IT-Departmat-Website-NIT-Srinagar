@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, use } from "react-router-dom";
+import { Link,} from "react-router-dom";
 import {
   Box,
   Text,
@@ -15,16 +15,14 @@ import {
   TabPanel,
   TabPanels,
 } from "@chakra-ui/react";
-import SmallBanner from "./../../Layout/SmallBanner";
-import project from "./../../assets/images/computer.jpg";
-// import SearchTable from "../../components/Tables/SearchTable";
+import SmallBanner from "../../Layout/SmallBanner";
+import project from "./../../assets/images/computer.webp";
 
 function VideoBox({ title, description, image, tags, link, teacher_name }) {
   return (
     <Link href={link} isExternal>
       <Box
         borderRadius="lg"
-        m={"4"}
         bg={"transparent"}
         _hover={{ cursor: "pointer" }}
       >
@@ -88,14 +86,12 @@ const Tutorials = () => {
       link: "https://example.com/chakra-ui-tutorial",
       teacher_name: "dr.janib",
     },
-    // Add more video data objects as needed
   ]);
   return (
     <>
       <SmallBanner heading={"TUTORIALS"} />
-      <Center p={{ base: "10px", md: "20px", lg: "40px" }}>
-        {/* <SearchTable /> */}
-        <Tabs align="center" variant="soft-rounded" colorScheme="facebook">
+      <Center>
+        <Tabs align="center" variant="soft-rounded" colorScheme="facebook" w={{base:"full", md:'90%'}} p={4}>
           <TabList
             textAlign={"left"}
             justifyContent={"flex-start"}
@@ -106,15 +102,15 @@ const Tutorials = () => {
             <Tab>Other</Tab>
           </TabList>
           <Divider />
-          <TabPanels>
-            <TabPanel>
+          <TabPanels p={0}>
+            <TabPanel p={0}>
               <Grid
                 templateColumns={{
                   base: "1fr",
                   md: "1fr 1fr",
                   lg: "1fr 1fr 1fr",
                 }}
-                gap={{ base: 2, md: 5, lg: 10 }}
+                gap={8}
               >
                 {data.map((video, index) => (
                   <GridItem key={index}>

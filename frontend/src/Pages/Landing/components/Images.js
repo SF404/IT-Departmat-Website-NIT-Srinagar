@@ -1,8 +1,9 @@
-import { Box, Heading, IconButton, Image, } from '@chakra-ui/react'
+import { Badge, Box, Heading, IconButton, Image, Text, } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import Carousel from 'react-grid-carousel'
 import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
 
 
 function Images() {
@@ -16,8 +17,6 @@ function Images() {
     const fetchImages = async () => {
         try {
             const response = await axios.get(`/api/public/galleryget/`);
-            console.log(response.data);
-
             setImages((prevImages) => ({
                 ...prevImages,
                 data: response.data,
@@ -34,7 +33,9 @@ function Images() {
     return (
         (
             <Box w={'100%'}>
-                <Heading fontSize={'1.5em'} my={'0.5em'} textAlign={'left'} p={4} color={'darkblue'}>PHOTO GALLERY</Heading>
+                <Heading fontSize={'1.5em'} mt={'0.5em'} textAlign={'left'} px={5} pt={4} color={'darkblue'}>PHOTO GALLERY</Heading> 
+                <Badge as={Link} to={'/gallery'} colorScheme='red' fontSize={'x-small'} _hover={{color:'red'}}  textAlign={'left'} mx={5} mb={2}>view all</Badge> 
+
                 <Box w={'full'} >
                     <Carousel cols={4} rows={3} loop={true} showDots={false} dotColorActive={'darkblue'}
                         arrowLeft={

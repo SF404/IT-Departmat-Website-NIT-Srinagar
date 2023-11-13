@@ -11,7 +11,7 @@ function Announcements({ announcements }) {
                     {announcements && announcements.length > 0 ? announcements.map((item, index) => (
 
                         <ListItem key={index} fontWeight={'semibold'} fontSize={'lg'} className='family-1'>
-                            <ListIcon as={PiCubeDuotone} mt={'-5px'} size={'lg'} color={'darkblue'} />
+                            <ListIcon as={PiCubeDuotone} mt={'-5px'} color={'darkblue'} />
                             <Link href={item.link}>{item.description}</Link>
                             
                         </ListItem>
