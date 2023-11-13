@@ -30,6 +30,7 @@ import PlacementBrochure from './Pages/Student_Activities/PlacementBrochure';
 import ImageGallery from './Pages/Gallery/ImageGallery';
 import CreditsPage from './Pages/contact_us/Credits1';
 import StaffTable from './Pages/People/Staff';
+import Alumni from './Pages/People/Alumni';
 
 const ScrollToTop = ({ children }) => {
   const { pathname } = useLocation();
@@ -40,7 +41,7 @@ const ScrollToTop = ({ children }) => {
       behavior: 'smooth',
     });
   }, [pathname]);
-  
+
   return children;
 };
 
@@ -77,6 +78,7 @@ const App = () => {
             <Route path="credits" element={<CreditsPage />} title="Credits" />
             <Route path="btech-students" element={<BTechStudents />} title="B.Tech Students" />
             <Route path="phd-students" element={<PhdStudents />} title="Ph.D. Students" />
+            <Route path="alumni" element={<Alumni />} title="Alumni" />
             <Route path="*" element={<NotFound />} title="Not Found" />
           </Route>
           <Route path="dashboard" element={<Dashboard />} title="Dashboard" />

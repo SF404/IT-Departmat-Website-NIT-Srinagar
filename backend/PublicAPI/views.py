@@ -199,8 +199,17 @@ class FileShow(viewsets.ModelViewSet):
     def get_queryset(self):       
         name = self.request.query_params.get('name')
         type = self.request.query_params.get('type')
+        query = self.request.query_params.get('q')
 
-        if type:
+
+        if query:
+            match (query):
+                case 'alumni':
+                    return File.objects.filter(type=type)
+                case default:
+                    return False
+        elif type:
             return File.objects.filter(type=type)
-        else:
+        elif name:
             return File.objects.filter(name=name)
+
