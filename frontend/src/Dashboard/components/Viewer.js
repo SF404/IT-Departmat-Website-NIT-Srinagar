@@ -1,6 +1,6 @@
 import { Box, Button, useDisclosure } from '@chakra-ui/react'
 import React, { useEffect, useRef, useState } from 'react'
-import { motion, transform } from 'framer-motion'
+import { motion, } from 'framer-motion'
 import Calender from './Calender'
 import Announcements from './Announcements'
 import ChatRoom from './ChatRoom'

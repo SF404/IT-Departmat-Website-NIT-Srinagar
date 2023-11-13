@@ -1,4 +1,4 @@
-import { Box, Button, Image, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Spinner, Text, useDisclosure } from '@chakra-ui/react';
+import { Box,  Image, Modal, ModalBody, ModalCloseButton, ModalContent,  ModalHeader, ModalOverlay, Spinner, Text, useDisclosure } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react'
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry"
 import SmallBanner from "../../Layout/SmallBanner";

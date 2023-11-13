@@ -15,10 +15,10 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import { EmailIcon, PhoneIcon } from "@chakra-ui/icons";
-import arman from "./../../assets/images/arman.png";
-import rajes from "./../../assets/images/rajes.jpeg";
-import suhaib from "./../../assets/images/suhaib.png";
-import janib from "./../../assets/images/janibsir.jpeg";
+import arman from "./../../assets/images/arman.webp";
+import rajes from "./../../assets/images/rajes.webp";
+import suhaib from "./../../assets/images/suhaib.webp";
+import janib from "./../../assets/images/janibsir.webp";
 
 const SectionRight = ({ img, name, details, email, phone, link }) => (
   <VStack

@@ -1,6 +1,6 @@
 import React from 'react'
 import SmallBanner from "./../../../Layout/SmallBanner"; 
-import image from './../../../assets/images/default_event_image.jpg'
+import image from './../../../assets/images/default_event_image.webp'
 import { Box, Center, Divider, Link, ListItem, Tab, TabList, TabPanel, TabPanels, Table, TableContainer, Tabs, Tbody, Td, Text, Th, Thead, Tr, UnorderedList } from '@chakra-ui/react'
 
 function DegreePrograms() {

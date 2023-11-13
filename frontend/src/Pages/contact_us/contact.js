@@ -9,7 +9,7 @@ import {
   Container,
   Grid,
   GridItem,
-  Flex, // Import the Flex component
+  Flex, 
   Icon,
 } from "@chakra-ui/react";
 import { FaMapMarker, FaPhone, FaEnvelope } from "react-icons/fa";

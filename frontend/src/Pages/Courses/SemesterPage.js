@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Box, Text, Button, HStack, Divider, Flex, Badge, Spinner, VStack, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, useDisclosure, Center, IconButton, Tag, Tooltip, Table, Tbody, Td, Tr, TableContainer, } from "@chakra-ui/react";
+import { Box, Text,  HStack, Divider, Flex, Badge, Spinner, VStack,  useDisclosure, Center, IconButton, Tag, Tooltip, Table, Tbody, Td, Tr, TableContainer, } from "@chakra-ui/react";
 import { Accordion, AccordionItem, AccordionButton, AccordionPanel, AccordionIcon, } from "@chakra-ui/react";
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 import axios from "axios";
-import { InfoOutlineIcon } from "@chakra-ui/icons";
 import SmallBanner from "../../Layout/SmallBanner";
 import { PiDownloadDuotone } from "react-icons/pi";
 

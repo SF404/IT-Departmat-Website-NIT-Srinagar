@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Box, Divider, Flex, Heading, Image, Link, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Spinner, Text, VStack, useDisclosure, } from '@chakra-ui/react';
 import axios from 'axios';
-import default_event_image from './../../../assets/images/default_event_image.jpg'
+import default_event_image from './../../../assets/images/default_event_image.webp'
 
 function UpcomingEvents({ events, }) {
 

@@ -8,13 +8,13 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
-import a from "./../../assets/images/computer.jpg";
-import hardware from "./../../assets/images/hardware.jpg";
-import ai from "./../../assets/images/ai.jpg";
-import analysis from "./../../assets/images/analysis.jpg";
-import iot from "./../../assets/images/iot.jpg";
-import security from "./../../assets/images/security.jpg";
-import programming from "./../../assets/images/programming.jpg";
+import a from "./../../assets/images/computer.webp";
+import hardware from "./../../assets/images/hardware.webp";
+import ai from "./../../assets/images/ai.webp";
+import analysis from "./../../assets/images/analysis.webp";
+import iot from "./../../assets/images/iot.webp";
+import security from "./../../assets/images/security.webp";
+import programming from "./../../assets/images/programming.webp";
 import SmallBanner from "../../Layout/SmallBanner";
 
 function Labs() {

@@ -7,12 +7,12 @@ import {
   VStack,
   SimpleGrid,
 } from "@chakra-ui/react";
-import project from "./../../assets/images/computer.jpg";
-import computing from "./../../assets/images/computing.jpg";
-import library from "./../../assets/images/library2.png";
-import network from "./../../assets/images/networking.jpeg";
-import research from "./../../assets/images/research.jpeg";
-import seminar from "./../../assets/images/seminar2.png";
+import project from "./../../assets/images/computer.webp";
+import computing from "./../../assets/images/computing.webp";
+import library from "./../../assets/images/library2.webp";
+import network from "./../../assets/images/networking.webp";
+import research from "./../../assets/images/research.webp";
+import seminar from "./../../assets/images/seminar2.webp";
 import SmallBanner from "../../Layout/SmallBanner";
 
 const facilities = [

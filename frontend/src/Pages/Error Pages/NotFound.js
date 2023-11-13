@@ -1,5 +1,3 @@
-// Error404.js
-
 import React from 'react';
 import { Box, Button, Center, Heading, Link, Text } from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router-dom';

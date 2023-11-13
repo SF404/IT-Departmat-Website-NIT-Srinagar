@@ -1,8 +1,8 @@
 import { Box, Button, Heading } from '@chakra-ui/react'
 import React from 'react'
 import Carousel from 'react-grid-carousel'
-import autumn from './../../../assets/images/autumn.jpg'
-import spring from './../../../assets/images/spring.jpeg'
+import autumn from './../../../assets/images/autumn.webp'
+import spring from './../../../assets/images/spring.webp'
 import { Link } from 'react-router-dom'
 
 

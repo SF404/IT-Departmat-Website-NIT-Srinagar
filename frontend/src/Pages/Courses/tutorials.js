@@ -15,9 +15,8 @@ import {
   TabPanel,
   TabPanels,
 } from "@chakra-ui/react";
-import SmallBanner from "./../../Layout/SmallBanner";
-import project from "./../../assets/images/computer.jpg";
-// import SearchTable from "../../components/Tables/SearchTable";
+import SmallBanner from "../../Layout/SmallBanner";
+import project from "./../../assets/images/computer.webp";
 
 function VideoBox({ title, description, image, tags, link, teacher_name }) {
   return (

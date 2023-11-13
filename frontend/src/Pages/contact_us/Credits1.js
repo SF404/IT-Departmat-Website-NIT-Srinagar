@@ -1,14 +1,9 @@
 import React, { useState } from 'react'
-import { Box, Image, Text, Link, Flex, IconButton, Icon, Center, Heading, VStack, Avatar, HStack, SimpleGrid, GridItem, Stack, Badge, useToast, Tooltip } from '@chakra-ui/react';
-import { AiFillHeart, AiOutlineTwitter, AiFillLinkedin, AiFillGithub } from 'react-icons/ai';
-import { Item } from 'react-grid-carousel';
-import arman from "./../../assets/images/arman.png";
-import rajes from "./../../assets/images/rajes.jpeg";
-import suhaib from "./../../assets/images/suhaib.png";
-import janib from "./../../assets/images/janibsir.jpeg";
-import { EmailIcon, PhoneIcon } from '@chakra-ui/icons';
-import { FaGithub } from 'react-icons/fa6';
-import { BsGithub, BsLinkedin } from 'react-icons/bs';
+import { Box, Image, Text, Link, Flex, IconButton, Icon,  Heading, VStack, Avatar, HStack, SimpleGrid, GridItem,  Badge, useToast, Tooltip } from '@chakra-ui/react';
+import arman from "./../../assets/images/arman.webp";
+import rajes from "./../../assets/images/rajes.webp";
+import suhaib from "./../../assets/images/suhaib.webp";
+import janib from "./../../assets/images/janibsir.webp";
 import { PiEnvelopeDuotone, PiGithubLogoDuotone, PiGlobeHemisphereEastDuotone, PiLinkedinLogoDuotone, PiPhoneDuotone } from 'react-icons/pi';
 
 function Credits1() {
