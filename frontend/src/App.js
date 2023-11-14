@@ -32,6 +32,7 @@ import CreditsPage from './Pages/contact_us/Credits1';
 import StaffTable from './Pages/People/Staff';
 import './App.css'
 import Alumni from './Pages/People/Alumni';
+import Feedback from './components/Feedbacks/Feedback';
 
 const ScrollToTop = ({ children }) => {
   const { pathname } = useLocation();
@@ -80,6 +81,7 @@ const App = () => {
             <Route path="btech-students" element={<BTechStudents />} title="B.Tech Students" />
             <Route path="phd-students" element={<PhdStudents />} title="Ph.D. Students" />
             <Route path="alumni" element={<Alumni />} title="Alumni" />
+            <Route path="feedback-form" element={<Feedback />} title="Alumni" />
             <Route path="*" element={<NotFound />} title="Not Found" />
           </Route>
           <Route path="dashboard" element={<Dashboard />} title="Dashboard" />

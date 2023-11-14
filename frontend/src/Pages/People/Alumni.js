@@ -69,8 +69,8 @@ function Alumni() {
     <>
       <SmallBanner heading={'ALUMNI'} />
       <Center>
-        <VStack w={{ base: 'full', md: '80%' }} my={4}>
-          <Heading fontSize={'1.5em'} my={'0.5em'} textAlign={'center'} color={'darkblue'} className='family-3'>PHD Graduates</Heading>
+        <VStack w={{ base: 'full', md: '80%' }} my={4} p={4}>
+          <Heading fontSize={'1.5em'} mt={'0.5em'} w={'full'} textAlign={'left'} color={'darkblue'} className='family-3'>PHD Graduates</Heading>
           <VStack w={'full'}>
             <Accordion allowToggle gap={6} w={'full'} >
               <AccordionItem border={"none"} boxShadow={'0 0 6px rgba(0,0,0,0.1)'} w={'full'}>
@@ -159,7 +159,7 @@ function Alumni() {
               </AccordionItem>
             </Accordion>
           </VStack>
-          <Heading fontSize={'1.5em'} my={'0.5em'} textAlign={'center'} color={'darkblue'} className='family-3'>B-TECH Graduates</Heading>
+          <Heading fontSize={'1.5em'} mt={'1em'} w={'full'} textAlign={'left'} color={'darkblue'} className='family-3'>B-TECH Graduates</Heading>
           <VStack w={'full'}>
             <Accordion allowToggle gap={6} reduceMotion onChange={(index) => { setExcelData(null); index >= 0 ? renderData(index) : setExcelData(null) }} w={'full'} >
               {alumni &&

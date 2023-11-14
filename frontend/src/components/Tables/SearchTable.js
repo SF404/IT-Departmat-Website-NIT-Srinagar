@@ -33,7 +33,7 @@ const SearchTable = ({ excelData }) => {
         const query = e.target.value.toLowerCase();
         setSearchQuery(query);
 
-        const filtered = excelData.filter((row) =>
+        const filtered = excelData.slice(1).filter((row) =>
             row.some((cell) =>
                 cell && cell.toString().toLowerCase().includes(query)
             )
@@ -99,9 +99,8 @@ const SearchTable = ({ excelData }) => {
     return (
         <>
             <TableContainer w={"full"}>
-                <HStack justifyContent={"space-between"} my={4}>
-                    <Box></Box>
-                    <HStack>
+                <HStack justifyContent={"space-between"} my={4} position={"relative"}>
+                    <HStack position={'sticky'} top={0} left={'100%'}>
                         <Input w={'200px'} mx={1} type="text" placeholder="Search..." value={searchQuery} onChange={(e) => handleSearch(e)} />
                         <Menu>
                             <MenuButton as={IconButton} variant={"outline"} color={'darkblue'} icon={isDownloading ? <Spinner /> : <PiDownloadDuotone />}></MenuButton>

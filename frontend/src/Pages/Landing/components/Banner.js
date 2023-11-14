@@ -3,8 +3,9 @@ import { Box, Heading, IconButton, Text, } from "@chakra-ui/react";
 import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons'
 import image1 from './../../../assets/images/image.webp'
 import image2 from './../../../assets/images/spring.webp'
-import image3 from './../../../assets/images/a1.webp'
-import image4 from './../../../assets/images/a2.webp'
+import image3 from './../../../assets/banners/a1.webp'
+import image4 from './../../../assets/banners/a2.webp'
+import image5 from './../../../assets/banners/a3.webp'
 
 
 const images = [
@@ -12,6 +13,7 @@ const images = [
     image2,
     image3,
     image4,
+    image5,
 ];
 
 const Banner = () => {
