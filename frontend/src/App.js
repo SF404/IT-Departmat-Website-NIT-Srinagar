@@ -15,6 +15,7 @@ import DegreePrograms from './Pages/Academics/Degree Programs/DegreePrograms';
 import VissionMission from './Pages/Academics/Vision Mission/VissionMission';
 import Outcomes from './Pages/Academics/Outcomes/Outcomes';
 import Courses from './Pages/Academics/Courses/Courses';
+import SemesterPage from './Pages/Courses/SemesterPage'
 import Coordinators from './Pages/Academics/Coordinators/Coordinators';
 import Committee from './Pages/Academics/Committee/Committee';
 import DepartmentNewsletter from './Pages/Academics/Department Newsletter/DepartmentNewsletter';
@@ -38,6 +39,8 @@ import Architecture from './components/Labs/Architecturelab'
 import ArtificialIntelligence from './components/Labs/ArtificialIntelligencelab';
 import ComputerVision from './components/Labs/ComputerVisionImageProcessing';
 import DataMining from './components/Labs/DataMiningAnalytics'
+import Alumni from './Pages/People/Alumni';
+import Feedback from './components/Feedbacks/Feedback';
 
 const ScrollToTop = ({ children }) => {
   const { pathname } = useLocation();
@@ -48,7 +51,7 @@ const ScrollToTop = ({ children }) => {
       behavior: 'smooth',
     });
   }, [pathname]);
-  
+
   return children;
 };
 
@@ -60,6 +63,7 @@ const App = () => {
           <Route path="/" element={<Layout />} title="IT NIT SRINAGAR">
             <Route index element={<Home />} title="Home" />
             <Route path="semester/all" element={<CoursesAll />} title="All Semesters" />
+            <Route path="semester/:semesterId" element={<SemesterPage/>} />
             <Route path="faculty" element={<Faculty />} title="Faculty" />
             <Route path="faculty/details/:id" element={<FacultyDetails />} title="Faculty Details" />
             <Route path="/login" element={<Login />} title="Login" />
@@ -85,7 +89,8 @@ const App = () => {
             <Route path="credits" element={<CreditsPage />} title="Credits" />
             <Route path="btech-students" element={<BTechStudents />} title="B.Tech Students" />
             <Route path="phd-students" element={<PhdStudents />} title="Ph.D. Students" />
-
+            <Route path="alumni" element={<Alumni />} title="Alumni" />
+            <Route path="feedback-form" element={<Feedback />} title="Alumni" />
 
             <Route path="artificialintelligence" element={<ArtificialIntelligence />} title="ArtificialIntelligence" />
             <Route path="architecture" element={<Architecture />} title="Architecture" />
@@ -94,7 +99,6 @@ const App = () => {
             <Route path="programming" element={<Programming />} title="Programming" />
             <Route path="embedded" element={<Embedded />} title="Embedded" />
             <Route path="security" element={<Security />} title="Security" />
-
 
 
             <Route path="*" element={<NotFound />} title="Not Found" />

@@ -69,7 +69,7 @@ const Footer = () => {
             <Divider my={3} border={'2px solid #3db166'} />
             <VStack w={"full"} spacing={3} pt={2} alignItems={'flex-start'} className="family-2">
               <Text as={Link} to={'/faculty'} color={"whiteAlpha.700"} _hover={{ color: 'white' }}>Faculties</Text>
-              <Text as={Link} to={'/feedback'} color={"whiteAlpha.700"} _hover={{ color: 'white' }}>Report and Feedback</Text>
+              <Text as={Link} to={'/feedback-form'} color={"whiteAlpha.700"} _hover={{ color: 'white' }}>Feedback</Text>
               <Text as={Link} to={'/mentor'} color={"whiteAlpha.700"} _hover={{ color: 'white' }}>Mentor</Text>
               <Text as={Link} to={'/'} color={"whiteAlpha.700"} _hover={{ color: 'white' }}></Text>
             </VStack>

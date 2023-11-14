@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Box,  Text, Flex,  VStack, Accordion, AccordionItem, AccordionButton, AccordionPanel, AccordionIcon,  Center, } from "@chakra-ui/react";
+import { Box, Text, Flex, VStack, Accordion, AccordionItem, AccordionButton, AccordionPanel, AccordionIcon, Center, } from "@chakra-ui/react";
 import * as XLSX from 'xlsx';
 import SmallBanner from "../../Layout/SmallBanner";
 import SearchTable from "../../components/Tables/SearchTable";
@@ -40,7 +40,7 @@ function BTechStudents() {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(`/api/public/fileget/?type=btech_student_list`);
+      const response = await axios.get(`/api/public/fileget/?q=btech&&type=btech_student_list`);
       console.log(response.data)
       setStudent(response.data)
     } catch (error) {
@@ -63,16 +63,16 @@ function BTechStudents() {
           fontSize={{ base: "sm", md: "md" }}
           width={{ base: '100%', md: '90%', lg: '80%' }}
           className="family-5" >
-          <Accordion allowToggle gap={6} onChange={(index) => renderData(index)} >
+          <Accordion allowToggle reduceMotion gap={6} onChange={(index) => {setExcelData(null);index < 0 ? setExcelData(null) : renderData(index)}} >
             {student &&
-              student.sort((a, b)=>b.name - a.name ).map((course, index) => (
+              student.sort((a, b) => b.name - a.name).map((course, index) => (
                 <AccordionItem
                   key={index}
                   border={"none"} boxShadow={'0 0 6px rgba(0,0,0,0.1)'}
                 >
                   <h2>
                     <AccordionButton
-                    bg={"white"}
+                      bg={"white"}
                       my={2}
                       cursor={"pointer"}
                       h={"64px"}

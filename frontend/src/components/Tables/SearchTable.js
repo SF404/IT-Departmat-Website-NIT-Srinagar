@@ -19,10 +19,11 @@ import {
     MenuList,
     MenuItem,
     Spinner,
+    Text,
 } from "@chakra-ui/react";
 import { PiDownloadDuotone } from "react-icons/pi";
 
-const SearchTable = ({excelData}) => {
+const SearchTable = ({ excelData }) => {
     const [searchQuery, setSearchQuery] = useState('');
     const [filteredData, setFilteredData] = useState([]);
     const [isDownloading, setIsDownloading] = useState(false);
@@ -32,7 +33,7 @@ const SearchTable = ({excelData}) => {
         const query = e.target.value.toLowerCase();
         setSearchQuery(query);
 
-        const filtered = excelData.filter((row) =>
+        const filtered = excelData.slice(1).filter((row) =>
             row.some((cell) =>
                 cell && cell.toString().toLowerCase().includes(query)
             )
@@ -54,7 +55,7 @@ const SearchTable = ({excelData}) => {
 
     const downloadTableAsPDF = async () => {
         setIsDownloading(true)
-        try{
+        try {
 
             const table = tableRef.current;
             console.log(table)
@@ -67,7 +68,7 @@ const SearchTable = ({excelData}) => {
                 marginTop: 10,
                 marginBottom: 10,
             });
-            
+
             const canvas = await html2canvas(table, { scale: 1 })
             const imgWidth = 190; // Adjust as needed
             const imgHeight = ((canvas.height * imgWidth) / canvas.width);
@@ -75,7 +76,7 @@ const SearchTable = ({excelData}) => {
             console.log(imgHeight)
             const totalPages = Math.ceil(imgHeight / pdf.internal.pageSize.height);
             console.log(totalPages)
-            
+
             for (let i = 0; i < totalPages; i++) {
                 if (i > 0) {
                     pdf.addPage();
@@ -84,11 +85,11 @@ const SearchTable = ({excelData}) => {
                 pdf.text('', 190, 285 + positionY);
                 pdf.addImage(canvas, 'PNG', 10, positionY + 10, imgWidth, imgHeight);
             }
-            
+
             pdf.save('download.pdf');
             setIsDownloading(false);
         }
-        catch(error){
+        catch (error) {
             console.log(error)
         }
 
@@ -98,9 +99,8 @@ const SearchTable = ({excelData}) => {
     return (
         <>
             <TableContainer w={"full"}>
-                <HStack justifyContent={"space-between"} my={4}>
-                    <Box></Box>
-                    <HStack>
+                <HStack justifyContent={"space-between"} my={4} position={"relative"}>
+                    <HStack position={'sticky'} top={0} left={'100%'}>
                         <Input w={'200px'} mx={1} type="text" placeholder="Search..." value={searchQuery} onChange={(e) => handleSearch(e)} />
                         <Menu>
                             <MenuButton as={IconButton} variant={"outline"} color={'darkblue'} icon={isDownloading ? <Spinner /> : <PiDownloadDuotone />}></MenuButton>
@@ -111,7 +111,7 @@ const SearchTable = ({excelData}) => {
                         </Menu>
                     </HStack>
                 </HStack>
-                <Table variant="striped" w={"full"} id="myTable" ref={tableRef}>
+                {excelData ? <Table variant="striped" w={"full"} id="myTable" ref={tableRef}>
                     <Thead w={"full"}>
 
                         <Tr bg={'#c5cae8'} mb={4}>
@@ -131,7 +131,7 @@ const SearchTable = ({excelData}) => {
                             </Tr>
                         ))}
                     </Tbody>
-                </Table>
+                </Table> : (<Box textAlign={"center"} m={4}><Spinner /><Text>Loading...</Text></Box>)}
             </TableContainer>
         </>
     );
