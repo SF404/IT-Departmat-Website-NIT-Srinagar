@@ -171,76 +171,76 @@ class Command(BaseCommand):
                   title="Depression Prediction: A Clinical Questionnaire and Machine Learning Based Approach",
                   authors="Sheikh Afaan Farooq, Wajid Ali, Iqra Altaf Gillani",
                   url="https://doi.org/10.1109/INCOFT55651.2022.10094365",
-                  date="Nov 2022",
+                  date="2022",
                   teacher=iqra   
             )
             Research.objects.create(
                   title="A Stochastic Process on a Network with Connections to Laplacian Systems of Equations",
                   authors="Amitabha Bagchi, Iqra Altaf Gillani, Pooja Vyavahare",
                   url="https://doi.org/10.1017/apr.2021.27",
-                  date="Jan 2022",
+                  date="2022",
                   teacher=iqra   
             )
             Research.objects.create(
                   title="Crowd Sourcing and Blockchain-Based Incentive Mechanism to Combat Fake News",
                   authors="Munaza Farooq, Aqsa Ashraf Makhdomi, Iqra Altaf Gillani",
                   url="https://doi.org/10.1007/978-3-030-90087-8_15",
-                  date="Jan 2022",
+                  date="2022",
                   teacher=iqra   
             )
             Research.objects.create(
                 title="Blockchain-based Incentive Mechanism to Combat Fake News",
                 authors="Munaza Farooq, Aqsa Ashraf Makhdomi, Iqra Altaf Gillani",
                 url="https://doi.org/10.1007/978-981-16-8059-5_5",
-                date="August 2021",
+                date="2021",
                 teacher=iqra  # Replace 'iqra' with the actual teacher object
             )
             Research.objects.create(
                 title="A Queueing Network-Based Distributed Laplacian Solver",
                 authors="Iqra Altaf Gillani, Amitabha Bagchi",
                 url="https://link.springer.com/article/10.1007/s00453-021-00845-4",
-                date="June 2021",
+                date="2021",
                 teacher=iqra
             )
             Research.objects.create(
                 title="Lower bounds for in-network computation of arbitrary functions",
                 authors="Iqra Altaf Gillani, Pooja Vyavahare, Amitabha Bagchi",
-                date="April 2021",
+                date="2021",
                 url="https://doi.org/10.1007/s00446-021-00394-7",
                 teacher=iqra
             )
             Research.objects.create(
                 title="Balance Maximization in Signed Networks via Edge Deletions",
                 authors="Kartik Sharma, Iqra Altaf Gillani, Sourav Medya, Sayan Ranu, Amitabha Bagchi",
-                date="March 2021",
+                date="2021",
                 url="https://doi.org/10.1145/3437963.3441778",
                 teacher=iqra
             )
             Research.objects.create(
                 title="A Queueing Network-Based Distributed Laplacian Solver for Directed Graphs",
                 authors="Iqra Altaf Gillani, Amitabha Bagchi",
-                date="February 2021",
+                date="2021",
                 url="https://doi.org/10.1016/j.ipl.2020.106040",
                 teacher=iqra
             )
             Research.objects.create(
                 title="A Group-to-Group Version of Random Walk Betweenness Centrality",
                 authors="Iqra Altaf Gillani, Amitabha Bagchi, Sayan Ranu",
-                date="January 2021",
+                date="2021",
                 url="https://doi.org/10.1145/3430984.3431020",
                 teacher=iqra
             )
             Research.objects.create(
                 title="A Queueing Network-Based Distributed Laplacian Solver",
                 authors="Iqra Altaf Gillani, Amitabha Bagchi",
-                date="July 2020",
+                date="2020",
                 url="https://arxiv.org/abs/1905.04989",
                 teacher=iqra
             )           
             Research.objects.create(
                 title="Light-weight, Real-time Internet Traffic Classification",
                 authors="Zilmarij Iqbal, Rahila Rahim, Iqra Altaf Gillani",
-                date="December 2019",
+                date="2019",
                 url="https://doi.org/10.1109/ANTS47819.2019.9118059",
                 teacher=iqra
             )
@@ -355,14 +355,14 @@ class Command(BaseCommand):
             Research.objects.create(
                 title="Temporary",
                 authors="rajes",
-                date="NOV 2023",
+                date="2023",
                 teacher = rajes
             )
             
             Research.objects.create(
                 title="Temporary",
                 authors="suhaib",
-                date="NOV 2023",
+                date="2023",
                 teacher = suhaib
             )
             Project.objects.create(
