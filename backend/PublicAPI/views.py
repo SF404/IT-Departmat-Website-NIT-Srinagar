@@ -211,6 +211,9 @@ class FileShow(viewsets.ModelViewSet):
                 case 'alumni': 
                     current_year = datetime.now().year
                     return File.objects.filter(type=type,name__lte=str(current_year - 4))
+                case 'btech': 
+                    current_year = datetime.now().year
+                    return File.objects.filter(type=type,name__gt=str(current_year - 4))
                 case default:
                     return False
         elif type:

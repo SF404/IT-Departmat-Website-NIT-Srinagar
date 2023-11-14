@@ -40,7 +40,7 @@ function BTechStudents() {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(`/api/public/fileget/?type=btech_student_list`);
+      const response = await axios.get(`/api/public/fileget/?q=btech&&type=btech_student_list`);
       console.log(response.data)
       setStudent(response.data)
     } catch (error) {
