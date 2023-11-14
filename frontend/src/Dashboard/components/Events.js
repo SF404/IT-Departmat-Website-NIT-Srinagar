@@ -152,7 +152,7 @@ function Events({ email }) {
                 >
                   Image <br />{" "}
                   <Text fontSize={"12px"} fontWeight={"normal"}>
-                    {formData.file ? formData.file.name : ""}
+                    {formData.image ? formData.image.name : ""}
                   </Text>
                 </FormLabel>
                 <Input

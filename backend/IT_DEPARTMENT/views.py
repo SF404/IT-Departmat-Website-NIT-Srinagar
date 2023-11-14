@@ -160,11 +160,12 @@ class ProfileUpdate(viewsets.ModelViewSet):
         teacher.save()
         research_title = request.data.get('research_title', None)
         research_date = request.data.get('research_date', None)
-        if research_title and research_date:
+        research_authors=request.data.get('research_authors', None)
+        if research_title and research_date and research_authors:
             research, created = Research.objects.get_or_create(
                 teacher=teacher,
                 title=research_title,
-                defaults={'authors': request.data.get('research_authors', None), 'url': request.data.get('research_url', None)}
+                defaults={'authors': research_authors, 'url': request.data.get('research_url', None)}
             )
             if not created:
                 research.date = research_date

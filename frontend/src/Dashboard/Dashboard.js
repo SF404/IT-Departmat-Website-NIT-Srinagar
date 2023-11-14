@@ -6,6 +6,7 @@ import Navbar from "../Layout/Navbar";
 import SideBar from "./components/SideBar";
 import CoursePanel from "./components/CoursePanel";
 import MyProfile from "./components/MyProfile";
+import Resources from "./components/Resources"
 import PlaceHolder from "./components/PlaceHolder";
 import Viewer from "./components/Viewer";
 
@@ -24,6 +25,13 @@ function Dashboard1() {
     onOpen: showMyProfile,
     onClose: closeMyProfile,
   } = useDisclosure();
+
+  const {
+    isOpen: openResources,
+    onOpen: showResources,
+    onClose: closeResources,
+  } = useDisclosure();
+  
 
 
   // functions
@@ -112,6 +120,9 @@ function Dashboard1() {
   const handleMyProfile = () => {
     showMyProfile();
   };
+  const handleResources=()=>{
+    showResources();
+  }
 
   useEffect(() => {
     payload_check();
@@ -142,6 +153,7 @@ function Dashboard1() {
           setCalenderShow={setCalenderShow}
           setSelectedCourse={setSelectedCourse}
           handleMyProfile={handleMyProfile}
+          handleResources={handleResources}
           currentView={currentView}
           setCurrentView={setCurrentView}
         />
@@ -159,11 +171,18 @@ function Dashboard1() {
         <Viewer currentView={currentView} user={user} />
       </Flex>
       {user && Object.keys(user).length > 0 && (
+        <>
         <MyProfile
           openMyProfile={openMyProfile}
           closeMyProfile={closeMyProfile}
           user={user}
         />
+        <Resources
+          openResources={openResources}
+          closeResources={closeResources}
+          user={user}
+        />
+        </>
       )}
     </>
   );

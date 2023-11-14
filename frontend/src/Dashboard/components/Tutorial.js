@@ -152,7 +152,7 @@ function Tutorial({ email }) {
                 >
                   Image <br />{" "}
                   <Text fontSize={"12px"} fontWeight={"normal"}>
-                    {formData.file ? formData.file.name : ""}
+                    {formData.image ? formData.image.name : ""}
                   </Text>
                 </FormLabel>
                 <Input
@@ -280,6 +280,7 @@ function Tutorial({ email }) {
           </Box>
         </Box>
       </Box>
+      
       <AlertDialog
         motionPreset="slideInBottom"
         leastDestructiveRef={cancelRef}

@@ -5,7 +5,7 @@ import { useDisclosure } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
 import { useState } from 'react'
 
-const SideBar = ({ user, courses, selectedCourse, setSelectedCourse, handleMyProfile, currentView, setCurrentView }) => {
+const SideBar = ({ user, courses, selectedCourse, setSelectedCourse, handleMyProfile, handleResources, currentView, setCurrentView }) => {
     const { getButtonProps, getDisclosureProps, isOpen } = useDisclosure()
     const [hidden, setHidden] = useState(!isOpen)
     const isMediumDevice = window.innerWidth <= 768;
@@ -53,6 +53,7 @@ const SideBar = ({ user, courses, selectedCourse, setSelectedCourse, handleMyPro
                                 />
                                 <MenuList p={4} >
                                     <MenuItem borderRadius={4} onClick={() => handleMyProfile()}>My Profile</MenuItem>
+                                    <MenuItem borderRadius={4} onClick={() => handleResources()}>Resources</MenuItem>
                                     <MenuItem borderRadius={4}>Logout</MenuItem>
                                 </MenuList>
                             </Menu>

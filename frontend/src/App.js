@@ -31,6 +31,13 @@ import ImageGallery from './Pages/Gallery/ImageGallery';
 import CreditsPage from './Pages/contact_us/Credits1';
 import StaffTable from './Pages/People/Staff';
 import './App.css'
+import Programming from './components/Labs/Programming'
+import Security from './components/Labs/Security';
+import Embedded from './components/Labs/EmbeddedIoT';
+import Architecture from './components/Labs/Architecturelab'
+import ArtificialIntelligence from './components/Labs/ArtificialIntelligencelab';
+import ComputerVision from './components/Labs/ComputerVisionImageProcessing';
+import DataMining from './components/Labs/DataMiningAnalytics'
 
 const ScrollToTop = ({ children }) => {
   const { pathname } = useLocation();
@@ -78,7 +85,21 @@ const App = () => {
             <Route path="credits" element={<CreditsPage />} title="Credits" />
             <Route path="btech-students" element={<BTechStudents />} title="B.Tech Students" />
             <Route path="phd-students" element={<PhdStudents />} title="Ph.D. Students" />
+
+
+            <Route path="artificialintelligence" element={<ArtificialIntelligence />} title="ArtificialIntelligence" />
+            <Route path="architecture" element={<Architecture />} title="Architecture" />
+            <Route path="computervision" element={<ComputerVision />} title="ComputerVision" />
+            <Route path="datamining" element={<DataMining />} title="DataMining" />
+            <Route path="programming" element={<Programming />} title="Programming" />
+            <Route path="embedded" element={<Embedded />} title="Embedded" />
+            <Route path="security" element={<Security />} title="Security" />
+
+
+
             <Route path="*" element={<NotFound />} title="Not Found" />
+
+
           </Route>
           <Route path="dashboard" element={<Dashboard />} title="Dashboard" />
         </Routes>

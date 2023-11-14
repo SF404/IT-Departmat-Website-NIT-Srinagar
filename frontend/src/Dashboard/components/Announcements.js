@@ -99,7 +99,7 @@ function Announcements({ email }) {
   const handleDelete = async (delete_id) => {
     console.log(delete_id);
     try {
-      const response = await axios.post("", delete_id, get_token());
+      const response = await axios.delete(`/api/delete/${delete_id}/?type=announcement`, get_token());
       closeDeleteAlert();
       if (response.status === 204) {
         await fetchAnnouncements();
@@ -148,7 +148,6 @@ function Announcements({ email }) {
                     <Text as={Link} top={item.link} color={"blue"}>
                       {item.description}
                     </Text>
-
                     <Box display={"flex"} gap={2}>
                       <IconButton
                         isRound={true}
@@ -161,7 +160,7 @@ function Announcements({ email }) {
                           e.stopPropagation();
                           setDeleteInfo({
                             name: item.description,
-                            id: { notes_id: item.id },
+                            id:item.id ,
                           });
                           showDeleteAlert();
                         }}

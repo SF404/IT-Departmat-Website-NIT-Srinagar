@@ -17,6 +17,7 @@ import security from "./../../assets/images/security.webp";
 import programming from "./../../assets/images/programming.webp";
 import SmallBanner from "../../Layout/SmallBanner";
 
+
 function Labs() {
   const [labs, setLabs] = useState([
     {
@@ -25,6 +26,7 @@ function Labs() {
       description:
         "The Architecture and Distributed Systems Laboratory provides a computing environment which includes multiple workstations, PCs, and a cluster with multi-core machines. Its mission is to support teaching and research in all areas of parallel and distributed computing: advanced computer architectures, operating systems, parallel programming languages, applications, and high performance computing and networking activities in the Department of Information Technology at National Institute of Technology, Srinagar.",
       image: hardware,
+      url:'architecture'
     },
     {
       name: "Artificial Intelligence and Machine Learning",
@@ -32,6 +34,7 @@ function Labs() {
       description:
         "The AI Lab is designed to provide students, researchers, and professionals with the tools and resources necessary to dive deep into the realm of artificial intelligence. It offers a dynamic and collaborative environment for both learning and experimenting with AI technologies",
       image: ai,
+      url:'artificialintelligence'
     },
     {
       name: "Computer Vision and Image Processing",
@@ -39,6 +42,7 @@ function Labs() {
       description:
         "The Computer Vision and Image Processing Lab is at the forefront of research and innovation in the field of computer vision and image processing. This facility offers a range of resources and expertise to advance our understanding and utilization of visual data. ",
       image: a,
+      url:'computervision'
     },
     {
       name: "Data Mining and Analytics",
@@ -46,6 +50,7 @@ function Labs() {
       description:
         "The Data Mining and Analytics Lab is a dedicated research and development facility designed to unlock the hidden insights within vast datasets and harness the power of data for informed decision-making. This lab serves as a pivotal resource for students, researchers, and professionals eager to explore the transformative potential of data analysis and data-driven insights.",
       image: analysis,
+      url:'datamining'
     },
     {
       name: "Embedded IoT",
@@ -53,6 +58,7 @@ function Labs() {
       description:
         "The Embedded IoT Lab is a dedicated facility that explores the convergence of embedded systems and the Internet of Things (IoT). This dynamic and innovative lab serves as a hub for students, researchers, and industry professionals to engage with IoT technologies and harness their potential.",
       image: iot,
+      url:'embedded'
     },
     {
       name: "Programming",
@@ -60,6 +66,7 @@ function Labs() {
       description:
         "The Programming Lab is a dedicated space for students and enthusiasts to delve into the world of coding, software development, and problem-solving. It provides an environment that fosters hands-on learning, experimentation, and collaboration to hone programming skills.",
       image: programming,
+      url:'programming'
     },
     {
       name: "Security",
@@ -67,6 +74,7 @@ function Labs() {
       description:
         "The Security Lab is a dedicated space focused on all aspects of cybersecurity and information security. It serves as a critical hub for research, education, and practical training in safeguarding digital assets and systems from threats and vulnerabilities.",
       image: security,
+      url:'security'
     },
   ]);
   return (
@@ -117,6 +125,7 @@ function Labs() {
                       px={6}
                       borderRadius={"full"}
                       colorScheme="purple"
+                      onClick={()=> window.location=lab.url}
                     >
                       Enter Lab
                     </Button>
