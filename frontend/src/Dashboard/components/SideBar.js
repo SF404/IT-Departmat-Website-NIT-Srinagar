@@ -57,7 +57,7 @@ const SideBar = ({ user, courses, selectedCourse, setSelectedCourse, handleMyPro
                                     <MenuItem borderRadius={4}>Logout</MenuItem>
                                 </MenuList>
                             </Menu>
-                            <Text color={'darkblue'} fontWeight={'semibold'}>{user.name}</Text>
+                            <Text color={'#192e59'} fontWeight={'semibold'}>{user.name}</Text>
 
                         </HStack>
                         <Divider borderColor={"blackAlpha.300"} my={1} />
@@ -70,14 +70,14 @@ const SideBar = ({ user, courses, selectedCourse, setSelectedCourse, handleMyPro
                                 {...(selectedCourse === item.course_id
                                     ? {
                                         backgroundColor: "#d8dcf0",
-                                        color: "darkblue",
+                                        color: "#192e59",
                                         _hover: { backgroundColor: "#d8dcf0" },
                                     }
                                     : {})}
                                 {...(selectedCourse !== item.course_id
                                     ? { _hover: { backgroundColor: "#e5e5e5" } }
                                     : {})}
-                                _active={{ color: "darkblue" }}
+                                _active={{ color: "#192e59" }}
                             >
                                 {item.name}
                             </Button>

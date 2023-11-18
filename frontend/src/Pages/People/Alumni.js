@@ -12,7 +12,6 @@ function Alumni() {
   const [phdAlumni, setPhdAlumni] = useState(null);
 
   const handleFileChange = (file) => {
-    console.log(file)
     if (file) {
       const reader = new FileReader();
       reader.onload = (e) => {
@@ -36,16 +35,18 @@ function Alumni() {
       const file = new File([blob], 'table.xlsx', { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
       handleFileChange(file);
     } catch (error) {
+      setExcelData(null)
       console.error('Error fetching Excel file:', error);
     }
   }
   useEffect(() => {
     const fetchBtechData = async () => {
+      console.log('hi')
       try {
         const response = await axios.get(`/api/public/fileget/?q=alumni&&type=btech_student_list`);
-        console.log(response.data)
         setAlumni(response.data)
       } catch (error) {
+        setAlumni(null)
         console.error('Error fetching Excel file:', error);
       }
     }
@@ -55,14 +56,17 @@ function Alumni() {
           "/api/public/getphdstudent/?alumni=True"
         );
         setPhdAlumni(response.data);
-        console.log(response.data);
       } catch (error) {
+        setPhdAlumni(null)
         console.error("Error fetching data:", error);
       }
     };
 
-    fetchPhdData();
-    fetchBtechData();
+    return () => {
+
+      fetchPhdData();
+      fetchBtechData();
+    }
   }, [])
 
   return (
@@ -70,7 +74,7 @@ function Alumni() {
       <SmallBanner heading={'ALUMNI'} />
       <Center>
         <VStack w={{ base: 'full', md: '80%' }} my={4} p={4}>
-          <Heading fontSize={'1.5em'} mt={'0.5em'} w={'full'} textAlign={'left'} color={'darkblue'} className='family-3'>PHD Graduates</Heading>
+          <Heading fontSize={'1.5em'} mt={'0.5em'} w={'full'} textAlign={'left'} color={'#192e59'} className='family-3'>PHD Graduates</Heading>
           <VStack w={'full'}>
             <Accordion allowToggle gap={6} w={'full'} >
               <AccordionItem border={"none"} boxShadow={'0 0 6px rgba(0,0,0,0.1)'} w={'full'}>
@@ -159,7 +163,7 @@ function Alumni() {
               </AccordionItem>
             </Accordion>
           </VStack>
-          <Heading fontSize={'1.5em'} mt={'1em'} w={'full'} textAlign={'left'} color={'darkblue'} className='family-3'>B-TECH Graduates</Heading>
+          <Heading fontSize={'1.5em'} mt={'1em'} w={'full'} textAlign={'left'} color={'#192e59'} className='family-3'>B-TECH Graduates</Heading>
           <VStack w={'full'}>
             <Accordion allowToggle gap={6} reduceMotion onChange={(index) => { setExcelData(null); index >= 0 ? renderData(index) : setExcelData(null) }} w={'full'} >
               {alumni &&

@@ -1,51 +1,76 @@
-import React from "react";
+import { useEffect, useState } from "react";
 import {
-  Table,
-  Thead,
-  Tbody,
-  Tr,
-  Th,
-  Td,
-  TableContainer,
   Center,
-} from "@chakra-ui/react";
+  VStack,
+  useToast,
+} from '@chakra-ui/react';
+import axios from "axios";
+import * as XLSX from 'xlsx'
+import SearchTable from "../../components/Tables/SearchTable";
 import SmallBanner from "../../Layout/SmallBanner";
 
-const staffData = [
-  { staffMember: "Mr. Muzaffar Ahmad Beigh", designation: "Lab. Attendant" },
-  { staffMember: "Mr.Mohammad Ashraf Kumar", designation: "Lab. Attendant" },
-  { staffMember: "Mr. Shahid-ul-Islam", designation: "Office Attendant" },
-  { staffMember: "Mr.Gh. Nabi", designation: "Orderly" },
-];
 
-function App() {
+function Staff() {
+  const [excelData, setExcelData] = useState(null)
+  const toast = useToast()
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`/api/public/fileget/?q=file&&type=management&&name=staff`);
+        const data = response.data
+        console.log(response.data)
+        if (data.length <= 0) {
+          toast({
+            title: 'Data not Found',
+            description: "Contact Administrator",
+            status: 'info',
+            duration: 5000,
+            isClosable: true,
+          })
+          return;
+
+        };
+        const fileURL = data[0].file;
+        const fileResponse = await axios.get(fileURL, { responseType: 'blob' });
+        const blob = fileResponse.data;
+        const file = new File([blob], 'table.xlsx', { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            const data = e.target.result;
+            const workbook = XLSX.read(data, { type: 'binary' });
+            const sheetName = workbook.SheetNames[0];
+            const sheet = workbook.Sheets[sheetName];
+            const jsonData = XLSX.utils.sheet_to_json(sheet, { header: 1 });
+            setExcelData(jsonData);
+          };
+          reader.readAsBinaryString(file);
+        }
+      } catch (error) {
+        toast({
+          title: 'Error',
+          description: error.message,
+          status: 'error',
+          duration: 9000,
+          isClosable: true,
+        })
+        setExcelData(null)
+        console.error('Error fetching Excel file:', error);
+      }
+    }
+
+    return () => fetchData();
+  }, [toast]);
   return (
     <>
-      <SmallBanner heading={"STAFF MEMBERS"} />
-      <Center>
-        <TableContainer w={{ base: '100%', md: '80%' }} boxShadow={'0 0 6px rgba(0,0,0,0.05)'} m={4}>
-          <Table variant="striped" bg={"white"}>
-            <Thead bg={"#d8dcf0"}>
-              <Tr>
-                <Th>SR No.</Th>
-                <Th>Staff Member</Th>
-                <Th>Designation</Th>
-              </Tr>
-            </Thead>
-            <Tbody className="family-3" fontSize={'14px'}>
-              {staffData.map((item, index) => (
-                <Tr key={index}>
-                  <Td>{index + 1}</Td>
-                  <Td>{item.staffMember}</Td>
-                  <Td>{item.designation}</Td>
-                </Tr>
-              ))}
-            </Tbody>
-          </Table>
-        </TableContainer>
+      <SmallBanner heading={'STAFF'} />
+      <Center p={4}>
+        <VStack width={{ base: '100%', md: '80%' }} m={4} bg={"white"} boxShadow={'0 0 2px rgba(0,0,0,0.05)'} p={4} borderRadius={4}>
+          <SearchTable excelData={excelData} />
+        </VStack>
       </Center>
     </>
   );
 }
-
-export default App;
+export default Staff;

@@ -134,7 +134,7 @@ function Events({ email }) {
           p={4}
           borderTopRadius={8}
           fontWeight={"semibold"}
-          color={"darkblue"}
+          color={"#192e59"}
         >
           Manage Events
         </Box>
@@ -217,7 +217,7 @@ function Events({ email }) {
               textAlign={"left"}
               fontWeight={"semibold"}
               my={2}
-              color={"darkblue"}
+              color={"#192e59"}
             >
               My Events
             </Text>

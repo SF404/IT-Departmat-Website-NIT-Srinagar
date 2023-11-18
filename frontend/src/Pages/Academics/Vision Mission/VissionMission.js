@@ -10,7 +10,7 @@ import {
   List,
 } from "@chakra-ui/react";
 import { PiShootingStarDuotone } from "react-icons/pi";
-import SmallBanner from  "./../../../Layout/SmallBanner";
+import SmallBanner from "./../../../Layout/SmallBanner";
 
 const FacilitiesPage = () => {
   return (
@@ -19,11 +19,11 @@ const FacilitiesPage = () => {
       <Center w={"full"} p={4}>
         <SimpleGrid columns={[1, 1, 3, 3]} w={{ base: '100%', lg: '80%' }} my={4} gap={4} rowGap={4} >
           <GridItem textAlign={"center"}>
-            <Heading size={"md"} p={4} bg={"white"} boxShadow={'0 0 6px rgba(0,0,0,0.05)'} borderRadius={'8px'} className="family-2" letterSpacing={'1px'} color={"darkblue"} >Vision</Heading>
-            <Box p={4} bg={"white"} borderRadius={'8px'} my={1} boxShadow={'0 0 6px rgba(0,0,0,0.05)'} textAlign={"justify"} className="family-2" minH={'300px'}>
+            <Heading size={"md"} p={4} bg={"white"} boxShadow={'0 0 6px rgba(0,0,0,0.05)'} borderRadius={'8px'} className="family-5" letterSpacing={'1px'} color={"#192e59"} >Vision</Heading>
+            <Box p={4} bg={"white"} borderRadius={'8px'} my={1} boxShadow={'0 0 6px rgba(0,0,0,0.05)'} textAlign={"justify"} className="family-5" minH={'300px'}>
               <List>
                 <ListItem>
-                  <ListIcon as={PiShootingStarDuotone} mt={'-5px'} size={'lg'} color={'darkblue'} />
+                  <ListIcon as={PiShootingStarDuotone} mt={'-5px'} size={'lg'} color={'#192e59'} />
                   To attain global recognition in Information Technology
                   education and research by producing “Creators of
                   Innovative Technology”.
@@ -32,26 +32,26 @@ const FacilitiesPage = () => {
             </Box>
           </GridItem>
           <GridItem textAlign={"center"}>
-            <Heading size={"md"} p={4} bg={"white"} boxShadow={'0 0 6px rgba(0,0,0,0.05)'} borderRadius={'8px'} className="family-2" letterSpacing={'1px'} color={"darkblue"}>Mission</Heading>
-            <Box p={4} bg={"white"} borderRadius={'8px'} my={1} boxShadow={'0 0 6px rgba(0,0,0,0.05)'} textAlign={"justify"} className="family-2" minH={'300px'}>
+            <Heading size={"md"} p={4} bg={"white"} boxShadow={'0 0 6px rgba(0,0,0,0.05)'} borderRadius={'8px'} className="family-5" letterSpacing={'1px'} color={"#192e59"}>Mission</Heading>
+            <Box p={4} bg={"white"} borderRadius={'8px'} my={1} boxShadow={'0 0 6px rgba(0,0,0,0.05)'} textAlign={"justify"} className="family-5" minH={'300px'}>
               <List>
                 <ListItem>
-                  <ListIcon as={PiShootingStarDuotone} mt={'-5px'} size={'lg'} color={'darkblue'} />
+                  <ListIcon as={PiShootingStarDuotone} mt={'-5px'} size={'lg'} color={'#192e59'} />
                   Promote quality teaching-learning process through
                   innovation.
                 </ListItem>
                 <ListItem>
-                  <ListIcon as={PiShootingStarDuotone} mt={'-5px'} size={'lg'} color={'darkblue'} />
+                  <ListIcon as={PiShootingStarDuotone} mt={'-5px'} size={'lg'} color={'#192e59'} />
                   Provide a conducive environment for students to develop
                   their skills.
                 </ListItem>
                 <ListItem>
-                  <ListIcon as={PiShootingStarDuotone} mt={'-5px'} size={'lg'} color={'darkblue'} />
+                  <ListIcon as={PiShootingStarDuotone} mt={'-5px'} size={'lg'} color={'#192e59'} />
                   Encourage research that contributes to technological
                   advancement.
                 </ListItem>
                 <ListItem>
-                  <ListIcon as={PiShootingStarDuotone} mt={'-5px'} size={'lg'} color={'darkblue'} />
+                  <ListIcon as={PiShootingStarDuotone} mt={'-5px'} size={'lg'} color={'#192e59'} />
                   Foster partnerships with industry and other institutions
                   to provide opportunities for practical training and
                   employment.
@@ -60,21 +60,21 @@ const FacilitiesPage = () => {
             </Box>
           </GridItem>
           <GridItem textAlign={"center"}>
-            <Heading size={"md"} p={4} bg={"white"} boxShadow={'0 0 6px rgba(0,0,0,0.05)'} borderRadius={'8px'} className="family-2" letterSpacing={'1px'} color={"darkblue"}>Values</Heading>
-            <Box p={4} bg={"white"} borderRadius={'8px'} my={1} boxShadow={'0 0 6px rgba(0,0,0,0.05)'} textAlign={"justify"} className="family-2" minH={'300px'}>
+            <Heading size={"md"} p={4} bg={"white"} boxShadow={'0 0 6px rgba(0,0,0,0.05)'} borderRadius={'8px'} className="family-5" letterSpacing={'1px'} color={"#192e59"}>Values</Heading>
+            <Box p={4} bg={"white"} borderRadius={'8px'} my={1} boxShadow={'0 0 6px rgba(0,0,0,0.05)'} textAlign={"justify"} className="family-5" minH={'300px'}>
               <List>
                 <ListItem>
-                  <ListIcon as={PiShootingStarDuotone} mt={'-5px'} size={'lg'} color={'darkblue'} />
+                  <ListIcon as={PiShootingStarDuotone} mt={'-5px'} size={'lg'} color={'#192e59'} />
                   Excellence: We strive for excellence in all our
                   activities.
                 </ListItem>
                 <ListItem>
-                  <ListIcon as={PiShootingStarDuotone} mt={'-5px'} size={'lg'} color={'darkblue'} />
+                  <ListIcon as={PiShootingStarDuotone} mt={'-5px'} size={'lg'} color={'#192e59'} />
                   Innovation: We encourage creativity and continuous
                   learning.
                 </ListItem>
                 <ListItem>
-                  <ListIcon as={PiShootingStarDuotone} mt={'-5px'} size={'lg'} color={'darkblue'} />
+                  <ListIcon as={PiShootingStarDuotone} mt={'-5px'} size={'lg'} color={'#192e59'} />
                   Collaboration: We work collaboratively towards achieving
                   shared objectives.
                 </ListItem>
@@ -83,92 +83,6 @@ const FacilitiesPage = () => {
           </GridItem>
         </SimpleGrid>
       </Center>
-
-
-
-
-
-
-      {/* 
-      <Box>
-        <Heading size={"lg"} color={"blue.800"} textAlign={"center"}>
-        </Heading>
-        <Center>
-          <VStack
-            w={"full"}
-            width={{ md: "100%", xl: "80%" }}
-            bg={"white"}
-            spacing={6}
-            mt={4}
-            p={6}
-          >
-            <Missionleft
-              img={vission}
-              title="Vision"
-              description={
-                <div>
-                  <List>
-                    <ListItem>
-                      To attain global recognition in Information Technology
-                      education <br /> and research by producing “Creators of
-                      Innovative Technology”.
-                    </ListItem>
-                  </List>
-                </div>
-              }
-            />
-            <Visionright
-              img={mission}
-              title="Mission"
-              description={
-                <div>
-                  <List>
-                    <ListItem>
-                      Promote quality teaching-learning process through
-                      innovation.
-                    </ListItem>
-                    <ListItem>
-                      Provide a conducive environment for students to develop
-                      their skills.
-                    </ListItem>
-                    <ListItem>
-                      Encourage research that contributes to technological
-                      advancement.
-                    </ListItem>
-                    <ListItem>
-                      Foster partnerships with industry and other institutions
-                      to provide opportunities for practical training and
-                      employment.
-                    </ListItem>
-                  </List>
-                </div>
-              }
-            />
-            <Missionleft
-              img={values}
-              title="Values"
-              description={
-                <div>
-                  <List>
-                    <ListItem>
-                      Excellence: We strive for excellence in all our
-                      activities.
-                    </ListItem>
-                    <ListItem>
-                      Innovation: We encourage creativity and continuous
-                      learning.
-                    </ListItem>
-                    <ListItem>
-                      Collaboration: We work collaboratively towards achieving
-                      shared objectives.
-                    </ListItem>
-                  </List>
-                </div>
-              }
-            />
-          </VStack>
-        </Center>
-      </Box> */}
     </>
   );
 };

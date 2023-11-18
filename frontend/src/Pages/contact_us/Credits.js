@@ -163,7 +163,7 @@ const CreditsPage = () => {
         mt={4}
         p={6}
       >
-        <Heading size={"lg"} color={"darkblue"} textAlign={"center"}>
+        <Heading size={"lg"} color={"#192e59"} textAlign={"center"}>
           Credits
         </Heading>
         <Heading as="h2" textAlign="start" mb={4}>

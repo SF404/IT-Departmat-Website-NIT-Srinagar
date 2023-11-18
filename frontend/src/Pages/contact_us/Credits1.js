@@ -88,10 +88,10 @@ function Credits1() {
 
     return (
         <VStack w={'full'}>
-            {/* <Heading fontSize={'1.5em'} my={'0.5em'} textAlign={'center'} color={'darkblue'}>CREDITS</Heading> */}
+            {/* <Heading fontSize={'1.5em'} my={'0.5em'} textAlign={'center'} color={'#192e59'}>CREDITS</Heading> */}
             <VStack width={{ base: '100%', md: '80%' }} gap={6} className='family-1' p={4}>
-                {/* <Heading fontSize={'1em'} my={'-1em'} textAlign={'left'} color={'darkblue'} w={'full'}>Mentor</Heading> */}
-                <Heading fontSize={'1em'} mb={-2} mt={2} fontWeight={'semibold'} textAlign={'center'} color={'darkblue'} w={'full'} className='family-1'>MENTOR</Heading>
+                {/* <Heading fontSize={'1em'} my={'-1em'} textAlign={'left'} color={'#192e59'} w={'full'}>Mentor</Heading> */}
+                <Heading fontSize={'1em'} mb={-2} mt={2} fontWeight={'semibold'} textAlign={'center'} color={'#192e59'} w={'full'} className='family-1'>MENTOR</Heading>
 
 
                 {
@@ -116,7 +116,7 @@ function Credits1() {
                                 <HStack textAlign={'left'} w={'full'}>
                                     <Tooltip hasArrow label={item.phone} bg='#d8dcf0' color='black' >
                                         <IconButton
-                                            color={'darkblue'}
+                                            color={'#192e59'}
                                             bg={'#ebedf7'}
                                             fontSize={'1.5em'}
                                             icon={<Icon as={PiPhoneDuotone} />}
@@ -130,7 +130,7 @@ function Credits1() {
                                     </Tooltip>
                                     <Tooltip hasArrow label={item.email} bg='#d8dcf0' color='black' >
                                         <IconButton
-                                            color={'darkblue'}
+                                            color={'#192e59'}
                                             bg={'#ebedf7'}
                                             fontSize={'1.5em'}
                                             icon={<Icon as={PiEnvelopeDuotone} />}
@@ -144,7 +144,7 @@ function Credits1() {
                                     </Tooltip>
                                     <Tooltip hasArrow label={'GitHub'} bg='#d8dcf0' color='black' >
                                         <IconButton
-                                            color={'darkblue'}
+                                            color={'#192e59'}
                                             bg={'#ebedf7'}
                                             fontSize={'1.5em'}
                                             icon={<Icon as={PiGithubLogoDuotone} />}
@@ -159,7 +159,7 @@ function Credits1() {
                                     </Tooltip>
                                     <Tooltip hasArrow label={'LinkedIn'} bg='#d8dcf0' color='black' >
                                         <IconButton
-                                            color={'darkblue'}
+                                            color={'#192e59'}
                                             bg={'#ebedf7'}
                                             fontSize={'1.5em'}
                                             icon={<Icon as={PiLinkedinLogoDuotone} />}
@@ -173,7 +173,7 @@ function Credits1() {
                                     </Tooltip>
                                     <Tooltip hasArrow label={item.website} bg='#d8dcf0' color='black' >
                                         <IconButton
-                                            color={'darkblue'}
+                                            color={'#192e59'}
                                             bg={'#ebedf7'}
                                             fontSize={'1.5em'}
                                             icon={<Icon as={PiGlobeHemisphereEastDuotone} />}
@@ -193,7 +193,7 @@ function Credits1() {
                     ))
 
                 }
-                <Heading fontSize={'1em'} mt={2} fontWeight={'semibold'} textAlign={'center'} color={'darkblue'} w={'full'} className='family-1'>DEVELOPED BY</Heading>
+                <Heading fontSize={'1em'} mt={2} fontWeight={'semibold'} textAlign={'center'} color={'#192e59'} w={'full'} className='family-1'>DEVELOPED BY</Heading>
 
                 <SimpleGrid gap={4} columns={[1, 1, 2, 3]} w={'full'}>
                     {
@@ -212,7 +212,7 @@ function Credits1() {
                                 <HStack justifyContent={'center'} textAlign={'center'} w={'full'}>
                                     <Tooltip hasArrow label={item.phone} bg='#d8dcf0' color='black' >
                                         <IconButton
-                                            color={'darkblue'}
+                                            color={'#192e59'}
                                             bg={'#ebedf7'}
                                             fontSize={'1.5em'}
                                             icon={<Icon as={PiPhoneDuotone} />}
@@ -226,7 +226,7 @@ function Credits1() {
                                     </Tooltip>
                                     <Tooltip hasArrow label={item.email} bg='#d8dcf0' color='black' >
                                         <IconButton
-                                            color={'darkblue'}
+                                            color={'#192e59'}
                                             bg={'#ebedf7'}
                                             fontSize={'1.5em'}
                                             icon={<Icon as={PiEnvelopeDuotone} />}
@@ -240,7 +240,7 @@ function Credits1() {
                                     </Tooltip>
                                     <Tooltip hasArrow label={'GitHub'} bg='#d8dcf0' color='black' >
                                         <IconButton
-                                            color={'darkblue'}
+                                            color={'#192e59'}
                                             bg={'#ebedf7'}
                                             fontSize={'1.5em'}
                                             icon={<Icon as={PiGithubLogoDuotone} />}
@@ -255,7 +255,7 @@ function Credits1() {
                                     </Tooltip>
                                     <Tooltip hasArrow label={'LinkedIn'} bg='#d8dcf0' color='black' >
                                         <IconButton
-                                            color={'darkblue'}
+                                            color={'#192e59'}
                                             bg={'#ebedf7'}
                                             fontSize={'1.5em'}
                                             icon={<Icon as={PiLinkedinLogoDuotone} />}
@@ -269,7 +269,7 @@ function Credits1() {
                                     </Tooltip>
                                     <Tooltip hasArrow label={item.website} bg='#d8dcf0' color='black' >
                                         <IconButton
-                                            color={'darkblue'}
+                                            color={'#192e59'}
                                             bg={'#ebedf7'}
                                             fontSize={'1.5em'}
                                             icon={<Icon as={PiGlobeHemisphereEastDuotone} />}

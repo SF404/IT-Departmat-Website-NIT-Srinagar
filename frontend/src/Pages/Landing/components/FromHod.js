@@ -1,12 +1,8 @@
 import {
-  AspectRatio,
   Box,
   Button,
-  Center,
-  Flex,
   Heading,
   SimpleGrid,
-  Stack,
   Text,
 } from "@chakra-ui/react";
 import React from "react";
@@ -18,7 +14,7 @@ function FromHod({ video_from_hod }) {
         fontSize={"1.5em"}
         my={"0.5em"}
         textAlign={"center"}
-        color={"darkblue"}
+        color={"#192e59"}
       >
         FROM HOD
       </Heading>
@@ -47,7 +43,7 @@ function FromHod({ video_from_hod }) {
             research, and the department is involved in IT research programs
             supported by both the government and industry.
           </Text>
-          <Box textAlign={"right"}>
+          {/* <Box textAlign={"right"}>
             <Button
               colorScheme={"facebook"}
               borderRadius={"0.5em"}
@@ -56,11 +52,9 @@ function FromHod({ video_from_hod }) {
             >
               Read More
             </Button>
-          </Box>
+          </Box> */}
         </Box>
-        {/* <Center w={'full'} h={'full'}> */}
         <video className="hod-video" src={video_from_hod} controls></video>
-        {/* </Center> */}
       </SimpleGrid>
     </Box>
   );

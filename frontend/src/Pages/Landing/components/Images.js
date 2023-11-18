@@ -1,6 +1,6 @@
 import { Badge, Box, Heading, IconButton, Image, Text, } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
-import Carousel from 'react-grid-carousel'
+import Carousel from 'better-react-carousel'
 import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
@@ -12,32 +12,32 @@ function Images() {
         data: [],
         loadedCount: 12, // Number of images to load initially
         totalCount: 0,  // Total number of images
-      });
+    });
 
-    const fetchImages = async () => {
-        try {
-            const response = await axios.get(`/api/public/galleryget/`);
-            setImages((prevImages) => ({
-                ...prevImages,
-                data: response.data,
-                totalCount: response.data.length,
-            }));
-        } catch (error) {
-            console.log(error)
-        }
-    }
 
     useEffect(() => {
-        fetchImages();
+        const fetchImages = async () => {
+            try {
+                const response = await axios.get(`/api/public/galleryget/`);
+                setImages((prevImages) => ({
+                    ...prevImages,
+                    data: response.data,
+                    totalCount: response.data.length,
+                }));
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        return () => fetchImages();
     }, [])
     return (
         (
             <Box w={'100%'}>
-                <Heading fontSize={'1.5em'} mt={'0.5em'} textAlign={'left'} px={5} pt={4} color={'darkblue'}>PHOTO GALLERY</Heading> 
-                <Badge as={Link} to={'/gallery'} colorScheme='red' fontSize={'x-small'} _hover={{color:'red'}}  textAlign={'left'} mx={5} mb={2}>view all</Badge> 
+                <Heading fontSize={'1.5em'} mt={'0.5em'} textAlign={'left'} px={5} pt={4} color={'#192e59'}>PHOTO GALLERY</Heading>
+                <Badge as={Link} to={'/gallery'} colorScheme='red' fontSize={'x-small'} _hover={{ color: 'red' }} textAlign={'left'} mx={5} mb={2}>view all</Badge>
 
                 <Box w={'full'} >
-                    <Carousel cols={4} rows={3} loop={true} showDots={false} dotColorActive={'darkblue'}
+                    <Carousel cols={4} rows={3} loop={true} showDots={false} dotColorActive={'#192e59'}
                         arrowLeft={
                             <IconButton icon={<ChevronRightIcon />}
                                 position={'absolute'}
@@ -57,7 +57,7 @@ function Images() {
                             images.data.slice(0, images.loadedCount).map((item, index) => (
                                 <Carousel.Item key={index}>
                                     <Box bg={'black'} overflow={'hidden'} h={'full'} borderRadius={{ base: '0.5em', lg: '0em' }}>
-                                        <Image key={index} src={item.image} alt="" style={{ width: '100%', height: '100%', display: 'block', transition: '0.2s ease-in', }} cursor={'pointer'}
+                                        <Image key={index} loading='lazy' src={item.image} alt="" style={{ width: '100%', height: '100%', display: 'block', transition: '0.2s ease-in', }} width={'100px'} height={'100px'}  cursor={'pointer'}
                                             _hover={{ transform: 'scale(1.1)' }}
                                         />
                                     </Box>

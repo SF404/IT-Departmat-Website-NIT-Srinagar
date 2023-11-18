@@ -7,22 +7,29 @@ import SmallBanner from "../../Layout/SmallBanner";
 
 function Faculty() {
   const [faculty, setFaculty] = useState();
-  const fetchData = async () => {
-    try {
-      const response = await axios.get("/api/public/getteacher/");
-      const teachers = response.data;
-      setFaculty(teachers);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  };
+  const toast = useToast();
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-    fetchData();
-  }, []);
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("/api/public/getteacher/");
+        const teachers = response.data;
+        setFaculty(teachers);
+      } catch (error) {
+        setFaculty(null)
+        console.log('Error fetching faculty: ', error)
+        toast({
+          title: 'Error',
+          description: error.message,
+          status: 'error',
+          duration: 9000,
+          isClosable: true,
+        })
+      }
+    };
+    return () => fetchData();
+  }, [toast]);
 
-  const toast = useToast();
   const handleClick = async (data) => {
     try {
       await navigator.clipboard.writeText(data);
@@ -52,11 +59,11 @@ function Faculty() {
             <VStack w={{ base: "100%", md: '80%' }} spacing={6} p={4}>
               <Divider />
 
-              {faculty.map((item, index) => (
+              {faculty.length > 0 && faculty.map((item, index) => (
                 <Stack key={index} direction={{ base: "column", md: "row" }} w={"full"} bg={"white"} p={4} borderRadius={'0.5em'} boxShadow={'rgba(0, 0, 0, 0.05) 0px 1px 6px;'}>
                   <Avatar name={item.name} border={'2px solid #d8dcf0'} p={0} src={item.profile_photo} size={'2xl'} mr={4}></Avatar>
                   <Box h={"full"}  >
-                    <Heading as={Link} to={`/faculty/details/${item.id}`} size={"md"} color={"darkblue"} _hover={{ textDecoration: 'underline' }}>{item.name}</Heading>
+                    <Heading as={Link} to={`/faculty/details/${item.id}`} size={"md"} color={"#192e59"} _hover={{ textDecoration: 'underline' }}>{item.name}</Heading>
                     <br />
                     <Badge fontFamily={'body'} colorScheme="facebook">{item.description}</Badge>
                     <br />
@@ -76,11 +83,10 @@ function Faculty() {
                         </Text>
                       </Tooltip>
 
-                      <Text as={Link} cursor={"pointer"} _hover={{ color: 'darkblue', textDecoration: 'underline' }} to={item.website || '/faculty/details/' + item.id} target="_blank">
+                      <Text as={Link} cursor={"pointer"} _hover={{ color: '#192e59', textDecoration: 'underline' }} to={item.website || '/faculty/details/' + item.id} target="_blank">
                         <Icon as={ExternalLinkIcon} mr={2} color="gray.600" />{item.website || "website"}
                       </Text>
                     </Box>
-
                   </Box>
                 </Stack>
               ))}

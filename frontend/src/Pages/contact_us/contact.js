@@ -6,7 +6,6 @@ import {
   Heading,
   Text,
   Divider,
-  Container,
   Grid,
   GridItem,
   Flex, 
@@ -18,7 +17,7 @@ import { FaFax } from "react-icons/fa6";
 const ContactUs = () => {
   return (
     <Box p={4} minHeight={0}>
-      <Heading as="h1" size="2xl" mb={6} textAlign="center" color={"darkblue"}>
+      <Heading as="h1" size="2xl" mb={6} textAlign="center" color={"#192e59"}>
         Contact Us
       </Heading>
       <Center>

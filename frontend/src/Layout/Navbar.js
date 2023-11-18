@@ -1,21 +1,5 @@
-import {
-  Box,
-  Flex,
-  Text,
-  Button,
-  VStack,
-  IconButton,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuList,
-  Image,
-  Stack,
-  HStack,
-  useDisclosure,
-  Tooltip,
-} from "@chakra-ui/react";
-import React, { useState,useEffect } from "react";
+import { Box, Flex, Text, Button, VStack, IconButton, Menu, MenuButton, MenuItem, MenuList, Image, Stack, HStack, useDisclosure, Tooltip, } from "@chakra-ui/react";
+import React, { useState, useEffect } from "react";
 import mainLogo from "./../assets/images/download.webp";
 import { Link } from "react-router-dom";
 import { FaBarsStaggered, FaX } from "react-icons/fa6";
@@ -27,15 +11,12 @@ function NavLinks({ color = "white", isOpen = null, onClose = null }) {
     if (isOpen) onClose();
   };
 
-
   const [login, setLogin] = useState(false);
   useEffect(() => {
-    if(localStorage.getItem('TokenA')) {
-      setLogin(true)
+    function func() {
+      localStorage.getItem('TokenA') ? setLogin(true) : setLogin(false);
     }
-    else{
-      setLogin(false)
-    }
+    return () => func();
   }, [])
 
   return (
@@ -65,23 +46,16 @@ function NavLinks({ color = "white", isOpen = null, onClose = null }) {
         <MenuList boxShadow={"lg"}>
           <MenuItem
             as={Link}
-            _hover={{ color: "darkblue" }}
+            _hover={{ color: "#192e59" }}
             onClick={handleNavigation}
             to="/degree-program"
           >
             Degree Program
           </MenuItem>
+
           <MenuItem
             as={Link}
-            _hover={{ color: "darkblue" }}
-            onClick={handleNavigation}
-            to="/vision-mission"
-          >
-            Vision and Mission
-          </MenuItem>
-          <MenuItem
-            as={Link}
-            _hover={{ color: "darkblue" }}
+            _hover={{ color: "#192e59" }}
             onClick={handleNavigation}
             to="/outcomes"
           >
@@ -89,7 +63,7 @@ function NavLinks({ color = "white", isOpen = null, onClose = null }) {
           </MenuItem>
           <MenuItem
             as={Link}
-            _hover={{ color: "darkblue" }}
+            _hover={{ color: "#192e59" }}
             onClick={handleNavigation}
             to="/courses"
           >
@@ -97,7 +71,7 @@ function NavLinks({ color = "white", isOpen = null, onClose = null }) {
           </MenuItem>
           <MenuItem
             as={Link}
-            _hover={{ color: "darkblue" }}
+            _hover={{ color: "#192e59" }}
             onClick={handleNavigation}
             to="/coordinators"
           >
@@ -105,7 +79,7 @@ function NavLinks({ color = "white", isOpen = null, onClose = null }) {
           </MenuItem>
           <MenuItem
             as={Link}
-            _hover={{ color: "darkblue" }}
+            _hover={{ color: "#192e59" }}
             onClick={handleNavigation}
             to="/committee"
           >
@@ -113,7 +87,15 @@ function NavLinks({ color = "white", isOpen = null, onClose = null }) {
           </MenuItem>
           <MenuItem
             as={Link}
-            _hover={{ color: "darkblue" }}
+            _hover={{ color: "#192e59" }}
+            onClick={handleNavigation}
+            to="/vision-mission"
+          >
+            Vision and Mission
+          </MenuItem>
+          <MenuItem
+            as={Link}
+            _hover={{ color: "#192e59" }}
             onClick={handleNavigation}
             to="/newsletter"
           >
@@ -135,7 +117,7 @@ function NavLinks({ color = "white", isOpen = null, onClose = null }) {
         <MenuList boxShadow={"lg"}>
           <MenuItem
             as={Link}
-            _hover={{ color: "darkblue" }}
+            _hover={{ color: "#192e59" }}
             onClick={handleNavigation}
             to="/faculty"
           >
@@ -143,7 +125,7 @@ function NavLinks({ color = "white", isOpen = null, onClose = null }) {
           </MenuItem>
           <MenuItem
             as={Link}
-            _hover={{ color: "darkblue" }}
+            _hover={{ color: "#192e59" }}
             onClick={handleNavigation}
             to="/phd-students"
           >
@@ -151,7 +133,7 @@ function NavLinks({ color = "white", isOpen = null, onClose = null }) {
           </MenuItem>
           <MenuItem
             as={Link}
-            _hover={{ color: "darkblue" }}
+            _hover={{ color: "#192e59" }}
             onClick={handleNavigation}
             to="/btech-students"
           >
@@ -159,7 +141,7 @@ function NavLinks({ color = "white", isOpen = null, onClose = null }) {
           </MenuItem>
           <MenuItem
             as={Link}
-            _hover={{ color: "darkblue" }}
+            _hover={{ color: "#192e59" }}
             onClick={handleNavigation}
             to="/alumni"
           >
@@ -167,7 +149,7 @@ function NavLinks({ color = "white", isOpen = null, onClose = null }) {
           </MenuItem>
           <MenuItem
             as={Link}
-            _hover={{ color: "darkblue" }}
+            _hover={{ color: "#192e59" }}
             onClick={handleNavigation}
             to="/staff"
           >
@@ -189,7 +171,7 @@ function NavLinks({ color = "white", isOpen = null, onClose = null }) {
         <MenuList boxShadow={"lg"}>
           <MenuItem
             as={Link}
-            _hover={{ color: "darkblue" }}
+            _hover={{ color: "#192e59" }}
             onClick={handleNavigation}
             to="/areas"
           >
@@ -197,7 +179,7 @@ function NavLinks({ color = "white", isOpen = null, onClose = null }) {
           </MenuItem>
           <MenuItem
             as={Link}
-            _hover={{ color: "darkblue" }}
+            _hover={{ color: "#192e59" }}
             onClick={handleNavigation}
             to="/papers"
           >
@@ -205,7 +187,7 @@ function NavLinks({ color = "white", isOpen = null, onClose = null }) {
           </MenuItem>
           <MenuItem
             as={Link}
-            _hover={{ color: "darkblue" }}
+            _hover={{ color: "#192e59" }}
             onClick={handleNavigation}
             to="/labs"
           >
@@ -227,7 +209,7 @@ function NavLinks({ color = "white", isOpen = null, onClose = null }) {
         <MenuList boxShadow={"lg"}>
           <MenuItem
             as={Link}
-            _hover={{ color: "darkblue" }}
+            _hover={{ color: "#192e59" }}
             onClick={handleNavigation}
             to="/awards"
           >
@@ -235,7 +217,7 @@ function NavLinks({ color = "white", isOpen = null, onClose = null }) {
           </MenuItem>
           <MenuItem
             as={Link}
-            _hover={{ color: "darkblue" }}
+            _hover={{ color: "#192e59" }}
             onClick={handleNavigation}
             to="/facilities"
           >
@@ -243,7 +225,7 @@ function NavLinks({ color = "white", isOpen = null, onClose = null }) {
           </MenuItem>
           <MenuItem
             as={Link}
-            _hover={{ color: "darkblue" }}
+            _hover={{ color: "#192e59" }}
             onClick={handleNavigation}
             to="/placement-brochure"
           >
@@ -251,7 +233,7 @@ function NavLinks({ color = "white", isOpen = null, onClose = null }) {
           </MenuItem>
           <MenuItem
             as={Link}
-            _hover={{ color: "darkblue" }}
+            _hover={{ color: "#192e59" }}
             onClick={handleNavigation}
             to="/gallery"
           >
@@ -273,7 +255,7 @@ function NavLinks({ color = "white", isOpen = null, onClose = null }) {
         <MenuList boxShadow={"lg"}>
           <MenuItem
             as={Link}
-            _hover={{ color: "darkblue" }}
+            _hover={{ color: "#192e59" }}
             onClick={handleNavigation}
             to="/semester/all"
           >
@@ -281,82 +263,12 @@ function NavLinks({ color = "white", isOpen = null, onClose = null }) {
           </MenuItem>
           <MenuItem
             as={Link}
-            _hover={{ color: "darkblue" }}
-            onClick={handleNavigation}
-            to="/semester/1"
-          >
-            Semester 1
-          </MenuItem>
-          <MenuItem
-            as={Link}
-            _hover={{ color: "darkblue" }}
-            onClick={handleNavigation}
-            to="/semester/2"
-          >
-            Semester 2
-          </MenuItem>
-          <MenuItem
-            as={Link}
-            _hover={{ color: "darkblue" }}
-            onClick={handleNavigation}
-            to="/semester/3"
-          >
-            Semester 3
-          </MenuItem>
-          <MenuItem
-            as={Link}
-            _hover={{ color: "darkblue" }}
-            onClick={handleNavigation}
-            to="/semester/4"
-          >
-            Semester 4
-          </MenuItem>
-          <MenuItem
-            as={Link}
-            _hover={{ color: "darkblue" }}
-            onClick={handleNavigation}
-            to="/semester/5"
-          >
-            Semester 5
-          </MenuItem>
-          <MenuItem
-            as={Link}
-            _hover={{ color: "darkblue" }}
-            onClick={handleNavigation}
-            to="/semester/6"
-          >
-            Semester 6
-          </MenuItem>
-          <MenuItem
-            as={Link}
-            _hover={{ color: "darkblue" }}
-            onClick={handleNavigation}
-            to="/semester/7"
-          >
-            Semester 7
-          </MenuItem>
-          <MenuItem
-            as={Link}
-            _hover={{ color: "darkblue" }}
-            onClick={handleNavigation}
-            to="/semester/8"
-          >
-            Semester 8
-          </MenuItem>
-          <MenuItem
-            as={Link}
-            _hover={{ color: "darkblue" }}
+            _hover={{ color: "#192e59" }}
             onClick={handleNavigation}
             to="/tutorials"
           >
             Tutorials
           </MenuItem>
-          {/* <MenuItem as={Link} _hover={{ color: 'darkblue' }} onClick={handleNavigation} to="/phd">
-            Phd
-          </MenuItem>
-          <MenuItem as={Link} _hover={{ color: 'darkblue' }} onClick={handleNavigation} to="/others">
-            Others
-          </MenuItem> */}
         </MenuList>
       </Menu>
 
@@ -402,7 +314,7 @@ function Navbar() {
         <Image src={mainLogo} h={"50px"} w={"50px"} alt="logo" />
         <Text
           mx={"10px"}
-          fontSize={{ base: "sm", md: "lg" }}
+          fontSize={{ base: "sm", md: "md" }}
           fontWeight={"bold"}
         >
           DEPARTMENT OF INFORMATION TECHNOLOGY <br />{" "}

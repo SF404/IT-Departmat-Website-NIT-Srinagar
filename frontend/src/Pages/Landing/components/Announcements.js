@@ -6,12 +6,12 @@ function Announcements({ announcements }) {
     return (
         <>
             <Box w={'full'}>
-                <Heading fontSize={'1.5em'} my={'0.5em'} textAlign={'center'} color={'darkblue'}>IMPORTANT ANNOUNCEMENTS</Heading>
-                <List minH={'50%'} spacing={2} bg={'white'} p={4} borderRadius={'1em'} boxShadow={'0 0 12px rgba(0,0,0,0.05)'}>
+                <Heading fontSize={'1.5em'} my={'0.5em'} textAlign={'center'} color={'#192e59'}>IMPORTANT ANNOUNCEMENTS</Heading>
+                <List spacing={2} bg={'white'} p={4} borderRadius={'1em'} boxShadow={'0 0 12px rgba(0,0,0,0.05)'}>
                     {announcements && announcements.length > 0 ? announcements.map((item, index) => (
 
                         <ListItem key={index} fontWeight={'semibold'} fontSize={'lg'} className='family-1'>
-                            <ListIcon as={PiCubeDuotone} mt={'-5px'} color={'darkblue'} />
+                            <ListIcon as={PiCubeDuotone} mt={'-5px'} color={'#192e59'} />
                             <Link href={item.link}>{item.description}</Link>
                             
                         </ListItem>

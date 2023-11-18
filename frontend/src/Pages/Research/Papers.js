@@ -1,7 +1,7 @@
-import { Box, Button, DarkMode, Link, List, ListIcon, ListItem, OrderedList, Spinner, Text, VStack } from '@chakra-ui/react'
+import { Box, Button, DarkMode, Link, List, ListIcon, ListItem, Text, VStack } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import SmallBanner from '../../Layout/SmallBanner';
-import { PiAsteriskSimpleDuotone, PiCubeDuotone } from "react-icons/pi";
+import {  PiCubeDuotone } from "react-icons/pi";
 import axios from 'axios'
 
 function Papers() {
@@ -14,9 +14,10 @@ function Papers() {
                 setPapers(response.data);
             } catch (error) {
                 console.error('Error fetching research papers:', error);
+                setPapers(null)
             }
         };
-        fetchResearch();
+        return () => fetchResearch();
     }, []);
 
     const scrollToSection = (sectionId) => {
@@ -64,15 +65,15 @@ function Papers() {
                 <Box flexGrow={1} className='family-5'>
                     {Object.keys(groupedPapers).reverse().map((year, index) => (
                         <Box key={index} id={year} py={'1em'} px={'0.5em'} bg={'white'} m={4} borderRadius={12} boxShadow={'0 0 4px rgba(0,0,0,0.1)'}>
-                            <Text maxW={'fit-content'} px={4} py={1} color={'darkblue'} fontWeight={'bold'}>Year: {year}</Text>
-                            <List p={4} fontSize={'0.9em'}>
+                            <Text maxW={'fit-content'} px={4} py={1} color={'#192e59'} fontWeight={'bold'}>Year: {year}</Text>
+                            <List p={4}>
                                 {groupedPapers[year].map((paper, paperIndex) => (
-                                    <ListItem key={paperIndex} display={'flex'}>
-                                        <ListIcon  as={PiCubeDuotone} mt={'4px'} color={'darkblue'} />
+                                    <ListItem key={paperIndex} display={'flex'} mb={2}>
+                                        <ListIcon as={PiCubeDuotone} fontSize={'1.3em'} mt={'4px'} color={'#192e59'} />
                                         <Box>
 
-                                            <Text as={Link} href={paper.url} fontWeight={'semibold'}>{paper.title}</Text>
-                                            <Text>Authors: {paper.authors}</Text>
+                                            <Text as={paper.url?Link:'p'} href={paper.url} fontWeight={'semibold'}>{paper.title}</Text>
+                                            <Text fontSize={'0.9em'}>Authors: {paper.authors}</Text>
                                         </Box>
                                         {/* Add other relevant information */}
                                     </ListItem>

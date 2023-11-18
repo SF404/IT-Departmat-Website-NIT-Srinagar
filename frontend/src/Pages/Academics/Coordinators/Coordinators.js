@@ -1,65 +1,65 @@
 import {
-  Box,
-  Table,
-  Thead,
-  Tbody,
-  Tr,
-  Th,
-  Td,
   Center,
-  TableContainer,
+  VStack,
+  useToast,
 } from "@chakra-ui/react";
-import React from "react";
-import SmallBanner from  "./../../../Layout/SmallBanner";
-
-const data = [
-  {
-    name: "Dr. Shabir Ahmad Sofi",
-    responsibility: "Spoken Tutorials Coordinator",
-    email: "shabir@nitsri.ac.in",
-  },
-  {
-    name: "Dr. Iqra Altaf",
-    responsibility: "Time Table Coordinator",
-    email: "iqraaltaf@nitsri.ac.in",
-  },
-  {
-    name: "Dr. Prabal Verma",
-    responsibility: "4th Year Coordinator",
-    email: "prabal.verma@nitsri.net",
-  },
-  {
-    name: "Dr. Janibul Bashir",
-    responsibility: "1st Year Coordinator, Examination Coordinator",
-    email: "Janibbashir@nitsri.ac.in",
-  },
-];
+import React, { useEffect, useState } from "react";
+import SmallBanner from "./../../../Layout/SmallBanner";
+import axios from "axios";
+import * as XLSX from 'xlsx'
+import SearchTable from "../../../components/Tables/SearchTable";
 
 const Page = () => {
+  const [excelData, setExcelData] = useState(null)
+  const toast = useToast()
+
+  useEffect(() => {
+    const fetchData = async () => {
+      console.log('hi')
+      try {
+        const response = await axios.get(`/api/public/fileget/?query=file&&type=management&&name=faculty_coordinators`);
+        const data = response.data
+        if (data.length <= 0) return;
+        const fileURL = data[0].file;
+        const fileResponse = await axios.get(fileURL, { responseType: 'blob' });
+        const blob = fileResponse.data;
+        const file = new File([blob], 'table.xlsx', { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            const data = e.target.result;
+            const workbook = XLSX.read(data, { type: 'binary' });
+            const sheetName = workbook.SheetNames[0];
+            const sheet = workbook.Sheets[sheetName];
+            const jsonData = XLSX.utils.sheet_to_json(sheet, { header: 1 });
+            console.log(jsonData)
+            setExcelData(jsonData);
+          };
+          reader.readAsBinaryString(file);
+        }
+      } catch (error) {
+        toast({
+          title: 'Error',
+          description: error.message,
+          status: 'error',
+          duration: 9000,
+          isClosable: true,
+        })
+        setExcelData(null)
+      }
+    }
+    return () => fetchData()
+  }, [toast]);
+
+
+
   return (
     <>
       <SmallBanner image={null} heading={'FACULTY COORDINATORS'} />
       <Center>
-        <TableContainer width={{ base: '100%', md: '80%' }} m={4} bg={"white"}>
-          <Table variant="striped">
-            <Thead bg="#d8dcf0">
-              <Tr >
-                <Th>Name</Th>
-                <Th>Responsibility</Th>
-                <Th>Email</Th>
-              </Tr>
-            </Thead>
-            <Tbody fontSize={'14px'} className="family-3">
-              {data.map((item, index) => (
-                <Tr key={index}>
-                  <Td>{item.name}</Td>
-                  <Td>{item.responsibility}</Td>
-                  <Td>{item.email}</Td>
-                </Tr>
-              ))}
-            </Tbody>
-          </Table>
-        </TableContainer>
+        <VStack w={{ base: 'full', md: '90%', lg: '80%' }} bg={"white"} padding={'1em'} my={6} boxShadow={'sm'}>
+          <SearchTable excelData={excelData} />
+        </VStack>
       </Center>
     </>
   );

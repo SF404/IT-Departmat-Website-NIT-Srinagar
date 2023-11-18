@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button, } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
-import { FaBell, FaBookOpenReader, FaTimeline } from 'react-icons/fa6';
+import { FaBookOpenReader, FaTimeline } from 'react-icons/fa6';
 import { AiTwotoneExperiment } from "react-icons/ai";
 
 

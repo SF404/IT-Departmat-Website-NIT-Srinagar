@@ -1,6 +1,6 @@
 import { Box, Heading, Text } from '@chakra-ui/react';
 import React from 'react';
-import image from './../../../assets/images/autumn1.webp';
+import image from './../../../assets/images/gallery.jpg';
 
 function Stats() {
     const facultyCount = 10; 

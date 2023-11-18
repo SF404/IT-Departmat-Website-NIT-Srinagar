@@ -1,22 +1,18 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
-// import { connect } from "react-redux";
-// import { verify } from "./auth";
+import { useNavigate } from "react-router-dom";
 
 const Activate = ({ verify, match }) => {
   const [verified, setVerified] = useState(false);
-  const navigate = useNavigate(); // Use the useNavigate hook
+  const navigate = useNavigate();
 
   const verify_account = (e) => {
     const uid = match.params.uid;
     const token = match.params.token;
-
-    // verify(uid, token);
     setVerified(true);
   };
 
   if (verified) {
-    navigate("http://localhost:3000/");
+    navigate("/");
     return null;
   }
 

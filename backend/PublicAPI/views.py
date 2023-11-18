@@ -205,7 +205,6 @@ class FileShow(viewsets.ModelViewSet):
         type = self.request.query_params.get('type')
         query = self.request.query_params.get('q')
 
-
         if query:
             if query =='alumni' :
                 current_year = datetime.now().year
@@ -213,6 +212,8 @@ class FileShow(viewsets.ModelViewSet):
             elif query =='btech':
                 current_year = datetime.now().year
                 return File.objects.filter(type=type,name__gt=str(current_year - 4))
+            elif query =='file':
+                return File.objects.filter(type=type, name=name)
             else :
                 return False
         elif type:
