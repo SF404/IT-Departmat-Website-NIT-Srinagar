@@ -6,8 +6,8 @@ function Announcements({ announcements }) {
     return (
         <>
             <Box w={'full'}>
-                <Heading fontSize={'1.5em'} my={'0.5em'} textAlign={'center'} color={'#192e59'}>IMPORTANT ANNOUNCEMENTS</Heading>
-                <List spacing={2} bg={'white'} p={4} borderRadius={'1em'} boxShadow={'0 0 12px rgba(0,0,0,0.05)'}>
+                <Heading fontSize={'1.5em'} my={'0.25em'} textAlign={'left'} color={'#192e59'}>Announcements</Heading>
+                <List spacing={2} bg={'white'} p={4} borderRadius={4} boxShadow={'0 0 12px rgba(0,0,0,0.05)'}>
                     {announcements && announcements.length > 0 ? announcements.map((item, index) => (
 
                         <ListItem key={index} fontWeight={'semibold'} fontSize={'lg'} className='family-1'>

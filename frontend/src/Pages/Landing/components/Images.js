@@ -37,7 +37,7 @@ function Images() {
                 <Badge as={Link} to={'/gallery'} colorScheme='red' fontSize={'x-small'} _hover={{ color: 'red' }} textAlign={'left'} mx={5} mb={2}>view all</Badge>
 
                 <Box w={'full'} >
-                    <Carousel cols={4} rows={3} loop={true} showDots={false} dotColorActive={'#192e59'}
+                    <Carousel cols={4} rows={3} loop={true} showDots={false} mobileBreakpoint={0} dotColorActive={'#192e59'}
                         arrowLeft={
                             <IconButton icon={<ChevronRightIcon />}
                                 position={'absolute'}

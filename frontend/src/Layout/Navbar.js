@@ -40,6 +40,7 @@ function NavLinks({ color = "white", isOpen = null, onClose = null }) {
           colorScheme="whiteAlpha"
           color={color}
           fontWeight={"normal"}
+          fontSize={'14px'} 
         >
           Academics
         </MenuButton>
@@ -272,7 +273,7 @@ function NavLinks({ color = "white", isOpen = null, onClose = null }) {
         </MenuList>
       </Menu>
 
-      <Button
+      {/* <Button
         onClick={handleNavigation}
         variant="ghost"
         colorScheme="whiteAlpha"
@@ -282,7 +283,7 @@ function NavLinks({ color = "white", isOpen = null, onClose = null }) {
         to="/contact-us"
       >
         Contact Us
-      </Button>
+      </Button> */}
       <HStack position={"absolute"} right={'20px'}>
         {!login ?
           (<Button variant={"ghost"} onClick={handleNavigation} as={Link} to={'/login'} px={4} bg={'whiteAlpha.200'} color={"whiteAlpha.900"} borderRadius={"full"} colorScheme="whiteAlpha" fontWeight={"normal"} size={'sm'} >Login</Button>) :
@@ -309,7 +310,7 @@ function Navbar() {
         zIndex={99}
         alignItems={"center"}
         px={"10px"}
-        bg={"white"}
+        bg={"white"} 
       >
         <Image src={mainLogo} h={"50px"} w={"50px"} alt="logo" />
         <Text

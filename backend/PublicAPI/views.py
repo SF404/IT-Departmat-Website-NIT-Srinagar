@@ -16,6 +16,7 @@ from datetime import datetime, timedelta
 class BaseFilteredViewSet(viewsets.ModelViewSet):
     def list(self, request, *args, **kwargs):
         email = self.request.query_params.get('email')
+        research_year=self.request.query_params.get('research_year')
         
         if email:
             teacher = Teacher.objects.filter(email=email).first()
@@ -23,7 +24,9 @@ class BaseFilteredViewSet(viewsets.ModelViewSet):
             if teacher:
                 queryset = self.get_queryset().filter(teacher=teacher)
             else:
-                queryset = self.get_queryset().none()
+                queryset = self.get_queryset().none() 
+        elif research_year:
+            queryset = Research.objects.filter(date__gte=research_year)
         else:
             queryset = self.get_queryset()
         serializer = self.get_serializer(queryset, many=True)

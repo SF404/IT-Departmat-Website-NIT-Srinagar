@@ -41,6 +41,7 @@ import ComputerVision from './components/Labs/ComputerVisionImageProcessing';
 import DataMining from './components/Labs/DataMiningAnalytics'
 import Alumni from './Pages/People/Alumni';
 import Feedback from './components/Feedbacks/Feedback';
+import UpdateNews from './components/News/UpdateNews';
 
 const ScrollToTop = ({ children }) => {
   const { pathname } = useLocation();
@@ -106,6 +107,7 @@ const App = () => {
 
           </Route>
           <Route path="dashboard" element={<Dashboard />} title="Dashboard" />
+          <Route path="addnews" element={<UpdateNews />} title="News | Dashboard" />
         </Routes>
       </ScrollToTop>
     </Router>

@@ -4,8 +4,8 @@ import React from 'react'
 function Holidays({ holidays }) {
     return (
         <Box w={'full'}>
-            <Heading fontSize={'1.5em'} mb={'0.5em'} textAlign={'left'} color={'#192e59'}>HOLIDAYS</Heading>
-            <VStack spacing={2} bg={'white'} p={4} borderRadius={'1em'} boxShadow={'0 0 12px rgba(0,0,0,0.05)'} w={'full'}>
+            <Heading fontSize={'1.5em'} mb={'0.25em'} textAlign={'left'} color={'#192e59'}>Holidays</Heading>
+            <VStack spacing={2} bg={'white'} p={4} borderRadius={4} boxShadow={'0 0 12px rgba(0,0,0,0.05)'} w={'full'}>
                 {holidays && holidays.length > 0 ? (holidays.map((item, index) => (
                     <VStack w={'full'} key={index}>
                         <Flex  w={'full'} gap={4}>

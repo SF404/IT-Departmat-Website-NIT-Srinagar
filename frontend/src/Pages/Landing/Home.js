@@ -82,7 +82,7 @@ function Home() {
 
   return (
     isLoading ? (<Box textAlign={'center'} mt={6}><Spinner /> <Text>Loading...</Text></Box>) : (<VStack w={"full"} spacing={0}>
-      <AnnouncementRibbon announcements={announcements} />
+      {/* <AnnouncementRibbon announcements={announcements} /> */}
       <Banner />
       <QuickButtons />
       <Center w={"full"}>
