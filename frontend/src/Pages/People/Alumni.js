@@ -114,7 +114,6 @@ function Alumni() {
                         <Flex
                           w={"full"}
                           p={4}
-                          boxShadow="0px 4px 16px rgba(149, 157, 165, 0.2)"
                           borderRadius={'0.5em'}
                           key={index}
                           bg={"white"}
@@ -130,7 +129,6 @@ function Alumni() {
                               </PopoverTrigger>
                             </Popover>
                           </WrapItem>
-
                           <Card marginLeft={8} style={{ boxShadow: "none" }}>
                             <Box>
                               <Text fontSize="xl" fontWeight="bold">
@@ -185,7 +183,6 @@ function Alumni() {
                           overflow={"hidden"}
                         >
                           <Flex justifyContent={"space-between"}>
-
                             <Text>
                               {"B-TECH"} | {course.name + " BATCH"}
                             </Text>

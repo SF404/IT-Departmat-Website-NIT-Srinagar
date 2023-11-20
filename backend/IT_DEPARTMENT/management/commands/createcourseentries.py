@@ -5,12 +5,10 @@ from assets.phd_student import *
 
 class Command(BaseCommand):
     help = 'Add default entries for Course model'
-
     def handle(self, *args, **kwargs):
             
             
-            shabir=Teacher.objects.create(
-                teacher_id ="shabir@nitsri.net",
+            shabir=Teacher.objects.create(        
                 name = "Dr. Shabir Ahmad Sofi",
                 description = "Associate Professor",
                 email = "shabir@nitsri.net",
@@ -19,7 +17,6 @@ class Command(BaseCommand):
                 research_field="Wireless Sensor Networks, Internet of Things, Artificial Intelligence, Machine Learning, and Big Data"
             )
             janib=Teacher.objects.create(
-                teacher_id ="janibbashir@nitsri.ac.in",
                 name = "Dr. Janib ul Bashir",
                 description = "HOD and Assistant Professor ",
                 email = "janibbashir@nitsri.ac.in",
@@ -28,7 +25,6 @@ class Command(BaseCommand):
                 research_field="Computer Architecture, Parallel Programming, on-chip security, on-chip networks"
             )
             iqra=Teacher.objects.create(
-                teacher_id ="iqraaltaf@nitsri.ac.in",
                 name = "Dr. Iqra Altaf Gillani",
                 description = "Assistant Professor",
                 email = "iqraaltaf@nitsri.ac.in",
@@ -37,7 +33,6 @@ class Command(BaseCommand):
                 research_field="Data Algorithmics, Probabilistic Analysis of Networks, Distributed Computation, Network and Data Science."
             )
             prabal=Teacher.objects.create(
-                teacher_id ="prabal.verma@nitsri.net",
                 name = "Dr. Prabal Verma",
                 description = "Assistant Professor",
                 email = "prabal.verma@nitsri.net",
@@ -45,8 +40,7 @@ class Command(BaseCommand):
                 profile_photo="teacher_profile/PrabalSir.jpeg",
                 research_field="Algorithms, Swarm Optimization Algorithms, Machine learning optimization"
             )
-            arooj=Teacher.objects.create(
-                teacher_id ="arooj@nitsri.net",
+            arooj=Teacher.objects.create(       
                 name = "Ms. Arooj Nissar",
                 description = "Assistant Professor",
                 email = "arooj@nitsri.net",
@@ -55,16 +49,13 @@ class Command(BaseCommand):
                 research_field="Digital Image Processing, Network Security, Computer Vision, Medical Image Analysis."
             )
             saniya=Teacher.objects.create(
-                teacher_id ="saniyazahoor@nitsri.ac.in",
                 name = "Dr. Saniya Zahoor",
                 description = "Assistant Professor (Contractual)",
-                email = "saniyazahoor@nitsri.ac.in",
-              
+                email = "saniyazahoor@nitsri.ac.in",            
                 profile_photo="teacher_profile/AroojMam.jpeg",
                 research_field="Internet of Things, Theory of Computation, Web Programming, Management Information Systems. "
             )
             surbhi=Teacher.objects.create(
-                teacher_id ="dsharma@nitsri.ac.in",
                 name = "Dr. Surbhi Sharma",
                 description = "Assistant Professor (Contractual)",
                 email = "dsharma@nitsri.ac.in",
@@ -73,7 +64,6 @@ class Command(BaseCommand):
                 research_field="Cryptography & Network Security, Software Engineering, Computer Networks, DBMS "
             )
             vippon=Teacher.objects.create(
-                teacher_id ="preetvippon@gmail.com",
                 name = "Dr. Vippon Preet Kour",
                 description = "Assistant Professor (Contractual)",
                 email = "preetvippon@gmail.com",
@@ -82,7 +72,6 @@ class Command(BaseCommand):
             )
             
             bazila=Teacher.objects.create(
-                teacher_id ="hashiabazila@gmail.com",
                 name = "Dr. Bazila",
                 description = "Guest Faculty",
                 email = "hashiabazila@gmail.com",
@@ -91,7 +80,6 @@ class Command(BaseCommand):
                 research_field="Image processing and analysis"
             )
             aksa=Teacher.objects.create(
-                teacher_id ="aksaurooj62@gmail.com",
                 name = "Ms. Aksa Urooj",
                 description = "Guest Faculty",
                 email = "aksaurooj62@gmail.com",
@@ -100,7 +88,6 @@ class Command(BaseCommand):
                 research_field="Programming, Data Structures and Algorithms, Operating Systems, Database Management Systems, Theory of Computation,Compiler Design"
             )
             kalimullah=Teacher.objects.create(
-                teacher_id ="kalimullahlone@gmail.com",
                 name = "Mr. Kalimullah Lone",
                 description = "Guest Faculty",
                 email = "kalimullahlone@gmail.com",
@@ -110,7 +97,6 @@ class Command(BaseCommand):
             )
             
             rajes=Teacher.objects.create(
-                teacher_id ="rmrajesofficial.0@gmail.com",
                 name = "Rajes Manna",
                 description = "Management team",
                 email = "rmrajesofficial.0@gmail.com",
@@ -119,7 +105,6 @@ class Command(BaseCommand):
                 research_field="Tech Team"
             )
             suhaib=Teacher.objects.create(
-                teacher_id ="suhaibsworkspace@gmail.com",
                 name = "Suhaib Salmani",
                 description = "Management team",
                 email = "suhaibsworkspace@gmail.com",
@@ -128,7 +113,6 @@ class Command(BaseCommand):
                 research_field="Tech Team"
             )
             arman=Teacher.objects.create(
-                teacher_id ="armsce856@gmail.com",
                 name = "Arman Ansari",
                 description = "Management team",
                 email = "armsce856@gmail.com",
@@ -137,56 +121,56 @@ class Command(BaseCommand):
                 research_field="Tech Team"
             )
             Patent.objects.create(
-                  patent="A Graphics Processor Unit (GPU) System with Photonics based On-chip Network, Janibul Bashir, Smruti R. Sarangi",
-                  date=" 19 Nov 2019",
-                  number=201911047168,
-                  teacher=janib
+                title="A Graphics Processor Unit (GPU) System with Photonics based On-chip Network, Janibul Bashir, Smruti R. Sarangi",
+                date=" 19 Nov 2019",
+                number=201911047168,
+                teacher=janib
             )
             Patent.objects.create(
-                patent="Temporary",
+                title="Temporary",
                 date="NOV 2023",
                 number="12346",
                 teacher = suhaib
             )
             Patent.objects.create(
-                  patent="Process and System for Using Unused Optical Power in Photonic On-Chip Networks, Janibul Bashir, Smruti R. Sarangi",
-                  date=" 18 Feb 2020",
-                  number=202011006878,
-                  teacher=janib
+                title="Process and System for Using Unused Optical Power in Photonic On-Chip Networks, Janibul Bashir, Smruti R. Sarangi",
+                date=" 18 Feb 2020",
+                number=202011006878,
+                teacher=janib
             )
             Patent.objects.create(
-                patent="Temporary",
+                title="Temporary",
                 date="NOV 2023",
                 number="12345",
                 teacher = rajes
             )
             Research.objects.create(
-                  title="Towards a Greener and Fairer Transportation System: A Survey of Route Recommendation Techniques",
-                  authors="Aqsa Ashraf Makhdomi, Iqra Altaf Gillani",
-                  url="",
-                  date="2023",
-                  teacher=iqra   
+                title="Towards a Greener and Fairer Transportation System: A Survey of Route Recommendation Techniques",
+                authors="Aqsa Ashraf Makhdomi, Iqra Altaf Gillani",
+                url="",
+                date="2023",
+                teacher=iqra   
             )
             Research.objects.create(
-                  title="Depression Prediction: A Clinical Questionnaire and Machine Learning Based Approach",
-                  authors="Sheikh Afaan Farooq, Wajid Ali, Iqra Altaf Gillani",
-                  url="https://doi.org/10.1109/INCOFT55651.2022.10094365",
-                  date="2022",
-                  teacher=iqra   
+                title="Depression Prediction: A Clinical Questionnaire and Machine Learning Based Approach",
+                authors="Sheikh Afaan Farooq, Wajid Ali, Iqra Altaf Gillani",
+                url="https://doi.org/10.1109/INCOFT55651.2022.10094365",
+                date="2022",
+                teacher=iqra   
             )
             Research.objects.create(
-                  title="A Stochastic Process on a Network with Connections to Laplacian Systems of Equations",
-                  authors="Amitabha Bagchi, Iqra Altaf Gillani, Pooja Vyavahare",
-                  url="https://doi.org/10.1017/apr.2021.27",
-                  date="2022",
-                  teacher=iqra   
+                title="A Stochastic Process on a Network with Connections to Laplacian Systems of Equations",
+                authors="Amitabha Bagchi, Iqra Altaf Gillani, Pooja Vyavahare",
+                url="https://doi.org/10.1017/apr.2021.27",
+                date="2022",
+                teacher=iqra   
             )
             Research.objects.create(
-                  title="Crowd Sourcing and Blockchain-Based Incentive Mechanism to Combat Fake News",
-                  authors="Munaza Farooq, Aqsa Ashraf Makhdomi, Iqra Altaf Gillani",
-                  url="https://doi.org/10.1007/978-3-030-90087-8_15",
-                  date="2022",
-                  teacher=iqra   
+                title="Crowd Sourcing and Blockchain-Based Incentive Mechanism to Combat Fake News",
+                authors="Munaza Farooq, Aqsa Ashraf Makhdomi, Iqra Altaf Gillani",
+                url="https://doi.org/10.1007/978-3-030-90087-8_15",
+                date="2022",
+                teacher=iqra   
             )
             Research.objects.create(
                 title="Blockchain-based Incentive Mechanism to Combat Fake News",
@@ -1119,7 +1103,7 @@ class Command(BaseCommand):
                 description="Christmas Day"
             )
             Patent.objects.create(
-                patent="Temporary",
+                title="Temporary",
                 date="NOV 2023",
                 number="12345",
                 teacher = rajes
@@ -1131,7 +1115,7 @@ class Command(BaseCommand):
                 teacher = rajes
             )
             Patent.objects.create(
-                patent="Temporary",
+                title="Temporary",
                 date="NOV 2023",
                 number="12346",
                 teacher = suhaib

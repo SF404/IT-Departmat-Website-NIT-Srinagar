@@ -61,10 +61,6 @@ class NotesSerializer(serializers.ModelSerializer):
         model = Notes
         fields = '__all__'
         
-class HolidaySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Holiday
-        fields = '__all__'
 
 class TeacherMails(serializers.ModelSerializer):
     class Meta:
@@ -80,3 +76,4 @@ class GallerySerializer(serializers.ModelSerializer):
     class Meta:
         model = Gallery
         fields = ('image',)
+        
