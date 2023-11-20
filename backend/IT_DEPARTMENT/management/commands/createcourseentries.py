@@ -1,5 +1,6 @@
 from django.core.management.base import BaseCommand
 from IT_DEPARTMENT.models import *
+from PublicAPI.models import *
 
 from assets.phd_student import *
 
@@ -1101,39 +1102,5 @@ class Command(BaseCommand):
             Holiday.objects.create(
                 date="2023-12-25T15:55:32Z",
                 description="Christmas Day"
-            )
-            Patent.objects.create(
-                title="Temporary",
-                date="NOV 2023",
-                number="12345",
-                teacher = rajes
-            )
-            Research.objects.create(
-                title="Temporary",
-                authors="rajes",
-                date="NOV 2023",
-                teacher = rajes
-            )
-            Patent.objects.create(
-                title="Temporary",
-                date="NOV 2023",
-                number="12346",
-                teacher = suhaib
-            )
-            Research.objects.create(
-                title="Temporary",
-                authors="suhaib",
-                date="NOV 2023",
-                teacher = suhaib
-            )
-            Project.objects.create(
-                title="Temporary",
-                teacher = suhaib
-            )
-            TeacherEducation.objects.create(
-                degree="12th",
-                college="MPML",
-                Year= "2021",
-                teacher = rajes
             )
             self.stdout.write(self.style.SUCCESS('ALL Course entries created.'))

@@ -74,7 +74,8 @@ class Course(models.Model):
     name=models.CharField(max_length=255)
     credit=models.BigIntegerField()
     semester=models.CharField(max_length=255)
-    description=models.TextField(blank=True)
+    syllabus=models.TextField(blank=True,null=True)
+    description=models.TextField(blank=True,null=True)
     teacher=models.ForeignKey(Teacher,on_delete=models.SET_NULL,null=True,blank=True)
     auto_date=models.DateTimeField(auto_now_add=True)
 
