@@ -129,7 +129,7 @@ function Announcements({ email }) {
           p={4}
           borderTopRadius={8}
           fontWeight={"semibold"}
-          color={"darkblue"}
+          color={"#192e59"}
           textAlign={"center"}
         >
           announcements

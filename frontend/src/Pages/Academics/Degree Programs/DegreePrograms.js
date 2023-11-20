@@ -87,7 +87,7 @@ function DegreePrograms() {
                     textAlign={"center"}
                     fontSize={"lg"}
                     fontWeight={"bold"}
-                    color={"darkblue"}
+                    color={"#192e59"}
                   >
                     Curriculum
                   </Text>

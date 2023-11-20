@@ -134,7 +134,7 @@ function Tutorial({ email }) {
           p={4}
           borderTopRadius={8}
           fontWeight={"semibold"}
-          color={"darkblue"}
+          color={"#192e59"}
         >
           My Tutorials
         </Box>
@@ -223,7 +223,7 @@ function Tutorial({ email }) {
               textAlign={"left"}
               fontWeight={"semibold"}
               my={2}
-              color={"darkblue"}
+              color={"#192e59"}
             >
               My Tutorials
             </Text>

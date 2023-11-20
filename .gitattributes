@@ -1,7 +1,4 @@
 from-hod.mp4 filter=lfs diff=lfs merge=lfs -text
 frontend/src/assets/banner.mp4 filter=lfs diff=lfs merge=lfs -text
 frontend/src/assets/videos/from-hod.mp4 filter=lfs diff=lfs merge=lfs -text
-<<<<<<< HEAD
 *.mp4 filter=lfs diff=lfs merge=lfs -text
-=======
->>>>>>> 04e7b8693b4c8cbcb62864d44c5fe2a29bb302d0

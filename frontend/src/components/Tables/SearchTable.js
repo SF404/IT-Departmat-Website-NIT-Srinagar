@@ -2,25 +2,7 @@ import React, { useRef, useState } from "react";
 import * as XLSX from 'xlsx'
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
-import {
-    Box,
-    TableContainer,
-    Table,
-    Thead,
-    Tr,
-    Th,
-    Tbody,
-    Td,
-    Input,
-    HStack,
-    IconButton,
-    Menu,
-    MenuButton,
-    MenuList,
-    MenuItem,
-    Spinner,
-    Text,
-} from "@chakra-ui/react";
+import { Box, TableContainer, Table, Thead, Tr, Th, Tbody, Td, Input, HStack, IconButton, Menu, MenuButton, MenuList, MenuItem, Spinner, Text, } from "@chakra-ui/react";
 import { PiDownloadDuotone } from "react-icons/pi";
 
 const SearchTable = ({ excelData }) => {
@@ -34,9 +16,7 @@ const SearchTable = ({ excelData }) => {
         setSearchQuery(query);
 
         const filtered = excelData.slice(1).filter((row) =>
-            row.some((cell) =>
-                cell && cell.toString().toLowerCase().includes(query)
-            )
+            row.some((cell) => cell && cell.toString().toLowerCase().includes(query))
         );
 
         setFilteredData(filtered);
@@ -70,7 +50,7 @@ const SearchTable = ({ excelData }) => {
             });
 
             const canvas = await html2canvas(table, { scale: 1 })
-            const imgWidth = 190; // Adjust as needed
+            const imgWidth = 190;
             const imgHeight = ((canvas.height * imgWidth) / canvas.width);
             console.log(canvas)
             console.log(imgHeight)
@@ -95,7 +75,6 @@ const SearchTable = ({ excelData }) => {
 
     };
 
-
     return (
         <>
             <TableContainer w={"full"}>
@@ -103,7 +82,7 @@ const SearchTable = ({ excelData }) => {
                     <HStack position={'sticky'} top={0} left={'100%'}>
                         <Input w={'200px'} mx={1} type="text" placeholder="Search..." value={searchQuery} onChange={(e) => handleSearch(e)} />
                         <Menu>
-                            <MenuButton as={IconButton} variant={"outline"} color={'darkblue'} icon={isDownloading ? <Spinner /> : <PiDownloadDuotone />}></MenuButton>
+                            <MenuButton as={IconButton} variant={"outline"} color={'#192e59'} icon={isDownloading ? <Spinner /> : <PiDownloadDuotone />}></MenuButton>
                             <MenuList borderRadius={"none"} className="family-4" minW={'100px'} fontSize={'14px'}>
                                 <MenuItem onClick={downloadTableAsExcel}>.xlsx</MenuItem>
                                 <MenuItem onClick={downloadTableAsPDF}>.pdf</MenuItem>

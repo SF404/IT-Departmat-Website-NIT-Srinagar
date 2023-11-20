@@ -1,4 +1,4 @@
-import { Box,  Image, Modal, ModalBody, ModalCloseButton, ModalContent,  ModalHeader, ModalOverlay, Spinner, Text, useDisclosure } from '@chakra-ui/react';
+import { Box, Image, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Spinner, Text, useDisclosure } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react'
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry"
 import SmallBanner from "../../Layout/SmallBanner";
@@ -16,22 +16,18 @@ function ImageGallery() {
 
     const [images, setImages] = useState(null)
 
-    const fetchImages = async () => {
-        try {
-            const response = await axios.get(`/api/public/galleryget/`);
-            console.log(response.data)
-            setImages(response.data)
-        } catch (error) {
-            console.log(error)
-        }
-    }
 
     useEffect(() => {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth',
-        });
-        fetchImages();
+        const fetchImages = async () => {
+            try {
+                const response = await axios.get(`/api/public/galleryget/`);
+                console.log(response.data)
+                setImages(response.data)
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        return () => fetchImages();
     }, [])
 
     return (

@@ -35,58 +35,59 @@ function FacultyDetails() {
   const [researchs, setResearchs] = useState(null);
   const [patents, setPatents] = useState(null);
 
-  async function fetchfacultyDetails() {
-    try {
-      // teacher
-      const teacher = await axios.get(`/api/public/getteacher/?Id=${id}`);
-      // couses
-      const courses = await axios.get(
-        `/api/courses?sid=${teacher.data[0].email}`
-      );
-      setCurrentTeachingCourses(courses.data);
-      const education = await axios.get(`/api/public/teachereducationget`, {
-        params: {
-          email: teacher.data[0].email,
-        },
-      });
-      setEducation(education.data);
-      // research
-      const research = await axios.get(`/api/public/researchget`, {
-        params: {
-          email: teacher.data[0].email,
-        },
-      });
-      setResearchs(research.data);
-
-      //patents
-      const patents = await axios.get(`/api/public/patentget`, {
-        params: {
-          email: teacher.data[0].email,
-        },
-      });
-      setPatents(patents.data);
-      //projects
-      const projects = await axios.get(`/api/public/projectget`, {
-        params: {
-          email: teacher.data[0].email,
-        },
-      });
-      setProjects(projects.data);
-      // set faculty details at last
-      setFacultyDetails(teacher.data[0]);
-      setResearchFields(
-        teacher.data[0].research_field
-          .split(",")
-          .map((field) => ({ field: field.trim() }))
-      );
-    } catch (err) {
-      console.log(err);
-    }
-  }
 
   useEffect(() => {
-    fetchfacultyDetails();
-  },[]);
+
+    async function fetchfacultyDetails() {
+      try {
+        // teacher
+        const teacher = await axios.get(`/api/public/getteacher/?Id=${id}`);
+        // couses
+        const courses = await axios.get(
+          `/api/courses?sid=${teacher.data[0].email}`
+        );
+        setCurrentTeachingCourses(courses.data);
+        const education = await axios.get(`/api/public/teachereducationget`, {
+          params: {
+            email: teacher.data[0].email,
+          },
+        });
+        setEducation(education.data);
+        // research
+        const research = await axios.get(`/api/public/researchget`, {
+          params: {
+            email: teacher.data[0].email,
+          },
+        });
+        setResearchs(research.data);
+
+        //patents
+        const patents = await axios.get(`/api/public/patentget`, {
+          params: {
+            email: teacher.data[0].email,
+          },
+        });
+        setPatents(patents.data);
+        //projects
+        const projects = await axios.get(`/api/public/projectget`, {
+          params: {
+            email: teacher.data[0].email,
+          },
+        });
+        setProjects(projects.data);
+        // set faculty details at last
+        setFacultyDetails(teacher.data[0]);
+        setResearchFields(
+          teacher.data[0].research_field
+            .split(",")
+            .map((field) => ({ field: field.trim() }))
+        );
+      } catch (err) {
+        console.log(err);
+      }
+    }
+    return () => fetchfacultyDetails();
+  }, [id]);
 
   const toast = useToast();
   const handleClick = async (data) => {
@@ -173,7 +174,7 @@ function FacultyDetails() {
                 <Text
                   as={Link}
                   cursor={"pointer"}
-                  _hover={{ color: "darkblue", textDecoration: "underline" }}
+                  _hover={{ color: "#192e59", textDecoration: "underline" }}
                   to={
                     FacultyDetails.website ||
                     "/faculty/" + FacultyDetails.teacher_id
@@ -186,7 +187,7 @@ function FacultyDetails() {
               </Box>
             </Box>
             <Box h={"full"} ml={4}>
-              <Heading fontSize={"1.5em"} color={"darkblue"}>
+              <Heading fontSize={"1.5em"} color={"#192e59"}>
                 {FacultyDetails.name}
               </Heading>
               <Badge colorScheme="messenger" fontFamily={"body"}>
@@ -227,7 +228,7 @@ function FacultyDetails() {
               borderRadius={"1em"}
               boxShadow={"rgba(0, 0, 0, 0.05) 0px 1px 12px;"}
             >
-              <Heading size={"md"} color={"darkblue"}>
+              <Heading size={"md"} color={"#192e59"}>
                 Education
               </Heading>
               <Box>
@@ -242,7 +243,7 @@ function FacultyDetails() {
                     </Thead>
                     <Tbody fontSize={"sm"}>
                       {education.map((item, index) => (
-                        <Tr>
+                        <Tr key={index}>
                           <Td>{item.degree}</Td>
                           <Td>{item.college}</Td>
                           <Td >{item.year}</Td>
@@ -264,7 +265,7 @@ function FacultyDetails() {
               borderRadius={"1em"}
               boxShadow={"rgba(0, 0, 0, 0.05) 0px 1px 12px;"}
             >
-              <Heading size={"md"} color={"darkblue"}>
+              <Heading size={"md"} color={"#192e59"}>
                 Teaching
               </Heading>
               <Box>
@@ -280,7 +281,7 @@ function FacultyDetails() {
                     </Thead>
                     <Tbody fontSize={"sm"}>
                       {currentTeachingCourses.map((item, index) => (
-                        <Tr>
+                        <Tr key={index}>
                           <Td>{item.course_id}</Td>
                           <Td>{item.name}</Td>
                           <Td textAlign={"center"}>
@@ -288,10 +289,10 @@ function FacultyDetails() {
                             {item.semester > 2
                               ? "th"
                               : item.semester === 1
-                              ? "st"
-                              : item.semester === 2
-                              ? "nd"
-                              : "rd"}
+                                ? "st"
+                                : item.semester === 2
+                                  ? "nd"
+                                  : "rd"}
                           </Td>
                           <Td textAlign={"center"}>{item.credit}</Td>
                         </Tr>
@@ -312,7 +313,7 @@ function FacultyDetails() {
               borderRadius={"1em"}
               boxShadow={"rgba(0, 0, 0, 0.05) 0px 1px 12px;"}
             >
-              <Heading size={"md"} color={"darkblue"}>
+              <Heading size={"md"} color={"#192e59"}>
                 Researchs
               </Heading>
               <Box>
@@ -334,7 +335,7 @@ function FacultyDetails() {
                           return bDate - aDate;
                         })
                         .map((item, index) => (
-                          <Tr>
+                          <Tr key={index}>
                             <Td>{index + 1}</Td>
                             <Td>{item.date}</Td>
                             <Td>{item.title}</Td>
@@ -357,7 +358,7 @@ function FacultyDetails() {
               borderRadius={"1em"}
               boxShadow={"rgba(0, 0, 0, 0.05) 0px 1px 12px;"}
             >
-              <Heading size={"md"} color={"darkblue"}>
+              <Heading size={"md"} color={"#192e59"}>
                 Patents
               </Heading>
               <Box>
@@ -394,7 +395,7 @@ function FacultyDetails() {
               borderRadius={"1em"}
               boxShadow={"rgba(0, 0, 0, 0.05) 0px 1px 12px;"}
             >
-              <Heading size={"md"} color={"darkblue"}>
+              <Heading size={"md"} color={"#192e59"}>
                 Projects
               </Heading>
               <Box>

@@ -33,7 +33,7 @@ const AwardsPage = () => {
                 w={"full"}
                 textAlign={"justify"}
               >
-                <Heading fontWeight={"semibold"} size={"md"} mb={2} color="darkblue">
+                <Heading fontWeight={"semibold"} size={"md"} mb={2} color="#192e59">
                   {award.title}
                 </Heading>
                 <Text fontSize="md" color="gray.600" mb={2}>

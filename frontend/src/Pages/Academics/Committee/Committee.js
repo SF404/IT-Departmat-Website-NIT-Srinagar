@@ -1,53 +1,72 @@
+import { useEffect, useState } from "react";
+import SearchTable from "../../../components/Tables/SearchTable";
 import SmallBanner from "./../../../Layout/SmallBanner";
 import {
-  Table,
-  Thead,
-  Tbody,
-  Tr,
-  Th,
-  Td,
   Center,
-  TableContainer,
+  VStack,
+  useToast,
 } from '@chakra-ui/react';
-const data = [
-  {
-    name: "Dr. G. R. Baig",
-    Role: "Head/Chairperson",
-    email: "grbegh@nitsri.net",
-  },
-  {
-    name: "Dr. Shabir Ahmad Sofi",
-    Role: "Member",
-    email: "shabir@nitsri.ac.in",
-  },
-  { name: "Dr. Shaima Qureshi", Role: "Member", email: "shaima@nitsri.net" },
-];
+import axios from "axios";
+import * as XLSX from 'xlsx'
+
 
 function Page() {
+  const [excelData, setExcelData] = useState(null)
+  const toast = useToast()
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`/api/public/fileget/?q=file&&type=management&&name=committee`);
+        const data = response.data
+        console.log(response.data)
+        if (data.length <= 0) {
+          toast({
+            title: 'Data not Found',
+            description: "Contact Administrator",
+            status: 'info',
+            duration: 5000,
+            isClosable: true,
+          })
+          return;
+        };
+        const fileURL = data[0].file;
+        const fileResponse = await axios.get(fileURL, { responseType: 'blob' });
+        const blob = fileResponse.data;
+        const file = new File([blob], 'table.xlsx', { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            const data = e.target.result;
+            const workbook = XLSX.read(data, { type: 'binary' });
+            const sheetName = workbook.SheetNames[0];
+            const sheet = workbook.Sheets[sheetName];
+            const jsonData = XLSX.utils.sheet_to_json(sheet, { header: 1 });
+            setExcelData(jsonData);
+          };
+          reader.readAsBinaryString(file);
+        }
+      } catch (error) {
+        toast({
+          title: 'Error',
+          description: error.message,
+          status: 'error',
+          duration: 9000,
+          isClosable: true,
+        })
+        setExcelData(null)
+      }
+    }
+
+    return () => fetchData();
+  }, [toast]);
   return (
     <div className="committeehead">
       <SmallBanner heading={'DEPARTMENTAL PURCHASING COMMITTEE'} />
-      <Center>
-        <TableContainer width={{ base: '100%', md: '80%' }} m={4} bg={"white"} boxShadow={'0 0 6px rgba(0,0,0,0.05)'}>
-          <Table variant="striped">
-            <Thead bg={"#d8dcf0"}>
-              <Tr >
-                <Th>Name</Th>
-                <Th>Role</Th>
-                <Th>Email</Th>
-              </Tr>
-            </Thead>
-            <Tbody fontSize={'14px'} className="family-3">
-              {data.map((item, index) => (
-                <Tr key={index}>
-                  <Td>{item.name}</Td>
-                  <Td>{item.Role}</Td>
-                  <Td>{item.email}</Td>
-                </Tr>
-              ))}
-            </Tbody>
-          </Table>
-        </TableContainer>
+      <Center p={4}>
+        <VStack width={{ base: '100%', md: '80%' }} m={4} bg={"white"} boxShadow={'0 0 4px rgba(0,0,0,0.05)'} p={4} borderRadius={4}>
+          <SearchTable excelData={excelData} />
+        </VStack>
       </Center>
     </div>
   );

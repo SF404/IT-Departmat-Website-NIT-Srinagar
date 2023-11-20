@@ -28,32 +28,35 @@ const PlacementBrochure = () => {
     }
   }
 
-  const fetchExcelFromDatabase = async () => {
-    try {
-      const response = await axios.get(`/api/public/fileget/?name=placement_record`);
-      console.log(response.data[0]);
-  
-      const fileURL = response.data[0].file;
-      console.log("File URL:", fileURL);
-  
-      // Fetch the blob data from the file URL
-      const fileResponse = await axios.get(fileURL, { responseType: 'blob' });
-      const blob = fileResponse.data;
-      console.log("Fetched Blob:", blob);
-  
-      // Create a File object
-      const file = new File([blob], 'table.xlsx', { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
-      console.log(file);
-  
-      handleFileChange(file);
-    } catch (error) {
-      console.error('Error fetching Excel file:', error);
-    }
-  }
-  
+
+
 
   useEffect(() => {
-    fetchExcelFromDatabase();
+    const fetchExcelFromDatabase = async () => {
+      try {
+        const response = await axios.get(`/api/public/fileget/?name=placement_record`);
+        console.log(response.data[0]);
+
+        const fileURL = response.data[0].file;
+        console.log("File URL:", fileURL);
+
+        // Fetch the blob data from the file URL
+        const fileResponse = await axios.get(fileURL, { responseType: 'blob' });
+        const blob = fileResponse.data;
+        console.log("Fetched Blob:", blob);
+
+        // Create a File object
+        const file = new File([blob], 'table.xlsx', { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+        console.log(file);
+
+        handleFileChange(file);
+      } catch (error) {
+        setExcelData(null)
+        console.error('Error fetching Excel file:', error);
+      }
+    }
+
+    return () => fetchExcelFromDatabase();
   }, []);
 
   return (

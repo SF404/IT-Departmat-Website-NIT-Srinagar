@@ -26,7 +26,7 @@ function Calender() {
     }, []);
     return (
         <Box w={'full'} height={'full'} bg={'white'} textAlign={'center'} borderRadius={'0.5em'} position={'relative'} boxShadow={'0 2px 8px rgba(0,0,0,0.05)'}>
-            <Box bg={'#d8dcf0'} p={4} borderTopRadius={8} fontWeight={'semibold'} color={'darkblue'}>Calendar</Box>
+            <Box bg={'#d8dcf0'} p={4} borderTopRadius={8} fontWeight={'semibold'} color={'#192e59'}>Calendar</Box>
             <Calendar onActiveStartDateChange={handleViewChange} showNeighboringMonth={false} />
             <Divider />
             {Holidays != null && (

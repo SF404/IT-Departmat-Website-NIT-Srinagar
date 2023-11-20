@@ -16,6 +16,7 @@ import Highlights from "./components/Highlights";
 import Stats from "./components/Stats";
 import Images from "./components/Images";
 import Faqs from "./components/Faqs";
+import News from "./components/News";
 
 function Home() {
   const [news, setNews] = useState(null);
@@ -57,7 +58,6 @@ function Home() {
     }
   }
   async function fetchAnnouncements() {
-
     try {
       const response = await axios.get(
         `api/public/announcementget`
@@ -77,7 +77,7 @@ function Home() {
       // await fetchNews(); 
       await fetchEvents();
     }
-    fetchData();
+    return () => fetchData();
   }, []);
 
   return (
@@ -102,6 +102,7 @@ function Home() {
             </VStack>
           </SimpleGrid>
           {/* <LatestNews news={news} /> */}
+          <News />
           <FeaturedVideos />
           <Highlights />
           <Divider />

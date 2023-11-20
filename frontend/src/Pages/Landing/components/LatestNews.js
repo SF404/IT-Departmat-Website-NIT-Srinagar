@@ -13,7 +13,7 @@ function LatestNews({ news }) {
         fontSize={"1.5em"}
         my={"0.5em"}
         textAlign={"center"}
-        color={"darkblue"}
+        color={"#192e59"}
       >
         LATEST NEWS
       </Heading>

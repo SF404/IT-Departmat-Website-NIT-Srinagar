@@ -1,23 +1,6 @@
 import React from "react";
-import {
-  Box,
-  Center,
-  Divider,
-  GridItem,
-  HStack,
-  Heading,
-  Icon,
-  IconButton,
-  SimpleGrid,
-  Text,
-  VStack,
-} from "@chakra-ui/react";
-import {
-  FaFacebookF,
-  FaInstagram,
-  FaTwitter,
-  FaLinkedinIn,
-} from "react-icons/fa";
+import { Box, Center, Divider, GridItem, HStack, Heading, Icon, IconButton, SimpleGrid, Text, VStack, } from "@chakra-ui/react";
+import { FaFacebookF, FaInstagram, FaTwitter, FaLinkedinIn, } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { EmailIcon, PhoneIcon } from "@chakra-ui/icons";
 
@@ -35,12 +18,10 @@ const Footer = () => {
                 <Text cursor={"pointer"} width={"fit-content"}>
                   <Icon as={PhoneIcon} mr={2} color={"whiteAlpha.700"} />  0194-2424809, 2429423
                 </Text>
-
                 <Text cursor={"pointer"} width={"fit-content"}>
                   <Icon as={EmailIcon} mr={2} color={"whiteAlpha.700"} /> hodit@nitsri.net
                 </Text>
               </Box>
-
             </VStack>
           </GridItem>
           <GridItem >

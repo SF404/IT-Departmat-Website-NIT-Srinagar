@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Center, Box } from "@chakra-ui/react";
+import {  Center, Box } from "@chakra-ui/react";
 import SmallBanner from  "./../../../Layout/SmallBanner";
 
 function DepartmentNewsletter() {

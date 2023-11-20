@@ -1,4 +1,4 @@
-import { EmailIcon, Icon, PhoneIcon } from "@chakra-ui/icons";
+import { EmailIcon, Icon } from "@chakra-ui/icons";
 import axios from "axios";
 import {
   Avatar,
@@ -16,24 +16,26 @@ import {
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import SmallBanner from "../../Layout/SmallBanner";
+import default_profile from './../../assets/images/default_profile.jpg'
 
 function PhdStudents() {
   const [phdStudent, setphdStudent] = useState(null);
-  const fetchData = async () => {
-    try {
-      const response = await axios.get(
-        "/api/public/getphdstudent/?alumni=False"
-      );
-      const phdstudent_data = response.data;
-      setphdStudent(phdstudent_data);
-      console.log(phdstudent_data[0]);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  };
 
   useEffect(() => {
-    fetchData();
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          "/api/public/getphdstudent/?alumni=False"
+        );
+        const phdstudent_data = response.data;
+        console.log(response.data)
+        setphdStudent(phdstudent_data);
+      } catch (error) {
+        setphdStudent(null)
+        console.error("Error fetching data:", error);
+      }
+    };
+    return () => fetchData();
   }, []);
 
   return (
@@ -41,7 +43,11 @@ function PhdStudents() {
       <SmallBanner heading={'PHD'} />
       <Center>
         <VStack w={{ base: '100%', md: '80%' }} spacing={6} my={4}>
-          {phdStudent ? (phdStudent.map((item, index) => (
+          {phdStudent ? (phdStudent.sort((a, b) => {
+            const enrollA = parseInt(a.enroll.substring(0, 4));
+            const enrollB = parseInt(b.enroll.substring(0, 4));
+            return enrollA - enrollB;
+          }).map((item, index) => (
             <Flex
               w={"full"}
               p={4}
@@ -56,7 +62,7 @@ function PhdStudents() {
                     <Avatar
                       size="2xl"
                       name={item.name}
-                      src={item.profile_photo}
+                      src={item.profile_photo ? item.profile_photo : default_profile}
                     />
                   </PopoverTrigger>
                 </Popover>
@@ -74,7 +80,7 @@ function PhdStudents() {
                     Enrollment: {item.enroll}
                   </Text>
                 </Box>
-                <Divider borderWidth="0.5px" my={2} borderColor="teal.500"/>
+                <Divider borderWidth="0.5px" my={2} borderColor="teal.500" />
                 <Box>
                   <Flex alignItems="center" mt={2}>
                     <Icon as={EmailIcon} color="gray.600" />
