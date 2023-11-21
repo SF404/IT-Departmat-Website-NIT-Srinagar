@@ -17,7 +17,7 @@ const Page = () => {
     const fetchData = async () => {
       console.log('hi')
       try {
-        const response = await axios.get(`/api/public/fileget/?query=file&&type=management&&name=faculty_coordinators`);
+        const response = await axios.get(`/api/public/fileget/?q=file&&type=management&&name=faculty_coordinators`);
         const data = response.data
         if (data.length <= 0) return;
         const fileURL = data[0].file;

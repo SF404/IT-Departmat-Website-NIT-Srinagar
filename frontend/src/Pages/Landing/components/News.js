@@ -13,7 +13,7 @@ const News = () => {
       // Only get the Research of last 2 years
       const one_year_ago = date.getFullYear() - 1;
       try {
-        const response = await axios.get(`/api/public/researchget/?research_year=${one_year_ago}`);
+        const response = await axios.get(`/api/public/teacherdataview/?type=research&&research_year=${one_year_ago}`);
         const sortedData = response.data.sort((a, b) => b.date - a.date);
         console.log(sortedData)
         setRecentPapers(sortedData)

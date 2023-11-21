@@ -41,20 +41,20 @@ function FacultyDetails() {
     async function fetchfacultyDetails() {
       try {
         // teacher
-        const teacher = await axios.get(`/api/public/getteacher/?Id=${id}`);
+        const teacher = await axios.get(`/api/public/getteacherstudent/?type=teacher&&Id=${id}`);
         // couses
         const courses = await axios.get(
-          `/api/courses?sid=${teacher.data[0].email}`
+          `/api/public/courses/?sid=${teacher.data[0].email}`
         );
         setCurrentTeachingCourses(courses.data);
-        const education = await axios.get(`/api/public/teachereducationget`, {
+        const education = await axios.get(`/api/public/teacherdataview/?type=education`, {
           params: {
             email: teacher.data[0].email,
           },
         });
         setEducation(education.data);
         // research
-        const research = await axios.get(`/api/public/researchget`, {
+        const research = await axios.get(`/api/public/teacherdataview/?type=research`, {
           params: {
             email: teacher.data[0].email,
           },
@@ -62,14 +62,14 @@ function FacultyDetails() {
         setResearchs(research.data);
 
         //patents
-        const patents = await axios.get(`/api/public/patentget`, {
+        const patents = await axios.get(`/api/public/teacherdataview/?type=patents`, {
           params: {
             email: teacher.data[0].email,
           },
         });
         setPatents(patents.data);
         //projects
-        const projects = await axios.get(`/api/public/projectget`, {
+        const projects = await axios.get(`/api/public/teacherdataview/?type=projects`, {
           params: {
             email: teacher.data[0].email,
           },

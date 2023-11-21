@@ -17,7 +17,7 @@ function UpcomingEvents({ events, }) {
     useEffect(() => {
         const fetchEvents = async () => {
             try {
-                const response = await axios.get(`/api/public/eventsget/`);
+                const response = await axios.get(`/api/public/teacherdataview/?type=events`);
                 setMyevents(response.data)
             } catch (error) {
                 setMyevents(null)

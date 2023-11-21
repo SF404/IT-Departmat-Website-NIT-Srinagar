@@ -21,6 +21,8 @@ class TeacherDataView(viewsets.ModelViewSet):
     def list(self, request, *args, **kwargs):
         data_type = self.request.query_params.get('type')
         email = self.request.query_params.get('email')
+        research_year=self.request.query_params.get('research_year')
+
         try:
             if data_type:
                 model_class, serializer_class = self.get_model_and_serializer(data_type)
@@ -31,6 +33,8 @@ class TeacherDataView(viewsets.ModelViewSet):
                         queryset = model_class.objects.filter(teacher=teacher)
                     else:
                         return Response({'error': 'Teacher not Found'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+                elif research_year:
+                    queryset = model_class.objects.filter(date__gte=research_year)
                 else:
                     queryset = model_class.objects.all()
                 serializer = serializer_class(queryset, many=True)
@@ -114,13 +118,14 @@ class CourseView(viewsets.ModelViewSet):
     def get_queryset(self):
         try:
             sid = self.request.query_params.get('sid')
+            print(sid)
             semester_id = self.request.query_params.get('semesterId')
             if sid: 
                 teacher = Teacher.objects.get(email=sid)
                 if not teacher: return Course.objects.none()
                 queryset = Course.objects.filter(teacher=teacher)
                 return queryset
-            if semester_id:
+            elif semester_id:
                 queryset = Course.objects.filter(semester=semester_id)
                 return queryset
             return Course.objects.all()
@@ -197,7 +202,7 @@ class FileShow(viewsets.ModelViewSet):
         type = self.request.query_params.get('type')
         query = self.request.query_params.get('q')
         try:
-            if not query and type and name : return File.object.none()
+            if not query and not type and not  name : return File.objects.none()
             if query:
                 if query =='alumni' :
                     current_year = datetime.now().year
@@ -214,9 +219,9 @@ class FileShow(viewsets.ModelViewSet):
             elif name:
                 return File.objects.filter(name=name)
         except DatabaseError as e:
-            return File.object.none()
+            return File.objects.none()
         except Exception as e:
-            return File.object.none()
+            return File.objects.none()
         
 class HolidayView(viewsets.ModelViewSet):
     serializer_class = HolidaySerializer

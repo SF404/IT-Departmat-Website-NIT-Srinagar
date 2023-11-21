@@ -27,7 +27,7 @@ function Home() {
 
   async function fetchNews() {
     try {
-      const response = await axios.get(`/api/news_data/`);
+      const response = await axios.get(`/api/public/events/?type=news`);
       setNews(response.data);
     } catch (error) {
       setNews(null)
@@ -37,7 +37,7 @@ function Home() {
 
   async function fetchEvents() {
     try {
-      const response = await axios.get(`/api/events_data/`);
+      const response = await axios.get(`/api/public/events/?type=events`);
       setEvents(response.data);
     } catch (error) {
       setEvents(null)
@@ -60,7 +60,7 @@ function Home() {
   async function fetchAnnouncements() {
     try {
       const response = await axios.get(
-        `api/public/announcementget`
+        `api/public/teacherdataview/?type=announcement`
       );
       setAnnouncement(response.data);
     } catch (error) {
@@ -82,7 +82,7 @@ function Home() {
 
   return (
     isLoading ? (<Box textAlign={'center'} mt={6}><Spinner /> <Text>Loading...</Text></Box>) : (<VStack w={"full"} spacing={0}>
-      {/* <AnnouncementRibbon announcements={announcements} /> */}
+      <AnnouncementRibbon announcements={announcements} />
       <Banner />
       <QuickButtons />
       <Center w={"full"}>

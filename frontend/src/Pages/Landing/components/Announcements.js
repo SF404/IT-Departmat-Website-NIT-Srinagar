@@ -12,7 +12,7 @@ function Announcements({ announcements }) {
 
                         <ListItem key={index} fontWeight={'semibold'} fontSize={'lg'} className='family-1'>
                             <ListIcon as={PiCubeDuotone} mt={'-5px'} color={'#192e59'} />
-                            <Link href={item.link}>{item.description}</Link>
+                            <Link href={item.url}>{item.description}</Link>
                             
                         </ListItem>
 

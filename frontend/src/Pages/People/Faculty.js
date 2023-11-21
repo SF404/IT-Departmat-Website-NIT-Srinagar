@@ -12,7 +12,7 @@ function Faculty() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("/api/public/getteacher/");
+        const response = await axios.get("/api/public/getteacherstudent/?type=teacher");
         const teachers = response.data;
         setFaculty(teachers);
       } catch (error) {
