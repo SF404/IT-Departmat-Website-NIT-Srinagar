@@ -13,4 +13,4 @@ admin.site.register(Course)
 admin.site.register(Announcement)
 admin.site.register(Assignment)
 admin.site.register(Notes)
-admin.site.register(Holiday)
+

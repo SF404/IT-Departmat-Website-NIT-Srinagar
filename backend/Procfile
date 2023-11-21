@@ -1,1 +1,0 @@
-web gunicorn IT_Department_NIT_Srinagar.wsgi:application --log-file -

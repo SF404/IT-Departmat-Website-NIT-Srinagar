@@ -7,199 +7,188 @@ from rest_framework.views import APIView
 from rest_framework import status,viewsets
 from rest_framework.response import Response
 from django.http import FileResponse
+from django.db import DatabaseError
+from datetime import datetime
 import requests
-from django.http import JsonResponse
-from datetime import datetime, timedelta
+from bs4 import BeautifulSoup
+import json
 
 # Create your views here.
+# exceptions are handled successfully
+# DOwnloadAssignment and DOwnloadNotes is merged to DownloadFile with quiry param type and id 
 
-class BaseFilteredViewSet(viewsets.ModelViewSet):
+class TeacherDataView(viewsets.ModelViewSet):
     def list(self, request, *args, **kwargs):
+        data_type = self.request.query_params.get('type')
         email = self.request.query_params.get('email')
-        research_year=self.request.query_params.get('research_year')
-        
-        if email:
-            teacher = Teacher.objects.filter(email=email).first()
-            
-            if teacher:
-                queryset = self.get_queryset().filter(teacher=teacher)
+        try:
+            if data_type:
+                model_class, serializer_class = self.get_model_and_serializer(data_type)
+                
+                if email:
+                    teacher = Teacher.objects.filter(email=email).first()
+                    if teacher:
+                        queryset = model_class.objects.filter(teacher=teacher)
+                    else:
+                        return Response({'error': 'Teacher not Found'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+                else:
+                    queryset = model_class.objects.all()
+                serializer = serializer_class(queryset, many=True)
+                return Response(serializer.data, status=status.HTTP_200_OK)
             else:
-                queryset = self.get_queryset().none() 
-        elif research_year:
-            queryset = Research.objects.filter(date__gte=research_year)
-        else:
-            queryset = self.get_queryset()
-        serializer = self.get_serializer(queryset, many=True)
-        return Response(serializer.data)
+                return Response({'error': 'Data type not specified'}, status=status.HTTP_400_BAD_REQUEST)
+        except DatabaseError as e:
+            return Response({'error': 'Database error'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        except Exception as e:
+            return Response({'error': 'Internal server error'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    def get_model_and_serializer(self, data_type):
+        models = {
+            'project': (Project, ProjectSerializer),
+            'patent': (Patent, PatentSerializer),
+            'teachereducation': (TeacherEducation, TeacherEducationSerializer),
+            'research': (Research, ResearchSerializer),
+            'announcement': (Announcement, AnnouncementSerializer),
+            'tutorials': (Tutorials, TutorialsSerializer),
+            'events': (Events, EventsSerializer),
+            # Add more models as needed
+        }
+
+        return models.get(data_type.lower(), (None, None))
 
 
-class ProjectView(BaseFilteredViewSet):
-    serializer_class = ProjectSerializer
-    queryset = Project.objects.all()
-
-class PatentView(BaseFilteredViewSet):
-    serializer_class = PatentSerializer
-    queryset = Patent.objects.all()
-
-class TeacherEducationView(BaseFilteredViewSet):
-    serializer_class = TeacherEducationSerializer
-    queryset = TeacherEducation.objects.all()
-
-class ResearchView(BaseFilteredViewSet):
-    serializer_class=ResearchSerializer
-    queryset = Research.objects.all()
-
-class AnnouncementView(BaseFilteredViewSet):
-    serializer_class=AnnouncementSerializer
-    queryset = Announcement.objects.all()
-
-class TutorialsView(BaseFilteredViewSet):
-    serializer_class=TutorialsSerializer
-    queryset = Tutorials.objects.all()
-
-class EventsView(BaseFilteredViewSet):
-    serializer_class=EventsSerializer
-    queryset = Events.objects.all()
-
-class ProjectView(viewsets.ModelViewSet):
-    serializer_class=ProjectSerializer
-    def get_queryset(self):
-        email=self.request.query_params.get('email')
-        if email:
-            teacher=Teacher.objects.filter(email=email).first()
-            if teacher:
-                queryset=Project.objects.filter(teacher=teacher)
-                return queryset
-        queryset = Project.objects.all()
-        return queryset
-    
-class PatentView(viewsets.ModelViewSet):
-    serializer_class=PatentSerializer
-    def get_queryset(self):
-        email=self.request.query_params.get('email')
-        if email:
-            teacher=Teacher.objects.filter(email=email).first()
-            if teacher:
-                queryset=Patent.objects.filter(teacher=teacher)
-                return queryset
-        queryset = Patent.objects.all()
-        return queryset
-    
-class TeacherEducationView(viewsets.ModelViewSet):
-    serializer_class=TeacherEducationSerializer
-    def get_queryset(self):
-        email=self.request.query_params.get('email')
-        if email:
-            teacher=Teacher.objects.filter(email=email).first()
-            if teacher:
-                queryset=TeacherEducation.objects.filter(teacher=teacher)
-                return queryset
-        queryset = TeacherEducation.objects.all()
-        return queryset
-
-
-class TeacherView(viewsets.ModelViewSet):
+class TeacherStudentView(viewsets.ModelViewSet):
     serializer_class = TeacherSerializer
-    def get_queryset(self):
-        id = self.request.query_params.get('Id')
-        if id :
-            teacher = Teacher.objects.filter(id=id)
-            return teacher
-        queryset = Teacher.objects.all()
-        print("Number of items in queryset:", queryset.count())
-        return queryset
-    
-class TeacherViewByMail(viewsets.ModelViewSet):
-    serializer_class = TeacherSerializer
-    def get_queryset(self):
-        email=self.request.query_params.get('email')
-        print(email)
-        if email :
-            teacher = Teacher.objects.filter(email=email)
-            return teacher
 
-
-class PhdStudentView(viewsets.ModelViewSet):
-    serializer_class = PhdStudentSerializer
-    def get_queryset(self):
-        alumni = self.request.query_params.get('alumni') 
-        print(alumni)
-        if alumni:
-            return Phd_Student.objects.filter(alumni=alumni)
+    def get_serializer_class(self):
+        data_type = self.request.query_params.get('type')
+        if data_type == 'teacher':
+            return TeacherSerializer
+        elif data_type == 'phdstudent':
+            return PhdStudentSerializer
+        elif data_type == 'list':
+            return TeacherMails
         else:
-            return Phd_Student.objects.filter(alumni=False)
-    
-
-class allCourseGet(viewsets.ModelViewSet):
-    serializer_class = CourseSerializer
+            return TeacherSerializer
     def get_queryset(self):
-        queryset = Course.objects.all()
-        print("Number of items in queryset:", queryset.count())
-        return queryset
-    
-
-class SemesterCourseView(viewsets.ModelViewSet):
-    serializer_class = CourseSerializer
-    def get_queryset(self):
-        semester_id = self.request.query_params.get('semesterId')
-        semester = semester_id
-        print(semester)
-        queryset = Course.objects.filter(semester=semester)
-        print("Number of items in queryset:", queryset.count())
-        return queryset
-    
-
+        data_type = self.request.query_params.get('type')
+        try:
+            id = self.request.query_params.get('Id')
+            email = self.request.query_params.get('email')
+            if data_type == 'teacher':
+                if id:
+                    teacher = Teacher.objects.filter(id=id)
+                    if not teacher:
+                        return Teacher.objects.none()
+                    return teacher
+                if email:
+                    teacher = Teacher.objects.filter(email=email)
+                    if not teacher:
+                        return Teacher.objects.none()
+                    return teacher
+                else:
+                    return Teacher.objects.all()
+            elif data_type == 'phdstudent':
+                if id:
+                    student = Phd_Student.objects.filter(id=id)
+                    if not student:
+                        return Phd_Student.objects.none()
+                    return student
+                if email:
+                    student = Phd_Student.objects.filter(email=email)
+                    if not student:
+                        return Phd_Student.objects.none()
+                    return student
+                else:
+                    return Phd_Student.objects.all()
+            elif data_type == 'list':
+                teachers = Teacher.objects.all()
+                return teacher
+            else:
+                return Teacher.objects.none()
+        except DatabaseError as e:
+            return Teacher.objects.none()
+        except Exception as e:
+            return Teacher.objects.none()
 class CourseView(viewsets.ModelViewSet):
     serializer_class = CourseSerializer
     def get_queryset(self):
-        sid = self.request.query_params.get('sid')
-        print(sid)
-        teacher = Teacher.objects.get(teacher_id=sid)
-        print("sid", teacher.name)
-        queryset = Course.objects.filter(teacher=teacher)
-        return queryset
+        try:
+            sid = self.request.query_params.get('sid')
+            semester_id = self.request.query_params.get('semesterId')
+            if sid: 
+                teacher = Teacher.objects.get(email=sid)
+                if not teacher: return Course.objects.none()
+                queryset = Course.objects.filter(teacher=teacher)
+                return queryset
+            if semester_id:
+                queryset = Course.objects.filter(semester=semester_id)
+                return queryset
+            return Course.objects.all()
+        except DatabaseError as e:
+            return Course.objects.none()
+        except Exception as e:
+            return Course.objects.none()
 
-class NotesShow(viewsets.ModelViewSet):
-    serializer_class = NotesSerializer
+class ShowFiles(viewsets.ModelViewSet):
+    def get_serializer_class(self):
+        data_type = self.request.query_params.get('type')
+        if data_type == 'notes':
+            return NotesSerializer
+        elif data_type == 'assignment':
+            return AssignmentSerializer
+        else:
+            return NotesSerializer
     def get_queryset(self):
         cid = self.request.query_params.get('cid')
-        course = Course.objects.get(course_id=cid)
-        notes = Notes.objects.filter(course=course)
-        return notes
-class AssignmentShow(viewsets.ModelViewSet):
-    serializer_class = AssignmentSerializer
-    def get_queryset(self):
-        cid = self.request.query_params.get('cid') 
-        course = Course.objects.get(course_id=cid)       
-        assignment = Assignment.objects.filter(course=course)
-        return assignment
-    
-class DownloadAssignment(APIView):
+        serializer_class = self.get_serializer_class()
+        try:
+            if cid:
+                course = Course.objects.get(course_id=cid)
+                if not course:
+                    return serializer_class.Meta.model.objects.none()
+                data = serializer_class.Meta.model.objects.filter(course=course)
+            else:
+                data = serializer_class.Meta.model.objects.all()
+            return data
+        except DatabaseError as e:
+            return serializer_class.Meta.model.objects.none()
+        except Exception as e:
+            return serializer_class.Meta.model.objects.none()
+            
+class DownloadFile(APIView):
     def post(self, request, *args, **kwargs):
-        file_id = request.data.get("aid")
-        my_model_instance = Assignment.objects.get(assignment_id=file_id)
-        
-        if not my_model_instance:
-            return Response({"message": "Assignment not found."}, status=status.HTTP_404_NOT_FOUND)
-        file_path = my_model_instance.pdf.path
-        return FileResponse(open(file_path, 'rb'), as_attachment=True)
-class DownloadNotes(APIView):
-    def post(self, request, *args, **kwargs):
-        file_id = request.data.get("nid")
-        my_model_instance = Notes.objects.get(notes_id=file_id)
-        
-        if not my_model_instance:
-            return Response({"message": "Note not found."}, status=status.HTTP_404_NOT_FOUND)
-        
-        file_path = my_model_instance.pdf.path
-        return FileResponse(open(file_path, 'rb'), as_attachment=True) 
+        file_id = self.request.query_params.get('id')
+        type = self.request.query_params.get('type')
+        if not file_id or not type : Response({'error': 'Type or id not found'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        try:
+          if type =='assignment':
+            my_model_instance = Assignment.objects.get(id=file_id)
+            if not my_model_instance:
+                return Response({"error": "Assignment not found."}, status=status.HTTP_404_NOT_FOUND)
+            file_path = my_model_instance.pdf.path
+            return FileResponse(open(file_path, 'rb'), as_attachment=True)
+          elif type =='notes':
+              my_model_instance = Notes.objects.get(id=file_id)
+          if not my_model_instance:
+              return Response({"message": "Note not found."}, status=status.HTTP_404_NOT_FOUND)         
+          file_path = my_model_instance.pdf.path
+          return FileResponse(open(file_path, 'rb'), as_attachment=True)
+        except DatabaseError as e:
+            return Response({'error': 'Database error'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        except Exception as e:
+            return Response({'error': 'Internal server error'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 class GalleryView(APIView):
     serializer_class = GallerySerializer
     def get(self, request):
-        queryset = Gallery.objects.all()
-        serializer = self.serializer_class(queryset, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        try:
+          queryset = Gallery.objects.all()
+          serializer = self.serializer_class(queryset, many=True)
+          return Response(serializer.data, status=status.HTTP_200_OK)
+        except DatabaseError as e:
+          return Response({'error': 'Database error'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        except Exception as e:
+          return Response({'error': 'Internal server error'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 class FileShow(viewsets.ModelViewSet):
     serializer_class = FileSerializer
@@ -207,20 +196,90 @@ class FileShow(viewsets.ModelViewSet):
         name = self.request.query_params.get('name')
         type = self.request.query_params.get('type')
         query = self.request.query_params.get('q')
-
-        if query:
-            if query =='alumni' :
-                current_year = datetime.now().year
-                return File.objects.filter(type=type,name__lte=str(current_year - 4))
-            elif query =='btech':
-                current_year = datetime.now().year
-                return File.objects.filter(type=type,name__gt=str(current_year - 4))
-            elif query =='file':
-                return File.objects.filter(type=type, name=name)
-            else :
-                return False
-        elif type:
-            return File.objects.filter(type=type)
-        elif name:
-            return File.objects.filter(name=name)
-
+        try:
+            if not query and type and name : return File.object.none()
+            if query:
+                if query =='alumni' :
+                    current_year = datetime.now().year
+                    return File.objects.filter(type=type,name__lte=str(current_year - 4))
+                elif query =='btech':
+                    current_year = datetime.now().year
+                    return File.objects.filter(type=type,name__gt=str(current_year - 4))
+                elif query =='file':
+                    return File.objects.filter(type=type, name=name)
+                else :
+                    return False
+            elif type:
+                return File.objects.filter(type=type)
+            elif name:
+                return File.objects.filter(name=name)
+        except DatabaseError as e:
+            return File.object.none()
+        except Exception as e:
+            return File.object.none()
+        
+class HolidayView(viewsets.ModelViewSet):
+    serializer_class = HolidaySerializer
+    def get_queryset(self):
+        month = self.request.query_params.get('activeMonth')
+        try :
+            if not month: queryset = Holiday.objects.all()
+            else: queryset = Holiday.objects.filter(date__month=month)
+            return queryset
+        except DatabaseError as e:
+            return Holiday.object.none()
+        except Exception as e:
+            return Holiday.object.none()
+        
+class GetData(APIView):
+     def get(self, request, *args, **kwargs):
+        type = request.query_params.get('type')
+        if not type : Response({'error': 'type may be event or news'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        try:
+            if type =='events':
+                url = 'https://nitsri.ac.in/'
+                if request.method == "GET":
+                    user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.1000.0 Safari/537.36'
+                    headers = {
+                        'User-Agent': user_agent,
+                        'Accept-Language': 'en-US,en;q=0.5',
+                    }
+                    req = requests.get(url=url)
+                    web_s = req.text
+                    soup = BeautifulSoup(web_s, "html.parser")
+                    event_container = soup.find(class_="gdlr-core-event-item-holder clearfix")
+                    events_data = []
+                    event_items = event_container.find_all(class_="gdlr-core-event-item-list gdlr-core-style-widget gdlr-core-item-pdlr clearfix")
+                    for event_item in event_items:
+                        event_data = {
+                            "date": event_item.find(class_="gdlr-core-date").text.strip(),
+                            "month": event_item.find(class_="gdlr-core-month").text.strip(),
+                            "title": event_item.find(class_="gdlr-core-event-item-title").a.text.strip(),
+                            "url": event_item.find(class_="gdlr-core-event-item-title").a.get('href'),
+                            "time": "",
+                            "location": "",
+                        }
+                        time_location = event_item.find_all(class_="gdlr-core-tail")
+                        event_data["time"]=time_location[0].text.strip()
+                        event_data["location"]=time_location[1].text.strip()
+                        events_data.append(event_data)
+                    if(events_data):
+                        return Response(events_data)
+                    return Response({"data":"not found"})
+            elif type == 'news' and request.method == "GET":
+                url = 'https://www.instagram.com/nitsriofficial/?__a=1&__d=dis'
+                user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.1000.0 Safari/537.36'
+                headers = {
+                    'User-Agent': user_agent,
+                    'Accept-Language': 'en-US,en;q=0.5',
+                }
+                req = requests.get(url=url, headers=headers)
+                web_s = req.text
+                data = json.loads(web_s)
+                news_data = data["graphql"]["user"]["edge_owner_to_timeline_media"]["edges"]
+                return Response(news_data)
+            return Response({"data":"not found"})
+        except DatabaseError as e:
+            return Response({'error': 'Database error'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        except Exception as e:
+            return Response({'error': 'Internal server error'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
