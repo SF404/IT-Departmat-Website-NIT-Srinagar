@@ -31,7 +31,7 @@ function Dashboard1() {
     onOpen: showResources,
     onClose: closeResources,
   } = useDisclosure();
-  
+
 
 
   // functions
@@ -75,17 +75,18 @@ function Dashboard1() {
   const fetchUser = async () => {
     try {
       const user = await axios.get("/api/auth/users/me/", get_token());
-      const teacher = await axios.get("/api/public/getteacherbymail/", {
+      const teacher = await axios.get("/api/public/getteacherstudent/", {
         params: {
+          type: 'teacher',
           email: user.data.email,
         },
       });
       setUser(teacher.data[0]);
       const response = await axios.get(
-        "/api/courses/",
+        "api/public/courses",
         {
           params: {
-            sid: user.data.email,
+            email: user.data.email,
           },
         },
         get_token()
@@ -99,7 +100,7 @@ function Dashboard1() {
 
   const fetchNotes = async () => {
     try {
-      const notes = await axios.get(`/api/shownotes/?cid=${selectedCourse}`);
+      const notes = await axios.get(`/api/public/showfiles/?type=notes&cid=${selectedCourse}`);
       setNotes(notes.data);
       console.log(notes);
     } catch (error) {
@@ -109,7 +110,7 @@ function Dashboard1() {
   const fetchAssignments = async () => {
     try {
       const assignment = await axios.get(
-        `/api/showassignment/?cid=${selectedCourse}`
+        `/api/public/showfiles/?type=assignment&cid=${selectedCourse}`
       );
       setAssignments(assignment.data);
     } catch (error) {
@@ -120,7 +121,7 @@ function Dashboard1() {
   const handleMyProfile = () => {
     showMyProfile();
   };
-  const handleResources=()=>{
+  const handleResources = () => {
     showResources();
   }
 
@@ -172,16 +173,16 @@ function Dashboard1() {
       </Flex>
       {user && Object.keys(user).length > 0 && (
         <>
-        <MyProfile
-          openMyProfile={openMyProfile}
-          closeMyProfile={closeMyProfile}
-          user={user}
-        />
-        <Resources
-          openResources={openResources}
-          closeResources={closeResources}
-          user={user}
-        />
+          <MyProfile
+            openMyProfile={openMyProfile}
+            closeMyProfile={closeMyProfile}
+            user={user}
+          />
+          <Resources
+            openResources={openResources}
+            closeResources={closeResources}
+            user={user}
+          />
         </>
       )}
     </>

@@ -51,7 +51,6 @@ function Viewer({ currentView, user }) {
             >
                 <Box padding={'14px'} w={'full'} h={'full'} pl={0}>
                     {renderComponent()}
-
                 </Box>
             </motion.div>
 

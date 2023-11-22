@@ -97,9 +97,8 @@ class PostPublicData(viewsets.ModelViewSet):
                 return Response({"message":"teacher cannot found"},status=status.HTTP_400_BAD_REQUEST)
             description=request.data.get("description")
             link=request.data.get('link')
-            id = random.randint(1, 10000)
             if object_type == 'announcement':
-                announcement=Announcement(announcement_id=id,description=description,link=link,teacher=teacher)
+                announcement=Announcement(description=description,url=link,teacher=teacher)
                 announcement.save()
                 return Response({"message": "Announcement Created Successfully"}, status=status.HTTP_201_CREATED)
             elif object_type == 'event':
@@ -107,14 +106,14 @@ class PostPublicData(viewsets.ModelViewSet):
                 title=request.data.get("title")
                 location=request.data.get("location")
                 date =  request.data.get("date")
-                event=Events(title=title,image=image,location=location,date=date ,description=description,link=link,teacher=teacher)
+                event=Events(title=title,image=image,location=location,date=date ,description=description,url=link,teacher=teacher)
                 event.save()
                 return Response({"message": "Event Created Successfully"}, status=status.HTTP_201_CREATED)
             elif object_type == 'tutorial':
                 image=request.FILES.get("image")
                 title=request.data.get("title")
                 tags=request.data.get("tags")
-                tutorial=Tutorials(title=title,image=image,tags=tags ,description=description,link=link,teacher=teacher)
+                tutorial=Tutorials(title=title,image=image,tags=tags ,description=description,url=link,teacher=teacher)
                 tutorial.save()
                 return Response({"message": "Event Created Successfully"}, status=status.HTTP_201_CREATED)
             else:
@@ -166,10 +165,11 @@ class ProfileUpdate(viewsets.ModelViewSet):
             patent_patent = request.data.get('patent_patent', None)
             patent_date = request.data.get('patent_date', None)
             patent_number = request.data.get('patent_number', None)
+            print(patent_patent,patent_date,patent_number)
             if patent_patent and patent_date and patent_number:
                 patent, created = Patent.objects.get_or_create(
                     teacher=teacher,
-                    patent=patent_patent,
+                    title=patent_patent,
                     defaults={'date': patent_date, 'number': patent_number}
                 )
                 if not created:
@@ -182,10 +182,10 @@ class ProfileUpdate(viewsets.ModelViewSet):
                 project, created = Project.objects.get_or_create(
                     teacher=teacher,
                     title=project_title,
-                    defaults={'link': project_link}
+                    defaults={'url': project_link}
                 )
                 if not created:
-                    project.link = project_link
+                    project.url = project_link
                     project.save()
             education_degree = request.data.get('education_degree', None)
             education_college = request.data.get('education_college', None)
@@ -212,7 +212,7 @@ class UploadFiles(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticated,)
     serializer_class = NotesSerializer
     def create(self, request, *args, **kwargs):
-        course_id=self.request.query_params.get('type')
+        course_id=self.request.query_params.get('cid')
         type = self.request.query_params.get('type')
         if not course_id: return Response({"error": "Course id not found"}, status=status.HTTP_400_BAD_REQUEST)
         course = Course.objects.get(course_id=course_id)
@@ -222,7 +222,7 @@ class UploadFiles(viewsets.ModelViewSet):
                 title = request.data.get("title")
                 uploaded_file = request.FILES.get("file")
                 if not uploaded_file or not title: return Response({"error": "file or title not found"}, status=status.HTTP_400_BAD_REQUEST)
-                note = Notes(name=title, pdf=uploaded_file,course=course)
+                note = Notes(name=title, file=uploaded_file,course=course)
                 note.save()
                 return Response({"message": "Notes created successfully"}, status=status.HTTP_201_CREATED)
             elif type =='assignment':
@@ -230,7 +230,7 @@ class UploadFiles(viewsets.ModelViewSet):
                 file = request.FILES.get("file")
                 description = request.data.get("description")
                 validity = request.data.get("validity")
-                assignment = Assignment(name=title, pdf=file, description=description, validity=validity, course=course)
+                assignment = Assignment(name=title, file=file, description=description, validity=validity, course=course)
                 assignment.save()
                 return Response({"message": "Assignment created successfully"}, status=status.HTTP_201_CREATED)
             Response({'error': 'the type is either `notes` or `assignments` error'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
@@ -259,21 +259,23 @@ class FileUpload (viewsets.ModelViewSet):
 
 class DeleteFilesAPIView(APIView):
     def post(self, request, *args, **kwargs):
-        file_id = self.request.query_params.get('id')
-        type = self.request.query_params.get('type')
-        if not id or not type:
-            return Response({"message": "Either 'id' or 'type' is required"}, status=status.HTTP_400_BAD_REQUEST)
+        aid = request.data.get("assignment_id")
+        nid = request.data.get("notes_id")
+        print(aid)
+        print(nid)
         try:
-            if type == 'assignment':
+            if not aid and not nid:
+                return Response({"message": "Either 'aid' or 'nid' is required"}, status=status.HTTP_400_BAD_REQUEST)
+            if aid:
                 try:
-                    assignment_entry = Assignment.objects.get(id=file_id)
+                    assignment_entry = Assignment.objects.get(id=aid)
                     assignment_entry.delete()
                     return Response({"message": "Assignment entry deleted successfully"}, status=status.HTTP_204_NO_CONTENT)
                 except Assignment.DoesNotExist:
                     return Response({"message": "Assignment entry not found"}, status=status.HTTP_404_NOT_FOUND)
-            elif type=='note':
+            if nid:
                 try:
-                    notes_entry = Notes.objects.get(id=file_id)
+                    notes_entry = Notes.objects.get(id=nid)
                     notes_entry.delete()
                     return Response({"message": "Notes entry deleted successfully"}, status=status.HTTP_204_NO_CONTENT)
                 except Notes.DoesNotExist:
@@ -283,6 +285,7 @@ class DeleteFilesAPIView(APIView):
             return Response({'error': 'Database error'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         except Exception as e:
             return Response({'error': 'Internal server error'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
     
 class GetUserFromTokenView(APIView):
     authentication_classes=[JWTAuthentication]

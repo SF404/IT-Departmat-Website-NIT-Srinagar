@@ -36,7 +36,7 @@ function Events({ email }) {
   const [events, setEvents] = useState(null);
   const fetchEvents = async () => {
     try {
-      const response = await axios.get(`/api/public/eventsget/?email=${email}`);
+      const response = await axios.get(`/api/public/teacherdataview/?type=events&email=${email}`);
       setEvents(response.data);
       console.log("Events", response.data);
     } catch (error) {
@@ -44,23 +44,23 @@ function Events({ email }) {
     }
   };
 
-    const [formData, setFormData] = useState({
-        image: "",
-        title: "",
-        description: "",
-        date: "",
-        location: "",
-        link: "",
-    });
+  const [formData, setFormData] = useState({
+    image: "",
+    title: "",
+    description: "",
+    date: "",
+    location: "",
+    link: "",
+  });
 
-    // Function to handle changes in form fields
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({
-            ...formData,
-            [name]: value,
-        });
-    };
+  // Function to handle changes in form fields
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
 
   // Function to handle image input change
   const handleFileChange = (e) => {
@@ -93,7 +93,7 @@ function Events({ email }) {
       if (response) fetchEvents();
       console.log(response);
       console.log("Form data submitted:", formData);
-    } catch (error) {}
+    } catch (error) { }
   };
 
   const handleDelete = async (delete_id) => {
@@ -113,9 +113,9 @@ function Events({ email }) {
     }
   };
 
-    useEffect(() => {
-        fetchEvents();
-    }, []);
+  useEffect(() => {
+    fetchEvents();
+  }, []);
 
   return (
     <>

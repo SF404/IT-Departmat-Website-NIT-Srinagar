@@ -36,7 +36,7 @@ function Tutorial({ email }) {
   const fetchTutorials = async () => {
     try {
       const response = await axios.get(
-        `/api/public/tutorialsget/?email=${email}`
+        `/api/public/teacherdataview/?type=tutorials&email=${email}`
       );
       setTutorials(response.data);
       console.log("Tutorials", response.data);
@@ -280,7 +280,7 @@ function Tutorial({ email }) {
           </Box>
         </Box>
       </Box>
-      
+
       <AlertDialog
         motionPreset="slideInBottom"
         leastDestructiveRef={cancelRef}

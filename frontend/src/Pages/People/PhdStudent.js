@@ -25,7 +25,7 @@ function PhdStudents() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "/api/public/getphdstudent/?alumni=False"
+          "/api/public/getteacherstudent/?type=phdstudent&alumni=False"
         );
         const phdstudent_data = response.data;
         console.log(response.data)

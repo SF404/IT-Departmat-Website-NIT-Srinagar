@@ -49,7 +49,7 @@ class CourseSerializer(serializers.ModelSerializer):
     teacher_name = serializers.CharField(source='teacher.name', read_only=True)
     class Meta:
         model = Course
-        fields = ['id', 'course_id', 'name', 'credit', 'semester', 'syllabus', 'description', 'date', 'teacher', 'teacher_name']
+        fields = ['id', 'course_id', 'name', 'credit', 'semester', 'syllabus', 'description', 'teacher', 'teacher_name']
 
 class AssignmentSerializer(serializers.ModelSerializer):
     class Meta:

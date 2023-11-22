@@ -40,7 +40,7 @@ function NavLinks({ color = "white", isOpen = null, onClose = null }) {
           colorScheme="whiteAlpha"
           color={color}
           fontWeight={"normal"}
-          fontSize={'14px'} 
+          fontSize={'14px'}
         >
           Academics
         </MenuButton>
@@ -262,14 +262,14 @@ function NavLinks({ color = "white", isOpen = null, onClose = null }) {
           >
             Semester All
           </MenuItem>
-          <MenuItem
+          {/* <MenuItem
             as={Link}
             _hover={{ color: "#192e59" }}
             onClick={handleNavigation}
             to="/tutorials"
           >
             Tutorials
-          </MenuItem>
+          </MenuItem> */}
         </MenuList>
       </Menu>
 
@@ -310,7 +310,7 @@ function Navbar() {
         zIndex={99}
         alignItems={"center"}
         px={"10px"}
-        bg={"white"} 
+        bg={"white"}
       >
         <Image src={mainLogo} h={"50px"} w={"50px"} alt="logo" />
         <Text

@@ -52,7 +52,7 @@ function Announcements({ email }) {
   const fetchAnnouncements = async () => {
     try {
       const response = await axios.get(
-        `/api/public/announcementget/?email=${email}`
+        `/api/public/teacherdataview/?type=announcement&email=${email}`
       );
       setannouncements(response.data);
       console.log("announcements", response.data);
@@ -160,7 +160,7 @@ function Announcements({ email }) {
                           e.stopPropagation();
                           setDeleteInfo({
                             name: item.description,
-                            id:item.id ,
+                            id: item.id,
                           });
                           showDeleteAlert();
                         }}

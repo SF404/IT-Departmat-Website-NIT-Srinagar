@@ -24,8 +24,8 @@ const SemesterPage = () => {
     console.log(notes_id);
     try {
       const response = await axios.post(
-        "/api/notesdownload/",
-        { nid: notes_id },
+        "/api/filedownload/?type=notes",
+        { id: notes_id },
         { responseType: "blob" }
       );
       const url = window.URL.createObjectURL(new Blob([response.data]));
@@ -44,8 +44,8 @@ const SemesterPage = () => {
     console.log(assignment_id);
     try {
       const response = await axios.post(
-        "/api/assignmentdownload/",
-        { aid: assignment_id },
+        "/api/filedownload/?type=assignment",
+        { id: assignment_id },
         { responseType: "blob" }
       );
       const url = window.URL.createObjectURL(new Blob([response.data]));
@@ -65,7 +65,7 @@ const SemesterPage = () => {
     const fetchAssignments = async () => {
       try {
         const assignment = await axios.get(
-          `/api/showassignment/?cid=${selectedCourse}`
+          `/api/public/showfiles/?type=assignment&cid=${selectedCourse}`
         );
         setAssignments(assignment.data);
         console.log(assignment.data)
@@ -78,7 +78,7 @@ const SemesterPage = () => {
     const fetchNotes = async () => {
       try {
         const notes = await axios.get(
-          `/api/shownotes/?cid=${selectedCourse}`
+          `/api/public/showfiles/?type=notes&cid=${selectedCourse}`
         );
         console.log('selected Course', selectedCourse)
         setNotes(notes.data);
@@ -99,7 +99,7 @@ const SemesterPage = () => {
     async function fetchCourses() {
       try {
         const response = await axios.get(
-          `/api/semester/?semesterId=${semesterId}`
+          `/api/public/courses/?semesterId=${semesterId}`
         );
         const data = response.data;
         setCourses(data);

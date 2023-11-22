@@ -1,7 +1,7 @@
 import { Box, Button, DarkMode, Link, List, ListIcon, ListItem, Text, VStack } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import SmallBanner from '../../Layout/SmallBanner';
-import {  PiCubeDuotone } from "react-icons/pi";
+import { PiCubeDuotone } from "react-icons/pi";
 import axios from 'axios'
 
 function Papers() {
@@ -10,7 +10,7 @@ function Papers() {
     useEffect(() => {
         const fetchResearch = async () => {
             try {
-                const response = await axios.get(`/api/public/researchget`);
+                const response = await axios.get('/api/public/teacherdataview?type=research');
                 setPapers(response.data);
             } catch (error) {
                 console.error('Error fetching research papers:', error);
@@ -72,7 +72,7 @@ function Papers() {
                                         <ListIcon as={PiCubeDuotone} fontSize={'1.3em'} mt={'4px'} color={'#192e59'} />
                                         <Box>
 
-                                            <Text as={paper.url?Link:'p'} href={paper.url} fontWeight={'semibold'}>{paper.title}</Text>
+                                            <Text as={paper.url ? Link : 'p'} href={paper.url} fontWeight={'semibold'}>{paper.title}</Text>
                                             <Text fontSize={'0.9em'}>Authors: {paper.authors}</Text>
                                         </Box>
                                         {/* Add other relevant information */}

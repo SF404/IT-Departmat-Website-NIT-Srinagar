@@ -53,7 +53,7 @@ function Alumni() {
     const fetchPhdData = async () => {
       try {
         const response = await axios.get(
-          "/api/public/getphdstudent/?alumni=True"
+          "/api/public/getteacherstudent/?type=phdstudent&alumni=True"
         );
         setPhdAlumni(response.data);
       } catch (error) {

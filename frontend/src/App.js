@@ -64,13 +64,13 @@ const App = () => {
           <Route path="/" element={<Layout />} title="IT NIT SRINAGAR">
             <Route index element={<Home />} title="Home" />
             <Route path="semester/all" element={<CoursesAll />} title="All Semesters" />
-            <Route path="semester/:semesterId" element={<SemesterPage/>} />
+            <Route path="semester/:semesterId" element={<SemesterPage />} />
             <Route path="faculty" element={<Faculty />} title="Faculty" />
             <Route path="faculty/details/:id" element={<FacultyDetails />} title="Faculty Details" />
             <Route path="/login" element={<Login />} title="Login" />
             <Route path="/signup" element={<Signup />} title="Signup" />
             <Route path="/activate/:uid/:token" element={<Activate />} title="Activate Account" />
-            <Route path="tutorials/" element={<Tutorials />} title="Tutorials" />
+            {/* <Route path="tutorials/" element={<Tutorials />} title="Tutorials" /> */}
             <Route path="degree-program" element={<DegreePrograms />} title="Degree Programs" />
             <Route path="vision-mission" element={<VissionMission />} title="Vision Mission" />
             <Route path="outcomes" element={<Outcomes />} title="Outcomes" />

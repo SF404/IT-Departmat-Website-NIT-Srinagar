@@ -22,11 +22,9 @@ class TeacherDataView(viewsets.ModelViewSet):
         data_type = self.request.query_params.get('type')
         email = self.request.query_params.get('email')
         research_year=self.request.query_params.get('research_year')
-
         try:
             if data_type:
                 model_class, serializer_class = self.get_model_and_serializer(data_type)
-                
                 if email:
                     teacher = Teacher.objects.filter(email=email).first()
                     if teacher:
@@ -92,6 +90,7 @@ class TeacherStudentView(viewsets.ModelViewSet):
                 else:
                     return Teacher.objects.all()
             elif data_type == 'phdstudent':
+                alumni = self.request.query_params.get('alumni')
                 if id:
                     student = Phd_Student.objects.filter(id=id)
                     if not student:
@@ -103,6 +102,8 @@ class TeacherStudentView(viewsets.ModelViewSet):
                         return Phd_Student.objects.none()
                     return student
                 else:
+                    if alumni:
+                        return Phd_Student.objects.filter(alumni=alumni)
                     return Phd_Student.objects.all()
             elif data_type == 'list':
                 teachers = Teacher.objects.all()
@@ -117,11 +118,11 @@ class CourseView(viewsets.ModelViewSet):
     serializer_class = CourseSerializer
     def get_queryset(self):
         try:
-            sid = self.request.query_params.get('sid')
-            print(sid)
+            email = self.request.query_params.get('email')
+            print(email)
             semester_id = self.request.query_params.get('semesterId')
-            if sid: 
-                teacher = Teacher.objects.get(email=sid)
+            if email: 
+                teacher = Teacher.objects.get(email=email)
                 if not teacher: return Course.objects.none()
                 queryset = Course.objects.filter(teacher=teacher)
                 return queryset

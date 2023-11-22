@@ -61,10 +61,10 @@ function Resources({ openResources, closeResources, user }) {
     const fetchResearch = async () => {
         try {
             const response = await axios.get(
-                `/api/public/researchget/?email=${user.email}`
+                `/api/public/teacherdataview/?type=research&email=${user.email}`
             );
             setResearch(response.data);
-            console.log("resource", response.data);
+            console.log("research", response.data);
         } catch (error) {
             console.log(error);
         }
@@ -72,7 +72,7 @@ function Resources({ openResources, closeResources, user }) {
     const fetchPatent = async () => {
         try {
             const response = await axios.get(
-                `/api/public/patentget/?email=${user.email}`
+                `/api/public/teacherdataview/?type=patent&email=${user.email}`
             );
             setPatent(response.data);
             console.log("patent", response.data);
@@ -83,7 +83,7 @@ function Resources({ openResources, closeResources, user }) {
     const fetchProject = async () => {
         try {
             const response = await axios.get(
-                `/api/public/projectget/?email=${user.email}`
+                `/api/public/teacherdataview/?type=project&email=${user.email}`
             );
             setProject(response.data);
             console.log("project", response.data);
@@ -94,7 +94,7 @@ function Resources({ openResources, closeResources, user }) {
     const fetchEducation = async () => {
         try {
             const response = await axios.get(
-                `/api/public/teachereducationget/?email=${user.email}`
+                `/api/public/teacherdataview/?type=teachereducation&email=${user.email}`
             );
             setEducation(response.data);
             console.log("education", response.data);
@@ -155,7 +155,7 @@ function Resources({ openResources, closeResources, user }) {
             console.log(error);
         }
     };
-    const patentSubmit = async(e) => {
+    const patentSubmit = async (e) => {
         try {
             e.preventDefault();
             if (patentformData.patent_patent == "" || patentformData.patent_date == "" || patentformData.patent_number == "") return;
@@ -175,8 +175,7 @@ function Resources({ openResources, closeResources, user }) {
         try {
             e.preventDefault();
             console.log(projectformData);
-            if (projectformData.project_title == "") return;
-            if (patentformData.patent_patent == "" || patentformData.patent_date == "" || patentformData.patent_number == "") return;
+            if (projectformData.project_title == "" || projectformData.project_link == "") return;
             const response = await axios.put(`/api/profileupdate/${user.id}/?email=${user.email}`,
                 projectformData,
                 get_token()
@@ -328,7 +327,7 @@ function Resources({ openResources, closeResources, user }) {
                                                 patent.map((item, index) => (
                                                     <>
                                                         <Tr>
-                                                            <Td>{item.patent}</Td>
+                                                            <Td>{item.title}</Td>
                                                             <Td>{item.number}</Td>
                                                             <Td><IconButton
                                                                 isRound={true}
@@ -340,7 +339,7 @@ function Resources({ openResources, closeResources, user }) {
                                                                 onClick={(e) => {
                                                                     e.stopPropagation();
                                                                     setDeleteInfo({
-                                                                        name: item.patent,
+                                                                        name: item.title,
                                                                         id: item.id,
                                                                         type: "patent"
                                                                     });

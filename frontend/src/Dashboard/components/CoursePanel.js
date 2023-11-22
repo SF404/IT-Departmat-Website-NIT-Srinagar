@@ -58,7 +58,7 @@ function CoursePanel({ selectedCourse, notes, assignments, fetchNotes, fetchAssi
         console.log(formData);
         try {
             const response = await axios.post(
-                "/api/notesupload/",
+                `/api/uploadfiles/?type=notes&cid=${selectedCourse}`,
                 formData,
                 get_token()
             );
@@ -99,7 +99,7 @@ function CoursePanel({ selectedCourse, notes, assignments, fetchNotes, fetchAssi
         formData.append("validity", assignmnetFormData.validity);
         formData.append("cid", selectedCourse);
         try {
-            const response = await axios.post("/api/assignmentupload/", formData, get_token());
+            const response = await axios.post(`/api/uploadfiles/?type=assignment&cid=${selectedCourse}`, formData, get_token());
             closeAssignmentModel();
             await fetchAssignmnets();
             // Display success toast
@@ -135,7 +135,7 @@ function CoursePanel({ selectedCourse, notes, assignments, fetchNotes, fetchAssi
     }
     const download_notes = async (nid) => {
         try {
-            const response = await axios.post("/api/notesdownload/", { nid: nid }, { responseType: "blob" });
+            const response = await axios.post(`/api/public/showfiles/?type=notes&cid=${selectedCourse}`, { responseType: "blob" });
             const url = window.URL.createObjectURL(new Blob([response.data]));
             const link = document.createElement("a");
             link.href = url;
@@ -150,7 +150,7 @@ function CoursePanel({ selectedCourse, notes, assignments, fetchNotes, fetchAssi
 
     const download_assignment = async (aid) => {
         try {
-            const response = await axios.post("/api/assignmentdownload/", { aid: aid }, { responseType: "blob" });
+            const response = await axios.post(`/api/public/showfiles/?type=notes&cid=${selectedCourse}`, { responseType: "blob" });
             const url = window.URL.createObjectURL(new Blob([response.data]));
             const link = document.createElement("a");
             link.href = url;
@@ -166,7 +166,7 @@ function CoursePanel({ selectedCourse, notes, assignments, fetchNotes, fetchAssi
     const handleDelete = async (delete_id) => {
         console.log(delete_id);
         try {
-            const response = await axios.post("/api/filesdelete/", delete_id, get_token());
+            const response = await axios.post(`/api/filesdelete/`, delete_id, get_token());
             closeDeleteAlert();
             if (response.status === 204) {
                 await fetchAssignmnets();
@@ -182,7 +182,7 @@ function CoursePanel({ selectedCourse, notes, assignments, fetchNotes, fetchAssi
             {
                 selectedCourse ? (
                     <Flex p={3} gap={3} flexFlow={1} flexWrap={'wrap'}>
-                        <Box  minW={'300px'} flexGrow={1} bg={'white'} height={'fit-content'} borderRadius={8} boxShadow={'0 2px 8px rgba(0,0,0,0.05)'}>
+                        <Box minW={'300px'} flexGrow={1} bg={'white'} height={'fit-content'} borderRadius={8} boxShadow={'0 2px 8px rgba(0,0,0,0.05)'}>
                             <Box bg={'#d8dcf0'} p={4} borderTopRadius={8} fontWeight={'semibold'} color={'#192e59'}>Notes Material </Box>
                             <VStack p={4}>
                                 {
@@ -196,7 +196,7 @@ function CoursePanel({ selectedCourse, notes, assignments, fetchNotes, fetchAssi
                                                             onClick={(e) => { e.stopPropagation(); download_notes(item.notes_id); }}
                                                         />
                                                         <IconButton isRound={true} variant="outline" aria-label="Done" icon={<FaTrash />} size={"xs"} color={"blackAlpha.800"}
-                                                            onClick={(e) => { e.stopPropagation(); setDeleteInfo({ name: item.name, id: { notes_id: item.notes_id }, }); showDeleteAlert(); }}
+                                                            onClick={(e) => { e.stopPropagation(); setDeleteInfo({ name: item.name, id: { notes_id: item.id }, }); showDeleteAlert(); }}
                                                         />
                                                     </Box>
                                                 </HStack>
@@ -231,7 +231,7 @@ function CoursePanel({ selectedCourse, notes, assignments, fetchNotes, fetchAssi
                                                         />
                                                         <IconButton isRound={true} variant="outline" aria-label="Done" icon={<FaTrash />} size={"xs"} color={"blackAlpha.800"}
                                                             onClick={() => {
-                                                                setDeleteInfo({ name: item.name, id: { assignment_id: item.assignment_id }, });
+                                                                setDeleteInfo({ name: item.name, id: { assignment_id: item.id }, });
                                                                 showDeleteAlert();
                                                             }}
                                                         />
@@ -300,12 +300,12 @@ function CoursePanel({ selectedCourse, notes, assignments, fetchNotes, fetchAssi
                         <form onSubmit={handleNotesSubmit} encType="multipart/form-data"  >
                             <FormControl>
                                 <FormLabel>Title</FormLabel>
-                                <Input type="text" name="title" value={notesFormData.title} onChange={handleNotesFormChange} placeholder="Enter title" />
+                                <Input type="text" name="title" value={notesFormData.title} onChange={handleNotesFormChange} required placeholder="Enter title" />
                             </FormControl>
 
                             <FormControl mt={4}>
                                 <FormLabel bg={"#e5e5e5"} p={3} borderRadius={"10px"} m={0} > Upload Notes</FormLabel>
-                                <Input type="file" name="file" onChange={handleNotesFormChange} display={"none"} />
+                                <Input type="file" name="file" onChange={handleNotesFormChange} display={"none"} required />
                             </FormControl>
                             <Divider my={4} />
                             <Button type="submit" colorScheme="blue" w={"full"}>Upload</Button>
@@ -327,7 +327,7 @@ function CoursePanel({ selectedCourse, notes, assignments, fetchNotes, fetchAssi
                         <form onSubmit={handleAssignmentSubmit}>
                             <FormControl>
                                 <FormLabel>Title</FormLabel>
-                                <Input type="text" name="title" value={assignmnetFormData.title} onChange={handleAssignmentFormChange} placeholder="Enter title" />
+                                <Input type="text" name="title" value={assignmnetFormData.title} onChange={handleAssignmentFormChange} placeholder="Enter title" required />
                             </FormControl>
 
                             <FormControl mt={4}>
@@ -337,12 +337,12 @@ function CoursePanel({ selectedCourse, notes, assignments, fetchNotes, fetchAssi
 
                             <FormControl>
                                 <FormLabel>validity</FormLabel>
-                                <Input type="text" name="validity" value={assignmnetFormData.validity} onChange={handleAssignmentFormChange} placeholder="Submission" />
+                                <Input type="text" name="validity" value={assignmnetFormData.validity} onChange={handleAssignmentFormChange} placeholder="Submission" required />
                             </FormControl>
 
                             <FormControl mt={4}>
                                 <FormLabel bg={"#e5e5e5"} p={3} borderRadius={"10px"} m={0} > Upload File {/* <DownloadIcon transform="rotate(180deg)"/> */}  </FormLabel>
-                                <Input type="file" name="file" onChange={handleAssignmentFormChange} display={"none"} />
+                                <Input type="file" name="file" onChange={handleAssignmentFormChange} display={"none"} required />
                             </FormControl>
                             <Button type="submit" colorScheme="facebook" mt={4} w={"full"} >Submit</Button>
                         </form>
