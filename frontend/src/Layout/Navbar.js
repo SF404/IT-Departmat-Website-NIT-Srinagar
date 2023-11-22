@@ -29,6 +29,7 @@ function NavLinks({ color = "white", isOpen = null, onClose = null }) {
         fontWeight={"normal"}
         as={Link}
         to="/"
+        
       >
         Home
       </Button>

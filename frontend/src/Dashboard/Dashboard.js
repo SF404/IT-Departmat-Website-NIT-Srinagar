@@ -90,8 +90,9 @@ function Dashboard1() {
           },
         },
         get_token()
-      );
+        );
       setCourses(response.data);
+      console.log(teacher)
     } catch (error) {
       console.error("Error fetching data:", error);
       navigate_login();

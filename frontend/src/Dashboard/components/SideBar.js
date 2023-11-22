@@ -6,6 +6,7 @@ import { motion } from 'framer-motion'
 import { useState } from 'react'
 
 const SideBar = ({ user, courses, selectedCourse, setSelectedCourse, handleMyProfile, handleResources, currentView, setCurrentView }) => {
+    console.log(user)
     const { getButtonProps, getDisclosureProps, isOpen } = useDisclosure()
     const [hidden, setHidden] = useState(!isOpen)
     const isMediumDevice = window.innerWidth <= 768;
@@ -22,7 +23,7 @@ const SideBar = ({ user, courses, selectedCourse, setSelectedCourse, handleMyPro
                         <IconButton bg={'transparent'} color={'#3848a2'}  {...getButtonProps()} icon={hidden ? <PiTextIndentDuotone size={'1.5em'} /> : <PiTextOutdentDuotone size={'1.5em'} />}></IconButton>
                         <IconButton bg={'transparent'} color={'#3848a2'} icon={<PiCalendarDuotone size={'1.5em'} />} onClick={() => handleSelect('calendar')}></IconButton>
                         <IconButton bg={'transparent'} color={'#3848a2'} icon={<PiChatsDuotone size={'1.5em'} />} onClick={() => handleSelect('chat')}></IconButton>
-                        <IconButton bg={'transparent'} color={'#3848a2'} icon={<PiStudentDuotone size={'1.5em'} />} onClick={() => handleSelect('student')}></IconButton>
+                        {/* <IconButton bg={'transparent'} color={'#3848a2'} icon={<PiStudentDuotone size={'1.5em'} />} onClick={() => handleSelect('student')}></IconButton> */}
                         <IconButton bg={'transparent'} color={'#3848a2'} icon={<PiMegaphoneDuotone size={'1.5em'} />} onClick={() => handleSelect('announcement')}></IconButton>
                         <IconButton bg={'transparent'} color={'#3848a2'} icon={<PiNotePencilDuotone size={'1.5em'} />} onClick={() => handleSelect('event')}></IconButton>
                         <IconButton bg={'transparent'} color={'#3848a2'} icon={<PiVideoDuotone size={'1.5em'} />} onClick={() => handleSelect('tutorial')}></IconButton>
