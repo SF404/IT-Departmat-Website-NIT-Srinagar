@@ -81,6 +81,7 @@ function Dashboard1() {
           email: user.data.email,
         },
       });
+      console.log(teacher.data);
       setUser(teacher.data[0]);
       const response = await axios.get(
         "api/public/courses",

@@ -135,7 +135,7 @@ function CoursePanel({ selectedCourse, notes, assignments, fetchNotes, fetchAssi
     }
     const download_notes = async (nid) => {
         try {
-            const response = await axios.post(`/api/public/showfiles/?type=notes&cid=${selectedCourse}`, { responseType: "blob" });
+            const response = await axios.post(`/api/filedownload/?type=notes&id=${nid}`, { responseType: "blob" });
             const url = window.URL.createObjectURL(new Blob([response.data]));
             const link = document.createElement("a");
             link.href = url;
@@ -150,7 +150,7 @@ function CoursePanel({ selectedCourse, notes, assignments, fetchNotes, fetchAssi
 
     const download_assignment = async (aid) => {
         try {
-            const response = await axios.post(`/api/public/showfiles/?type=notes&cid=${selectedCourse}`, { responseType: "blob" });
+            const response = await axios.post(`/api/filedownload/?type=assignment&id=${aid}`, { responseType: "blob" });
             const url = window.URL.createObjectURL(new Blob([response.data]));
             const link = document.createElement("a");
             link.href = url;
@@ -193,7 +193,7 @@ function CoursePanel({ selectedCourse, notes, assignments, fetchNotes, fetchAssi
                                                     <Text>{item.name}</Text>
                                                     <Box display={'flex'} gap={2} >
                                                         <IconButton isRound={true} variant="outline" aria-label="Done" size={"xs"} color={"blackAlpha.800"} icon={<FaDownload />}
-                                                            onClick={(e) => { e.stopPropagation(); download_notes(item.notes_id); }}
+                                                            onClick={(e) => { e.stopPropagation(); download_notes(item.id); }}
                                                         />
                                                         <IconButton isRound={true} variant="outline" aria-label="Done" icon={<FaTrash />} size={"xs"} color={"blackAlpha.800"}
                                                             onClick={(e) => { e.stopPropagation(); setDeleteInfo({ name: item.name, id: { notes_id: item.id }, }); showDeleteAlert(); }}
@@ -227,7 +227,7 @@ function CoursePanel({ selectedCourse, notes, assignments, fetchNotes, fetchAssi
                                                     <Box display={'flex'} gap={2} >
                                                         <Badge px={2} colorScheme='yellow' display={'flex'} alignItems={'center'}>Due: {item.validity}</Badge>
                                                         <IconButton isRound={true} variant="outline" aria-label="Done" size={"xs"} color={"blackAlpha.800"} icon={<FaDownload />}
-                                                            onClick={() => { download_assignment(item.assignment_id); }}
+                                                            onClick={() => { download_assignment(item.id); }}
                                                         />
                                                         <IconButton isRound={true} variant="outline" aria-label="Done" icon={<FaTrash />} size={"xs"} color={"blackAlpha.800"}
                                                             onClick={() => {
