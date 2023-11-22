@@ -171,13 +171,13 @@ class DownloadFile(APIView):
             my_model_instance = Assignment.objects.get(id=file_id)
             if not my_model_instance:
                 return Response({"error": "Assignment not found."}, status=status.HTTP_404_NOT_FOUND)
-            file_path = my_model_instance.pdf.path
+            file_path = my_model_instance.file.path
             return FileResponse(open(file_path, 'rb'), as_attachment=True)
           elif type =='notes':
               my_model_instance = Notes.objects.get(id=file_id)
           if not my_model_instance:
               return Response({"message": "Note not found."}, status=status.HTTP_404_NOT_FOUND)         
-          file_path = my_model_instance.pdf.path
+          file_path = my_model_instance.file.path
           return FileResponse(open(file_path, 'rb'), as_attachment=True)
         except DatabaseError as e:
             return Response({'error': 'Database error'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

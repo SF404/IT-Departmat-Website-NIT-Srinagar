@@ -24,8 +24,7 @@ const SemesterPage = () => {
     console.log(notes_id);
     try {
       const response = await axios.post(
-        "/api/filedownload/?type=notes",
-        { id: notes_id },
+        `/api/filedownload/?type=notes&id=${notes_id}`,
         { responseType: "blob" }
       );
       const url = window.URL.createObjectURL(new Blob([response.data]));
@@ -44,8 +43,7 @@ const SemesterPage = () => {
     console.log(assignment_id);
     try {
       const response = await axios.post(
-        "/api/filedownload/?type=assignment",
-        { id: assignment_id },
+        `/api/filedownload/?type=assignment&id=${assignment_id}`,
         { responseType: "blob" }
       );
       const url = window.URL.createObjectURL(new Blob([response.data]));
@@ -97,6 +95,7 @@ const SemesterPage = () => {
 
   useEffect(() => {
     async function fetchCourses() {
+
       try {
         const response = await axios.get(
           `/api/public/courses/?semesterId=${semesterId}`
@@ -139,7 +138,7 @@ const SemesterPage = () => {
                               <Text
                                 cursor={"pointer"}
                                 _hover={{ color: "blue", textDecoration: "underline" }}
-                                onClick={() => download_notes(item.notes_id)}
+                                onClick={() => download_notes(item.id)}
                               >
                                 {item.name}
                               </Text>
@@ -168,7 +167,7 @@ const SemesterPage = () => {
                                     textDecoration: "underline",
                                   }}
                                   onClick={() =>
-                                    download_assignment(item.assignment_id)
+                                    download_assignment(item.id)
                                   }
                                 >
                                   {item.name}
