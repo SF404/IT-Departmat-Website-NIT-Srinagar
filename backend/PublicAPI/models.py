@@ -23,5 +23,15 @@ class Holiday(models.Model):
     def _str_(self):
         return self.name
 
+class News(models.Model):
+    headline= models.CharField(max_length=255)
+    author=models.CharField(max_length=225,null=True,blank=True)
+    date=models.DateField()
+    content=models.TextField(max_length=1000,null=True,blank=True)
+    image=models.ImageField(upload_to='news/',null=True,blank=True)
+    class Meta:
+        ordering=['date']   
+    def __str__(self):
+        return f"{self.headline}"
 
 

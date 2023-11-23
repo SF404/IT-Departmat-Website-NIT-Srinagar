@@ -44,7 +44,7 @@ function FacultyDetails() {
         const teacher = await axios.get(`/api/public/getteacherstudent/?type=teacher&Id=${id}`);
         // couses
         const courses = await axios.get(
-          `/api/public/courses/?sid=${teacher.data[0].email}`
+          `/api/public/courses/?email=${teacher.data[0].email}`
         );
         setCurrentTeachingCourses(courses.data);
         const education = await axios.get(`/api/public/teacherdataview/?type=teachereducation&Id=${id}`, {
@@ -375,7 +375,7 @@ function FacultyDetails() {
                       {patents.map((item, index) => (
                         <Tr key={index}>
                           <Td>{item.date}</Td>
-                          <Td>{item.patent}</Td>
+                          <Td>{item.title}</Td>
                           <Td>{item.number}</Td>
                         </Tr>
                       ))}
