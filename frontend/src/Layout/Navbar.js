@@ -29,6 +29,7 @@ function NavLinks({ color = "white", isOpen = null, onClose = null }) {
         fontWeight={"normal"}
         as={Link}
         to="/"
+
       >
         Home
       </Button>
@@ -40,7 +41,6 @@ function NavLinks({ color = "white", isOpen = null, onClose = null }) {
           colorScheme="whiteAlpha"
           color={color}
           fontWeight={"normal"}
-          fontSize={'14px'}
         >
           Academics
         </MenuButton>
@@ -260,7 +260,7 @@ function NavLinks({ color = "white", isOpen = null, onClose = null }) {
             onClick={handleNavigation}
             to="/semester/all"
           >
-            Semester All
+            Semesters
           </MenuItem>
           {/* <MenuItem
             as={Link}
