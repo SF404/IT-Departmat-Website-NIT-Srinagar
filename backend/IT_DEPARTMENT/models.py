@@ -4,14 +4,6 @@ from django.contrib.auth.models import BaseUserManager,AbstractBaseUser
 
 # Create your models here.
 
-# edits by Rajes:
-    # teacher_id removed
-    # rename date -> auto_date in every auto_now_add=True
-    # rename patent -> title in Patent table
-    # rename link -> url in Project Announcement Events Tutorial
-    # rename pdf -> file in Assignment Notes
-    # remove notes_id and assignment_id announcement_id
-
 
 
 
@@ -156,5 +148,8 @@ class Notes(models.Model):
         ordering=['name'] 
     def __str__(self):
         return f"{self.name}"
+    
+
+
 
 

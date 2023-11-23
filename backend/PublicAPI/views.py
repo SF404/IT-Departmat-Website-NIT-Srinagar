@@ -52,9 +52,9 @@ class TeacherDataView(viewsets.ModelViewSet):
             'announcement': (Announcement, AnnouncementSerializer),
             'tutorials': (Tutorials, TutorialsSerializer),
             'events': (Events, EventsSerializer),
+            'news':(News, NewsSerializer),
             # Add more models as needed
         }
-
         return models.get(data_type.lower(), (None, None))
 
 
