@@ -30,7 +30,7 @@ class News(models.Model):
     content=models.TextField(max_length=1000,null=True,blank=True)
     image=models.ImageField(upload_to='news/',null=True,blank=True)
     class Meta:
-        ordering=['date']   
+        ordering=['-date']   
     def __str__(self):
         return f"{self.headline}"
 

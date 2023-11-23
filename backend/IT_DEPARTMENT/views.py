@@ -36,7 +36,6 @@ class DataDelete(viewsets.ModelViewSet):
                 serializer = EventsSerializer(obj)
                 obj.delete()
                 return Response({'message': 'Event Data deleted successfully'}, status=status.HTTP_204_NO_CONTENT)
-            
             elif obj_type == 'project':
                 obj = Project.objects.get(pk=kwargs['pk'])
                 serializer = ProjectSerializer(obj)
@@ -57,6 +56,11 @@ class DataDelete(viewsets.ModelViewSet):
                 serializer = TeacherEducationSerializer(obj)
                 obj.delete()
                 return Response({'message': 'TeacherEducation Data deleted successfully'}, status=status.HTTP_204_NO_CONTENT)
+            elif obj_type == 'news':
+                obj = News.objects.get(pk=kwargs['pk'])
+                serializer = NewsSerializer(obj)
+                obj.delete()
+                return Response({'message': 'News Data deleted successfully'}, status=status.HTTP_204_NO_CONTENT)
             else:
                 return Response({'message': 'Invalid type specified'}, status=status.HTTP_400_BAD_REQUEST)
         except DatabaseError as e:
@@ -116,6 +120,14 @@ class PostPublicData(viewsets.ModelViewSet):
                 tutorial=Tutorials(title=title,image=image,tags=tags ,description=description,url=link,teacher=teacher)
                 tutorial.save()
                 return Response({"message": "Event Created Successfully"}, status=status.HTTP_201_CREATED)
+            elif object_type == 'news':
+                image=request.FILES.get("image")
+                headline=request.data.get("headline")
+                content=request.data.get("content")
+                date=request.data.get("date")
+                news=News(headline=headline,author=teacher.name,content=content,date=date,image=image)
+                news.save()
+                return Response({"message": "News Created Successfully"}, status=status.HTTP_201_CREATED)
             else:
                 return Response({"message": "cannot find the type"}, status=status.HTTP_400_BAD_REQUEST)
         except DatabaseError as e:
