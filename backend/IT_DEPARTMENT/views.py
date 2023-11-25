@@ -330,54 +330,5 @@ class GetUserFromTokenView(APIView):
             return Response({'error': 'Internal server error'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         
 
-# class RegistrationView(APIView):
-#     def post(self, request):
-#         password = request.data.get('password')
-#         username=request.data.get('username')
-#         name = request.data.get('name')
-#         email = request.data.get('email')
-#         print(password)
-#         if not username or not password:
-#             return Response({'message': 'Username and password are required.'}, status=status.HTTP_400_BAD_REQUEST)
-#         if User.objects.filter(username=username).exists():
-#             return Response({'message': 'Username already exists.'}, status=status.HTTP_400_BAD_REQUEST)
-#         user = User.objects.create_user(username=username, password=password,is_active=True)
-#         user.name = name
-#         user.save()
-#         return Response({'message': 'User created but not Verified.'}, status=status.HTTP_201_CREATED)
-
-# class CustomObtainTokenView(APIView):
-#     def post(self, request):
-#         username = request.data.get('username')
-#         password = request.data.get('password')
-#         if not username or not password:
-#             return Response({'message': 'Email and password are required.'}, status=status.HTTP_400_BAD_REQUEST)
-#         user = authenticate(username=username, password=password)
-#         if user is None:
-#             return Response({'message': 'Invalid credentials.'}, status=status.HTTP_401_UNAUTHORIZED)
-#         login(request, user)
-#         refresh = RefreshToken.for_user(user)
-#         access = str(refresh.access_token)
-#         return Response({'access_token': access,'refresh_token': str(refresh),'message': 'Logging in'}, status=status.HTTP_200_OK)
-    
-
-# class CustomRefreshTokenView(APIView):
-#     authentication_classes=[JWTAuthentication]
-#     permission_classes = (IsAuthenticated,)
-#     def post(self, request):
-#         refresh = RefreshToken(request.data.get('refresh_token'))
-#         access_token = str(refresh.access_token)
-#         return Response({'access_token': access_token,'refresh_token': str(refresh)}, status=status.HTTP_200_OK)
-    
-# class LogoutView(APIView):
-#     authentication_classes=[JWTAuthentication]
-#     permission_classes = (IsAuthenticated,)
-#     def post(self, request):
-#         logout(request)
-#         return Response({'message': 'Logged out successfully.'}, status=status.HTTP_200_OK)
-        
-
-    
-
 
      
