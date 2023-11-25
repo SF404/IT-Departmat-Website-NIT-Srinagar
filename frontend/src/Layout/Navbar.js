@@ -254,6 +254,7 @@ function NavLinks({ color = "white", isOpen = null, onClose = null }) {
           For Students
         </MenuButton>
         <MenuList boxShadow={"lg"}>
+
           <MenuItem
             as={Link}
             _hover={{ color: "#192e59" }}
@@ -286,7 +287,7 @@ function NavLinks({ color = "white", isOpen = null, onClose = null }) {
       </Button> */}
       <HStack position={"absolute"} right={'20px'}>
         {!login ?
-          (<Button variant={"ghost"} onClick={handleNavigation} as={Link} to={'/login'} px={4} bg={'whiteAlpha.200'} color={"whiteAlpha.900"} borderRadius={"full"} colorScheme="whiteAlpha" fontWeight={"normal"} size={'sm'} >Login</Button>) :
+          (<Button variant={"ghost"} onClick={handleNavigation} as={Link} to={'/login'} px={4} bg={'whiteAlpha.200'} color={"whiteAlpha.800"} borderRadius={"full"} colorScheme="whiteAlpha" fontWeight={"normal"} >Login</Button>) :
           (
             <Tooltip label={'Dashboard'} hasArrow>
               <IconButton as={Link} to={'/dashboard'} variant={"ghost"} colorScheme="whiteAlpha" color={"white"} fontSize={'1.5em'} icon={<PiDotsNineBold />} />
@@ -324,15 +325,16 @@ function Navbar() {
       </Box>
       <Flex
         align="center"
-        h={"46px"}
+        h={"56px"}
         zIndex={99}
         justify="space-between"
         p="0"
+        m={0}
         px={2}
         bg="#192e59"
         color="#192e59"
         position={"sticky"}
-        top={0}
+        top={'0px'}
         boxShadow={"0 4px 12px rgba(0,0,0,0.2)"}
       >
         <Stack
@@ -342,10 +344,9 @@ function Navbar() {
           align="stretch"
           display={{ base: "none", lg: "flex" }}
           alignItems={"center"}
-          className="family-5"
           fontSize={"14px"}
         >
-          <NavLinks color={"white"} />
+          <NavLinks color={"rgba(255, 255, 255, 0.85)"} />
         </Stack>
 
         {/* Mobile Navigation Icon */}
@@ -368,7 +369,8 @@ function Navbar() {
           initial={false}
           onAnimationStart={() => setHidden(false)}
           onAnimationComplete={() => setHidden(!isOpen)}
-          animate={{ width: isOpen ? 250 : 0 }}
+          animate={{ width: isOpen ? 250 : 0, opacity: isOpen ? 1 : 0 }}
+          transition={{ width: { duration: 0.3 }, opacity: { duration: 0.2 } }}
           style={{
             background: "white",
             whiteSpace: "nowrap",
@@ -377,7 +379,7 @@ function Navbar() {
             boxShadow: "2px 0px 8px rgba(0, 0, 0, 0.05)",
             position: "absolute",
             left: "0",
-            top: "46px",
+            top: "56px",
           }}
         >
           {isOpen && (

@@ -20,9 +20,6 @@ const Nav = () => {
                 <Link as={DomLink} to='addnews' activeClassName="active" color="darkblue" mr="4" fontWeight="bold" textDecoration="none">
                     News +
                 </Link>
-                <Link color="darkblue" mr="4" fontWeight="bold" textDecoration="none">
-                    Services
-                </Link>
             </Box>
             <Spacer />
             <Box>

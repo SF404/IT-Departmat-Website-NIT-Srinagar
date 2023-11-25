@@ -14,15 +14,6 @@ import {
   extendTheme,
   Text,
 } from "@chakra-ui/react";
-const theme = extendTheme({
-  styles: {
-    global: {
-      body: {
-        bg: "gray.100",
-      },
-    },
-  },
-});
 
 function Login() {
   const toast = useToast();
@@ -126,7 +117,6 @@ function Login() {
   };
 
   return (
-    <ChakraProvider theme={theme}>
       <Box
         p={4}
         maxW="400px"
@@ -176,7 +166,6 @@ function Login() {
           </Stack>
         </form>
       </Box>
-    </ChakraProvider>
   );
 }
 
