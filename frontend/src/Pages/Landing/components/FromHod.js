@@ -21,7 +21,7 @@ function FromHod({ video_from_hod }) {
       <SimpleGrid
         columns={[1, 1, 2]}
         w={"full"}
-        p={"1em"}
+        p={"2em"}
         gap={"1.5em"}
         bg={"#d8dcf0"}
         borderRadius={"1em"}

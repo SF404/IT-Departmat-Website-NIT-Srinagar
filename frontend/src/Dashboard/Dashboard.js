@@ -2,11 +2,8 @@ import { Flex, useDisclosure } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import Navbar from "../Layout/Navbar";
 import SideBar from "./components/SideBar";
 import CoursePanel from "./components/CoursePanel";
-import MyProfile from "./components/MyProfile";
-import Resources from "./components/Resources"
 import PlaceHolder from "./components/PlaceHolder";
 import Viewer from "./components/Viewer";
 
@@ -20,19 +17,7 @@ function Dashboard1() {
   const [notes, setNotes] = useState(null);
   const [calenderShow, setCalenderShow] = useState(false);
   const [currentView, setCurrentView] = useState(null);
-  const {
-    isOpen: openMyProfile,
-    onOpen: showMyProfile,
-    onClose: closeMyProfile,
-  } = useDisclosure();
-
-  const {
-    isOpen: openResources,
-    onOpen: showResources,
-    onClose: closeResources,
-  } = useDisclosure();
-
-
+  
 
   // functions
   function get_token() {
@@ -91,7 +76,7 @@ function Dashboard1() {
           },
         },
         get_token()
-        );
+      );
       setCourses(response.data);
       console.log(teacher)
     } catch (error) {
@@ -120,16 +105,11 @@ function Dashboard1() {
     }
   };
 
-  const handleMyProfile = () => {
-    showMyProfile();
-  };
-  const handleResources = () => {
-    showResources();
-  }
 
   useEffect(() => {
     payload_check();
     fetchUser();
+    
   }, []);
 
   useEffect(() => {
@@ -141,12 +121,11 @@ function Dashboard1() {
 
   return (
     <>
-      <Navbar />
       <Flex
         position={"fixed"}
         bottom={0}
         w={"full"}
-        top={"110px"}
+        top={"64px"}
       >
         <SideBar
           user={user}
@@ -155,8 +134,6 @@ function Dashboard1() {
           calenderShow={calenderShow}
           setCalenderShow={setCalenderShow}
           setSelectedCourse={setSelectedCourse}
-          handleMyProfile={handleMyProfile}
-          handleResources={handleResources}
           currentView={currentView}
           setCurrentView={setCurrentView}
         />
@@ -173,20 +150,7 @@ function Dashboard1() {
         )}
         <Viewer currentView={currentView} user={user} />
       </Flex>
-      {user && Object.keys(user).length > 0 && (
-        <>
-          <MyProfile
-            openMyProfile={openMyProfile}
-            closeMyProfile={closeMyProfile}
-            user={user}
-          />
-          <Resources
-            openResources={openResources}
-            closeResources={closeResources}
-            user={user}
-          />
-        </>
-      )}
+      
     </>
   );
 }

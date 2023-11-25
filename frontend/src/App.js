@@ -42,6 +42,9 @@ import DataMining from './components/Labs/DataMiningAnalytics'
 import Alumni from './Pages/People/Alumni';
 import Feedback from './components/Feedbacks/Feedback';
 import UpdateNews from './components/News/UpdateNews';
+import News from './Pages/Landing/components/News';
+import IndexDashboard from './Dashboard/IndexDashboard';
+import MyProfile from './Dashboard/components/MyProfile1';
 
 const ScrollToTop = ({ children }) => {
   const { pathname } = useLocation();
@@ -106,8 +109,12 @@ const App = () => {
 
 
           </Route>
-          <Route path="dashboard" element={<Dashboard />} title="Dashboard" />
-          <Route path="addnews" element={<UpdateNews />} title="News | Dashboard" />
+          <Route path="dashboard" element={<IndexDashboard />} >
+            <Route index element={<Dashboard />} title="Security" />
+            <Route path='addnews' element={<UpdateNews />} title="Security" />
+            <Route path='myprofile' element={<MyProfile />} title="Security" />
+
+          </Route>
         </Routes>
       </ScrollToTop>
     </Router>

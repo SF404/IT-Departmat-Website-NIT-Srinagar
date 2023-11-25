@@ -132,7 +132,7 @@ function Announcements({ email }) {
           color={"#192e59"}
           textAlign={"center"}
         >
-          announcements
+          Announcements
         </Box>
         {announcements ? (
           <VStack p={4} fontSize={"14px"} className="family-1">

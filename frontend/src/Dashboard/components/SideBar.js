@@ -1,11 +1,12 @@
 import { Avatar, Box, Button, Divider, HStack, IconButton, Menu, MenuButton, MenuItem, MenuList, Text, VStack } from '@chakra-ui/react'
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import { PiCalendarDuotone, PiChatsDuotone, PiGearSixDuotone, PiMegaphoneDuotone, PiNotePencilDuotone, PiStudentDuotone, PiTextIndentDuotone, PiTextOutdentDuotone, PiVideoDuotone } from "react-icons/pi";
 import { useDisclosure } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
 import { useState } from 'react'
+import { Link } from 'react-router-dom';
 
-const SideBar = ({ user, courses, selectedCourse, setSelectedCourse, handleMyProfile, handleResources, currentView, setCurrentView }) => {
+const SideBar = ({ user, courses, selectedCourse, setSelectedCourse, currentView, setCurrentView }) => {
     console.log(user)
     const { getButtonProps, getDisclosureProps, isOpen } = useDisclosure()
     const [hidden, setHidden] = useState(!isOpen)
@@ -14,13 +15,26 @@ const SideBar = ({ user, courses, selectedCourse, setSelectedCourse, handleMyPro
     function handleSelect(component_name) {
         (component_name !== currentView) ? setCurrentView(component_name) : setCurrentView(null);
     }
+    const textOutdentButtonRef = useRef();
+
+    useEffect(() => {
+        const onSideBar = () => {
+            setTimeout(() => {
+                if (textOutdentButtonRef.current) {
+                    textOutdentButtonRef.current.click();
+                }
+            }, 500);
+
+        }
+        return () => onSideBar();
+    }, []);
 
     return (
         <>
             <Box display={'flex'} width={'fit-content'} height={'full'} bg={'white'} position={'relative'}>
-                <Box width={'64px'} bg={'#c5cae8'} py={2} display={'flex'} justifyContent={'space-between'} flexDirection={'column'} color={'white'} gap={2}>
+                <Box width={'64px'} bg={'white'} py={2} display={'flex'} justifyContent={'space-between'} flexDirection={'column'} color={'white'} gap={2}>
                     <VStack>
-                        <IconButton bg={'transparent'} color={'#3848a2'}  {...getButtonProps()} icon={hidden ? <PiTextIndentDuotone size={'1.5em'} /> : <PiTextOutdentDuotone size={'1.5em'} />}></IconButton>
+                        <IconButton bg={'transparent'} color={'#3848a2'}  {...getButtonProps()} icon={hidden ? <PiTextIndentDuotone size={'1.5em'} /> : <PiTextOutdentDuotone size={'1.5em'} />} ref={textOutdentButtonRef}></IconButton>
                         <IconButton bg={'transparent'} color={'#3848a2'} icon={<PiCalendarDuotone size={'1.5em'} />} onClick={() => handleSelect('calendar')}></IconButton>
                         <IconButton bg={'transparent'} color={'#3848a2'} icon={<PiChatsDuotone size={'1.5em'} />} onClick={() => handleSelect('chat')}></IconButton>
                         {/* <IconButton bg={'transparent'} color={'#3848a2'} icon={<PiStudentDuotone size={'1.5em'} />} onClick={() => handleSelect('student')}></IconButton> */}
@@ -47,14 +61,13 @@ const SideBar = ({ user, courses, selectedCourse, setSelectedCourse, handleMyPro
                 >
 
                     <VStack w={'full'} h={'full'} p={4} >
-                        <HStack bg={'#c5cae8'} width={'full'} px={2} height={'70px'} borderRadius={16}>
+                        <HStack bg={'#ebedf7'} width={'full'} px={2} height={'70px'} borderRadius={16}>
                             <Menu>
                                 <MenuButton
                                     as={Avatar}
                                 />
                                 <MenuList p={4} >
-                                    <MenuItem borderRadius={4} onClick={() => handleMyProfile()}>My Profile</MenuItem>
-                                    <MenuItem borderRadius={4} onClick={() => handleResources()}>Resources</MenuItem>
+                                    <MenuItem borderRadius={4} as={Link} to={'myprofile'}>My Profile</MenuItem>
                                     <MenuItem borderRadius={4}>Logout</MenuItem>
                                 </MenuList>
                             </Menu>

@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Box, Button, Center, FormControl, FormLabel, Input, SimpleGrid, Textarea, VStack } from '@chakra-ui/react';
+import { Box, Button, Center, FormControl, FormLabel, Image, Input, SimpleGrid, Text, Textarea, VStack, useToast } from '@chakra-ui/react';
 
 const UpdateNews = () => {
+  const toast = useToast()
+  const [news, setNews] = useState(null)
   const [formData, setFormData] = useState({
     headline: '',
     date: '',
@@ -36,11 +38,7 @@ const UpdateNews = () => {
         formDataForUpload.append(key, formData[key]);
       }
 
-      await axios.post('https://your-backend-api/news', formDataForUpload, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
+      await axios.post('/api/public/teacherdataview/?type=news');
 
       setFormData({
         headline: '',
@@ -54,12 +52,64 @@ const UpdateNews = () => {
     }
   };
 
+  useEffect(() => {
+    const fetchNews = async () => {
+      try {
+        const response = await axios.get('/api/public/teacherdataview/?type=news')
+        setNews(response.data)
+        console.log(response.data)
+      } catch (error) {
+        console.log(error)
+        toast({
+          title: 'Contact Administrator',
+          description: "Failed to fetch News, " + error.message,
+          status: 'error',
+          duration: 5000,
+          isClosable: true,
+        })
+      }
+    }
+
+    return () => {
+      fetchNews()
+    }
+  }, [])
+
+  const NewsTile = ({ headline, date, image, content, author }) => (
+    <Box
+      key={headline} // Assuming each news item has a unique headline
+      border="1px"
+      borderColor="gray.200"
+      borderRadius="lg"
+      overflow="hidden"
+      display={'flex'}
+      maxH={'200px'}
+      minH={'200px'}
+      p={2}
+    >
+      {image && <Image aspectRatio={1} height={'150px'} src={image} alt={headline} mb={4} />}
+      <Box fontSize={'0.8em'}>
+        <Text fontWeight="bold" fontSize="xl" mb={2}>
+          {headline}
+        </Text>
+        <Text fontSize="sm" color="gray.500" mb={2}>
+          {date}
+        </Text>
+        <Text>{content}</Text>
+        <Text mt={4} fontStyle="italic" textAlign="right" color="gray.600">
+          {author}
+        </Text>
+      </Box>
+    </Box>
+  );
+
+
   return (
-    <Center p="4" h={'100vh'} w={'full'}>
+    <Center p="4" h={'calc(100vh-64px)'} w={'full'}>
       <SimpleGrid columns={[1, 1, 2, 2]} w={{ base: '100%', md: '80%' }} gap={4}>
 
         <Box bg={'white'} borderRadius={8} w={'full'} h={'full'} boxShadow={'0 0 6px rgba(0,0,0,0.05)'}>
-          <Box h={'40px'} w={'full'} bg={'#99d5cf'} borderTopRadius={8}></Box>
+          <Box h={'40px'} w={'full'} bg={'#d8dcf0'} borderTopRadius={8}></Box>
           <VStack spacing="4" p={8}>
             <FormControl>
               <FormLabel display={'flex'} justifyContent={'center'} alignItems={'center'} bg={'rgba(0,0,0,0.1)'} fontWeight={'bold'} color={'rgba(0,0,0,0.6)'} border={'3px dashed rgba(0,0,0,0.3)'} padding={4} height={'100px'} width={'100%'} borderRadius={'12px'}>Image</FormLabel>
@@ -85,9 +135,23 @@ const UpdateNews = () => {
             </Box>
           </VStack>
         </Box>
-        <VStack bg={'white'} borderRadius={8}>
-
-        </VStack>
+        <Box bg={'white'} borderRadius={8} w={'full'} h={'full'} boxShadow={'0 0 6px rgba(0,0,0,0.05)'}>
+          <Box h={'40px'} w={'full'} bg={'#d8dcf0'} borderTopRadius={8}></Box>
+          <VStack bg={'white'} spacing={4} p={8} overflowY={'scroll'}  w={'full'}>
+            {
+              news && news.map((item, index) => (
+                <NewsTile
+                  key={index}
+                  headline={item.headline}
+                  date={item.date}
+                  image={item.image}
+                  content={item.content}
+                  author={item.author}
+                />
+              ))
+            }
+          </VStack>
+        </Box>
       </SimpleGrid>
     </Center>
   );

@@ -2,8 +2,13 @@ import { useDisclosure, Modal, Link, Box, Tab, TabList, TabPanel, TabPanels, Tab
 import axios from "axios";
 import React, { useEffect, useState, useRef } from "react";
 import { FaTrash } from "react-icons/fa6";
+import { PiPlus } from "react-icons/pi";
+import { useToast } from '@chakra-ui/react'
 
-function Resources({ openResources, closeResources, user }) {
+
+function Resources({ user }) {
+    console.log(user)
+    const toast = useToast()
     const cancelRef = useRef();
     const [research, setResearch] = useState(null)
     const [patent, setPatent] = useState(null)
@@ -234,248 +239,249 @@ function Resources({ openResources, closeResources, user }) {
     };
 
     useEffect(() => {
-        fetchResearch();
-        fetchPatent();
-        fetchEducation();
-        fetchProject();
+        const fetchData = async () => {
+            try {
+                await fetchResearch();
+                await fetchPatent();
+                await fetchEducation();
+                await fetchProject();
+            } catch (error) {
+                toast({
+                    varient:'left-accent',
+                    title: 'Something went Wrong',
+                    description: error.message,
+                    status: 'error',
+                    duration: 5000,
+                    isClosable: true,
+                  })
+            }
+        }
+        return () => fetchData();
     }, []);
     return (
-        <>
-            <Modal closeOnOverlayClick={false} isOpen={openResources} onClose={closeResources} motionPreset='slideInLeft' scrollBehavior={'inside'} size={'3xl'}>
-                <ModalOverlay backdropFilter='auto' backdropBlur='2px' />
-                <ModalContent zIndex={999}>
-                    <ModalHeader mx={6}>Resources</ModalHeader>
-                    <ModalCloseButton />
-                    <ModalBody>
-                        <Tabs align="center" variant="soft-rounded" colorScheme="facebook" w={{ base: "full", md: '90%' }} p={4}>
-                            <TabList
-                                textAlign={"left"}
-                                justifyContent={"flex-start"}
-                                my={"0.5em"}
-                            >
-                                <Tab>Researchs</Tab>
-                                <Tab>Patents</Tab>
-                                <Tab>Projects</Tab>
-                                <Tab>Educations</Tab>
-                            </TabList>
-                            <Divider />
-                            <TabPanels p={0}>
-                                <TabPanel marginTop={4} p={0}>
-                                    <TableContainer>
-                                        <Table variant={"simple"} colorScheme="facebook">
-                                            <Thead bg={"#d8dcf0"}>
-                                                <Tr>
-                                                    <Th>Journal</Th>
-                                                    <Th>Authors</Th>
-                                                    <Th>Action</Th>
-                                                </Tr>
-                                            </Thead>
-                                            <Tbody fontSize={"sm"}>
-                                                {research && research.length !== 0 ? (
-                                                    research.map((item, index) => (
-                                                        <>
-                                                            <Tr>
-                                                                <Td>{item.title}</Td>
-                                                                <Td>{item.authors}</Td>
-                                                                <Td><IconButton
-                                                                    isRound={true}
-                                                                    variant="outline"
-                                                                    aria-label="Done"
-                                                                    icon={<FaTrash />}
-                                                                    size={"xs"}
-                                                                    color={"blackAlpha.800"}
-                                                                    onClick={(e) => {
-                                                                        e.stopPropagation();
-                                                                        setDeleteInfo({
-                                                                            name: item.title,
-                                                                            id: item.id,
-                                                                            type: "research"
-                                                                        });
-                                                                        showDeleteAlert();
-                                                                    }}
-                                                                /></Td>
-                                                            </Tr>
-                                                        </>
-                                                    ))
-                                                ) : (
-                                                    <>
-                                                        <Text>Empty...</Text>
-                                                        <Divider borderColor={"blackAlpha.300"} />
-                                                    </>
-                                                )}
-                                            </Tbody>
-                                        </Table>
-                                    </TableContainer>
-                                    <Box w={"full"} textAlign={"right"} >
-                                        <Button marginTop={4} colorScheme="teal" onClick={addResearch}>
-                                            {" "}
-                                            Add{" "}
-                                        </Button>
-                                    </Box>
-                                </TabPanel>
-                                <TabPanel marginTop={4} p={0}>
-                                    <TableContainer>
-                                        <Table variant={"simple"} colorScheme="facebook">
-                                            <Thead bg={"#d8dcf0"}>
-                                                <Tr>
-                                                    <Th>Patent</Th>
-                                                    <Th>Number</Th>
-                                                    <Th>Action</Th>
-                                                </Tr>
-                                            </Thead>
-                                            <Tbody fontSize={"sm"}>{patent && patent.length !== 0 ? (
-                                                patent.map((item, index) => (
-                                                    <>
-                                                        <Tr>
-                                                            <Td>{item.title}</Td>
-                                                            <Td>{item.number}</Td>
-                                                            <Td><IconButton
-                                                                isRound={true}
-                                                                variant="outline"
-                                                                aria-label="Done"
-                                                                icon={<FaTrash />}
-                                                                size={"xs"}
-                                                                color={"blackAlpha.800"}
-                                                                onClick={(e) => {
-                                                                    e.stopPropagation();
-                                                                    setDeleteInfo({
-                                                                        name: item.title,
-                                                                        id: item.id,
-                                                                        type: "patent"
-                                                                    });
-                                                                    showDeleteAlert();
-                                                                }}
-                                                            /></Td>
-                                                        </Tr>
-                                                    </>
-                                                ))
-                                            ) : (
-                                                <>
-                                                    <Text>Empty...</Text>
-                                                    <Divider borderColor={"blackAlpha.300"} />
-                                                </>
-                                            )}
-                                            </Tbody>
-                                        </Table>
-                                    </TableContainer>
-                                    <Box w={"full"} textAlign={"right"} >
-                                        <Button marginTop={4} colorScheme="teal" onClick={addPatent}>
-                                            {" "}
-                                            Add{" "}
-                                        </Button>
-                                    </Box>
-                                </TabPanel>
-                                <TabPanel marginTop={4} p={0}>
-                                    <TableContainer>
-                                        <Table variant={"simple"} colorScheme="facebook">
-                                            <Thead bg={"#d8dcf0"}>
-                                                <Tr>
-                                                    <Th>Title</Th>
-                                                    <Th>URL</Th>
-                                                    <Th>Action</Th>
-                                                </Tr>
-                                            </Thead>
-                                            <Tbody fontSize={"sm"}>{project && project.length !== 0 ? (
-                                                project.map((item, index) => (
-                                                    <>
-                                                        <Tr>
-                                                            <Td>{item.title}</Td>
-                                                            <Td><Link to={item.link}>url</Link></Td>
-                                                            <Td><IconButton
-                                                                isRound={true}
-                                                                variant="outline"
-                                                                aria-label="Done"
-                                                                icon={<FaTrash />}
-                                                                size={"xs"}
-                                                                color={"blackAlpha.800"}
-                                                                onClick={(e) => {
-                                                                    e.stopPropagation();
-                                                                    setDeleteInfo({
-                                                                        name: item.title,
-                                                                        id: item.id,
-                                                                        type: "project"
-                                                                    });
-                                                                    showDeleteAlert();
-                                                                }}
-                                                            /></Td>
-                                                        </Tr>
-                                                    </>
-                                                ))
-                                            ) : (
-                                                <>
-                                                    <Text>Empty...</Text>
-                                                    <Divider borderColor={"blackAlpha.300"} />
-                                                </>
-                                            )}
-                                            </Tbody>
-                                        </Table>
-                                    </TableContainer>
-                                    <Box w={"full"} textAlign={"right"} >
-                                        <Button marginTop={4} colorScheme="teal" onClick={addProject}>
-                                            {" "}
-                                            Add{" "}
-                                        </Button>
-                                    </Box>
-                                </TabPanel>
-                                <TabPanel marginTop={4} p={0}>
-                                    <TableContainer>
-                                        <Table variant={"simple"} colorScheme="facebook">
-                                            <Thead bg={"#d8dcf0"}>
-                                                <Tr>
-                                                    <Th>Degree</Th>
-                                                    <Th>College</Th>
-                                                    <Th>Year</Th>
-                                                    <Th>Action</Th>
-                                                </Tr>
-                                            </Thead>
-                                            <Tbody fontSize={"sm"}>{education && education.length !== 0 ? (
-                                                education.map((item, index) => (
-                                                    <>
-                                                        <Tr>
-                                                            <Td>{item.degree}</Td>
-                                                            <Td>{item.college}</Td>
-                                                            <Td>{item.year}</Td>
-                                                            <Td><IconButton
-                                                                isRound={true}
-                                                                variant="outline"
-                                                                aria-label="Done"
-                                                                icon={<FaTrash />}
-                                                                size={"xs"}
-                                                                color={"blackAlpha.800"}
-                                                                onClick={(e) => {
-                                                                    e.stopPropagation();
-                                                                    setDeleteInfo({
-                                                                        name: item.degree,
-                                                                        id: item.id,
-                                                                        type: "teachereducation"
-                                                                    });
-                                                                    showDeleteAlert();
-                                                                }}
-                                                            /></Td>
-                                                        </Tr>
-                                                    </>
-                                                ))
-                                            ) : (
-                                                <>
-                                                    <Text>Empty...</Text>
-                                                    <Divider borderColor={"blackAlpha.300"} />
-                                                </>
-                                            )}
-                                            </Tbody>
-                                        </Table>
-                                    </TableContainer>
-                                    <Box w={"full"} textAlign={"right"}>
-                                        <Button marginTop={4} colorScheme="teal" onClick={addEducation}>
-                                            {" "}
-                                            Add{" "}
-                                        </Button>
-                                    </Box>
-                                </TabPanel>
-                            </TabPanels>
-                        </Tabs>
-                    </ModalBody>
-                </ModalContent>
-            </Modal >
+        <Box w={'full'} minH={'80vh'} pb={'100px'}>
+
+            <Tabs align="center" variant="soft-rounded" colorScheme="facebook" w={'full'} p={4}>
+                <TabList
+                    textAlign={"left"}
+                    justifyContent={"flex-start"}
+                    my={"0.5em"}
+                >
+                    <Tab>Researchs</Tab>
+                    <Tab>Patents</Tab>
+                    <Tab>Projects</Tab>
+                    <Tab>Educations</Tab>
+                </TabList>
+                <Divider />
+                <TabPanels p={0} bg={"white"}>
+                    <TabPanel marginTop={4} p={0}>
+                        <TableContainer>
+                            <Table variant={"simple"} colorScheme="facebook">
+                                <Thead bg={"#d8dcf0"}>
+                                    <Tr>
+                                        <Th>Journal</Th>
+                                        <Th>Authors</Th>
+                                        <Th>Action</Th>
+                                    </Tr>
+                                </Thead>
+                                <Tbody fontSize={"sm"}>
+                                    {research && research.length !== 0 ? (
+                                        research.map((item, index) => (
+                                            <Tr key={index}>
+                                                <Td>{item.title}</Td>
+                                                <Td>{item.authors}</Td>
+                                                <Td><IconButton
+                                                    isRound={true}
+                                                    variant="outline"
+                                                    aria-label="Done"
+                                                    icon={<FaTrash />}
+                                                    size={"xs"}
+                                                    color={"blackAlpha.800"}
+                                                    onClick={(e) => {
+                                                        e.stopPropagation();
+                                                        setDeleteInfo({
+                                                            name: item.title,
+                                                            id: item.id,
+                                                            type: "research"
+                                                        });
+                                                        showDeleteAlert();
+                                                    }}
+                                                /></Td>
+                                            </Tr>
+                                        ))
+                                    ) : (
+                                        <>
+                                            <Text>Empty...</Text>
+                                            <Divider borderColor={"blackAlpha.300"} />
+                                        </>
+                                    )}
+                                </Tbody>
+                            </Table>
+                        </TableContainer>
+                        <Box w={"full"} textAlign={"right"} >
+                            <Button rounded={'full'} mr={4} mb={4} marginTop={4} colorScheme={'blue'} p={2} onClick={addResearch}>
+                                <PiPlus />
+                            </Button>
+                        </Box>
+                    </TabPanel>
+                    <TabPanel marginTop={4} p={0}>
+                        <TableContainer>
+                            <Table variant={"simple"} colorScheme="facebook">
+                                <Thead bg={"#d8dcf0"}>
+                                    <Tr>
+                                        <Th>Patent</Th>
+                                        <Th>Number</Th>
+                                        <Th>Action</Th>
+                                    </Tr>
+                                </Thead>
+                                <Tbody fontSize={"sm"}>{patent && patent.length !== 0 ? (
+                                    patent.map((item, index) => (
+                                        <>
+                                            <Tr>
+                                                <Td>{item.title}</Td>
+                                                <Td>{item.number}</Td>
+                                                <Td><IconButton
+                                                    isRound={true}
+                                                    variant="outline"
+                                                    aria-label="Done"
+                                                    icon={<FaTrash />}
+                                                    size={"xs"}
+                                                    color={"blackAlpha.800"}
+                                                    onClick={(e) => {
+                                                        e.stopPropagation();
+                                                        setDeleteInfo({
+                                                            name: item.title,
+                                                            id: item.id,
+                                                            type: "patent"
+                                                        });
+                                                        showDeleteAlert();
+                                                    }}
+                                                /></Td>
+                                            </Tr>
+                                        </>
+                                    ))
+                                ) : (
+                                    <>
+                                        <Text>Empty...</Text>
+                                        <Divider borderColor={"blackAlpha.300"} />
+                                    </>
+                                )}
+                                </Tbody>
+                            </Table>
+                        </TableContainer>
+                        <Box w={"full"} textAlign={"right"} >
+                            <Button rounded={'full'} mr={4} mb={4} marginTop={4} colorScheme={'blue'} p={2} onClick={addPatent}>
+                                <PiPlus />
+                            </Button>
+                        </Box>
+                    </TabPanel>
+                    <TabPanel marginTop={4} p={0}>
+                        <TableContainer>
+                            <Table variant={"simple"} colorScheme="facebook">
+                                <Thead bg={"#d8dcf0"}>
+                                    <Tr>
+                                        <Th>Title</Th>
+                                        <Th>URL</Th>
+                                        <Th>Action</Th>
+                                    </Tr>
+                                </Thead>
+                                <Tbody fontSize={"sm"}>{project && project.length !== 0 ? (
+                                    project.map((item, index) => (
+                                        <>
+                                            <Tr>
+                                                <Td>{item.title}</Td>
+                                                <Td><Link to={item.link}>url</Link></Td>
+                                                <Td><IconButton
+                                                    isRound={true}
+                                                    variant="outline"
+                                                    aria-label="Done"
+                                                    icon={<FaTrash />}
+                                                    size={"xs"}
+                                                    color={"blackAlpha.800"}
+                                                    onClick={(e) => {
+                                                        e.stopPropagation();
+                                                        setDeleteInfo({
+                                                            name: item.title,
+                                                            id: item.id,
+                                                            type: "project"
+                                                        });
+                                                        showDeleteAlert();
+                                                    }}
+                                                /></Td>
+                                            </Tr>
+                                        </>
+                                    ))
+                                ) : (
+                                    <>
+                                        <Text>Empty...</Text>
+                                        <Divider borderColor={"blackAlpha.300"} />
+                                    </>
+                                )}
+                                </Tbody>
+                            </Table>
+                        </TableContainer>
+                        <Box w={"full"} textAlign={"right"} >
+                            <Button rounded={'full'} mr={4} mb={4} marginTop={4} colorScheme={'blue'} p={2} onClick={addProject}>
+                                <PiPlus />
+                            </Button>
+                        </Box>
+                    </TabPanel>
+                    <TabPanel marginTop={4} p={0}>
+                        <TableContainer>
+                            <Table variant={"simple"} colorScheme="facebook">
+                                <Thead bg={"#d8dcf0"}>
+                                    <Tr>
+                                        <Th>Degree</Th>
+                                        <Th>College</Th>
+                                        <Th>Year</Th>
+                                        <Th>Action</Th>
+                                    </Tr>
+                                </Thead>
+                                <Tbody fontSize={"sm"}>{education && education.length !== 0 ? (
+                                    education.map((item, index) => (
+                                        <>
+                                            <Tr>
+                                                <Td>{item.degree}</Td>
+                                                <Td>{item.college}</Td>
+                                                <Td>{item.year}</Td>
+                                                <Td><IconButton
+                                                    isRound={true}
+                                                    variant="outline"
+                                                    aria-label="Done"
+                                                    icon={<FaTrash />}
+                                                    size={"xs"}
+                                                    color={"blackAlpha.800"}
+                                                    onClick={(e) => {
+                                                        e.stopPropagation();
+                                                        setDeleteInfo({
+                                                            name: item.degree,
+                                                            id: item.id,
+                                                            type: "teachereducation"
+                                                        });
+                                                        showDeleteAlert();
+                                                    }}
+                                                /></Td>
+                                            </Tr>
+                                        </>
+                                    ))
+                                ) : (
+                                    <>
+                                        <Text>Empty...</Text>
+                                        <Divider borderColor={"blackAlpha.300"} />
+                                    </>
+                                )}
+                                </Tbody>
+                            </Table>
+                        </TableContainer>
+                        <Box w={"full"} textAlign={"right"}>
+                            <Button rounded={'full'} mr={4} mb={4} marginTop={4} colorScheme={'blue'} p={2} onClick={addEducation}>
+                                <PiPlus />
+                            </Button>
+                        </Box>
+                    </TabPanel>
+                </TabPanels>
+            </Tabs>
+
             {/* Model fo research  */}
             <Modal
                 closeOnOverlayClick={false}
@@ -731,7 +737,7 @@ function Resources({ openResources, closeResources, user }) {
                     </AlertDialogFooter>
                 </AlertDialogContent>
             </AlertDialog>
-        </>
+        </Box>
     );
 }
 
