@@ -4,10 +4,18 @@ from django.db import models
 class File(models.Model):
     name=models.CharField(max_length=255, primary_key=True)
     file=models.FileField(upload_to='files/')
-    type=models.CharField(max_length=255)
+    SELECTION_CHOICES=(
+        ('management','Management'),
+        ('btech_student_list','B-Tech Student List'),
+        ('other','Other'),
+    )
+    type=models.CharField(
+        max_length=50,
+        choices=SELECTION_CHOICES,default='other'
+    )
     auto_date=models.DateTimeField(auto_now_add=True)
     class Meta:
-        ordering=['name']   
+        ordering=['name']
     def __str__(self):
         return f"{self.name}"
     
@@ -30,7 +38,7 @@ class News(models.Model):
     content=models.TextField(max_length=1000,null=True,blank=True)
     image=models.ImageField(upload_to='news/',null=True,blank=True)
     class Meta:
-        ordering=['date']   
+        ordering=['-date']   
     def __str__(self):
         return f"{self.headline}"
 

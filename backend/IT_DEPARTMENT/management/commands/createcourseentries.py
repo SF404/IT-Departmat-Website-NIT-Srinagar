@@ -8,7 +8,66 @@ class Command(BaseCommand):
     help = 'Add default entries for Course model'
     def handle(self, *args, **kwargs):
             
-            
+            File.objects.create(
+                name='committee',
+                file='files/committee.xlsx',
+                type='management'
+            )
+            File.objects.create(
+                name='coordinators',
+                file='files/coordinators.xlsx',
+                type='management'
+            )
+            File.objects.create(
+                name='faculty_coordinators',
+                file='files/Faculty_Details.xlsx',
+                type='management'
+            )
+            File.objects.create(
+                name='placement_record',
+                file='files/placement_brochure.xlsx',
+                type='management'
+            )
+            File.objects.create(
+                name='2015',
+                file='files/2015.xlsx',
+                type='btech_student_list'
+            )
+            File.objects.create(
+                name='2016',
+                file='files/2016.xlsx',
+                type='btech_student_list'
+            )
+            File.objects.create(
+                name='2017',
+                file='files/2017.xlsx',
+                type='btech_student_list'
+            )
+            File.objects.create(
+                name='2018',
+                file='files/2018.xlsx',
+                type='btech_student_list'
+            )
+            File.objects.create(
+                name='2019',
+                file='files/2019.xlsx',
+                type='btech_student_list'
+            )
+            File.objects.create(
+                name='2020',
+                file='files/2020.xlsx',
+                type='btech_student_list'
+            )
+            File.objects.create(
+                name='2021',
+                file='files/2021.xlsx',
+                type='btech_student_list'
+            )
+            File.objects.create(
+                name='2022',
+                file='files/2022.xlsx',
+                type='btech_student_list'
+            )
             shabir=Teacher.objects.create(        
                 name = "Dr. Shabir Ahmad Sofi",
                 description = "Associate Professor",
@@ -409,14 +468,14 @@ class Command(BaseCommand):
                 teacher=prabal
             )
 
-            # Phd_Student.objects.create(
-            #     enroll="2018PHAITE003",
-            #     name = "Kalimullah Lone",
-            #     description = " ",
-            #     email = "kalimullahlone@gmail.com",
-                
-            #     profile_photo="phd_student/kalimullah.jpg",
-            #     research_field="Big Data, Cloud Computing")
+            Phd_Student.objects.create(
+                enroll="2018PHAITE003",
+                name = "Kalimullah Lone",
+                description = " ",
+                email = "kalimullahlone@gmail.com",
+                alumni=True,
+                profile_photo="phd_student/kalimullah.jpg",
+                research_field="Big Data, Cloud Computing")
             
             Phd_Student.objects.create(
                 enroll=" 2018PHAITE004",
