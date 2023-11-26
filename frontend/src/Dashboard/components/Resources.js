@@ -7,7 +7,6 @@ import { useToast } from '@chakra-ui/react'
 
 
 function Resources({ user }) {
-    console.log(user)
     const toast = useToast()
     const cancelRef = useRef();
     const [research, setResearch] = useState(null)
@@ -69,7 +68,6 @@ function Resources({ user }) {
                 `/api/public/teacherdataview/?type=research&email=${user.email}`
             );
             setResearch(response.data);
-            console.log("research", response.data);
         } catch (error) {
             console.log(error);
         }
@@ -80,7 +78,6 @@ function Resources({ user }) {
                 `/api/public/teacherdataview/?type=patent&email=${user.email}`
             );
             setPatent(response.data);
-            console.log("patent", response.data);
         } catch (error) {
             console.log(error);
         }
@@ -91,7 +88,6 @@ function Resources({ user }) {
                 `/api/public/teacherdataview/?type=project&email=${user.email}`
             );
             setProject(response.data);
-            console.log("project", response.data);
         } catch (error) {
             console.log(error);
         }
@@ -102,7 +98,6 @@ function Resources({ user }) {
                 `/api/public/teacherdataview/?type=teachereducation&email=${user.email}`
             );
             setEducation(response.data);
-            console.log("education", response.data);
         } catch (error) {
             console.log(error);
         }
@@ -147,14 +142,12 @@ function Resources({ user }) {
     const researchSubmit = async (e) => {
         try {
             e.preventDefault();
-            console.log(researchformData);
             if (researchformData.research_title == "" || researchformData.research_authors == "" || researchformData.research_date == "") return;
             const response = await axios.put(`/api/profileupdate/${user.id}/?email=${user.email}`,
                 researchformData,
                 get_token()
             );
             if (response) fetchResearch();
-            console.log(response.data);
             closeResearchModel();
         } catch (error) {
             console.log(error);
@@ -169,7 +162,6 @@ function Resources({ user }) {
                 get_token()
             );
             if (response) fetchPatent();
-            console.log(response.data);
             closePatentModel();
         } catch (error) {
             console.log(error);
@@ -179,14 +171,12 @@ function Resources({ user }) {
     const projectSubmit = async (e) => {
         try {
             e.preventDefault();
-            console.log(projectformData);
             if (projectformData.project_title == "" || projectformData.project_link == "") return;
             const response = await axios.put(`/api/profileupdate/${user.id}/?email=${user.email}`,
                 projectformData,
                 get_token()
             );
             if (response) fetchProject();
-            console.log(response.data);
             closeProjectModel();
         } catch (error) {
             console.log(error);
@@ -212,7 +202,6 @@ function Resources({ user }) {
     };
 
     const handleDelete = async (delete_id, type) => {
-        console.log(delete_id);
         try {
             const response = await axios.delete(`/api/delete/${delete_id}/?type=${type}`, get_token());
             closeDeleteAlert();
@@ -247,13 +236,13 @@ function Resources({ user }) {
                 await fetchProject();
             } catch (error) {
                 toast({
-                    varient:'left-accent',
+                    varient: 'left-accent',
                     title: 'Something went Wrong',
                     description: error.message,
                     status: 'error',
                     duration: 5000,
                     isClosable: true,
-                  })
+                })
             }
         }
         return () => fetchData();

@@ -14,6 +14,7 @@ import { PiNotePencilDuotone } from "react-icons/pi";
 import Resources from './Resources';
 import { useToast } from '@chakra-ui/react'
 
+// must change the url line No. 125
 function MyProfile1() {
     const [user, setUser] = useState(null);
     const [myInfo, setMyInfo] = useState({
@@ -37,18 +38,23 @@ function MyProfile1() {
                         email: user.data.email,
                     },
                 });
+                const profilePhotoUrl = teacher.data[0].profile_photo || '';
+                const match = profilePhotoUrl.match(/teacher_profile\/(.+)$/);
+                teacher.data[0].profile_photo = 'teacher_profile/' + match[1]
                 setUser(teacher.data[0]);
                 setMyInfo(teacher.data[0])
+
+
             } catch (error) {
                 console.error("Error fetching data:", error);
                 toast({
-                    varient:'left-accent',
+                    varient: 'left-accent',
                     title: 'Access Denied',
                     description: error.message,
                     status: '',
                     duration: 5000,
                     isClosable: true,
-                  })
+                })
             }
         };
         return () => {
@@ -71,12 +77,14 @@ function MyProfile1() {
         const updatedFormData = { ...myInfo };
         const file = e.target.files[0];
         updatedFormData[name] = file;
+        console.log(name, file);
         setMyInfo(updatedFormData);
+        console.log(myInfo);
     };
     function get_token() {
         return {
             headers: {
-                "Content-Type": "application/json",
+                "Content-Type": "multipart/form-data",
                 Authorization: `Bearer ${localStorage.getItem("TokenA")}`,
                 Accept: "application/json",
             },
@@ -86,29 +94,29 @@ function MyProfile1() {
         try {
             e.preventDefault();
             console.log(myInfo);
-            if (myInfo.phone === user.phone && myInfo.profile_photo && user.profile_photo && myInfo.about === user.about && myInfo.research_field === user.research_field) { console.log('not change'); return; }
+            if (myInfo.phone === user.phone && myInfo.profile_photo === user.profile_photo && myInfo.about === user.about && myInfo.research_field === user.research_field) { console.log('not change'); return; }
             const response = await axios.put(`/api/profileupdate/${user.id}/?email=${user.email}`,
                 myInfo,
                 get_token()
             );
-            if(response)
-            toast({
-                variant:'left-accent',
-                title: 'Updated Successfully',
-                status: 'info',
-                duration: 5000,
-                isClosable: true,
-              })
+            if (response)
+                toast({
+                    variant: 'left-accent',
+                    title: 'Updated Successfully',
+                    status: 'info',
+                    duration: 5000,
+                    isClosable: true,
+                })
         } catch (error) {
             console.log(error);
             toast({
-                variant:'left-accent',
+                variant: 'left-accent',
                 title: 'Failed',
                 description: error.message,
                 status: 'info',
                 duration: 5000,
                 isClosable: true,
-              })
+            })
         }
     };
     return (
@@ -116,10 +124,10 @@ function MyProfile1() {
             <VStack>
                 <Box width={{ base: 'full', md: '80%' }} >
                     <Flex w={'full'} gap={'1em'} p={4}>
-                        <Box width={'250px'} height={'250px'} aspectRatio={1} boxShadow={' 0 0 6px rgba(0,0,0,0.05)'} rounded={'full'} background={`url(${myInfo.profile_photo}) no-repeat center center/cover`} position={'relative'}>
+                        <Box width={'250px'} height={'250px'} aspectRatio={1} boxShadow={' 0 0 6px rgba(0,0,0,0.05)'} rounded={'full'} background={`url(http://localhost:8000/assets/${myInfo.profile_photo}) no-repeat center center/cover`} position={'relative'}>
                             <FormControl position={'absolute'} width={'fit-content'} right={0} bottom={0}>
                                 <FormLabel width="fit-content"><PiNotePencilDuotone /></FormLabel>
-                                <Input type='file' display={'none'} onChange={handleFileChange}></Input>
+                                <Input name='profile_photo' type='file' display={'none'} onChange={handleFileChange}></Input>
                             </FormControl>
 
                         </Box>
@@ -157,7 +165,7 @@ function MyProfile1() {
 
                         </Box>
                     </Flex>
-                   {user && <Resources user={user} />}
+                    {user && <Resources user={user} />}
                 </Box>
             </VStack>
 

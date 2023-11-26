@@ -150,13 +150,13 @@ class ProfileUpdate(viewsets.ModelViewSet):
                 return Response({"message": "Teacher not found"}, status=status.HTTP_404_NOT_FOUND)
             phone = request.data.get('phone')
             research_field = request.data.get('research_field')
-            profile_photo = request.data.get('profile_photo')
+            profile_photo = request.FILES.get("profile_photo")
             about = request.data.get('about')
             if phone is not None:
                 teacher.phone = phone
             if research_field is not None:
                 teacher.research_field = research_field
-            if profile_photo is not None:
+            if profile_photo:
                 teacher.profile_photo = profile_photo
             if about is not None:
                 teacher.about = about
@@ -177,7 +177,6 @@ class ProfileUpdate(viewsets.ModelViewSet):
             patent_patent = request.data.get('patent_patent', None)
             patent_date = request.data.get('patent_date', None)
             patent_number = request.data.get('patent_number', None)
-            print(patent_patent,patent_date,patent_number)
             if patent_patent and patent_date and patent_number:
                 patent, created = Patent.objects.get_or_create(
                     teacher=teacher,
