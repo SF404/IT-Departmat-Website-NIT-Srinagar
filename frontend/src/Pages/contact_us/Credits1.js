@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Box, Image, Text, Link, Flex, IconButton, Icon,  Heading, VStack, Avatar, HStack, SimpleGrid, GridItem,  Badge, useToast, Tooltip } from '@chakra-ui/react';
 import arman from "./../../assets/images/arman.webp";
 import rajes from "./../../assets/images/rajes.webp";
-import suhaib from "./../../assets/images/suhaib.webp";
+// import suhaib from "./../../assets/images/suhaib.webp";
 import janib from "./../../assets/images/janibsir.webp";
 import { PiEnvelopeDuotone, PiGithubLogoDuotone, PiGlobeHemisphereEastDuotone, PiLinkedinLogoDuotone, PiPhoneDuotone } from 'react-icons/pi';
 
@@ -37,7 +37,7 @@ function Credits1() {
             },
             {
                 name: "Suhaib Ahmad",
-                image: suhaib,
+                image: "https://media.licdn.com/dms/image/D4D03AQEZslD7f4DKFQ/profile-displayphoto-shrink_800_800/0/1693129744681?e=2147483647&v=beta&t=6cKPE675VyzB8zMtRHQrrrDAzbG2FUcv0MLurFBDva8",
                 details: "",
                 email: "enigma00800@gmail.com",
                 phone: "+91 8492002286",
@@ -89,17 +89,17 @@ function Credits1() {
     return (
         <VStack w={'full'}>
             {/* <Heading fontSize={'1.5em'} my={'0.5em'} textAlign={'center'} color={'#192e59'}>CREDITS</Heading> */}
-            <VStack width={{ base: '100%', md: '80%' }} gap={6} className='family-1' p={4}>
+            <VStack width={{ base: '100%', md: '80%' }} gap={6}  p={4}>
                 {/* <Heading fontSize={'1em'} my={'-1em'} textAlign={'left'} color={'#192e59'} w={'full'}>Mentor</Heading> */}
-                <Heading fontSize={'1em'} mb={-2} mt={2} fontWeight={'semibold'} textAlign={'center'} color={'#192e59'} w={'full'} className='family-1'>MENTOR</Heading>
+                <Heading fontSize={'1em'} mb={-2} mt={2} fontWeight={'semibold'} textAlign={'center'} color={'#192e59'} w={'full'} >MENTOR</Heading>
 
 
                 {
                     mentors.map((item, index) => (
-                        <Flex colSpan={{ base: 1, sm: 2, md: 3 }} flexDirection={{ base: 'column', md: 'row' }} alignItems={{ base: 'center', md: 'left' }} width={'fit-content'} textAlign={'center'} bg={'white'} key={index} borderRadius={'1em'} overflow="hidden" py={4} pr={4} boxShadow={'0 0 12px rgba(0,0,0,0.05)'} w={'full'}>
+                        <Flex colSpan={{ base: 1, sm: 2, md: 3 }} flexDirection={{ base: 'column', md: 'row' }} alignItems={{ base: 'center', md: 'left' }} width={'fit-content'} textAlign={'center'} bg={'white'} key={index} borderRadius={6} overflow="hidden" py={4} pr={4} boxShadow={'0 0 12px rgba(0,0,0,0.05)'} w={'full'}>
                             <Box>
                                 <Image borderRadius={'0.5em'} mx={4} name={item.name} src={item.image} minW={'150px'} minH={'150px'} maxW={'150px'}></Image>
-                                <Text mt={2} >MENTOR</Text>
+                                {/* <Text mt={2} >MENTOR</Text> */}
                             </Box>
 
                             <VStack textAlign={'left'} justifyContent={'space-between'} px={4}>
@@ -193,12 +193,12 @@ function Credits1() {
                     ))
 
                 }
-                <Heading fontSize={'1em'} mt={2} fontWeight={'semibold'} textAlign={'center'} color={'#192e59'} w={'full'} className='family-1'>DEVELOPED BY</Heading>
+                <Heading fontSize={'1em'} mt={2} fontWeight={'semibold'} textAlign={'center'} color={'#192e59'} w={'full'} >DEVELOPED BY</Heading>
 
                 <SimpleGrid gap={4} columns={[1, 1, 2, 3]} w={'full'}>
                     {
                         contributors.map((item, index) => (
-                            <GridItem textAlign={'center'} bg={'white'} key={index} borderRadius="1em" overflow="hidden" p={8} px={8} boxShadow={'0 0 12px rgba(0,0,0,0.05)'} w={'full'} minW={'250px'}>
+                            <GridItem textAlign={'center'} bg={'white'} key={index} borderRadius={6} overflow="hidden" p={8} px={8} boxShadow={'0 0 12px rgba(0,0,0,0.05)'} w={'full'} minW={'250px'}>
                                 <Avatar size={'2xl'} src={item.image} alt={item.name} mb={4} />
                                 <Text fontSize="xl" fontWeight="semibold" mb={2} fontFamily={'body'} >
                                     {item.name}
