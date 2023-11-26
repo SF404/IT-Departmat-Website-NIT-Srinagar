@@ -11,7 +11,6 @@ function IndexDashboard() {
             </Box>
             <Box width={'full'} height={`calc(100vh - 64px)`} overflowY={'scroll'}>
                 <Outlet />
-
             </Box>
         </>
     )

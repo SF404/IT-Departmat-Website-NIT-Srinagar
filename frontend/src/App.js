@@ -95,7 +95,6 @@ const App = () => {
             <Route path="phd-students" element={<PhdStudents />} title="Ph.D. Students" />
             <Route path="alumni" element={<Alumni />} title="Alumni" />
             <Route path="feedback-form" element={<Feedback />} title="Alumni" />
-
             <Route path="artificialintelligence" element={<ArtificialIntelligence />} title="ArtificialIntelligence" />
             <Route path="architecture" element={<Architecture />} title="Architecture" />
             <Route path="computervision" element={<ComputerVision />} title="ComputerVision" />
