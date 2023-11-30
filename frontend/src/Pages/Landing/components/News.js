@@ -1,11 +1,36 @@
-import { Box, GridItem, HStack, Heading, IconButton, Link, SimpleGrid, Text, baseTheme, position } from '@chakra-ui/react'
+import { Box, GridItem, HStack, Heading, IconButton, Link, SimpleGrid, Spinner, Text, baseTheme, position, useToast } from '@chakra-ui/react'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import Carousel from 'better-react-carousel'
 import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons'
 
 const News = () => {
+  const toast = useToast()
+  const [news, setNews] = useState(null)
   const [recentPapers, setRecentPapers] = useState(null);
+
+  useEffect(() => {
+    const fetchNews = async () => {
+      try {
+        const response = await axios.get('/api/public/teacherdataview/?type=news')
+        setNews(response.data)
+        console.log(response.data)
+      } catch (error) {
+        console.log(error)
+        toast({
+          title: 'Contact Administrator',
+          description: "Failed to fetch News, " + error.message,
+          status: 'error',
+          duration: 5000,
+          isClosable: true,
+        })
+      }
+    }
+
+    return () => {
+      fetchNews()
+    }
+  }, [])
 
   useEffect(() => {
     const fetchResearch = async () => {
@@ -42,45 +67,36 @@ const News = () => {
       <GridItem colSpan={2}>
         <Heading fontSize={'1.5em'} mt={8} mb={2} pl={{ md: '20px' }} textAlign={'left'} color={'#192e59'}>Latest News</Heading>
         <Box w={'full'} >
-          <Carousel cols={2} rows={1} gap={8} loop={true} showDots={false}
+          <Carousel cols={2} rows={1} gap={16} loop={true} showDots={false}
             arrowLeft={
-              <IconButton  icon={<ChevronLeftIcon />} variant={'ghost'} colorScheme='whiteAlpha' style={{ position: 'absolute', top: '35%', left: '20px', zIndex: 50 }}></IconButton>}
+              <IconButton icon={<ChevronLeftIcon />} variant={'solid'} color={'black'} size={'sm'} style={{ position: 'absolute', top: '-40px', right: '60px', }}></IconButton>}
             arrowRight={
-              <IconButton icon={<ChevronRightIcon />} variant={'ghost'} colorScheme='whiteAlpha' style={{ position: 'absolute', top: '35%', right: '20px', zIndex: 50 }}></IconButton>}
+              <IconButton icon={<ChevronRightIcon />} variant={'solid'} color={'black'} size={'sm'} style={{ position: 'absolute', top: '-40px', right: '20px', }}></IconButton>}
             containerStyle={{ margin: '0em', }}>
 
 
+            {
 
-            <Carousel.Item >
-              <Box w={'full'}>
-                <Box aspectRatio={2 / 1} bg={'red'}></Box>
-                <Box aspectRatio={2 / 1} bg={'white'}></Box>
-              </Box>
-            </Carousel.Item>
-            <Carousel.Item >
-              <Box w={'full'}>
-                <Box aspectRatio={2 / 1} bg={'red'}></Box>
-                <Box aspectRatio={2 / 1} bg={'white'}></Box>
-              </Box>
-            </Carousel.Item>
-            <Carousel.Item >
-              <Box w={'full'}>
-                <Box aspectRatio={2 / 1} bg={'red'}></Box>
-                <Box aspectRatio={2 / 1} bg={'white'}></Box>
-              </Box>
-            </Carousel.Item>
-            <Carousel.Item >
-              <Box w={'full'}>
-                <Box aspectRatio={2 / 1} bg={'red'}></Box>
-                <Box aspectRatio={2 / 1} bg={'white'}></Box>
-              </Box>
-            </Carousel.Item>
-            <Carousel.Item >
-              <Box w={'full'}>
-                <Box aspectRatio={2 / 1} bg={'red'}></Box>
-                <Box aspectRatio={2 / 1} bg={'white'}></Box>
-              </Box>
-            </Carousel.Item>
+              news ? news.length > 0 ? news.map((item, index) => (<Carousel.Item key={index}>
+                <Box w={'full'} rounded={6} bg={'white'}>
+                  <Box aspectRatio={4 / 3} bg={'red'} background={`url(${item.image}) no-repeat center center/cover`}></Box>
+                  <Box aspectRatio={2 / 1}>
+                    <Box fontSize={'0.8em'} p={4}>
+                      <Text fontWeight="bold" fontSize="xl" mb={2}>
+                        {item.headline}
+                      </Text>
+                      <Text fontSize="sm" color="gray.500" mb={2}>
+                        {item.date}
+                      </Text>
+                      <Text>{item.content}</Text>
+                      {/* <Text mt={4} fontStyle="italic" textAlign="right" color="gray.600">
+                        {item.author}
+                      </Text> */}
+                    </Box>
+                  </Box>
+                </Box>
+              </Carousel.Item>)) : (<Carousel.Item>No News</Carousel.Item>) : (<Box><Spinner /></Box>)
+            }
           </Carousel>
         </Box>
       </GridItem>

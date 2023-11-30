@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Box, Button, Center, FormControl, FormLabel, Image, Input, SimpleGrid, Text, Textarea, VStack, useToast } from '@chakra-ui/react';
+import { Box, Button, Center, Flex, FormControl, FormLabel, Image, Input, SimpleGrid, Text, Textarea, VStack, useToast } from '@chakra-ui/react';
 
 const UpdateNews = () => {
   const toast = useToast()
@@ -83,11 +83,11 @@ const UpdateNews = () => {
       borderRadius="lg"
       overflow="hidden"
       display={'flex'}
-      maxH={'200px'}
-      minH={'200px'}
-      p={2}
+      alignItems={'flex-start'}
+      p={4}
+      gap={4}
     >
-      {image && <Image aspectRatio={1} height={'150px'} src={image} alt={headline} mb={4} />}
+      {image && <Image aspectRatio={1} height={'150px'} src={image} alt={headline} mb={4} rounded={6} />}
       <Box fontSize={'0.8em'}>
         <Text fontWeight="bold" fontSize="xl" mb={2}>
           {headline}
@@ -106,7 +106,7 @@ const UpdateNews = () => {
 
   return (
     <Center p="4" h={'calc(100vh-64px)'} w={'full'}>
-      <SimpleGrid columns={[1, 1, 2, 2]} w={{ base: '100%', md: '80%' }} gap={4}>
+      <Flex w={'full'} gap={4}>
 
         <Box bg={'white'} borderRadius={8} w={'full'} h={'full'} boxShadow={'0 0 6px rgba(0,0,0,0.05)'}>
           <Box h={'40px'} w={'full'} bg={'#d8dcf0'} borderTopRadius={8}></Box>
@@ -152,7 +152,7 @@ const UpdateNews = () => {
             }
           </VStack>
         </Box>
-      </SimpleGrid>
+      </Flex>
     </Center>
   );
 };

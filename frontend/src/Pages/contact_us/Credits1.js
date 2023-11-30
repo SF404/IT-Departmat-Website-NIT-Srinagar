@@ -88,9 +88,7 @@ function Credits1() {
 
     return (
         <VStack w={'full'}>
-            {/* <Heading fontSize={'1.5em'} my={'0.5em'} textAlign={'center'} color={'#192e59'}>CREDITS</Heading> */}
             <VStack width={{ base: '100%', md: '80%' }} gap={6}  p={4}>
-                {/* <Heading fontSize={'1em'} my={'-1em'} textAlign={'left'} color={'#192e59'} w={'full'}>Mentor</Heading> */}
                 <Heading fontSize={'1em'} mb={-2} mt={2} fontWeight={'semibold'} textAlign={'center'} color={'#192e59'} w={'full'} >MENTOR</Heading>
 
 
@@ -99,7 +97,6 @@ function Credits1() {
                         <Flex colSpan={{ base: 1, sm: 2, md: 3 }} flexDirection={{ base: 'column', md: 'row' }} alignItems={{ base: 'center', md: 'left' }} width={'fit-content'} textAlign={'center'} bg={'white'} key={index} borderRadius={6} overflow="hidden" py={4} pr={4} boxShadow={'0 0 12px rgba(0,0,0,0.05)'} w={'full'}>
                             <Box>
                                 <Image borderRadius={'0.5em'} mx={4} name={item.name} src={item.image} minW={'150px'} minH={'150px'} maxW={'150px'}></Image>
-                                {/* <Text mt={2} >MENTOR</Text> */}
                             </Box>
 
                             <VStack textAlign={'left'} justifyContent={'space-between'} px={4}>
