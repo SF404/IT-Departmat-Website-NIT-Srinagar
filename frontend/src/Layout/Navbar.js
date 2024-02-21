@@ -78,14 +78,14 @@ function NavLinks({ color = "white", isOpen = null, onClose = null }) {
           >
             Coordinators
           </MenuItem>
-          <MenuItem
+          {/* <MenuItem
             as={Link}
             _hover={{ color: "#192e59" }}
             onClick={handleNavigation}
             to="/committee"
           >
             Committee
-          </MenuItem>
+          </MenuItem> */}
           <MenuItem
             as={Link}
             _hover={{ color: "#192e59" }}
@@ -94,14 +94,14 @@ function NavLinks({ color = "white", isOpen = null, onClose = null }) {
           >
             Vision and Mission
           </MenuItem>
-          <MenuItem
+          {/* <MenuItem
             as={Link}
             _hover={{ color: "#192e59" }}
             onClick={handleNavigation}
             to="/newsletter"
           >
             Department Newsletter
-          </MenuItem>
+          </MenuItem> */}
         </MenuList>
       </Menu>
 

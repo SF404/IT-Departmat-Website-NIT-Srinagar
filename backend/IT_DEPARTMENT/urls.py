@@ -48,7 +48,7 @@ urlpatterns = [
     path('api/public/events/', GetData.as_view(),name='registration'),
     path('api/auth/', include('djoser.urls')),
     path('api/auth/', include('djoser.urls.jwt')),
-    re_path(r'^$', TemplateView.as_view(template_name='index.html')),
+    re_path(r'^$', TemplateView.as_view(template_name='build/index.html')),
     path('activate/<str:uid>/<str:token>/', TemplateView.as_view(template_name='activate_site.html'), name='activate'),
 ]
 

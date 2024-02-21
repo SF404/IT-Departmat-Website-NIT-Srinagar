@@ -13,7 +13,6 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 from django.conf import settings
 from django.db import DatabaseError
 
-
 class DataDelete(viewsets.ModelViewSet):
     authentication_classes=[JWTAuthentication]
     permission_classes = (IsAuthenticated,)
@@ -68,7 +67,6 @@ class DataDelete(viewsets.ModelViewSet):
         except Exception as e:
             return Response({'error': 'Internal server error'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-
 class GalleryUpload(APIView):
     authentication_classes=[JWTAuthentication]
     permission_classes = (IsAuthenticated,)
@@ -93,12 +91,12 @@ class PostPublicData(viewsets.ModelViewSet):
         object_type = request.query_params.get('type', None)
         try:
             if not email :
-                return Response({"message": "email cannot be null"}, status=status.HTTP_400_BAD_REQUEST)
+                return Response({"error": "email cannot be null"}, status=status.HTTP_400_BAD_REQUEST)
             if not object_type:
-                return Response({"message": "type cannot be null"}, status=status.HTTP_400_BAD_REQUEST)
-            teacher =Teacher.objects.filter(email=email).first()
+                return Response({"error": "type cannot be null"}, status=status.HTTP_400_BAD_REQUEST)
+            teacher =Teacher.objects.get(email=email).first()
             if not teacher:
-                return Response({"message":"teacher cannot found"},status=status.HTTP_400_BAD_REQUEST)
+                return Response({"error":"teacher cannot found"},status=status.HTTP_400_BAD_REQUEST)
             description=request.data.get("description")
             link=request.data.get('link')
             if object_type == 'announcement':
@@ -145,7 +143,7 @@ class ProfileUpdate(viewsets.ModelViewSet):
             if not email:
                 return Response({"message": "Email cannot be null"}, status=status.HTTP_400_BAD_REQUEST)
             try:
-                teacher = Teacher.objects.get(pk=pk,email=email)
+                teacher = Teacher.objects.get(pk=pk)
             except Teacher.DoesNotExist:
                 return Response({"message": "Teacher not found"}, status=status.HTTP_404_NOT_FOUND)
             phone = request.data.get('phone')
@@ -217,7 +215,6 @@ class ProfileUpdate(viewsets.ModelViewSet):
         except Exception as e:
             return Response({'error': 'Internal server error'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-
 class UploadFiles(viewsets.ModelViewSet):
     authentication_classes=[JWTAuthentication]
     permission_classes = (IsAuthenticated,)
@@ -266,7 +263,6 @@ class FileUpload (viewsets.ModelViewSet):
             return Response({'error': 'Database error'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         except Exception as e:
             return Response({'error': 'Internal server error'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-        
 
 class DeleteFilesAPIView(APIView):
     def post(self, request, *args, **kwargs):
@@ -297,7 +293,6 @@ class DeleteFilesAPIView(APIView):
         except Exception as e:
             return Response({'error': 'Internal server error'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-    
 class GetUserFromTokenView(APIView):
     authentication_classes=[JWTAuthentication]
     permission_classes = (IsAuthenticated,)
@@ -315,7 +310,6 @@ class GetUserFromTokenView(APIView):
                 return Response({'error': 'User not found token Exists.'}, status=status.HTTP_401_UNAUTHORIZED)
             auth_email=user.email
             auth_name=user.first_name
-            print(auth_email,auth_name)
             if not auth_email or not auth_name:
                 return Response({'error': 'User not found token Exists.'}, status=status.HTTP_401_UNAUTHORIZED)
             teacher=Teacher.objects.filter(email=auth_email)
@@ -327,7 +321,3 @@ class GetUserFromTokenView(APIView):
             return Response({'error': 'Database error'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         except Exception as e:
             return Response({'error': 'Internal server error'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-        
-
-
-     

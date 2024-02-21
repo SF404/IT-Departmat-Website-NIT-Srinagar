@@ -302,7 +302,6 @@ function CoursePanel({ selectedCourse, notes, assignments, fetchNotes, fetchAssi
                                 <FormLabel>Title</FormLabel>
                                 <Input type="text" name="title" value={notesFormData.title} onChange={handleNotesFormChange} required placeholder="Enter title" />
                             </FormControl>
-
                             <FormControl mt={4}>
                                 <FormLabel bg={"#e5e5e5"} p={3} borderRadius={"10px"} m={0} > Upload Notes</FormLabel>
                                 <Input type="file" name="file" onChange={handleNotesFormChange} display={"none"} required />

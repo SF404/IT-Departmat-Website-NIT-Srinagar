@@ -57,10 +57,8 @@ class TeacherDataView(viewsets.ModelViewSet):
         }
         return models.get(data_type.lower(), (None, None))
 
-
 class TeacherStudentView(viewsets.ModelViewSet):
     serializer_class = TeacherSerializer
-
     def get_serializer_class(self):
         data_type = self.request.query_params.get('type')
         if data_type == 'teacher':
@@ -114,6 +112,7 @@ class TeacherStudentView(viewsets.ModelViewSet):
             return Teacher.objects.none()
         except Exception as e:
             return Teacher.objects.none()
+
 class CourseView(viewsets.ModelViewSet):
     serializer_class = CourseSerializer
     def get_queryset(self):
@@ -160,7 +159,7 @@ class ShowFiles(viewsets.ModelViewSet):
             return serializer_class.Meta.model.objects.none()
         except Exception as e:
             return serializer_class.Meta.model.objects.none()
-            
+
 class DownloadFile(APIView):
     def post(self, request, *args, **kwargs):
         file_id = self.request.query_params.get('id')
@@ -175,8 +174,8 @@ class DownloadFile(APIView):
             return FileResponse(open(file_path, 'rb'), as_attachment=True)
           elif type =='notes':
               my_model_instance = Notes.objects.get(id=file_id)
-          if not my_model_instance:
-              return Response({"message": "Note not found."}, status=status.HTTP_404_NOT_FOUND)         
+              if not my_model_instance:
+                return Response({"message": "Note not found."}, status=status.HTTP_404_NOT_FOUND)         
           file_path = my_model_instance.file.path
           return FileResponse(open(file_path, 'rb'), as_attachment=True)
         except DatabaseError as e:
@@ -223,7 +222,7 @@ class FileShow(viewsets.ModelViewSet):
             return File.objects.none()
         except Exception as e:
             return File.objects.none()
-        
+
 class HolidayView(viewsets.ModelViewSet):
     serializer_class = HolidaySerializer
     def get_queryset(self):
@@ -236,7 +235,7 @@ class HolidayView(viewsets.ModelViewSet):
             return Holiday.object.none()
         except Exception as e:
             return Holiday.object.none()
-        
+
 class GetData(APIView):
      def get(self, request, *args, **kwargs):
         type = request.query_params.get('type')

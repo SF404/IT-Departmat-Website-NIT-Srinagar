@@ -18,10 +18,8 @@ function FeaturedVideos() {
 
     async function fetchYouTubeData(videoUrl) {
         const oembedURL = `http://www.youtube.com/oembed?url=${videoUrl}&format=json`;
-
         try {
             const response = await axios.get(oembedURL);
-
             if (response.status === 200) {
                 return response.data;
             } else {

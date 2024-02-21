@@ -1,11 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.contrib.auth.models import BaseUserManager,AbstractBaseUser
-
 # Create your models here.
-
-
-
 
 class Teacher(models.Model):
     name=models.CharField(max_length=255) 
@@ -34,8 +29,6 @@ class Research(models.Model):
         ordering=['date']
     def __str__(self):
         return f"{self.title}"
-
-
 
 class Patent(models.Model):
     title=models.CharField(max_length=255)

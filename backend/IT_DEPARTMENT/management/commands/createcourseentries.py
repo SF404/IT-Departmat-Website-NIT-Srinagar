@@ -7,7 +7,45 @@ from assets.phd_student import *
 class Command(BaseCommand):
     help = 'Add default entries for Course model'
     def handle(self, *args, **kwargs):
-            
+            Gallery.objects.create(
+                image="gallery/1.webp"
+            )
+            Gallery.objects.create(
+                image="gallery/2.webp"
+            )
+            Gallery.objects.create(
+                image="gallery/3.webp"
+            )
+            Gallery.objects.create(
+                image="gallery/4.webp"
+            )
+            Gallery.objects.create(
+                image="gallery/5.webp"
+            )
+            Gallery.objects.create(
+                image="gallery/6.webp"
+            )
+            Gallery.objects.create(
+                image="gallery/7.webp"
+            )
+            Gallery.objects.create(
+                image="gallery/8.webp"
+            )
+            Gallery.objects.create(
+                image="gallery/9.webp"
+            )
+            Gallery.objects.create(
+                image="gallery/10.webp"
+            )
+            Gallery.objects.create(
+                image="gallery/11.webp"
+            )
+            Gallery.objects.create(
+                image="gallery/12.webp"
+            )
+            Gallery.objects.create(
+                image="gallery/13.webp"
+            )
             File.objects.create(
                 name='committee',
                 file='files/committee.xlsx',
