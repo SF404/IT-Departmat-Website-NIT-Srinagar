@@ -25,12 +25,14 @@ import {
   Text,
   VStack,
   useDisclosure,
+  useToast,
 } from "@chakra-ui/react";
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import { FaDownload, FaTrash } from "react-icons/fa6";
 
 function Announcements({ email }) {
+  const toast = useToast()
   const [announcements, setannouncements] = useState(null);
   const [deleteInfo, setDeleteInfo] = useState({ name: "", id: "" });
   const [formData, setFormData] = useState({
@@ -55,9 +57,7 @@ function Announcements({ email }) {
         `/api/public/teacherdataview/?type=announcement&email=${email}`
       );
       setannouncements(response.data);
-      console.log("announcements", response.data);
     } catch (error) {
-      console.log(error);
     }
   };
 
@@ -89,24 +89,52 @@ function Announcements({ email }) {
         get_token()
       );
       if (response) fetchAnnouncements();
-      console.log(response);
-      console.log("Form data submitted:", formData);
       closeAnnouncementModel();
+      toast({
+        varient: 'left-accent',
+        title: 'Successfully added',
+        description: "",
+        status: 'success',
+        duration: 5000,
+        isClosable: true,
+      })
     } catch (error) {
+      toast({
+        varient: 'left-accent',
+        title: 'Something went Wrong',
+        description: "",
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+      })
       console.log(error);
     }
   };
   const handleDelete = async (delete_id) => {
-    console.log(delete_id);
     try {
       const response = await axios.delete(`/api/delete/${delete_id}/?type=announcement`, get_token());
       closeDeleteAlert();
       if (response.status === 204) {
         await fetchAnnouncements();
-        console.log("Successfully deleted");
+        toast({
+          varient: 'left-accent',
+          title: 'Successfully deleted',
+          description: "",
+          status: 'success',
+          duration: 5000,
+          isClosable: true,
+        })
       }
     } catch (error) {
       console.error("File Cannot be deleted", error);
+      toast({
+        varient: 'left-accent',
+        title: 'Something went Wrong',
+        description: "",
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+      })
     }
   };
 

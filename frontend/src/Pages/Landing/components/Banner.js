@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Box, Heading, IconButton, Text, } from "@chakra-ui/react";
 import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons'
-import image1 from './../../../assets/banners/a0.jpg'
+import image1 from './../../../assets/banners/a0.jpeg'
 import image3 from './../../../assets/banners/a1.webp'
 import image5 from './../../../assets/banners/a3.webp'
-import image6 from './../../../assets/banners/a4.jpg'
+import image6 from './../../../assets/banners/a4.jpeg'
 
 
 const images = [

@@ -24,7 +24,6 @@ function ProfileModal({ isOpen, onClose, user }) {
     };
 
     const handleSubmit = () => {
-        // Handle form submission, e.g., make an API request to update user profile
         onClose();
     };
 

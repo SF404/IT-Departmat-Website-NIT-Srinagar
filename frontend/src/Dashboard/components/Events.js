@@ -19,6 +19,7 @@ import {
   AlertDialogContent,
   AlertDialogHeader,
   AlertDialogOverlay,
+  useToast,
 } from "@chakra-ui/react";
 import { FaTrash } from "react-icons/fa6";
 
@@ -26,6 +27,7 @@ import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 
 function Events({ email }) {
+  const toast = useToast();
   const [deleteInfo, setDeleteInfo] = useState({ name: "", id: "" });
   const {
     isOpen: openDeleteAlert,
@@ -82,18 +84,31 @@ function Events({ email }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      console.log(formData);
       if (formData.title == "" || formData.date == "") return;
-
       const response = await axios.post(
         `/api/postpublicdata/?email=${email}&type=event`,
         formData,
         get_token()
       );
       if (response) fetchEvents();
-      console.log(response);
-      console.log("Form data submitted:", formData);
-    } catch (error) { }
+      toast({
+        varient: 'left-accent',
+        title: 'Successfully added',
+        description: "",
+        status: 'success',
+        duration: 5000,
+        isClosable: true,
+      })
+    } catch (error) {
+      toast({
+        varient: 'left-accent',
+        title: 'Something went Wrong',
+        description: "",
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+      })
+    }
   };
 
   const handleDelete = async (delete_id) => {
@@ -106,9 +121,25 @@ function Events({ email }) {
       closeDeleteAlert();
       if (response.status === 204) {
         await fetchEvents();
-        console.log("Successfully deleted");
+        toast({
+          varient: 'left-accent',
+          title: 'Successfully deleted',
+          description: "",
+          status: 'success',
+          duration: 5000,
+          isClosable: true,
+        })
       }
+
     } catch (error) {
+      toast({
+        varient: 'left-accent',
+        title: 'Something went Wrong',
+        description: "",
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+      })
       console.error("File Cannot be deleted", error);
     }
   };

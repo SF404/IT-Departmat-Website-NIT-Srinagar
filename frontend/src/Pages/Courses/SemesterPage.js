@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Box, Text, HStack, Divider, Flex, Spinner, VStack, Center, IconButton, Tag, Tooltip, Table, Tbody, Td, Tr, TableContainer, } from "@chakra-ui/react";
+import { Box, Text, HStack, Divider, Flex, Spinner, VStack, Center, IconButton, Tag, Tooltip, Table, Tbody, Td, Tr, TableContainer, Heading, } from "@chakra-ui/react";
 import { Accordion, AccordionItem, AccordionButton, AccordionPanel, AccordionIcon, } from "@chakra-ui/react";
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 import axios from "axios";
 import SmallBanner from "../../Layout/SmallBanner";
 import { PiDownloadDuotone } from "react-icons/pi";
+import image from '../../assets/banners/library.jpeg';
+
 
 const SemesterPage = () => {
   const { semesterId } = useParams();
-
+  const [syllabus, setSyllabus] = useState(null);
   const [notes, setNotes] = useState(null);
   const [assignments, setAssignments] = useState([]);
   const [selectedCourse, setSelectedCourse] = useState(null);
@@ -19,7 +21,12 @@ const SemesterPage = () => {
   function handleTabChange(index) {
     setActiveTab(index);
   }
-
+  function convert(id) {
+    if (id == 1) return `${id}st`;
+    else if (id == 2) return `${id}nd`;
+    else if (id == 3) return `${id}rd`;
+    else return `${id}th`;
+  }
   const download_notes = async (notes_id) => {
     console.log(notes_id);
     try {
@@ -57,8 +64,6 @@ const SemesterPage = () => {
       console.error("Error downloading notes:", error);
     }
   };
-
-  // use effects
   useEffect(() => {
     const fetchAssignments = async () => {
       try {
@@ -108,7 +113,20 @@ const SemesterPage = () => {
     }
     return () => fetchCourses();
   }, [semesterId]);
-
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`/api/public/fileget/?name=${convert(semesterId)}_sem`);
+        console.log(response.data[0]);
+        setSyllabus(response.data[0]);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+    return () => {
+    };
+  }, []);
   function DataTabs() {
     return (
       <>
@@ -123,7 +141,6 @@ const SemesterPage = () => {
             <Tab>ASSIGNMENT</Tab>
             <Tab>OTHER</Tab>
           </TabList>
-
           <TabPanels my={2} fontFamily={"sans-serif"} fontSize={"14px"} bg={"white"} boxShadow={'0 0 6px rgba(0,0,0,0.05)'} borderRadius={6}>
             <TabPanel >
               <TableContainer p={2}>
@@ -131,7 +148,6 @@ const SemesterPage = () => {
                   {
                     notes ? (
                       <Tbody>
-
                         {notes.length > 0 ? notes.map((item, index) => (
                           <Tr key={index}>
                             <Td p={2}>
@@ -144,12 +160,10 @@ const SemesterPage = () => {
                               </Text>
                             </Td>
                           </Tr>)) : (<Text textAlign={"center"}>Empty...</Text>)}
-
                       </Tbody>) : (<Spinner />)
                   }
                 </Table>
               </TableContainer>
-
             </TabPanel>
             <TabPanel>
               <TableContainer p={2}>
@@ -207,7 +221,7 @@ const SemesterPage = () => {
   }
   return (
     <>
-      <SmallBanner heading={'SEMESTER ' + semesterId} />
+      <SmallBanner image={image} heading={'SEMESTER ' + semesterId} />
       <Center>
         <Box
           p={{ base: 2, md: 4 }}
@@ -217,6 +231,14 @@ const SemesterPage = () => {
           width={{ base: '100%', md: '90%', lg: '80%' }}
           className="family-5"
         >
+          <Heading size={'md'} mb={6} ml={1} mr={1} color={'blue.900'} display="flex" alignItems="center">
+            <Box flex="1" pr={5}>{`Syllabus`}</Box>
+            <a href={(syllabus) ? syllabus.file : `/semester/${semesterId}`} target="_blank" rel="noopener noreferrer">
+              <Tooltip label={`${convert(semesterId)}-Sem Syllabus`} ml={4}>
+                <IconButton icon={<PiDownloadDuotone />} bg="gray.300" color="black" />
+              </Tooltip>
+            </a>
+          </Heading>
           <Divider my={2} />
           <Accordion allowToggle gap={2}>
             {courses && courses.length > 0 ?
@@ -260,9 +282,7 @@ const SemesterPage = () => {
                         </HStack>
                         <Tag colorScheme="facebook" >Credit: {course.credit}</Tag>
                       </Box>
-                      <Tooltip label={'Syllabus'}>
-                        <IconButton icon={<PiDownloadDuotone />}></IconButton>
-                      </Tooltip>
+
                     </Box>
 
                     <Divider my={2} />
@@ -273,7 +293,7 @@ const SemesterPage = () => {
               )) : (<Box my={4} textAlign={"center"}><Spinner /><Text>Loading...</Text></Box>)}
           </Accordion>
         </Box>
-      </Center>
+      </Center >
     </>
   );
 };

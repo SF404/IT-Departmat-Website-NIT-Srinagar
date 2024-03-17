@@ -40,6 +40,8 @@ urlpatterns = [
     path('api/updategallery/',GalleryUpload.as_view()),
     path('api/filedownload/', DownloadFile.as_view(),name='registration'),
     path('api/filesdelete/', DeleteFilesAPIView.as_view(),name='registration'),
+    path('api/check/', CheckAuthenticationAPIView.as_view(), name='check_authentication'),
+    path('api/logout/', LogoutAPIView.as_view(), name='check_authentication'),
     # path('api/auth/register/', RegistrationView.as_view(), name='registration'),
     # path('api/auth/login/', CustomObtainTokenView.as_view(), name='login'),
     # path('api/auth/refresh-token/', CustomRefreshTokenView.as_view(), name='refresh-token'),

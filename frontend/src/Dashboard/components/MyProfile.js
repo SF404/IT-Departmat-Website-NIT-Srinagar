@@ -1,8 +1,9 @@
-import { Button, Divider, FormControl, FormLabel, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Textarea } from '@chakra-ui/react';
+import { Button, Divider, FormControl, FormLabel, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Textarea, useToast } from '@chakra-ui/react';
 import axios from 'axios';
 import React, { useState } from 'react'
 
 function MyProfile({ openMyProfile, closeMyProfile, user }) {
+    const toast = useToast();
     const [myInfo, setMyInfo] = useState({
         name: user.name,
         profile_photo: user.profile_photo,
@@ -21,12 +22,12 @@ function MyProfile({ openMyProfile, closeMyProfile, user }) {
         });
     };
     const handleFileChange = (e) => {
-    const { name, value } = e.target;
-    const updatedFormData = { ...myInfo };
-    const file = e.target.files[0];
-    updatedFormData[name] = file;
-    setMyInfo(updatedFormData);
-  };
+        const { name, value } = e.target;
+        const updatedFormData = { ...myInfo };
+        const file = e.target.files[0];
+        updatedFormData[name] = file;
+        setMyInfo(updatedFormData);
+    };
     function get_token() {
         return {
             headers: {
@@ -45,9 +46,23 @@ function MyProfile({ openMyProfile, closeMyProfile, user }) {
                 myInfo,
                 get_token()
             );
-            console.log(response.data);
+            toast({
+                varient: 'left-accent',
+                title: 'Successfully updated',
+                description: "",
+                status: 'success',
+                duration: 5000,
+                isClosable: true,
+            })
         } catch (error) {
-            console.log(error);
+            toast({
+                varient: 'left-accent',
+                title: 'Something went Wrong',
+                description: "",
+                status: 'error',
+                duration: 5000,
+                isClosable: true,
+            })
         }
         closeMyProfile();
     };
@@ -66,7 +81,7 @@ function MyProfile({ openMyProfile, closeMyProfile, user }) {
                                     type="file"
                                     name="profile_photo"
                                     display={"none"}
-                                  onChange={handleFileChange}
+                                    onChange={handleFileChange}
                                 />
                             </div>
                             <FormControl>

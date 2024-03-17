@@ -1,0 +1,30 @@
+{
+  "featured_videos": [
+    "https://youtu.be/xEkUrqU3yCs?si=43n0lYQQvv42ilk1",
+    "https://youtu.be/ShqAKyD3v6U?si=JoLXL6hnBSokFv9M",
+    "https://www.youtube.com/watch?v=HsN7vF7M7rA",
+    "https://www.youtube.com/watch?v=4lcKj0xnXkg&list=PLUbapHgKkROnP9It2FQiDfR1DBoSpIshT",
+    "https://www.youtube.com/watch?v=xEkUrqU3yCs&t",
+    "https://www.youtube.com/shorts/Z3yAN7Y2LH4",
+    "https://www.youtube.com/watch?v=vJk_8DFp3Yo&t=578s&pp=ygUjbml0IHNyaW5hZ2FyIGluZm9ybWF0aW9uIGRlcGFydG1lbnQ%3D",
+    "https://www.youtube.com/watch?v=LSIrG0QnEJ8",
+    "https://www.youtube.com/watch?v=5aMIM-qGLK0&list=PLUbapHgKkROk_CAo6OJEmQuzQKfraDFKM"
+  ],
+  "awards": [
+    {
+      "title": "A Comparison of Class Imbalance techniques for Real-world landslide prediction",
+      "year": 2017,
+      "description": "Deepti Dwivedi (IT-677/14) from 7th semester presented her paper titled: “A Comparison of Class Imbalance techniques for Real-world landslide prediction” at International Conference on Machine Learning and Data Science (ICMLDS – 2017), Noida, India"
+    },
+    {
+      "title": "Won third Prize in NIT Conclave",
+      "year": 2017,
+      "description": "Rakshit Sharma (IT-33/15) and Akansha Aggarwal (IT-59/15) from 5th Semester won third Prize in NIT Conclave 2017 held at NIT Silchar from 1st to 3rd Sept., 2017."
+    },
+    {
+      "title": "Won fifth Prize in “Apptitute Contest”",
+      "year": 2017,
+      "description": "Anmol Jaiswal (IT-61/15) from 5th Semester won 5th Prize in “Apptitute Contest” organized by IIED cell NIT Srinagar on 14th October, 2017."
+    }
+  ]
+}

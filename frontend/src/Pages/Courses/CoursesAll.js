@@ -1,7 +1,10 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { Box, Button, Center, Heading, SimpleGrid, Text, VStack } from '@chakra-ui/react';
+import React, { useEffect, useState } from 'react';
+import { Link, renderMatches } from 'react-router-dom';
+import axios from 'axios';
+import { Box, Button, Center, Heading, IconButton, SimpleGrid, Text, Tooltip, VStack } from '@chakra-ui/react';
 import SmallBanner from './../../Layout/SmallBanner'
+import image from '../../assets/banners/a0.jpeg';
+import { PiDownloadDuotone } from 'react-icons/pi';
 const btech = [
     { id: 1, name: 'SEMESTER 1', nickname: 'AUTUMN' },
     { id: 2, name: 'SEMESTER 2', nickname: 'SPRING' },
@@ -25,12 +28,42 @@ const SemesterAll = () => {
         type = 'AUTUMN';
     }
     const year = date.getFullYear();
+
+    const [syllabus, setSyllabus] = useState(null);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get('/api/public/fileget/?name=all_sem');
+                console.log(response.data[0]);
+                setSyllabus(response.data[0]);
+            } catch (error) {
+                console.log(error);
+            }
+        };
+
+        fetchData();
+
+        // Optionally, you can also perform cleanup if necessary
+        return () => {
+            // Cancel the request or perform any cleanup
+        };
+    }, []);
+
     return (
         <>
-            <SmallBanner heading={'COURSE WORK'} />
+            <SmallBanner image={image} heading={'COURSE WORK'} />
             <Center>
                 <VStack align="center" p={6} width={{ base: '100%', md: '60%' }}>
-                    <Heading size={'md'} mb={6} color={'blue.900'}>{`B-TECH ${type}-${year}`}</Heading>
+                    <Heading size={'md'} mb={6} color={'blue.900'} display="flex" alignItems="center">
+                        <Box flex="1" pr={5}>{`B-TECH ${type}-${year}`}</Box>
+                        <a href={(syllabus && syllabus.file)} target="_blank" rel="noopener noreferrer">
+                            <Tooltip label={`B-Tech ${year} Syllabus`} ml={4}>
+                                <IconButton icon={<PiDownloadDuotone />} bg="gray.300" color="black" />
+                            </Tooltip>
+                        </a>
+                    </Heading>
+
                     <SimpleGrid columns={[2, 3, 4]} spacing={4} w={'full'}>
                         {btech.map((semester) => (
                             (semester.nickname === type) && (<Button transition={'all 0.2s ease-in'} _hover={{ transform: 'scale(1.02)', boxShadow: '0 0 12px rgba(63,81,181,0.5)' }} display={'flex'} flexDirection={'column'} colorScheme='whiteAlpha' color={'#192e59'} aspectRatio={19 / 6} w={'full'} h={'full'} as={Link} to={`/semester/${semester.id}`} boxShadow={'0 0 6px rgba(0,0,0,0.1)'}>

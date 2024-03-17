@@ -1,4 +1,6 @@
 from IT_DEPARTMENT.models import *
+from django.shortcuts import get_object_or_404
+from django.contrib.sessions.models import Session
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.views import APIView
 from rest_framework import status,viewsets
@@ -12,6 +14,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from django.conf import settings
 from django.db import DatabaseError
+from django.contrib.auth import authenticate, login, logout
 
 class DataDelete(viewsets.ModelViewSet):
     authentication_classes=[JWTAuthentication]
@@ -61,11 +64,11 @@ class DataDelete(viewsets.ModelViewSet):
                 obj.delete()
                 return Response({'message': 'News Data deleted successfully'}, status=status.HTTP_204_NO_CONTENT)
             else:
-                return Response({'message': 'Invalid type specified'}, status=status.HTTP_400_BAD_REQUEST)
+                return Response({'error': 'Invalid type specified'}, status=status.HTTP_400_BAD_REQUEST)
         except DatabaseError as e:
-            return Response({'error': 'Database error'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         except Exception as e:
-            return Response({'error': 'Internal server error'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 class GalleryUpload(APIView):
     authentication_classes=[JWTAuthentication]
@@ -79,9 +82,9 @@ class GalleryUpload(APIView):
                 return Response(gallery.data, status=status.HTTP_201_CREATED)
             return Response(gallery.errors, status=status.HTTP_400_BAD_REQUEST)
         except DatabaseError as e:
-            return Response({'error': 'Database error'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         except Exception as e:
-            return Response({'error': 'Internal server error'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 class PostPublicData(viewsets.ModelViewSet):
     authentication_classes=[JWTAuthentication]
@@ -94,7 +97,7 @@ class PostPublicData(viewsets.ModelViewSet):
                 return Response({"error": "email cannot be null"}, status=status.HTTP_400_BAD_REQUEST)
             if not object_type:
                 return Response({"error": "type cannot be null"}, status=status.HTTP_400_BAD_REQUEST)
-            teacher =Teacher.objects.get(email=email).first()
+            teacher =get_object_or_404(Teacher,email=email)
             if not teacher:
                 return Response({"error":"teacher cannot found"},status=status.HTTP_400_BAD_REQUEST)
             description=request.data.get("description")
@@ -127,11 +130,11 @@ class PostPublicData(viewsets.ModelViewSet):
                 news.save()
                 return Response({"message": "News Created Successfully"}, status=status.HTTP_201_CREATED)
             else:
-                return Response({"message": "cannot find the type"}, status=status.HTTP_400_BAD_REQUEST)
+                return Response({"error": "cannot find the type"}, status=status.HTTP_400_BAD_REQUEST)
         except DatabaseError as e:
-            return Response({'error': 'Database error'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         except Exception as e:
-            return Response({'error': 'Internal server error'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 class ProfileUpdate(viewsets.ModelViewSet):
     authentication_classes=[JWTAuthentication]
@@ -141,11 +144,11 @@ class ProfileUpdate(viewsets.ModelViewSet):
         email = request.query_params.get('email', None)
         try:
             if not email:
-                return Response({"message": "Email cannot be null"}, status=status.HTTP_400_BAD_REQUEST)
+                return Response({"error": "Email cannot be null"}, status=status.HTTP_400_BAD_REQUEST)
             try:
                 teacher = Teacher.objects.get(pk=pk)
             except Teacher.DoesNotExist:
-                return Response({"message": "Teacher not found"}, status=status.HTTP_404_NOT_FOUND)
+                return Response({"error": "Teacher not found"}, status=status.HTTP_404_NOT_FOUND)
             phone = request.data.get('phone')
             research_field = request.data.get('research_field')
             profile_photo = request.FILES.get("profile_photo")
@@ -211,9 +214,9 @@ class ProfileUpdate(viewsets.ModelViewSet):
                     education.save()
             return Response({"message": "All necessary Teacher data has been updated or created"}, status=status.HTTP_200_OK)
         except DatabaseError as e:
-            return Response({'error': 'Database error'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         except Exception as e:
-            return Response({'error': 'Internal server error'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 class UploadFiles(viewsets.ModelViewSet):
     authentication_classes=[JWTAuthentication]
@@ -243,9 +246,9 @@ class UploadFiles(viewsets.ModelViewSet):
                 return Response({"message": "Assignment created successfully"}, status=status.HTTP_201_CREATED)
             Response({'error': 'the type is either `notes` or `assignments` error'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         except DatabaseError as e:
-            return Response({'error': 'Database error'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         except Exception as e:
-            return Response({'error': 'Internal server error'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 class FileUpload (viewsets.ModelViewSet):
     authentication_classes=[JWTAuthentication]
@@ -260,9 +263,9 @@ class FileUpload (viewsets.ModelViewSet):
             file.save()
             return Response({"message": "Assignment created successfully"}, status=status.HTTP_201_CREATED)
         except DatabaseError as e:
-            return Response({'error': 'Database error'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         except Exception as e:
-            return Response({'error': 'Internal server error'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 class DeleteFilesAPIView(APIView):
     def post(self, request, *args, **kwargs):
@@ -289,9 +292,9 @@ class DeleteFilesAPIView(APIView):
                     return Response({"message": "Notes entry not found"}, status=status.HTTP_404_NOT_FOUND)
             return Response({"message": "Invalid request"}, status=status.HTTP_400_BAD_REQUEST)
         except DatabaseError as e:
-            return Response({'error': 'Database error'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         except Exception as e:
-            return Response({'error': 'Internal server error'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 class GetUserFromTokenView(APIView):
     authentication_classes=[JWTAuthentication]
@@ -318,6 +321,51 @@ class GetUserFromTokenView(APIView):
             serializer = TeacherSerializer(teacher, many=True)
             return Response(serializer.data)
         except DatabaseError as e:
-            return Response({'error': 'Database error'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         except Exception as e:
-            return Response({'error': 'Internal server error'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
+class CheckAuthenticationAPIView(APIView):
+    def get(self, request, *args, **kwargs):
+        try:
+            session_id = request.session.session_key
+            session = Session.objects.get(session_key=session_id)
+            user_id = session.get_decoded().get('_auth_user_id')
+            try:
+                user = User.objects.get(id=user_id) if user_id else None
+            except User.DoesNotExist as e :
+                return Response({'error': "No Session Found"}, status=status.HTTP_404_NOT_FOUND)
+            if user:
+                if user.is_superuser:
+                    return Response({'message': "You are logging in with Admin User. Change to Faculty user and relogin."}, status=status.HTTP_406_NOT_ACCEPTABLE)
+                try:
+                    teacher_obj=Teacher.objects.get(email=user.email) if user.email!='' else None
+                except Teacher.DoesNotExist as e :
+                    mail=user.email
+                    user.delete()
+                    return Response({'error': "This email is not associated with a faculty account.","mail":mail}, status=status.HTTP_203_NON_AUTHORITATIVE_INFORMATION)
+                if teacher_obj:
+                    teacher_obj.user = user
+                    teacher_obj.save()
+                    refresh = RefreshToken.for_user(user)
+                    access = str(refresh.access_token)
+                    return Response({'refresh': str(refresh), 'access': access}, status=status.HTTP_201_CREATED)
+                else:
+                    mail=user.email
+                    user.delete()
+                    return Response({'error': "This email is not associated with a faculty account.","mail":mail}, status=status.HTTP_203_NON_AUTHORITATIVE_INFORMATION)
+            else:
+                return Response({'error': "False Authentication"}, status=status.HTTP_404_NOT_FOUND)
+        except Exception as e:
+            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
+class LogoutAPIView(APIView):
+    def post(self, request, *args, **kwargs):
+        try:
+            session_key = request.session.session_key
+            if session_key:
+                Session.objects.filter(session_key=session_key).delete()
+            logout(request)
+            return Response({'message': "Successfully logged out."}, status=status.HTTP_200_OK)
+        except Exception as e:
+            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

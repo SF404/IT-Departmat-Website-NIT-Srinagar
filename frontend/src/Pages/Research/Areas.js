@@ -8,6 +8,8 @@ import ds from './../../assets/icons/data-center.png'
 import gv from './../../assets/icons/chart.png'
 import sn from './../../assets/icons/motion-sensor.png'
 import cc from './../../assets/icons/big-data.png'
+import image from './../../assets/banners/research.jpeg';
+
 import SmallBanner from '../../Layout/SmallBanner'
 
 function Areas() {
@@ -65,7 +67,7 @@ function Areas() {
 
     return (
         <>
-            <SmallBanner heading={'RESEARCH AREAS'} />
+            <SmallBanner image={image} heading={'RESEARCH AREAS'} />
 
             <Center m={4}>
                 <Box width={{ base: '100%', md: '80%' }}>

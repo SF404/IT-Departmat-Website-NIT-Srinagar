@@ -25,6 +25,19 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
+function current(number) {
+  const date = new Date();
+  const month = date.getMonth() + 1;
+
+  if (month >= 1 && month <= 6) {
+    return number % 2 === 0;
+  } else if (month >= 7 && month <= 12) {
+    return number % 2 !== 0;
+  } else {
+    return false;
+  }
+}
+
 function FacultyDetails() {
   const [researchFields, setResearchFields] = useState(null);
   const { id } = useParams();
@@ -283,7 +296,7 @@ function FacultyDetails() {
                       {currentTeachingCourses.map((item, index) => (
                         <Tr key={index}>
                           <Td>{item.course_id}</Td>
-                          <Td>{item.name}</Td>
+                          <Td>{item.name}{current(item.semester) ? " - (Current)" : ""}</Td>
                           <Td textAlign={"center"}>
                             {item.semester}
                             {item.semester > 2

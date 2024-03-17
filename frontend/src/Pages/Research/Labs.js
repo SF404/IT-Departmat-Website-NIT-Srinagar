@@ -16,6 +16,8 @@ import iot from "./../../assets/images/iot.webp";
 import security from "./../../assets/images/security.webp";
 import programming from "./../../assets/images/programming.webp";
 import SmallBanner from "../../Layout/SmallBanner";
+import image from './../../assets/banners/labs.jpeg';
+
 
 
 function Labs() {
@@ -79,7 +81,7 @@ function Labs() {
   ]
   return (
     <>
-      <SmallBanner heading={'LABS'} />
+      <SmallBanner image={image} heading={'LABS'} />
       <Box p={4}>
         <Center>
           <VStack

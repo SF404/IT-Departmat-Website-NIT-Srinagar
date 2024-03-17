@@ -5,6 +5,8 @@ import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPane
 import axios from 'axios'
 import * as XLSX from 'xlsx'
 import { EmailIcon } from '@chakra-ui/icons'
+import image from './../../assets/banners/alumni.webp';
+
 
 function Alumni() {
   const [alumni, setAlumni] = useState(null)
@@ -71,7 +73,7 @@ function Alumni() {
 
   return (
     <>
-      <SmallBanner heading={'ALUMNI'} />
+      <SmallBanner image={image} heading={'ALUMNI'} />
       <Center>
         <VStack w={{ base: 'full', md: '80%' }} my={4} p={4}>
           <Heading fontSize={'1.5em'} mt={'0.5em'} w={'full'} textAlign={'left'} color={'#192e59'} className='family-3'>PHD Graduates</Heading>

@@ -38,7 +38,7 @@ const UpdateNews = () => {
         formDataForUpload.append(key, formData[key]);
       }
 
-      await axios.post('/api/public/teacherdataview/?type=news');
+      await axios.post('/api/postpublicdata/?type=news');
 
       setFormData({
         headline: '',
@@ -48,7 +48,15 @@ const UpdateNews = () => {
         image: null,
       });
     } catch (error) {
-      console.error('Error adding news:', error);
+      toast({
+        varient: 'left-accent',
+        title: 'Something went Wrong',
+        description: error.response.data.error,
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+      })
+      console.error(error);
     }
   };
 
@@ -116,8 +124,8 @@ const UpdateNews = () => {
               <Input type="file" name="image" onChange={handleImageChange} display={'none'} />
             </FormControl>
             <FormControl>
-              <FormLabel>Headline</FormLabel>
-              <Input type="text" name="headline" value={formData.headline} onChange={handleChange} maxLength={'200'} />
+              <FormLabel  >Headline</FormLabel>
+              <Input type="text" name="headline" value={formData.headline} onChange={handleChange} maxLength={'200'} isRequired />
             </FormControl>
             <FormControl>
               <FormLabel>Content</FormLabel>
@@ -125,7 +133,7 @@ const UpdateNews = () => {
             </FormControl>
             <FormControl>
               <FormLabel>Date</FormLabel>
-              <Input type="date" name="date" value={formData.date} onChange={handleChange} />
+              <Input type="date" name="date" value={formData.date} onChange={handleChange} isRequired />
             </FormControl>
             <Box textAlign={'right'} w={'full'}>
 
@@ -137,7 +145,7 @@ const UpdateNews = () => {
         </Box>
         <Box bg={'white'} borderRadius={8} w={'full'} h={'full'} boxShadow={'0 0 6px rgba(0,0,0,0.05)'}>
           <Box h={'40px'} w={'full'} bg={'#d8dcf0'} borderTopRadius={8}></Box>
-          <VStack bg={'white'} spacing={4} p={8} overflowY={'scroll'}  w={'full'}>
+          <VStack bg={'white'} spacing={4} p={8} overflowY={'scroll'} w={'full'}>
             {
               news && news.map((item, index) => (
                 <NewsTile

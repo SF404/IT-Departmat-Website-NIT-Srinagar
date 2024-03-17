@@ -3,6 +3,8 @@ import { Box, Text, Flex, VStack, Accordion, AccordionItem, AccordionButton, Acc
 import * as XLSX from 'xlsx';
 import SmallBanner from "../../Layout/SmallBanner";
 import SearchTable from "../../components/Tables/SearchTable";
+import image from './../../assets/banners/btech.jpeg';
+
 import axios from "axios";
 
 function BTechStudents() {
@@ -56,7 +58,7 @@ function BTechStudents() {
 
   return (
     <>
-      <SmallBanner heading={'B-TECH STUDENTS'} />
+      <SmallBanner image={image} heading={'B-TECH STUDENTS'} />
       <Center>
         <Box p={{ base: 2, md: 4 }}
           borderRadius="lg"

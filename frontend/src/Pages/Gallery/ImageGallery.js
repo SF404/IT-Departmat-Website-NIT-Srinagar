@@ -2,6 +2,7 @@ import { Box, Image, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHead
 import React, { useEffect, useState } from 'react'
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry"
 import SmallBanner from "../../Layout/SmallBanner";
+import image from '../../assets/banners/a1.webp';
 import axios from 'axios';
 
 function ImageGallery() {
@@ -32,7 +33,7 @@ function ImageGallery() {
 
     return (
         <>
-            <SmallBanner heading={'GALLERY'} />
+            <SmallBanner image={image} heading={'GALLERY'} />
             <Box p={{ base: '1em', md: '2em', lg: '3em' }} bg={'white'}>
                 {images ? (images.length > 0 ? (<ResponsiveMasonry
                     columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3, 1020: 4 }}

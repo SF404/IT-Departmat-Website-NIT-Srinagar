@@ -19,12 +19,14 @@ import {
   AlertDialogContent,
   AlertDialogHeader,
   AlertDialogOverlay,
+  useToast,
 } from "@chakra-ui/react";
 import axios from "axios";
 import { FaTrash } from "react-icons/fa6";
 import React, { useEffect, useRef, useState } from "react";
 
 function Tutorial({ email }) {
+  const toast = useToast()
   const [deleteInfo, setDeleteInfo] = useState({ name: "", id: "" });
   const {
     isOpen: openDeleteAlert,
@@ -89,9 +91,23 @@ function Tutorial({ email }) {
         get_token()
       );
       if (response) fetchTutorials();
-      console.log(response);
-      console.log("Form data submitted:", formData);
+      toast({
+        varient: 'left-accent',
+        title: 'Successfully added',
+        description: "",
+        status: 'success',
+        duration: 5000,
+        isClosable: true,
+      })
     } catch (error) {
+      toast({
+        varient: 'left-accent',
+        title: 'Something went Wrong',
+        description: "",
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+      })
       console.log(error);
     }
   };
@@ -106,10 +122,24 @@ function Tutorial({ email }) {
       closeDeleteAlert();
       if (response.status === 204) {
         await fetchTutorials();
-        console.log("Successfully deleted");
+        toast({
+          varient: 'left-accent',
+          title: 'Successfully deleted',
+          description: "",
+          status: 'success',
+          duration: 5000,
+          isClosable: true,
+        })
       }
     } catch (error) {
-      console.error("File Cannot be deleted", error);
+      toast({
+        varient: 'left-accent',
+        title: 'Something went Wrong',
+        description: "",
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+      })
     }
   };
 

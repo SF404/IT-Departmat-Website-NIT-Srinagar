@@ -7,6 +7,8 @@ import {
 } from "@chakra-ui/react";
 import SmallBanner from "../../Layout/SmallBanner";
 import SearchTable from "../../components/Tables/SearchTable";
+import image from './../../assets/banners/a0.jpeg';
+
 import axios from "axios";
 
 const PlacementBrochure = () => {
@@ -61,7 +63,7 @@ const PlacementBrochure = () => {
 
   return (
     <>
-      <SmallBanner heading={"TRAINING AND PLACEMENT"} />
+      <SmallBanner image={image} heading={"TRAINING AND PLACEMENT"} />
 
       <Center>
         <VStack

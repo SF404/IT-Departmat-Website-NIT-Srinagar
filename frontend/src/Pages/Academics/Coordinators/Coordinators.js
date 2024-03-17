@@ -8,6 +8,7 @@ import SmallBanner from "./../../../Layout/SmallBanner";
 import axios from "axios";
 import * as XLSX from 'xlsx'
 import SearchTable from "../../../components/Tables/SearchTable";
+import image from './../../../assets/banners/coordinator.webp';
 
 const Page = () => {
   const [excelData, setExcelData] = useState(null)
@@ -15,9 +16,8 @@ const Page = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      console.log('hi')
       try {
-        const response = await axios.get(`/api/public/fileget/?q=file&&type=management&&name=faculty_coordinators`);
+        const response = await axios.get(`/api/public/fileget/?q=file&&type=management&&name=coordinators`);
         const data = response.data
         if (data.length <= 0) return;
         const fileURL = data[0].file;
@@ -32,7 +32,6 @@ const Page = () => {
             const sheetName = workbook.SheetNames[0];
             const sheet = workbook.Sheets[sheetName];
             const jsonData = XLSX.utils.sheet_to_json(sheet, { header: 1 });
-            console.log(jsonData)
             setExcelData(jsonData);
           };
           reader.readAsBinaryString(file);
@@ -55,7 +54,7 @@ const Page = () => {
 
   return (
     <>
-      <SmallBanner image={null} heading={'FACULTY COORDINATORS'} />
+      <SmallBanner image={image} heading={'FACULTY COORDINATORS'} />
       <Center>
         <VStack w={{ base: 'full', md: '90%', lg: '80%' }} bg={"white"} padding={'1em'} my={6} boxShadow={'sm'}>
           <SearchTable excelData={excelData} />

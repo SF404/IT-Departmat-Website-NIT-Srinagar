@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react'
 import SmallBanner from '../../Layout/SmallBanner';
 import { PiCubeDuotone } from "react-icons/pi";
 import axios from 'axios'
+import image from './../../assets/banners/research_paper.jpeg';
+
 
 function Papers() {
     const [papers, setPapers] = useState(null);
@@ -51,7 +53,7 @@ function Papers() {
 
     return (
         <>
-            <SmallBanner heading={"RESEARCH PAPERS"} />
+            <SmallBanner image={image} heading={"RESEARCH PAPERS"} />
             <Box display={'flex'} justifyContent={'flex-start'} position={'relative'}>
                 <Box display={{ base: 'none', md: 'block' }}>
                     <VStack maxW={'250px'} id='selector' minW={'250px'} position={'sticky'} top={'54px'} padding={'1em'} ml={2} mt={4} borderRadius={4} boxShadow={'0 0 4px rgba(0, 0, 0, 0.1)'} minH={'fit-content'} bg={'white'}>

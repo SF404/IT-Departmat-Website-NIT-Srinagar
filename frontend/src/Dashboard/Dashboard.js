@@ -17,7 +17,7 @@ function Dashboard1() {
   const [notes, setNotes] = useState(null);
   const [calenderShow, setCalenderShow] = useState(false);
   const [currentView, setCurrentView] = useState(null);
-  
+
 
   // functions
   function get_token() {
@@ -30,10 +30,11 @@ function Dashboard1() {
     };
   }
 
-  function navigate_login() {
+  function Logout() {
     localStorage.removeItem("TokenA");
     localStorage.removeItem("TokenR");
-    navigate("/login");
+    document.cookie = "sessionid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    navigate("/");
   }
 
   async function payload_check() {
@@ -50,10 +51,9 @@ function Dashboard1() {
         return;
       } catch (err) {
         console.error(err);
-        navigate_login();
+        Logout();
       }
-    } else navigate_login();
-
+    } else Logout();
     return;
   }
 
@@ -81,7 +81,7 @@ function Dashboard1() {
       console.log(teacher)
     } catch (error) {
       console.error("Error fetching data:", error);
-      navigate_login();
+      Logout();
     }
   };
 
@@ -109,7 +109,7 @@ function Dashboard1() {
   useEffect(() => {
     payload_check();
     fetchUser();
-    
+
   }, []);
 
   useEffect(() => {
@@ -150,7 +150,7 @@ function Dashboard1() {
         )}
         <Viewer currentView={currentView} user={user} />
       </Flex>
-      
+
     </>
   );
 }

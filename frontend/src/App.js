@@ -45,6 +45,7 @@ import UpdateNews from './components/News/UpdateNews';
 import News from './Pages/Landing/components/News';
 import IndexDashboard from './Dashboard/IndexDashboard';
 import MyProfile from './Dashboard/components/MyProfile1';
+import TimeTable from './Pages/Gallery/TimeTable';
 
 const ScrollToTop = ({ children }) => {
   const { pathname } = useLocation();
@@ -70,8 +71,8 @@ const App = () => {
             <Route path="semester/:semesterId" element={<SemesterPage />} />
             <Route path="faculty" element={<Faculty />} title="Faculty" />
             <Route path="faculty/details/:id" element={<FacultyDetails />} title="Faculty Details" />
-            <Route path="/login" element={<Login />} title="Login" />
-            <Route path="/signup" element={<Signup />} title="Signup" />
+            {/* <Route path="/login" element={<Login />} title="Login" />
+            <Route path="/signup" element={<Signup />} title="Signup" /> */}
             <Route path="/activate/:uid/:token" element={<Activate />} title="Activate Account" />
             {/* <Route path="tutorials/" element={<Tutorials />} title="Tutorials" /> */}
             <Route path="degree-program" element={<DegreePrograms />} title="Degree Programs" />
@@ -79,8 +80,8 @@ const App = () => {
             <Route path="outcomes" element={<Outcomes />} title="Outcomes" />
             <Route path="courses" element={<Courses />} title="Courses" />
             <Route path="coordinators" element={<Coordinators />} title="Coordinators" />
-            <Route path="committee" element={<Committee />} title="Committee" />
-            <Route path="newsletter" element={<DepartmentNewsletter />} title="Department Newsletter" />
+            {/* <Route path="committee" element={<Committee />} title="Committee" /> */}
+            {/* <Route path="newsletter" element={<DepartmentNewsletter />} title="Department Newsletter" /> */}
             <Route path="staff" element={<StaffTable />} title="Staff" />
             <Route path="areas" element={<Areas />} title="Research Areas" />
             <Route path="papers" element={<Papers />} title="Research Papers" />
@@ -90,27 +91,26 @@ const App = () => {
             <Route path="facilities" element={<FacilitiesPage />} title="Facilities" />
             <Route path="placement-brochure" element={<PlacementBrochure />} title="Placement Brochure" />
             <Route path="gallery" element={<ImageGallery />} title="Image Gallery" />
+            <Route path="timetable" element={<TimeTable />} title="Image Gallery" />
             <Route path="credits" element={<CreditsPage />} title="Credits" />
             <Route path="btech-students" element={<BTechStudents />} title="B.Tech Students" />
             <Route path="phd-students" element={<PhdStudents />} title="Ph.D. Students" />
             <Route path="alumni" element={<Alumni />} title="Alumni" />
-            <Route path="feedback-form" element={<Feedback />} title="Alumni" />
-            <Route path="artificialintelligence" element={<ArtificialIntelligence />} title="ArtificialIntelligence" />
+            {/* <Route path="feedback-form" element={<Feedback />} title="Alumni" /> */}
+            {/* <Route path="artificialintelligence" element={<ArtificialIntelligence />} title="ArtificialIntelligence" />
             <Route path="architecture" element={<Architecture />} title="Architecture" />
             <Route path="computervision" element={<ComputerVision />} title="ComputerVision" />
             <Route path="datamining" element={<DataMining />} title="DataMining" />
             <Route path="programming" element={<Programming />} title="Programming" />
             <Route path="embedded" element={<Embedded />} title="Embedded" />
-            <Route path="security" element={<Security />} title="Security" />
-
-
+            <Route path="security" element={<Security />} title="Security" /> */}
             <Route path="*" element={<NotFound />} title="Not Found" />
 
 
           </Route>
           <Route path="dashboard" element={<IndexDashboard />} >
             <Route index element={<Dashboard />} title="Security" />
-            <Route path='addnews' element={<UpdateNews />} title="Security" />
+            {/* <Route path='addnews' element={<UpdateNews />} title="Security" /> */}
             <Route path='myprofile' element={<MyProfile />} title="Security" />
 
           </Route>

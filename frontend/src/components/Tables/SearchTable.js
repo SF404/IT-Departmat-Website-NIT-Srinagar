@@ -10,18 +10,14 @@ const SearchTable = ({ excelData }) => {
     const [filteredData, setFilteredData] = useState([]);
     const [isDownloading, setIsDownloading] = useState(false);
     const tableRef = useRef();
-
     const handleSearch = (e) => {
         const query = e.target.value.toLowerCase();
         setSearchQuery(query);
-
         const filtered = excelData.slice(1).filter((row) =>
             row.some((cell) => cell && cell.toString().toLowerCase().includes(query))
         );
-
         setFilteredData(filtered);
     };
-
     const downloadTableAsExcel = async () => {
         setIsDownloading(true);
         const table = document.getElementById("myTable");
@@ -32,13 +28,10 @@ const SearchTable = ({ excelData }) => {
         await XLSX.writeFile(wb, fileName);
         setIsDownloading(false);
     };
-
     const downloadTableAsPDF = async () => {
         setIsDownloading(true)
         try {
-
             const table = tableRef.current;
-            console.log(table)
             const pdf = new jsPDF({
                 orientation: 'portrait',
                 unit: 'mm',
@@ -48,15 +41,10 @@ const SearchTable = ({ excelData }) => {
                 marginTop: 10,
                 marginBottom: 10,
             });
-
             const canvas = await html2canvas(table, { scale: 1 })
             const imgWidth = 190;
             const imgHeight = ((canvas.height * imgWidth) / canvas.width);
-            console.log(canvas)
-            console.log(imgHeight)
             const totalPages = Math.ceil(imgHeight / pdf.internal.pageSize.height);
-            console.log(totalPages)
-
             for (let i = 0; i < totalPages; i++) {
                 if (i > 0) {
                     pdf.addPage();
@@ -65,16 +53,13 @@ const SearchTable = ({ excelData }) => {
                 pdf.text('', 190, 285 + positionY);
                 pdf.addImage(canvas, 'PNG', 10, positionY + 10, imgWidth, imgHeight);
             }
-
             pdf.save('download.pdf');
             setIsDownloading(false);
         }
         catch (error) {
             console.log(error)
         }
-
     };
-
     return (
         <>
             <TableContainer w={"full"}>
@@ -92,14 +77,12 @@ const SearchTable = ({ excelData }) => {
                 </HStack>
                 {excelData ? <Table variant="striped" w={"full"} id="myTable" ref={tableRef}>
                     <Thead w={"full"}>
-
                         <Tr bg={'#c5cae8'} mb={4}>
                             {excelData.length > 0 &&
                                 excelData[0].map((cell, index) => (
                                     <Th key={index}>{cell}</Th>
                                 ))}
                         </Tr>
-
                     </Thead>
                     <Tbody fontSize={'14px'} className="family-5">
                         {(searchQuery ? filteredData : excelData.slice(1)).map((row, rowIndex) => (

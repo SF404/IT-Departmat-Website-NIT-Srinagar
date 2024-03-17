@@ -8,6 +8,8 @@ import axios from "axios";
 import * as XLSX from 'xlsx'
 import SearchTable from "../../components/Tables/SearchTable";
 import SmallBanner from "../../Layout/SmallBanner";
+import image from './../../assets/banners/staff.webp';
+
 
 
 function Staff() {
@@ -64,7 +66,7 @@ function Staff() {
   }, [toast]);
   return (
     <>
-      <SmallBanner heading={'STAFF'} />
+      <SmallBanner image={image} heading={'STAFF'} />
       <Center p={4}>
         <VStack width={{ base: '100%', md: '80%' }} m={4} bg={"white"} boxShadow={'0 0 2px rgba(0,0,0,0.05)'} p={4} borderRadius={4}>
           <SearchTable excelData={excelData} />

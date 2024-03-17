@@ -33,6 +33,16 @@ function Login() {
   });
 
   async function payload_check() {
+    try {
+      const response = await axios.get('/api/check/', {
+        withCredentials: true,
+      });
+      console.log(response.data);
+      return response.data;
+    } catch (error) {
+      console.error('Error occurred:', error.response);
+      return false;
+    }
     if (localStorage.getItem("TokenA") && localStorage.getItem("TokenR")) {
       const config = {
         headers: {
@@ -85,6 +95,7 @@ function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     try {
       const response = await axios.post("api/auth/jwt/create/", formData, {
         headers: {
@@ -115,57 +126,73 @@ function Login() {
     }
     payload_check();
   };
+  const handleGoogleLogin = async () => {
+    try {
+      window.location.href = "http://localhost:8000/accounts/google/login/?next=http://localhost:3000/login";
+    } catch (error) {
+      console.error('Error occurred:', error);
+    }
+  };
 
   return (
-      <Box
-        p={4}
-        maxW="400px"
-        mx="auto"
-        bg="white"
-        borderRadius="lg"
-        boxShadow="md"
-        mt="4rem"
-      >
-        <Heading as="h3" size="lg" mb={4} textAlign={"Center"}>
-          Log In
-        </Heading>
-        <FormControl isRequired>
-          <FormLabel htmlFor="name">Username</FormLabel>
-          <Input
-            type="text"
-            name="username"
-            value={formData.username}
-            required
-            minLength="2"
-            onChange={handleInputChange}
-          />
-        </FormControl>
+    <Box
+      p={4}
+      maxW="400px"
+      mx="auto"
+      bg="white"
+      borderRadius="lg"
+      boxShadow="md"
+      mt="4rem"
+    >
+      <Heading as="h3" size="lg" mb={4} textAlign={"Center"}>
+        Log In
+      </Heading>
+      <FormControl isRequired>
+        <FormLabel htmlFor="name">Username</FormLabel>
+        <Input
+          type="text"
+          name="username"
+          value={formData.username}
+          required
+          minLength="2"
+          onChange={handleInputChange}
+        />
+      </FormControl>
 
-        <form onSubmit={handleSubmit}>
-          <Stack spacing={4}>
-            <FormControl isRequired>
-              <FormLabel htmlFor="name">Password</FormLabel>
-              <Input
-                type="password"
-                name="password"
-                value={formData.password}
-                required
-                minLength="2"
-                onChange={handleInputChange}
-              />
-            </FormControl>
-            <Button
-              type="submit"
-              colorScheme="teal"
-              size="lg"
-              fontSize="md"
-              borderRadius="md"
-            >
-              Login
-            </Button>
-          </Stack>
-        </form>
-      </Box>
+      <form onSubmit={handleSubmit}>
+        <Stack spacing={4}>
+          <FormControl isRequired>
+            <FormLabel htmlFor="name">Password</FormLabel>
+            <Input
+              type="password"
+              name="password"
+              value={formData.password}
+              required
+              minLength="2"
+              onChange={handleInputChange}
+            />
+          </FormControl>
+          <Button
+            type="submit"
+            colorScheme="teal"
+            size="lg"
+            fontSize="md"
+            borderRadius="md"
+          >
+            Login
+          </Button>
+          <Button
+            onClick={handleGoogleLogin}
+            colorScheme="red" // You can change the color scheme to match your design
+            size="lg"
+            fontSize="md"
+            borderRadius="md"
+          >
+            Login with Google
+          </Button>
+        </Stack>
+      </form>
+    </Box>
   );
 }
 

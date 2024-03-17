@@ -4,6 +4,8 @@ import { Avatar, Badge, Box, Center, Divider, Heading, Icon, Spinner, Stack, Tex
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import SmallBanner from "../../Layout/SmallBanner";
+import image from './../../assets/banners/faculty.jpeg';
+
 
 function Faculty() {
   const [faculty, setFaculty] = useState();
@@ -52,7 +54,7 @@ function Faculty() {
 
   return (
     <>
-      <SmallBanner heading={'FACULTY MEMBERS'} />
+      <SmallBanner image={image} heading={'FACULTY MEMBERS'} />
       {
         faculty ? (
           <Center className="family-1">

@@ -14,6 +14,8 @@ import network from "./../../assets/images/networking.webp";
 import research from "./../../assets/images/research.webp";
 import seminar from "./../../assets/images/seminar2.webp";
 import SmallBanner from "../../Layout/SmallBanner";
+import image from './../../assets/banners/btech.jpeg';
+
 
 const facilities = [
   {
@@ -54,7 +56,7 @@ const facilities = [
 const FacilitiesPage = () => {
   return (
     <>
-      <SmallBanner heading={'FACILITIES'} />
+      <SmallBanner image={image} heading={'FACILITIES'} />
 
 
       <Center>

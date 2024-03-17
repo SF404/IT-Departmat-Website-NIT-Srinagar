@@ -1,11 +1,12 @@
 import { Box, Flex, Text, Button, VStack, IconButton, Menu, MenuButton, MenuItem, MenuList, Image, Stack, HStack, useDisclosure, Tooltip, } from "@chakra-ui/react";
 import React, { useState, useEffect } from "react";
 import mainLogo from "./../assets/images/download.webp";
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { FaBarsStaggered, FaX } from "react-icons/fa6";
 import { motion } from "framer-motion";
 import { PiDotsNineBold } from "react-icons/pi";
-
+import axios from "axios";
 function NavLinks({ color = "white", isOpen = null, onClose = null }) {
   const handleNavigation = () => {
     if (isOpen) onClose();
@@ -13,11 +14,44 @@ function NavLinks({ color = "white", isOpen = null, onClose = null }) {
 
   const [login, setLogin] = useState(false);
   useEffect(() => {
-    function func() {
-      localStorage.getItem('TokenA') ? setLogin(true) : setLogin(false);
-    }
-    return () => func();
+    payload_check();
+    (localStorage.getItem('TokenA')) ? setLogin(true) : setLogin(false)
   }, [])
+
+  async function payload_check() {
+
+    try {
+      const response = await axios.get('/api/check/', {
+        withCredentials: true,
+      });
+      switch (response.status) {
+        case 201:
+          const accessToken = response.data.access;
+          const refreshToken = response.data.refresh;
+          localStorage.setItem("TokenA", accessToken);
+          localStorage.setItem("TokenR", refreshToken);
+          setLogin(true)
+          break;
+        case 203:
+          alert(`${response.data.mail} is not a valid faculty email`)
+          break;
+        case 404:
+          break;
+        default:
+          console.log('CheckAuthenticationAPIView not returning 201');
+          console.log(response);
+      }
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
+  const handleGoogleLogin = async () => {
+    try {
+      window.location.href = "http://localhost:8000/accounts/google/login/?next=http://localhost:3000/";
+    } catch (error) {
+      console.error('Error occurred:', error);
+    }
+  };
 
   return (
     <>
@@ -49,11 +83,18 @@ function NavLinks({ color = "white", isOpen = null, onClose = null }) {
             as={Link}
             _hover={{ color: "#192e59" }}
             onClick={handleNavigation}
+            to="/vision-mission"
+          >
+            Vision and Mission
+          </MenuItem>
+          <MenuItem
+            as={Link}
+            _hover={{ color: "#192e59" }}
+            onClick={handleNavigation}
             to="/degree-program"
           >
             Degree Program
           </MenuItem>
-
           <MenuItem
             as={Link}
             _hover={{ color: "#192e59" }}
@@ -78,30 +119,7 @@ function NavLinks({ color = "white", isOpen = null, onClose = null }) {
           >
             Coordinators
           </MenuItem>
-          {/* <MenuItem
-            as={Link}
-            _hover={{ color: "#192e59" }}
-            onClick={handleNavigation}
-            to="/committee"
-          >
-            Committee
-          </MenuItem> */}
-          <MenuItem
-            as={Link}
-            _hover={{ color: "#192e59" }}
-            onClick={handleNavigation}
-            to="/vision-mission"
-          >
-            Vision and Mission
-          </MenuItem>
-          {/* <MenuItem
-            as={Link}
-            _hover={{ color: "#192e59" }}
-            onClick={handleNavigation}
-            to="/newsletter"
-          >
-            Department Newsletter
-          </MenuItem> */}
+
         </MenuList>
       </Menu>
 
@@ -251,7 +269,7 @@ function NavLinks({ color = "white", isOpen = null, onClose = null }) {
           color={color}
           fontWeight={"normal"}
         >
-          For Students
+          Student Corner
         </MenuButton>
         <MenuList boxShadow={"lg"}>
 
@@ -263,31 +281,19 @@ function NavLinks({ color = "white", isOpen = null, onClose = null }) {
           >
             Semesters
           </MenuItem>
-          {/* <MenuItem
+          <MenuItem
             as={Link}
             _hover={{ color: "#192e59" }}
             onClick={handleNavigation}
-            to="/tutorials"
+            to="/timetable"
           >
-            Tutorials
-          </MenuItem> */}
+            TimeTable
+          </MenuItem>
         </MenuList>
       </Menu>
-
-      {/* <Button
-        onClick={handleNavigation}
-        variant="ghost"
-        colorScheme="whiteAlpha"
-        color={color}
-        fontWeight={"normal"}
-        as={Link}
-        to="/contact-us"
-      >
-        Contact Us
-      </Button> */}
       <HStack position={"absolute"} right={'20px'}>
         {!login ?
-          (<Button variant={"ghost"} onClick={handleNavigation} as={Link} to={'/login'} px={4} bg={'whiteAlpha.200'} color={"whiteAlpha.800"} borderRadius={"full"} colorScheme="whiteAlpha" fontWeight={"normal"} >Login</Button>) :
+          (<Button variant={"ghost"} onClick={handleGoogleLogin} as={Link} px={4} bg={'whiteAlpha.200'} color={"whiteAlpha.800"} borderRadius={"full"} colorScheme="whiteAlpha" fontWeight={"normal"} >Login</Button>) :
           (
             <Tooltip label={'Dashboard'} hasArrow>
               <IconButton as={Link} to={'/dashboard'} variant={"ghost"} colorScheme="whiteAlpha" color={"white"} fontSize={'1.5em'} icon={<PiDotsNineBold />} />

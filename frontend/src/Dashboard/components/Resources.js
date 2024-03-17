@@ -148,8 +148,24 @@ function Resources({ user }) {
                 get_token()
             );
             if (response) fetchResearch();
+            toast({
+                varient: 'left-accent',
+                title: 'Successfully added',
+                description: "",
+                status: 'success',
+                duration: 5000,
+                isClosable: true,
+            })
             closeResearchModel();
         } catch (error) {
+            toast({
+                varient: 'left-accent',
+                title: 'Something went Wrong',
+                description: error.response.data.error,
+                status: 'error',
+                duration: 5000,
+                isClosable: true,
+            })
             console.log(error);
         }
     };
@@ -162,8 +178,24 @@ function Resources({ user }) {
                 get_token()
             );
             if (response) fetchPatent();
+            toast({
+                varient: 'left-accent',
+                title: 'Successfully added',
+                description: "",
+                status: 'success',
+                duration: 5000,
+                isClosable: true,
+            })
             closePatentModel();
         } catch (error) {
+            toast({
+                varient: 'left-accent',
+                title: 'Something went Wrong',
+                description: error.response.data.error,
+                status: 'error',
+                duration: 5000,
+                isClosable: true,
+            })
             console.log(error);
         }
         closePatentModel();
@@ -177,8 +209,24 @@ function Resources({ user }) {
                 get_token()
             );
             if (response) fetchProject();
+            toast({
+                varient: 'left-accent',
+                title: 'Successfully added',
+                description: "",
+                status: 'success',
+                duration: 5000,
+                isClosable: true,
+            })
             closeProjectModel();
         } catch (error) {
+            toast({
+                varient: 'left-accent',
+                title: 'Something went Wrong',
+                description: error.response.data.error,
+                status: 'error',
+                duration: 5000,
+                isClosable: true,
+            })
             console.log(error);
         }
         closeProjectModel();
@@ -194,8 +242,24 @@ function Resources({ user }) {
                 get_token()
             );
             if (response) fetchEducation();
+            toast({
+                varient: 'left-accent',
+                title: 'Successfully added',
+                description: "",
+                status: 'success',
+                duration: 5000,
+                isClosable: true,
+            })
             closeEducationModel();
         } catch (error) {
+            toast({
+                varient: 'left-accent',
+                title: 'Something went Wrong',
+                description: error.response.data.error,
+                status: 'error',
+                duration: 5000,
+                isClosable: true,
+            })
             console.log(error);
         }
         closeEducationModel();
@@ -220,9 +284,24 @@ function Resources({ user }) {
                         await fetchEducation();
                         break;
                 }
-                console.log("Successfully deleted");
+                toast({
+                    varient: 'left-accent',
+                    title: 'Successfully deleted',
+                    description: "",
+                    status: 'success',
+                    duration: 5000,
+                    isClosable: true,
+                })
             }
         } catch (error) {
+            toast({
+                varient: 'left-accent',
+                title: 'Something went Wrong',
+                description: "",
+                status: 'error',
+                duration: 5000,
+                isClosable: true,
+            })
             console.error("File Cannot be deleted", error);
         }
     };

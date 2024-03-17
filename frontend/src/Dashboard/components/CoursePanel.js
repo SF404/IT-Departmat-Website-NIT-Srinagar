@@ -62,10 +62,8 @@ function CoursePanel({ selectedCourse, notes, assignments, fetchNotes, fetchAssi
                 formData,
                 get_token()
             );
-            // openNotesModel=false;
             closeNotesModel();
             await fetchNotes();
-            // Display success toast
             toast({
                 title: "Notes Uploaded",
                 description: "Your notes have been successfully uploaded.",
@@ -76,7 +74,6 @@ function CoursePanel({ selectedCourse, notes, assignments, fetchNotes, fetchAssi
 
             console.log("Response data notes:", response.data);
         } catch (error) {
-            // Display error toast
             toast({
                 title: "Error",
                 description: "There was an error uploading the notes.",
@@ -171,9 +168,24 @@ function CoursePanel({ selectedCourse, notes, assignments, fetchNotes, fetchAssi
             if (response.status === 204) {
                 await fetchAssignmnets();
                 await fetchNotes();
-                console.log("Successfully deleted");
             }
+            toast({
+                varient: 'left-accent',
+                title: 'Successfully deleted',
+                description: "",
+                status: 'success',
+                duration: 5000,
+                isClosable: true,
+            })
         } catch (error) {
+            toast({
+                varient: 'left-accent',
+                title: 'Something went Wrong',
+                description: "",
+                status: 'error',
+                duration: 5000,
+                isClosable: true,
+            })
             console.error("File Cannot be deleted", error);
         }
     };

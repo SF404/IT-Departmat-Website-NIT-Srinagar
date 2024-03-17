@@ -1,7 +1,9 @@
 import React from 'react'
-import SmallBanner from  "./../../../Layout/SmallBanner";
+import SmallBanner from "./../../../Layout/SmallBanner";
 import { Box, Center, Heading, List, ListIcon, ListItem, Tab, TabList, TabPanel, TabPanels, Tabs, Text } from '@chakra-ui/react'
 import { PiPlantDuotone } from 'react-icons/pi'
+import image from './../../../assets/banners/outcome.jpeg';
+
 
 function Outcomes() {
 
@@ -89,9 +91,9 @@ function Outcomes() {
 
   return (
     <>
-      <SmallBanner heading={'COURSE OUTCOMES'} />
+      <SmallBanner image={image} heading={'COURSE OUTCOMES'} />
       <Center>
-        <Tabs variant='soft-rounded' colorScheme='facebook' m={4}  width={{ base: '100%', md: '80%' }}>
+        <Tabs variant='soft-rounded' colorScheme='facebook' m={4} width={{ base: '100%', md: '80%' }}>
           <TabList textAlign={'left'} justifyContent={'flex-start'} my={'0.5em'}>
             <Tab>Program Outcomes</Tab>
             <Tab>Program Educational Objectives</Tab>

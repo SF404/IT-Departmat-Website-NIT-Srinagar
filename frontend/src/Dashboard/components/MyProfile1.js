@@ -50,7 +50,7 @@ function MyProfile1() {
                 toast({
                     varient: 'left-accent',
                     title: 'Access Denied',
-                    description: error.message,
+                    description: error.response.data.error,
                     status: '',
                     duration: 5000,
                     isClosable: true,
@@ -112,7 +112,7 @@ function MyProfile1() {
             toast({
                 variant: 'left-accent',
                 title: 'Failed',
-                description: error.message,
+                description: error.response.data.error,
                 status: 'info',
                 duration: 5000,
                 isClosable: true,

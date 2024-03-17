@@ -17,6 +17,8 @@ import {
 import React, { useEffect, useState } from "react";
 import SmallBanner from "../../Layout/SmallBanner";
 import default_profile from './../../assets/images/default_profile.jpg'
+import image from './../../assets/banners/phd.jpeg';
+
 
 function PhdStudents() {
   const [phdStudent, setphdStudent] = useState(null);
@@ -40,7 +42,7 @@ function PhdStudents() {
 
   return (
     <>
-      <SmallBanner heading={'PHD'} />
+      <SmallBanner image={image} heading={'PHD'} />
       <Center>
         <VStack w={{ base: '100%', md: '80%' }} spacing={6} my={4}>
           {phdStudent ? (phdStudent.sort((a, b) => {

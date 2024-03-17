@@ -2,18 +2,11 @@ import { Box, Heading, IconButton, Link, Text } from '@chakra-ui/react'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import Carousel from 'better-react-carousel'
+import conf from '../../../config.json';
 import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons'
 
 function FeaturedVideos() {
-    const [urls, setUrls] = useState([
-        'https://www.youtube.com/watch?v=HsN7vF7M7rA',
-        'https://www.youtube.com/watch?v=4lcKj0xnXkg&list=PLUbapHgKkROnP9It2FQiDfR1DBoSpIshT',
-        'https://www.youtube.com/watch?v=xEkUrqU3yCs&t',
-        'https://www.youtube.com/shorts/Z3yAN7Y2LH4',
-        'https://www.youtube.com/watch?v=vJk_8DFp3Yo&t=578s&pp=ygUjbml0IHNyaW5hZ2FyIGluZm9ybWF0aW9uIGRlcGFydG1lbnQ%3D',
-        'https://www.youtube.com/watch?v=LSIrG0QnEJ8',
-        'https://www.youtube.com/watch?v=5aMIM-qGLK0&list=PLUbapHgKkROk_CAo6OJEmQuzQKfraDFKM',
-    ])
+    const [urls, setUrls] = useState(conf.featured_videos);
     const [videos, setVideos] = useState([])
 
     async function fetchYouTubeData(videoUrl) {

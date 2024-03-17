@@ -8,11 +8,16 @@ from PublicAPI.models import *
  
 # create a serializer class
 
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = '__all__'
+        
 class UserCreateSerializer(UserCreateSerializer):
     
     class Meta(UserCreateSerializer.Meta):
         model=User
-        fields=('id', 'name', 'password')
+        fields=('id', 'name', 'password','email')
 
 
 class TeacherSerializer(serializers.ModelSerializer):

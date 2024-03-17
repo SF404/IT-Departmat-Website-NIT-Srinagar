@@ -11,11 +11,13 @@ import {
 } from "@chakra-ui/react";
 import { PiShootingStarDuotone } from "react-icons/pi";
 import SmallBanner from "./../../../Layout/SmallBanner";
+import image from './../../../assets/banners/vision.jpeg';
+
 
 const FacilitiesPage = () => {
   return (
     <>
-      <SmallBanner image={null} heading={'CRAFTING A BETTER TOMMOROW'} />
+      <SmallBanner image={image} heading={'CRAFTING A BETTER TOMMOROW'} />
       <Center w={"full"} p={4}>
         <SimpleGrid columns={[1, 1, 3, 3]} w={{ base: '100%', lg: '80%' }} my={4} gap={4} rowGap={4} >
           <GridItem textAlign={"center"}>
