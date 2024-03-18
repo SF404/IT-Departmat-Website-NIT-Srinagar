@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import { Box, Image, Text, Link, Flex, IconButton, Icon,  Heading, VStack, Avatar, HStack, SimpleGrid, GridItem,  Badge, useToast, Tooltip } from '@chakra-ui/react';
+import { Box, Image, Text, Link, Flex, IconButton, Icon, Heading, VStack, Avatar, HStack, SimpleGrid, GridItem, Badge, useToast, Tooltip } from '@chakra-ui/react';
 import arman from "./../../assets/images/arman.webp";
 import rajes from "./../../assets/images/rajes.webp";
-// import suhaib from "./../../assets/images/suhaib.webp";
+import suhaib from "./../../assets/images/suhaib.webp";
 import janib from "./../../assets/images/janibsir.webp";
 import { PiEnvelopeDuotone, PiGithubLogoDuotone, PiGlobeHemisphereEastDuotone, PiLinkedinLogoDuotone, PiPhoneDuotone } from 'react-icons/pi';
 
@@ -31,13 +31,13 @@ function Credits1() {
                 email: "rmrajesofficial.0@gmail.com",
                 phone: "+91 9149780559",
                 github: "https://www.github.com/rmrajesofficial",
-                linkedin: "https://www.github.com/rmrajesofficial",
-                website: "",
+                linkedin: "https://www.linkedin.com/in/rajes-manna-489110212/",
+                website: "https://www.linkedin.com/in/rajes-manna-489110212/",
                 enroll: '2021BITE063'
             },
             {
                 name: "Suhaib Ahmad",
-                image: "https://media.licdn.com/dms/image/D4D03AQEZslD7f4DKFQ/profile-displayphoto-shrink_800_800/0/1693129744681?e=2147483647&v=beta&t=6cKPE675VyzB8zMtRHQrrrDAzbG2FUcv0MLurFBDva8",
+                image: suhaib,
                 details: "",
                 email: "enigma00800@gmail.com",
                 phone: "+91 8492002286",
@@ -57,7 +57,6 @@ function Credits1() {
                 website: "https://www.linkedin.com/in/armsri/",
                 enroll: '2021BITE053'
             },
-
         ]
     )
 
@@ -67,9 +66,9 @@ function Credits1() {
         try {
             await navigator.clipboard.writeText(data);
             toast({
-                variant:'left-accent',
-                position:'top',
-                title:data+ " copied!",
+                variant: 'left-accent',
+                position: 'top',
+                title: data + " copied!",
                 status: "success",
                 duration: 2000,
                 isClosable: true,
@@ -77,8 +76,8 @@ function Credits1() {
         } catch (err) {
             console.error("Unable to copy to clipboard", err);
             toast({
-                position:'top',
-                title:data+ " Failed to copy",
+                position: 'top',
+                title: data + " Failed to copy",
                 status: "error",
                 duration: 2000,
                 isClosable: true,
@@ -88,7 +87,7 @@ function Credits1() {
 
     return (
         <VStack w={'full'}>
-            <VStack width={{ base: '100%', md: '80%' }} gap={6}  p={4}>
+            <VStack width={{ base: '100%', md: '80%' }} gap={6} p={4}>
                 <Heading fontSize={'1em'} mb={-2} mt={2} fontWeight={'semibold'} textAlign={'center'} color={'#192e59'} w={'full'} >MENTOR</Heading>
 
 

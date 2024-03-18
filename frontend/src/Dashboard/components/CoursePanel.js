@@ -161,7 +161,7 @@ function CoursePanel({ selectedCourse, notes, assignments, fetchNotes, fetchAssi
     };
 
     const handleDelete = async (delete_id) => {
-        console.log(delete_id);
+        // console.log(delete_id);
         try {
             const response = await axios.post(`/api/filesdelete/`, delete_id, get_token());
             closeDeleteAlert();
@@ -315,7 +315,7 @@ function CoursePanel({ selectedCourse, notes, assignments, fetchNotes, fetchAssi
                                 <Input type="text" name="title" value={notesFormData.title} onChange={handleNotesFormChange} required placeholder="Enter title" />
                             </FormControl>
                             <FormControl mt={4}>
-                                <FormLabel bg={"#e5e5e5"} p={3} borderRadius={"10px"} m={0} > Upload Notes</FormLabel>
+                                <FormLabel bg={"#e5e5e5"} p={3} borderRadius={"10px"} m={0} > Upload Notes*</FormLabel>
                                 <Input type="file" name="file" onChange={handleNotesFormChange} display={"none"} required />
                             </FormControl>
                             <Divider my={4} />
@@ -352,7 +352,7 @@ function CoursePanel({ selectedCourse, notes, assignments, fetchNotes, fetchAssi
                             </FormControl>
 
                             <FormControl mt={4}>
-                                <FormLabel bg={"#e5e5e5"} p={3} borderRadius={"10px"} m={0} > Upload File {/* <DownloadIcon transform="rotate(180deg)"/> */}  </FormLabel>
+                                <FormLabel bg={"#e5e5e5"} p={3} borderRadius={"10px"} m={0} > Upload File* {/* <DownloadIcon transform="rotate(180deg)"/> */}  </FormLabel>
                                 <Input type="file" name="file" onChange={handleAssignmentFormChange} display={"none"} required />
                             </FormControl>
                             <Button type="submit" colorScheme="facebook" mt={4} w={"full"} >Submit</Button>

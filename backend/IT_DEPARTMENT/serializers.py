@@ -1,6 +1,5 @@
 # import serializers from the REST framework
 from rest_framework import serializers
-from djoser.serializers import UserCreateSerializer
  
 # import the todo data model
 from .models import *
@@ -12,12 +11,6 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = '__all__'
-        
-class UserCreateSerializer(UserCreateSerializer):
-    
-    class Meta(UserCreateSerializer.Meta):
-        model=User
-        fields=('id', 'name', 'password','email')
 
 
 class TeacherSerializer(serializers.ModelSerializer):

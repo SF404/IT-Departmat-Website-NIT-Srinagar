@@ -42,16 +42,9 @@ urlpatterns = [
     path('api/filesdelete/', DeleteFilesAPIView.as_view(),name='registration'),
     path('api/check/', CheckAuthenticationAPIView.as_view(), name='check_authentication'),
     path('api/logout/', LogoutAPIView.as_view(), name='check_authentication'),
-    # path('api/auth/register/', RegistrationView.as_view(), name='registration'),
-    # path('api/auth/login/', CustomObtainTokenView.as_view(), name='login'),
-    # path('api/auth/refresh-token/', CustomRefreshTokenView.as_view(), name='refresh-token'),
-    # path('api/auth/logout/', LogoutView.as_view(), name='logout'),
-    # path('api/auth/getuser/', GetUserFromTokenView.as_view(), name='logout'),
-    path('api/public/events/', GetData.as_view(),name='registration'),
     path('api/auth/', include('djoser.urls')),
     path('api/auth/', include('djoser.urls.jwt')),
-    re_path(r'^$', TemplateView.as_view(template_name='build/index.html')),
-    path('activate/<str:uid>/<str:token>/', TemplateView.as_view(template_name='activate_site.html'), name='activate'),
+    path('api/public/events/', GetData.as_view(),name='registration'),
 ]
 
 

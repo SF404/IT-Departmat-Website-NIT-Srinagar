@@ -1,0 +1,4 @@
+1:- Feedback form 
+2:- Faculty Tutorial are not visible on landing page 
+3:- news section has been removed 
+4:- all Patent section and all Projects section for Faculty (just like ResearchPaper section)

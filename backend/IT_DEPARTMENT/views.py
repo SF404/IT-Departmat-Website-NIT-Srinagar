@@ -296,35 +296,6 @@ class DeleteFilesAPIView(APIView):
         except Exception as e:
             return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-class GetUserFromTokenView(APIView):
-    authentication_classes=[JWTAuthentication]
-    permission_classes = (IsAuthenticated,)
-    def get(self, request):
-        refresh_token = request.query_params.get('refresh_token')
-        access_token = request.query_params.get('access_token')
-        if not refresh_token or not access_token:
-            return Response({'error': 'Token cannout found'}, status=status.HTTP_400_BAD_REQUEST)
-        try:
-            refresh_token = RefreshToken(refresh_token)
-            access_token = refresh_token.access_token
-            user_id = access_token['user_id']
-            user = User.objects.get(id=user_id)
-            if not user :
-                return Response({'error': 'User not found token Exists.'}, status=status.HTTP_401_UNAUTHORIZED)
-            auth_email=user.email
-            auth_name=user.first_name
-            if not auth_email or not auth_name:
-                return Response({'error': 'User not found token Exists.'}, status=status.HTTP_401_UNAUTHORIZED)
-            teacher=Teacher.objects.filter(email=auth_email)
-            if not teacher:
-                return Response({'error': 'Data not exists in Teacher Table'}, status=status.HTTP_401_UNAUTHORIZED)
-            serializer = TeacherSerializer(teacher, many=True)
-            return Response(serializer.data)
-        except DatabaseError as e:
-            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-        except Exception as e:
-            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-        
 class CheckAuthenticationAPIView(APIView):
     def get(self, request, *args, **kwargs):
         try:
@@ -358,7 +329,7 @@ class CheckAuthenticationAPIView(APIView):
                 return Response({'error': "False Authentication"}, status=status.HTTP_404_NOT_FOUND)
         except Exception as e:
             return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-        
+
 class LogoutAPIView(APIView):
     def post(self, request, *args, **kwargs):
         try:

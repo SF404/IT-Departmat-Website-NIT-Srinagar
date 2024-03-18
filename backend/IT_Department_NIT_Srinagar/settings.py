@@ -18,7 +18,7 @@ DEBUG = True
 ALLOWED_HOSTS = ['*']
 
 # Application definition
-SITE_ID=2
+SITE_ID=3
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -29,10 +29,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'IT_DEPARTMENT',
     'PublicAPI',
+    'djoser',
     'rest_framework',
     'rest_framework_simplejwt',
     'rest_framework_simplejwt.token_blacklist',
-    'djoser',
     "corsheaders",
     "django.contrib.sites",
     "allauth",
@@ -101,20 +101,6 @@ DATABASES = {
 }
 
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'techteam.it.nitsri@gmail.com'
-DEFAULT_FROM_EMAIL = 'techteam.it.nitsri@gmail.com'
-SERVER_EMAIL = 'techteam.it.nitsri@gmail.com'
-EMAIL_HOST_PASSWORD = 'tzkg xmcb brny dglb'
-EMAIL_USE_TLS = True
-EMAIL_USE_SSL = False
-
-
-# Password validation
-# https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -132,9 +118,6 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 
-# Internationalization
-# https://docs.djangoproject.com/en/4.2/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
@@ -144,8 +127,6 @@ USE_I18N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
@@ -153,8 +134,6 @@ STATICFILES_DIRS = [
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-# Default primary key field type
-# https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
@@ -179,30 +158,7 @@ SIMPLE_JWT = {
     "UPDATE_LAST_LOGIN": True,
 }
 
-DJOSER = {
-    'LOGIN_FIELD': 'username',
-    'USER_CREATE_PASSWORD_RETYPE':True,
-    'ACTIVATION_URL':'activate/{uid}/{token}',
-    'SEND_ACTIVATION_EMAIL':True,
-    'SEND_CONFIRMATION_EMAIL':True,
-    'PASSWORD_CHANGED_EMAIL_CONFIRMATION':True,
-    'PASSWORD_RESET_CONFIRM_URL': 'password-reset/{uid}/{token}',
-    'SET_PASSWORD_RETYPE': True,
-    'PASSWORD_RESET_SHOW_EMAIL_NOT_FOUND': True,
-    'TOKEN_MODEL': None,
-    'SERIALIZERS':{
-        'user_create': 'IT_DEPARTMENT.serializers.UserCreateSerializer',
-        'user': 'IT_DEPARTMENT.serializers.UserCreateSerializer',
-        'user_delete': 'djoser.serializers.UserDeleteSerializer',
-    },
-    'EMAIL': {
-        'activation': 'IT_DEPARTMENT.email.ActivationEmail',
-        'confirmation': 'IT_DEPARTMENT.email.ConfirmationEmail',
-        'password_reset': 'IT_DEPARTMENT.email.PasswordResetEmail',
-        'password_changed_confirmation': 'IT_DEPARTMENT.email.PasswordChangedConfirmationEmail',
-    },
 
-}
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
